@@ -1,0 +1,320 @@
+<!--Web header-->
+<div ng-controller="settingCtrl">
+
+    <div class="container phone-hide">
+        <div class="myaccount-details">
+            <h1>{{allicontext[0].title}}</h1>
+                <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+
+            <div class="profile-details">
+                <div class="form">
+                    <div class="dx-fieldset">
+
+                        <div class="dx-field">
+                            <div class="dx-field-label">Other Notification Media</div>
+                            <div class="dx-field-value">
+                                <!--<div dx-check-box="checkBox.checked" ng-model="media_notification"></div>-->
+                                <div class="checkBox" dx-check-box="{
+                                onValueChanged: valueChanged
+                            }" ng-model="media_notification"></div>
+                            </div>
+                        </div>
+
+                        <div class="dx-field" ng-show="mediaCheck">
+                            <div class="dx-field-label">WA</div>
+                            <div class="dx-field-value">
+                                <div dx-check-box="checkBox.checked" ng-model="notification_wa"></div>
+                            </div>
+                        </div>
+                        <div class="dx-field" ng-show="mediaCheck">
+                            <div class="dx-field-label">SMS</div>
+                            <div class="dx-field-value">
+                                <div dx-check-box="checkBox.checked" ng-model="notification_sms"></div>
+                            </div>
+                        </div>
+                        <div class="dx-field" ng-show="mediaCheck">
+                            <div class="dx-field-label">Email</div>
+                            <div class="dx-field-value">
+                                <div dx-check-box="checkBox.checked" ng-model="notification_email"></div>
+                            </div>
+                        </div>
+                        <div class="dx-field">
+                            <div class="dx-field-label">Reminder Before Expired in Day</div>
+                            <div class="dx-field-value">
+                                <!--<div dx-check-box="checkBox.unchecked" ng-model="expire_date_notification"></div>-->
+                                <div class="checkBox" dx-check-box="{
+                                onValueChanged: valueChangedDate
+                            }" ng-model="expire_date_notification"></div>
+                            </div>
+                        </div>
+
+                        <div class="dx-field" ng-show="dayscheck">
+                            <div class="dx-field-label">No. of Days</div>
+                            <div class="dx-field-value">
+                                <div dx-text-box="textBox.remainder_days"  ng-model="remainder_days"></div>
+                            </div>
+                        </div>
+                        <div class="dx-field">
+                            <div class="dx-field-label">Allowed New/Hot/Last Day Promo Notification</div>
+                            <div class="dx-field-value">
+                                <div dx-check-box="checkBox.unchecked" ng-model="promo_notification"></div>
+                            </div>
+                        </div>
+
+                        <div class="dx-field">
+                            <div class="dx-field-label">Allowed News Letter</div>
+                            <div class="dx-field-value">
+                                <div dx-check-box="checkBox.unchecked" ng-model="news_letter_notification"></div>
+                            </div>
+                        </div>
+                        <div class="dx-field">
+                            <div class="dx-field-label">&nbsp;</div>
+                            <div class="dx-field-value">
+                        <div id="button" dx-button="{
+                                text: 'Submit',
+                                type: 'success',
+                                onClick: saveSetting }" ></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                    </div>
+                    <!--<div id="summary" dx-validation-summary="{ }"></div>-->
+
+
+            </div>
+        </div>
+    </div>
+    <div class="m-myaccount-details tablet-hide">
+
+        <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+        <h1>{{allicontext[0].title}}</h1>
+        <div class="m-profile-details">
+            <div class="form">
+                <div class="dx-fieldset">
+                    <div class="dx-field">
+                        <div class="dx-field-label">Other Notification Media</div>
+                        <div class="dx-field-value">
+                            <!--<div dx-check-box="checkBox.checked" ng-model="media_notification"></div>-->
+                            <div class="checkBox" dx-check-box="{
+                                onValueChanged: valueChanged
+                            }" ng-model="media_notification"></div>
+                        </div>
+                    </div>
+
+                    <div class="dx-field" ng-show="mediaCheck">
+                        <div class="dx-field-label">WA</div>
+                        <div class="dx-field-value">
+                            <div dx-check-box="checkBox.checked" ng-model="notification_wa"></div>
+                        </div>
+                    </div>
+                    <div class="dx-field" ng-show="mediaCheck">
+                        <div class="dx-field-label">SMS</div>
+                        <div class="dx-field-value">
+                            <div dx-check-box="checkBox.checked" ng-model="notification_sms"></div>
+                        </div>
+                    </div>
+                    <div class="dx-field" ng-show="mediaCheck">
+                        <div class="dx-field-label">Email</div>
+                        <div class="dx-field-value">
+                            <div dx-check-box="checkBox.checked" ng-model="notification_email"></div>
+                        </div>
+                    </div>
+                    <div class="dx-field">
+                        <div class="dx-field-label">Reminder Before Expired in Day</div>
+                        <div class="dx-field-value">
+                            <!--<div dx-check-box="checkBox.unchecked" ng-model="expire_date_notification"></div>-->
+                            <div class="checkBox" dx-check-box="{
+                                onValueChanged: valueChangedDate
+                            }" ng-model="expire_date_notification"></div>
+                        </div>
+                    </div>
+
+                    <div class="dx-field" ng-show="dayscheck">
+                        <div class="dx-field-label">No. of Days</div>
+                        <div class="dx-field-value">
+                            <div dx-text-box="textBox.remainder_days"  ng-model="remainder_days"></div>
+                        </div>
+                    </div>
+                    <div class="dx-field">
+                        <div class="dx-field-label">Allowed New/Hot/Last Day Promo Notification</div>
+                        <div class="dx-field-value">
+                            <div dx-check-box="checkBox.unchecked" ng-model="promo_notification"></div>
+                        </div>
+                    </div>
+
+                    <div class="dx-field">
+                        <div class="dx-field-label">Allowed News Letter</div>
+                        <div class="dx-field-value">
+                            <div dx-check-box="checkBox.unchecked" ng-model="news_letter_notification"></div>
+                        </div>
+                    </div>
+                    <div class="dx-field">
+                        <div class="dx-field-label">&nbsp;</div>
+                        <div class="dx-field-value">
+                            <div id="button" dx-button="{
+                                text: 'Submit',
+                                type: 'success',
+                                onClick: saveSetting }" ></div>
+                        </div>
+                    </div>
+
+                    <!--<div class="dx-field">-->
+                        <!--<div class="dx-field-label">&nbsp;</div>-->
+                        <!--<div class="dx-field-value">-->
+                            <!--<div id="button" dx-button="{-->
+                                <!--text: 'Submit',-->
+                                <!--type: 'success',-->
+                                <!--class:'btn btn-success btn-lg btn-block',-->
+                                <!--height:'40px',-->
+                                <!--width:'110px',-->
+                                <!--onClick: saveSetting }" ></div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+
+                </div>
+                <!--<div id="summary" dx-validation-summary="{ }"></div>-->
+
+            </div>
+        </div>
+
+    </div>
+    <div class="dx-clearfix"></div>
+    <!--<div class="container phone-hide">
+        <div class="transaction-details">
+            <h1>Transaction Details</h1>
+            <table>
+                <tr>
+                    <td width="15%" class="header-color">Transaction Date</td>
+                    <td width="14%" class="header-color">Transaction ID</td>
+                    <td width="33%" class="header-color">Transaction Description</td>
+                    <td width="13%" class="header-color">Debit (mPts)</td>
+                    <td width="12%" class="header-color">Credit (mPts)</td>
+                    <td width="13%" class="header-color">Total (mPts)</td>
+                </tr>
+                <tr>
+                    <td><div class="select-box"><select>
+                        <option>Select</option>
+                        <option>Select</option>
+                        <option>Select</option>
+                    </select></div></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><div class="select-box"><select>
+                        <option>Select</option>
+                        <option>Select</option>
+                        <option>Select</option>
+                    </select></div></td>
+                </tr>
+                <tr>
+                    <td>7/1/2015</td>
+                    <td>TRN120953549</td>
+                    <td>Brought Forward Balance</td>
+                    <td>250,000</td>
+                    <td>0</td>
+                    <td>250,000</td>
+                </tr>
+                <tr>
+                    <td>7/1/2015</td>
+                    <td>TRN120953549</td>
+                    <td>Brought Forward Balance</td>
+                    <td>250,000</td>
+                    <td>0</td>
+                    <td>250,000</td>
+                </tr>
+                <tr>
+                    <td>7/1/2015</td>
+                    <td>TRN120953549</td>
+                    <td>Brought Forward Balance</td>
+                    <td>250,000</td>
+                    <td>0</td>
+                    <td>250,000</td>
+                </tr>
+                <tr>
+                    <td>7/1/2015</td>
+                    <td>TRN120953549</td>
+                    <td>Brought Forward Balance</td>
+                    <td>250,000</td>
+                    <td>0</td>
+                    <td>250,000</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="m-transaction-details tablet-hide">
+        <h1>Transaction Details</h1>
+        <table>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction Date</td>
+                <td>7/1/2015</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction ID</td>
+                <td>TRN120953549</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction Description</td>
+                <td>Brought Forward Balance</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Debit (mPts)</td>
+                <td>250,000</td>
+            </tr>
+            <tr>
+                <td width="12%" class="m-header-color">Credit (mPts)</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td width="13%" class="m-header-color">Total (mPts)</td>
+                <td>250,000</td>
+            </tr>
+            </tr>
+        </table>
+
+    </div>
+
+    <div class="m-transaction-details tablet-hide">
+        <h1>Transaction Details</h1>
+        <table>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction Date</td>
+                <td>7/1/2015</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction ID</td>
+                <td>TRN120953549</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction Description</td>
+                <td>Brought Forward Balance</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Debit (mPts)</td>
+                <td>250,000</td>
+            </tr>
+            <tr>
+                <td width="12%" class="m-header-color">Credit (mPts)</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td width="13%" class="m-header-color">Total (mPts)</td>
+                <td>250,000</td>
+            </tr>
+            </tr>
+        </table>
+
+    </div>-->
+
+    <div class="dx-clearfix"></div>
+</div>
+
+

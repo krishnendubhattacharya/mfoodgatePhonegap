@@ -1,0 +1,107 @@
+<div ng-controller="memberlistCtrl">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+                <div ng-if="memberView == 'view'">
+                    <header class="panel-heading">
+                        Member
+                        <span class="tools pull-right">
+                            <a class="fa fa-chevron-down" href="javascript:;"></a>
+                            <a class="fa fa-times" href="javascript:;"></a>
+                         </span>
+                    </header>
+                    <div class="panel-body">
+
+                        <table id="membersList" class="table  table-hover general-table">
+                            <thead>
+                            <tr>
+                                <th> Id</th>
+                                <th class="hidden-phone">First Name</th>
+                                <th class="hidden-phone">Last Name</th>
+                                <th class="hidden-phone">Email</th>
+                                <th class="hidden-phone">M-Points</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr ng-repeat="item in allMember">
+                                <td>
+                                    {{item.id}}
+                                </td>
+                                <td >{{item.first_name}} </td>
+                                <td >{{item.last_name}}</td>
+                                <td >{{item.email}}</td>
+                                <td >{{item.points}}</td>
+                                <td ><a class="btn btn-default edit" href="javascript:;" ng-click ="editMember(item)">View</a>
+                                    <a class="btn btn-default edit" ui-sref="admin.voucherofmember({memberId:item.id})">Voucher</a>
+                                    <a class="btn btn-default delete" href="javascript:;" ng-click="deleteMember(item.id)"
+                                            >Delete</a></td>
+
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div ng-if="memberView == 'edit'">
+                    <header class="panel-heading">
+                        Member Details
+                    </header>
+                    <div class="panel-body">
+                        <form role="form" ng-submit="saveLocation()">
+                            <div class="form-group" >
+                                <label ><b>First name</b>: {{item.first_name}} </label>
+                            </div>
+
+                            <div class="form-group" >
+                                <label ><b>Last name</b>: {{item.last_name}} </label>
+                            </div>
+
+                            <div class="form-group" >
+                                <label ><b>Email</b>: {{item.email}} </label>
+                            </div>
+
+                            <div class="form-group" >
+                                <label ><b>Registration Date</b>: {{item.registration_date}} </label>
+                            </div>
+
+                            <div class="form-group" >
+                                <label ><b>Last Loged In</b>: {{item.last_login}} </label>
+                            </div>
+
+                            <div class="form-group" >
+                                <label ><b>Phone</b>: {{item.phone}} </label>
+                            </div>
+
+                            <div class="form-group" >
+                                <label ><b>Address</b>: {{item.address}} </label>
+                            </div>
+
+                            <div class="form-group" >
+                                <label ><b>Gender</b>: {{item.gender}} </label>
+                            </div>
+
+                            <div class="form-group" >
+                                <label ><b>M-Points</b> : {{item.points}} </label>
+                            </div>
+
+                            <div class="form-group" >
+                                <label ><img src="{{item.image}}" style="width:250px;height:auto;" > </label>
+                            </div>
+
+                            <button class="btn btn-danger" type="button" ng-click="cancelMember()">Back</button>
+                        </form>
+
+                    </div>
+                </div>
+
+
+            </section>
+        </div>
+    </div>
+
+</div>

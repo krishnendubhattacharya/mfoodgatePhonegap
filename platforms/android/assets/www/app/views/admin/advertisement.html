@@ -1,0 +1,198 @@
+<div ng-controller="advertisementCtrl">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+                <div ng-if="bannerView == 'view'">
+                    <header class="panel-heading">
+                        Advertisement
+                        <span class="tools pull-right">
+                            <a class="fa fa-chevron-down" href="javascript:;"></a>
+                            <a class="fa fa-times" href="javascript:;"></a>
+                         </span>
+                    </header>
+                    <div class="panel-body">
+                        <div class="btn-group">
+                            <button class="btn btn-primary" id="editable-sample_new" ng-click ="addBanner()">
+                                Add Advertise
+                            </button>
+                        </div>
+                        <table id="promosList" class="table  table-hover general-table">
+                            <thead>
+                            <tr>
+                                <th> Id</th>
+                                <th class="hidden-phone">Title</th>
+                                <th class="hidden-phone">Merchant</th>
+                                <th class="hidden-phone">Restaurant</th>
+                                <th class="hidden-phone">Target Click</th>
+                                <th class="hidden-phone">Actual Click</th>
+                                <th class="hidden-phone">Cost Per Click</th>
+                                <th>Action</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr ng-repeat="item in allbanner">
+                                <td>
+                                    {{item.id}}
+                                </td>
+                                <td >{{item.title}}</td>
+                                <td >{{item.merchant_name}}</td>
+                                <td >{{item.res_title}}</td>
+                                <td >{{item.target_click}}</td>
+                                <td >{{item.number_of_click}}</td>
+                                <td >{{item.cost_per_click}}</td>
+                                <td ><a class="btn btn-default edit" ui-sref="admin.advertisementedit({addvertiseId:item.id})">Edit</a>
+                                    <a class="btn btn-default delete" href="javascript:;" ng-click="deleteBanner(item.id)"
+                                            >Delete</a></td>
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div ng-if="bannerView == 'edit'">
+                    <header class="panel-heading">
+                        Advertise
+                    </header>
+                    <div class="panel-body">
+                        <form role="form" ng-submit="saveBanner()" enctype="multipart/form-data">
+
+                            <!--<div class="form-group">
+                                <label for="category_id">Select Merchant</label>
+                                <select id="restaurants" ng-model="item.restaurant_id" required  class="form-control" ng-change="getOutlet(item.restaurant_id)">
+                                    <option value="">Select</option>
+                                    <option ng-repeat="restaurant in restaurants" value="{{restaurant.id}}">{{restaurant.title}}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="category_id">Select Restaurant</label>
+                                <div ng-required ng-dropdown-multiselect="" id="outlet_id" options="allOutlet" selected-model="item.outlet_id"></div>
+                            </div>-->
+                            <div class="form-group">
+                                <label for="price">Title</label>
+                                <input type="text" required placeholder="Please enter title"  id="title" ng-model="item.title" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="category_id">Select Merchant</label>
+                                <select id="merchant" ng-model="item.merchant_id"   class="form-control" ng-change="getRestaurant(item.merchant_id)">
+                                    <option value="">Select</option>
+                                    <option ng-repeat="merchant in merchants" value="{{merchant.id}}">{{merchant.merchant_name}}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="category_id">Select Restaurant</label>
+                                <select id="restaurant" ng-model="item.restaurant_id"   class="form-control" ng-change="getOutletsByRestaurant(item.restaurant_id)">
+                                    <option value="">Select</option>
+                                    <option ng-repeat="restaurant in restaurantList" value="{{restaurant.id}}">{{restaurant.title}}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="location_id">Select Outlets</label>
+                                <!--<div ng-required ng-dropdown-multiselect=""  options="alllocation" selected-model="item.location_id"></div>-->
+                                <div ng-dropdown-multiselect=""  options="outlets" selected-model="item.outlet_id"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="location_id">Select Location</label>
+                                <!--<div ng-required ng-dropdown-multiselect=""  options="alllocation" selected-model="item.location_id"></div>-->
+                                <div ng-dropdown-multiselect=""  options="alllocation" selected-model="item.location_id"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea placeholder="Enter Description" required  id="description" ng-model="item.description" ckeditor class="form-control"></textarea>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label for="price">Target Click</label>
+                                <input type="hidden"   id="id" ng-model="item.id" class="form-control">
+                                <input type="text" required placeholder="Target Click"  id="target_click" ng-model="item.target_click" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="price">Cost Per Click</label>
+                                <input type="text" required placeholder="Cost Per Click"  id="cost_per_click" ng-model="item.cost_per_click" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="price">Income</label>
+                                <input type="text" required placeholder="Enter Income"  id="income" ng-model="item.income" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="price">Sharing Cost</label>
+                                <input type="text" required placeholder="Sharing Cost"  id="sharing_cost" ng-model="item.sharing_cost" class="form-control">
+                            </div>
+
+                            <!--<div class="form-group">
+                                <label for="price">M-point Name</label>
+                                <input type="text" required placeholder="Mpoint Name"  id="mpoint_name" ng-model="item.mpoint_name" class="form-control">
+                            </div>-->
+
+                            <div class="form-group">
+                                <label for="category_id">M-point Name</label>
+                                <select id="mpoint_name" ng-model="item.mpoint_name" required  class="form-control" >
+                                    <option value="">Select</option>
+                                    <option ng-repeat="pointsmaster in pointsmasters" value="{{pointsmaster.id}}">{{pointsmaster.name}}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="price">Mpoint Get Per Click</label>
+                                <input type="text" required placeholder="Mpoint Get Per Click"  id="mpoint_get_per_click" ng-model="item.mpoint_get_per_click" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="price">Start Date</label>
+                                <input type="text" data-ng-datepicker data-ng-options="datepickerOptions" required placeholder="From Date"  id="start_date" ng-model="item.start_date" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="price">End Date</label>
+                                <input type="text" data-ng-datepicker data-ng-options="datepickerOptions" required placeholder="To Date"  id="end_date" ng-model="item.end_date" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="image">Image</label>
+                                <input type="file"  id="image" ng-model="item.image" base-sixty-four-input>
+                                <img data-ng-src="data:{{item.image.filetype}};base64,{{item.image.base64}}" width="200" ng-if="item.image">
+                            </div>
+
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="item.is_featured" ng-true-value="1" ng-false-value="0"> Is Featured
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="item.is_internal_merchants" ng-true-value="1" ng-false-value="0"> Is Internal Merchants
+                                </label>
+                            </div>
+
+
+
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="item.is_active" ng-true-value="1" ng-false-value="0"> Is Active
+                                </label>
+                            </div>
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                            <button class="btn btn-danger" type="button" ng-click="cancelBanner()">Cancel</button>
+                        </form>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</div>

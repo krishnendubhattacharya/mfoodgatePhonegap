@@ -1,0 +1,87 @@
+<!--Web header-->
+<div ng-controller="eventdetailCtrl">
+
+    <div class="container phone-hide">
+        <div class="voucher-details">
+            <h1>Event Detail</h1>
+                <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+            <div class="ev-details">
+                <div class="event-d">
+                    <div class="img-box">
+
+                                <!--<div class="p-circle">5X</div>-->
+                                <img src="{{eventInfo.data.image}}" width="218" height="100"  alt=""/>
+
+                    </div>
+                    <div class="dsc-bx">
+                        <h1>{{eventInfo.data.title}}</h1>
+                        <p ng-bind-html="eventInfo.data.description"></p>
+
+
+                            <p><span class="title">Created By</span> <span class="val">{{eventInfo.data.user_details.first_name}} {{eventInfo.data.user_details.last_name}}</span></p>
+                            <p><span class="title">Status</span> <span class="val">{{eventInfo.data.status}}</span></p>
+                            <p><span class="title">Outlet type</span> <span class="val"><span ng-repeat="item in eventInfo.data.categories">{{item.name}}, </span></span></p>
+                            <p><span class="title">Outlet location</span> <span class="val"><span ng-repeat="item_loc in eventInfo.data.locations">{{item_loc.city}}, </span></span></p>
+                            <p><span class="title">Event Start Date</span> <span class="val">{{eventInfo.data.from_date}}</span></p>
+                            <p><span class="title">Event End Date</span> <span class="val">{{eventInfo.data.to_date}}</span></p>
+                            <p><span class="title">Offer Start Date</span> <span class="val">{{eventInfo.data.offer_from_date}}</span></p>
+                            <p><span class="title">Offer End Date</span> <span class="val">{{eventInfo.data.offer_to_date}}</span></p>
+                            <p><span class="title"><div class="nwe-btn" ng-if="loggedindetails.user_type_id == 3 && !isBidEvent  && eventInfo.data.status!='Expired' "><span class="dx-button" ng-click="eventBid({{eventInfo.data.id}})">Bid</span></div></span></p>
+
+
+                    </div>
+
+                 </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="m-myaccount-details tablet-hide">
+
+        <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+        <h1>Event Detail</h1>
+        <div class="m-ev-details">
+            <div class="event-d">
+                <div class="img-box">
+                    <div class="pro-item">
+                        <div class="logo-box">
+                            <!--<div class="p-circle">5X</div>-->
+                            <img src="{{eventInfo.data.image}}" width="218" height="100"  alt=""/>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="dsc-bx">
+                    <h1>{{eventInfo.data.title}}</h1>
+                    <p ng-bind-html="eventInfo.data.description"></p>
+
+
+                    <p><span class="title">Created By</span> <span class="val">{{eventInfo.data.user_details.first_name}} {{eventInfo.data.user_details.last_name}}</span></p>
+                    <p><span class="title">Status</span> <span class="val">{{eventInfo.data.status}}</span></p>
+                    <p><span class="title">Outlet type</span> <span class="val"><span ng-repeat="item in eventInfo.data.categories">{{item.name}}, </span></span></p>
+                    <p><span class="title">Outlet location</span> <span class="val"><span ng-repeat="item_loc in eventInfo.data.locations">{{item_loc.city}}, </span></span></p>
+                    <p><span class="title">Event Start Date</span> <span class="val">{{eventInfo.data.from_date}}</span></p>
+                    <p><span class="title">Event End Date</span> <span class="val">{{eventInfo.data.to_date}}</span></p>
+                    <p><span class="title">Offer Start Date</span> <span class="val">{{eventInfo.data.offer_from_date}}</span></p>
+                    <p><span class="title">Offer End Date</span> <span class="val">{{eventInfo.data.offer_to_date}}</span></p>
+                    <p ><span class="title"><div class="nwe-btn" ng-if="loggedindetails.user_type_id == 3 && !isBidEvent  && eventInfo.data.status!='Expired' "><span class="dx-button" ng-click="eventBid({{eventInfo.data.id}})">Bid</span></div></span></p>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- <div class="m-profile-details">
+            <div id="gridContainer" dx-data-grid="dataGridOptions"></div>
+
+        </div> -->
+
+    </div>
+
+
+</div>
+
+

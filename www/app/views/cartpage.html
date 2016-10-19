@@ -1,0 +1,202 @@
+<div ng-controller="cartpageCtrl" class="container">
+
+
+        <div class="container phone-hide">
+        <div class="myaccount-details">
+            <h1>Cart</h1>
+                <div ng-if="loggedindetails" data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+
+            <div class="profile-details carts">
+                <div ng-if="cartDetails" class="offer" ng-repeat="cart in cartDetails">
+                <img src="{{cart.image}}" width="200" style="float:left;margin:10px">
+                <p>
+                    <span>{{cart.offer_title}}:</span> {{cart.restaurant_title}}
+                </p>
+                <!--<div class="price-div">
+
+                    <div class="off">{{cart.offer_percent}}% <span>off</span></div>
+                    <div class="price-m"><span>{{cart.price}}</span>  IDR{{cart.offer_price | number}}</div>
+                    <div style="clear: both"></div>
+                    <div class="off">M-points</div>
+                    <div class="price-m" style="float: right">{{cart.mpoints}}</div>
+                </div>-->
+                <div class="price-div">
+                    <div ng-if="cart.event == 0" class="off"><span><input type="checkbox" id="paymentscash" name="paymentscash" ng-model="cart.paymentscash" ng-disabled="{{cart.condtn==1?true:false}}" ng-change="updateCheck(cartDetails,cart.offer_id,'c')"></span>{{cart.offer_percent}}% <span>off</span> </div>
+                    <div class="price-m"><span ng-if="cart.event == 0">{{cart.price}}</span>  IDR{{cart.offer_price | number}}</div>
+                    <div style="clear: both"></div>
+                    <div ng-if="cart.mpoints != 0" class="price-m" style="float: right">{{cart.condtn==1?'And':'Or'}}</div>
+                    <div style="clear: both"></div>
+                    <div ng-if="cart.mpoints != 0" class="off"><span><input type="checkbox" name="payments" id="payments" ng-model="cart.payments" ng-disabled="{{cart.condtn==1?true:false}}" ng-change="updateCheck(cartDetails,cart.offer_id,'p')"></span>{{cart.point_name}}</div>
+                    <div ng-if="cart.mpoints != 0" class="price-m" style="float: right">{{cart.mpoints}}</div>
+                </div>
+                <div class="qty-totals">
+                    <div ng-if="cart.event == 0" class="qty">Qty: <span><input type="text" ng-model="cart.quantity" value="1" ng-change="updateQuantity(cart)"></span></div>
+                    <div class="totals" ><span>Total:</span> IDR{{cart.quantity*cart.offer_price | number}}</div>
+                </div>
+
+                <div class="qty-totals">
+                    <div class="qty" style="width:60%">
+                        <div ng-if="cart.event == 0" class="nwe-btn" ng-click="remove_offer({{cart.offer_id}})" ><span class="dx-button" ng-click="remove_offer({{cart.offer_id}})" style="color:red;">Remove from Cart</span></div>
+                        <div ng-if="cart.event == 1" class="nwe-btn" ng-click="remove_event({{cart.event_id}})" ><span class="dx-button" ng-click="remove_event({{cart.event_id}})" style="color:red;">Remove from Cart</span></div>
+                    </div>
+                    <div ng-if="cart.event == 0" class="totals" style="width:40%" ><span>M-points:</span>{{cart.quantity*cart.mpoints}}</div>
+
+                </div>
+
+            </div>
+            <!--<div ng-if="cartDetails && loggedindetails" class="offer">
+                <p>
+                    <span>Payment By:-</span>
+                </p>
+                <div class="qty-totals" ng-init="payments='C'">
+                    <div class="qty">
+                        <input type="radio" ng-model="$parent.payments" value="C">Cash
+                    </div>
+                    <div class="qty">
+                        <input type="radio" ng-model="$parent.payments" value="P">M-points
+                    </div>
+                    <div class="qty" ng-if="payments=='P'">Available M-points:</div>
+                    <div class="totals" ng-if="payments=='P'">{{mpoints}}</div>
+                </div>
+            </div>-->
+            <div ng-if="cartDetails" class="offer">
+                <div class="qty-totals">
+                    <div class="qty">Total : </div>
+                    <div class="totals" ng-init="getCartTotals()">IDR{{cart_total | number}}</div>
+                    <div ng-repeat="cartpn in cart_ttl_point">
+                        <div class="qty" >{{cartpn.point_name}} : </div>
+                        <div class="totals">{{cartpn.point_value}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-if="!cartDetails || cartDetails.length==0" class="offer">
+                <p>
+                    <span>No item found.</span>
+                </p>
+            </div>
+
+            <!--<div class="offer">
+                <p>
+                    <span>Offer - 1:</span> Lorem ip dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                </p>
+                <div class="price-div">
+                    <div class="off">64% <span>off</span></div>
+                    <div class="price-m"><span>2,800</span>  $999</div>
+                </div>
+                <div class="qty-totals">
+                    <div class="qty">Qty: <span><input type="text" value="1"></span></div>
+                    <div class="totals"><span>Total:</span> $1400</div>
+                </div>
+            </div>-->
+            <p ng-if="cartDetails"><input type="button" value="BUY NOW" ng-click="pay_now()"></p>
+        </div>
+                
+            </div>
+    </div>
+    <div class="m-myaccount-details tablet-hide">
+
+        <div ng-if="loggedindetails" data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+        <h1>Cart</h1>
+        <div class="m-profile-details">
+            <div class="m-carts tablet-hide">
+            
+            <div ng-if="cartDetails" class="offer" ng-repeat="cart in cartDetails">
+                <p>
+                    <span>{{cart.offer_title}}:</span> {{cart.restaurant_title}}
+
+                </p>
+                <!--<div class="price-div">
+                    <div class="off">{{cart.offer_percent}}% <span>off</span></div>
+                    <div class="price-m"><span>{{cart.price}}</span>  IDR{{cart.offer_price | number}}</div>
+                    <div style="clear: both"></div>
+                    <div class="off">M-points</div>
+                    <div class="price-m" style="float: right">{{cart.mpoints}}</div>
+                </div>-->
+                <div class="price-div">
+                    <div ng-if="cart.event == 0" class="off"><span><input type="checkbox" id="paymentscash" name="paymentscash" ng-model="cart.paymentscash" ng-disabled="{{cart.condtn==1?true:false}}" ng-change="updateCheck(cartDetails,cart.offer_id,'c')"></span>{{cart.offer_percent}}% <span>off</span> </div>
+                    <div class="price-m"><span ng-if="cart.event == 0">{{cart.price}}</span>  IDR{{cart.offer_price | number}}</div>
+                    <div style="clear: both"></div>
+                    <div ng-if="cart.mpoints != 0" class="price-m" style="float: right">{{cart.condtn==1?'And':'Or'}}</div>
+                    <div style="clear: both"></div>
+                    <div ng-if="cart.mpoints != 0" class="off"><span><input type="checkbox" name="payments" id="payments" ng-model="cart.payments" ng-disabled="{{cart.condtn==1?true:false}}" ng-change="updateCheck(cartDetails,cart.offer_id,'p')"></span>{{cart.point_name}}</div>
+                    <div ng-if="cart.mpoints != 0" class="price-m" style="float: right">{{cart.mpoints}}</div>
+                </div>
+                <div class="qty-totals">
+                    <div ng-if="cart.event == 0" class="qty">Qty: <span><input type="text" ng-model="cart.quantity" value="1" ng-change="updateQuantity(cart)"></span></div>
+                    <div class="totals" ><span>Total:</span> IDR{{cart.quantity*cart.offer_price | number}}</div>
+                </div>
+                <div class="qty-totals">
+                	<div class="qty" style="width:60%">
+                    	<div ng-if="cart.event == 0" class="nwe-btn" ng-click="remove_offer({{cart.offer_id}})" ><span class="dx-button" ng-click="remove_offer({{cart.offer_id}})" style="color:red;">Remove from Cart</span></div>
+                        <div ng-if="cart.event == 1" class="nwe-btn" ng-click="remove_event({{cart.event_id}})" ><span class="dx-button" ng-click="remove_event({{cart.event_id}})" style="color:red;">Remove from Cart</span></div>
+                    </div>
+                    <div ng-if="cart.event == 0" class="totals" style="width:40%" ><span>M-points:</span>{{cart.quantity*cart.mpoints}}</div>
+                    
+                </div>
+            </div>
+            <!--<div ng-if="cartDetails && loggedindetails" class="offer">
+                <p>
+                    <span>Payment By:-</span>
+                </p>
+                <div class="qty-totals">
+                    <div class="qty">
+                        <input type="radio" name="payments" ng-model="$parent.payments" value="C">Cash
+                    </div>
+                    <div class="qty">
+                        <input type="radio" name="payments" ng-model="$parent.payments" value="P">M-points
+                    </div>
+                    <div class="qty" ng-if="payments=='P'">Available M-points:</div>
+                    <div class="totals" ng-if="payments=='P'">{{mpoints}}</div>
+                </div>
+            </div>-->
+            <div ng-if="cartDetails" class="offer">
+                <div class="qty-totals">
+                    <div class="qty">Total : </div>
+                    <div class="totals" ng-init="getCartTotals()">IDR{{cart_total | number}}</div>
+                    <div ng-repeat="cartpn in cart_ttl_point">
+                        <div class="qty" >{{cartpn.point_name}} : </div>
+                        <div class="totals">{{cartpn.point_value}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-if="!cartDetails || cartDetails.length==0" class="offer">
+                <p>
+                    <span>No item found.</span>
+                </p>
+            </div>
+
+            <!--<div class="offer">
+                <p>
+                    <span>Offer - 1:</span> Lorem ip dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                </p>
+                <div class="price-div">
+                    <div class="off">64% <span>off</span></div>
+                    <div class="price-m"><span>2,800</span>  $999</div>
+                </div>
+                <div class="qty-totals">
+                    <div class="qty">Qty: <span><input type="text" value="1"></span></div>
+                    <div class="totals"><span>Total:</span> $1400</div>
+                </div>
+            </div>-->
+            <p ng-if="cartDetails"><input type="button" value="BUY NOW" ng-click="pay_now()"></p>
+        </div>
+        </div>
+
+    </div>
+    <div class="dx-clearfix"></div>
+
+
+
+
+
+</div>
+<style>
+.profile-details {
+width: 80% !important;
+float: right !important;
+margin: 0 !important;
+border: solid 1px #eaeaea !important;
+}
+</style>

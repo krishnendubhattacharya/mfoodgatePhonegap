@@ -1,0 +1,480 @@
+<?php
+$sellang=$this->Session->read('sellang');
+if($sellang=='de')
+{
+App::import('Vendor', 'languages', array('file' => 'de.php'));
+}
+else{
+App::import('Vendor', 'languages', array('file' => 'en.php'));
+}
+?>
+
+<style>
+    .img-responsive{
+        min-height: 100% !important;
+        width: 100% !important;
+    }
+</style>
+<section class="tab-page">
+    <div class="container">
+        <div class="row">
+            <form action=""  id="FilterGuidanceForm" method="post">
+                <div class="col-lg-12">
+                    <ul class="nav nav-tabs custom-tabs">
+                        <li class="active"><a data-toggle="tab" href="#circumstancesd"><?php echo ROOMSTYLE; ?></a></li>
+                        <li><a data-toggle="tab" href="#picture"><?php echo PICTURESTYLE; ?></a></li>
+                        <li><a data-toggle="tab" href="#budget"><?php echo SIZE ?></a></li>
+                        <li><a data-toggle="tab" href="#properties"><?php echo PROPERTIES ?></a></li>
+                    </ul>
+                    <div class="clearfix"><</div>
+                    <div class="tab-content">
+                        <a href="javascript:void(0)" class="next btn btn-primary" onclick="submit_form();"><?php echo MANAGEABLE;?> <i class="fa fa-angle-double-right"></i></a>
+                        </a>
+                        <div class="clearfix"></div>
+                        <div id="circumstancesd" class="tab-pane fade in active">
+                            <div class="row">
+
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="room_post_by">
+                                        <img src="<?php echo $this->webroot;  ?>site_logo/<?php echo $guidance_image['SiteSetting']['header_pic'] ?>" alt="" />
+                                        <p><?php echo ROOMCOMES;?>? </p>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-md-12 col-sm-12 roompic">
+                                    <?php  if(!empty($rooms)) {
+			        		foreach($rooms as $room) {
+			        		        $all_cat = '';
+			        		        $all_color = '';
+			        		        /*$all_cat = $sellang=='de'?$room['Category']['name_translated']:$room['Category']['name'];
+			        		        $all_color = $sellang=='de'?$room['Color']['name_translated']:$room['Color']['name'];
+
+			        		        $all_publish = $sellang=='de'?$room['Publisher']['name_translated']:$room['Publisher']['name'];
+			        		        if(!empty($room['Category2']['name'])){
+			        		                $all_cat = $all_cat.', '.($sellang=='de'?$room['Category2']['name_translated']:$room['Category2']['name']);
+			        		        }
+			        		        if(!empty($room['Category3']['name'])){
+			        		                $all_cat = $all_cat.', '.($sellang=='de'?$room['Category3']['name_translated']:$room['Category3']['name']);
+			        		        }
+			        		        if(!empty($room['Category4']['name'])){
+			        		                $all_cat = $all_cat.', '.($sellang=='de'?$room['Category4']['name_translated']:$room['Category4']['name']);
+			        		        }
+			        		        if(!empty($room['Category5']['name'])){
+			        		                $all_cat = $all_cat.', '.($sellang=='de'?$room['Category5']['name_translated']:$room['Category5']['name']);
+			        		        }
+			        		        if(!empty($room['Category6']['name'])){
+			        		                $all_cat = $all_cat.', '.($sellang=='de'?$room['Category6']['name_translated']:$room['Category6']['name']);
+			        		        }
+			        		        if(!empty($room['Category7']['name'])){
+			        		                $all_cat = $all_cat.', '.($sellang=='de'?$room['Category7']['name_translated']:$room['Category7']['name']);
+			        		        }
+			        		        if(!empty($room['Category8']['name'])){
+			        		                $all_cat = $all_cat.', '.($sellang=='de'?$room['Category8']['name_translated']:$room['Category8']['name']);
+			        		        }
+			        		        if(!empty($room['Category9']['name'])){
+			        		                $all_cat = $all_cat.', '.($sellang=='de'?$room['Category9']['name_translated']:$room['Category9']['name']);
+			        		        }
+			        		        if(!empty($room['Category10']['name'])){
+			        		                $all_cat = $all_cat.', '.($sellang=='de'?$room['Category10']['name_translated']:$room['Category10']['name']);
+			        		        }
+
+			        		        if(!empty($room['Publisher2']['name'])){
+			        		                $all_publish = $all_publish.', '.($sellang=='de'?$room['Publisher2']['name_translated']:$room['Publisher2']['name']);
+			        		        }
+			        		        if(!empty($room['Publisher3']['name'])){
+			        		                $all_publish = $all_publish.', '.($sellang=='de'?$room['Publisher3']['name_translated']:$room['Publisher3']['name']);
+			        		        }
+			        		        if(!empty($room['Publisher4']['name'])){
+			        		                $all_publish = $all_publish.', '.($sellang=='de'?$room['Publisher4']['name_translated']:$room['Publisher4']['name']);
+			        		        }
+			        		        if(!empty($room['Publisher5']['name'])){
+			        		                $all_publish = $all_publish.', '.($sellang=='de'?$room['Publisher5']['name_translated']:$room['Publisher5']['name']);
+			        		        }
+			        		        if(!empty($room['Publisher6']['name'])){
+			        		                $all_publish = $all_publish.', '.($sellang=='de'?$room['Publisher6']['name_translated']:$room['Publisher6']['name']);
+			        		        }
+			        		        if(!empty($room['Publisher7']['name'])){
+			        		                $all_publish = $all_publish.', '.($sellang=='de'?$room['Publisher7']['name_translated']:$room['Publisher7']['name']);
+			        		        }
+			        		        if(!empty($room['Publisher8']['name'])){
+			        		                $all_publish = $all_publish.', '.($sellang=='de'?$room['Publisher8']['name_translated']:$room['Publisher8']['name']);
+			        		        }
+			        		        if(!empty($room['Publisher9']['name'])){
+			        		                $all_publish = $all_publish.', '.($sellang=='de'?$room['Publisher9']['name_translated']:$room['Publisher9']['name']);
+			        		        }
+			        		        if(!empty($room['Publisher10']['name'])){
+			        		                $all_publish = $all_publish.', '.($sellang=='de'?$room['Publisher10']['name_translated']:$room['Publisher10']['name']);
+			        		        }
+
+			        		        if(!empty($room['Color2']['name'])){
+			        		                $all_color = $all_color.', '.($sellang=='de'?$room['Color2']['name_translated']:$room['Color2']['name']);
+			        		        }
+			        		        if(!empty($room['Color3']['name'])){
+			        		                $all_color = $all_color.', '.($sellang=='de'?$room['Color3']['name_translated']:$room['Color3']['name']);
+			        		        }
+			        		        if(!empty($room['Color4']['name'])){
+			        		                $all_color = $all_color.', '.($sellang=='de'?$room['Color4']['name_translated']:$room['Color4']['name']);
+			        		        }*/
+			        		        $description = ($sellang=='de'?$room['RoomStyle']['description_translated']:$room['RoomStyle']['description']);
+			        		?>
+
+                                    <div class="col-md-4 col-sm-4 roompic_boxes"><b title = "<?php echo DESCRIPTION.': '.$description.'';?>">
+                                        <div class="image_selector">
+                                            <input type="checkbox" value="<?php echo $room['RoomStyle']['category_id'].','.$room['RoomStyle']['category2'].','.$room['RoomStyle']['category3'].','.$room['RoomStyle']['category4'].','.$room['RoomStyle']['category5'].','.$room['RoomStyle']['category6'].','.$room['RoomStyle']['category7'].','.$room['RoomStyle']['category8'].','.$room['RoomStyle']['category9'].','.$room['RoomStyle']['category10'].'-'.$room['RoomStyle']['color_id'].','.$room['RoomStyle']['color2'].','.$room['RoomStyle']['color3'].','.$room['RoomStyle']['color4'].'-'.$room['RoomStyle']['publisher_id'].','.$room['RoomStyle']['publisher2'].','.$room['RoomStyle']['publisher3'].','.$room['RoomStyle']['publisher4'].','.$room['RoomStyle']['publisher5'].','.$room['RoomStyle']['publisher6'].','.$room['RoomStyle']['publisher7'].','.$room['RoomStyle']['publisher8'].','.$room['RoomStyle']['publisher9'].','.$room['RoomStyle']['publisher10'].','.$room['RoomStyle']['publisher11'].','.$room['RoomStyle']['publisher12'].','.$room['RoomStyle']['publisher13'].','.$room['RoomStyle']['publisher14'].','.$room['RoomStyle']['publisher15'].','.$room['RoomStyle']['publisher16'].','.$room['RoomStyle']['publisher17'].','.$room['RoomStyle']['publisher18'].','.$room['RoomStyle']['publisher19'].','.$room['RoomStyle']['publisher20'].'-'; ?>" name="data[Filter][styleroom][]">
+                                            <img onclick="" src="<?php echo $this->webroot; ?>stylepicture_images/<?php echo $room['RoomStyle']['image'] ?>" class="img-responsive">
+                                            <div class="image_text"><?php echo $sellang=='en'?$room['RoomStyle']['name']:$room['RoomStyle']['name_translated']; ?></div>
+                                        </div>
+
+                                    </b>
+                                    </div>
+
+                                    <?php
+			        		}}
+			        		?>
+                                </div>
+                                
+
+                            </div>
+                        </div>
+                        <div id="picture" class="tab-pane fade">
+                            <div class="row">
+
+                                <div class="clearfix"></div>
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="room_post_by">
+                                        <img src="<?php echo $this->webroot;  ?>site_logo/<?php echo $guidance_image['SiteSetting']['header_pic'] ?>" alt="" />
+                                        <p><?php echo PRODUCTSTYLES;?>? </p>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-md-12 col-sm-12 roompic">
+                                    <?php   if(!empty($stylepictures)) {
+			        		foreach($stylepictures as $stylepicture) {
+			        		        $all_cat = '';
+			        		        $all_color = '';
+			        		        /*$all_cat = ($sellang=='de'?$stylepicture['Category']['name_translated']:$stylepicture['Category']['name']);
+			        		        $all_color = ($sellang=='de'?$stylepicture['Color']['name_translated']:$stylepicture['Color']['name']);
+			        		         $all_publish = $sellang=='de'?$stylepicture['Publisher']['name_translated']:$stylepicture['Publisher']['name'];
+			        		        if(!empty($stylepicture['Category2']['name'])){
+			        		                $all_cat = $all_cat.', '.($sellang=='de'?$stylepicture['Category2']['name_translated']:$stylepicture['Category2']['name']);
+			        		        }
+			        		        if(!empty($stylepicture['Category3']['name'])){
+			        		                $all_cat = $all_cat.', '.($sellang=='de'?$stylepicture['Category3']['name_translated']:$stylepicture['Category3']['name']);
+			        		        }
+			        		        if(!empty($stylepicture['Category4']['name'])){
+			        		                $all_cat = $all_cat.', '.($sellang=='de'?$stylepicture['Category4']['name_translated']:$stylepicture['Category4']['name']);
+			        		        }
+			        		        if(!empty($stylepicture['Category5']['name'])){
+			        		                $all_cat = $all_cat.', '.($sellang=='de'?$stylepicture['Category5']['name_translated']:$stylepicture['Category5']['name']);
+			        		        }
+			        		        if(!empty($stylepicture['Category6']['name'])){
+			        		                $all_cat = $all_cat.', '.($sellang=='de'?$stylepicture['Category6']['name_translated']:$stylepicture['Category6']['name']);
+			        		        }
+			        		        if(!empty($stylepicture['Category7']['name'])){
+			        		                $all_cat = $all_cat.', '.($sellang=='de'?$stylepicture['Category7']['name_translated']:$stylepicture['Category7']['name']);
+			        		        }
+			        		        if(!empty($stylepicture['Category8']['name'])){
+			        		                $all_cat = $all_cat.', '.($sellang=='de'?$stylepicture['Category8']['name_translated']:$stylepicture['Category8']['name']);
+			        		        }
+			        		        if(!empty($stylepicture['Category9']['name'])){
+			        		                $all_cat = $all_cat.', '.($sellang=='de'?$stylepicture['Category9']['name_translated']:$stylepicture['Category9']['name']);
+			        		        }
+			        		        if(!empty($stylepicture['Category10']['name'])){
+			        		                $all_cat = $all_cat.', '.($sellang=='de'?$stylepicture['Category10']['name_translated']:$stylepicture['Category10']['name']);
+			        		        }
+
+			        		        if(!empty($stylepicture['Color2']['name'])){
+			        		                $all_color = $all_color.', '.($sellang=='de'?$stylepicture['Color2']['name_translated']:$stylepicture['Color2']['name']);
+			        		        }
+			        		        if(!empty($stylepicture['Color3']['name'])){
+			        		                $all_color = $all_color.', '.($sellang=='de'?$stylepicture['Color3']['name_translated']:$stylepicture['Color3']['name']);
+			        		        }
+			        		        if(!empty($stylepicture['Color4']['name'])){
+			        		                $all_color = $all_color.', '.($sellang=='de'?$stylepicture['Color4']['name_translated']:$stylepicture['Color4']['name']);
+			        		        }
+
+			        		        if(!empty($stylepicture['Publisher2']['name'])){
+			        		                $all_publish = $all_publish.', '.($sellang=='de'?$stylepicture['Publisher2']['name_translated']:$stylepicture['Publisher2']['name']);
+			        		        }
+			        		        if(!empty($stylepicture['Publisher3']['name'])){
+			        		                $all_publish = $all_publish.', '.($sellang=='de'?$stylepicture['Publisher3']['name_translated']:$stylepicture['Publisher3']['name']);
+			        		        }
+			        		        if(!empty($stylepicture['Publisher4']['name'])){
+			        		                $all_publish = $all_publish.', '.($sellang=='de'?$stylepicture['Publisher4']['name_translated']:$stylepicture['Publisher4']['name']);
+			        		        }
+			        		        if(!empty($stylepicture['Publisher5']['name'])){
+			        		                $all_publish = $all_publish.', '.($sellang=='de'?$stylepicture['Publisher5']['name_translated']:$stylepicture['Publisher5']['name']);
+			        		        }
+			        		        if(!empty($stylepicture['Publisher6']['name'])){
+			        		                $all_publish = $all_publish.', '.($sellang=='de'?$stylepicture['Publisher6']['name_translated']:$stylepicture['Publisher6']['name']);
+			        		        }
+			        		        if(!empty($stylepicture['Publisher7']['name'])){
+			        		                $all_publish = $all_publish.', '.($sellang=='de'?$stylepicture['Publisher7']['name_translated']:$stylepicture['Publisher7']['name']);
+			        		        }
+			        		        if(!empty($stylepicture['Publisher8']['name'])){
+			        		                $all_publish = $all_publish.', '.($sellang=='de'?$stylepicture['Publisher8']['name_translated']:$stylepicture['Publisher8']['name']);
+			        		        }
+			        		        if(!empty($stylepicture['Publisher9']['name'])){
+			        		                $all_publish = $all_publish.', '.($sellang=='de'?$stylepicture['Publisher9']['name_translated']:$stylepicture['Publisher9']['name']);
+			        		        }
+			        		        if(!empty($stylepicture['Publisher10']['name'])){
+			        		                $all_publish = $all_publish.', '.($sellang=='de'?$stylepicture['Publisher10']['name_translated']:$stylepicture['Publisher10']['name']);
+			        		        }*/
+
+			        		        $description = ($sellang=='de'?$stylepicture['StylePicture']['description_translated']:$stylepicture['StylePicture']['description']);
+			        		?>
+
+                                    <div class="col-md-4 col-sm-4 stylepic_boxes">
+                                        <b title = "<?php echo DESCRIPTION.': '.$description.'';?>">
+                                            <div class="image_selector1">
+                                                <input type="checkbox" value="<?php echo $stylepicture['StylePicture']['category_id'].','.$stylepicture['StylePicture']['category2'].','.$stylepicture['StylePicture']['category3'].','.$stylepicture['StylePicture']['category4'].','.$stylepicture['StylePicture']['category5'].','.$stylepicture['StylePicture']['category6'].','.$stylepicture['StylePicture']['category7'].','.$stylepicture['StylePicture']['category8'].','.$stylepicture['StylePicture']['category9'].','.$stylepicture['StylePicture']['category10'].'-'.$stylepicture['StylePicture']['color_id'].','.$stylepicture['StylePicture']['color2'].','.$stylepicture['StylePicture']['color3'].','.$stylepicture['StylePicture']['color4'].'-'.$stylepicture['StylePicture']['publisher_id'].','.$stylepicture['StylePicture']['publisher2'].','.$stylepicture['StylePicture']['publisher3'].','.$stylepicture['StylePicture']['publisher4'].','.$stylepicture['StylePicture']['publisher5'].','.$stylepicture['StylePicture']['publisher6'].','.$stylepicture['StylePicture']['publisher7'].','.$stylepicture['StylePicture']['publisher8'].','.$stylepicture['StylePicture']['publisher9'].','.$stylepicture['StylePicture']['publisher10'].','.$stylepicture['StylePicture']['publisher11'].','.$stylepicture['StylePicture']['publisher12'].','.$stylepicture['StylePicture']['publisher13'].','.$stylepicture['StylePicture']['publisher14'].','.$stylepicture['StylePicture']['publisher15'].','.$stylepicture['StylePicture']['publisher16'].','.$stylepicture['StylePicture']['publisher17'].','.$stylepicture['StylePicture']['publisher18'].','.$stylepicture['StylePicture']['publisher19'].','.$stylepicture['StylePicture']['publisher20'].'-'; ?>" name="data[Filter][stylepic][]">
+                                                <img onclick="" src="<?php echo $this->webroot; ?>stylepicture_images/<?php echo $stylepicture['StylePicture']['image'] ?>" class="img-responsive">
+                                                <div class="image_text"><?php echo $sellang=='en'?$stylepicture['StylePicture']['name']:$stylepicture['StylePicture']['name_translated'] ?></div>
+                                            </div>
+                                        </b>
+                                    </div>
+
+                                    <?php } } ?>
+                                </div>
+                                <!--<div class="col-md-4 col-sm-4">
+
+                                        <div class="image_selector">
+                                            <input type="checkbox" name="markerType">
+                                            <img onclick="" src="<?php echo $this->webroot;  ?>product_images/1309199455_1071_ol_product.jpg" class="img-responsive">
+                                            <div class="image_text">Name der Kollektion: Test1234</div>
+                                        </div>
+
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+
+                                        <div class="image_selector">
+                                            <input type="checkbox" name="markerType">
+                                            <img onclick="" src="<?php echo $this->webroot;  ?>product_images/1309199455_1071_ol_product.jpg" class="img-responsive">
+                                            <div class="image_text">Name der Kollektion: Test1234</div>
+                                        </div>
+
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+
+                                        <div class="image_selector">
+                                            <input type="checkbox" name="markerType">
+                                            <img onclick="" src="<?php echo $this->webroot;  ?>product_images/1309199455_1071_ol_product.jpg" class="img-responsive">
+                                            <div class="image_text">Name der Kollektion: Test1234</div>
+                                        </div>
+
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+
+                                        <div class="image_selector">
+                                            <input type="checkbox" name="markerType">
+                                            <img onclick="" src="<?php echo $this->webroot;  ?>product_images/1309199455_1071_ol_product.jpg" class="img-responsive">
+                                            <div class="image_text">Name der Kollektion: Test1234</div>
+                                        </div>
+
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+
+                                        <div class="image_selector">
+                                            <input type="checkbox" name="markerType">
+                                            <img onclick="" src="<?php echo $this->webroot;  ?>product_images/1309199455_1071_ol_product.jpg" class="img-responsive">
+                                            <div class="image_text">Name der Kollektion: Test1234</div>
+                                        </div>
+
+                                </div>-->
+
+                            </div>
+                        </div>
+                        <div id="budget" class="tab-pane fade">
+                            <div class="row">
+
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="content-holder2">
+                                        <div class="clearfix"></div>
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="room_post_by">
+                                                <img src="<?php echo $this->webroot;  ?>site_logo/<?php echo $guidance_image['SiteSetting']['header_pic'] ?>" alt="" />
+                                                <p><?php echo PREFERSIZE;?>? </p>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="thirtycm">
+                                            <div class="image_selector rdo">
+                                                <input type="radio" value="30" name="data[Filter][sizetype]">
+                                                <img onclick="" src="<?php echo $this->webroot;  ?>site_logo/<?php echo $guidance_image['SiteSetting']['small_size_pic'] ?>" class="img-responsive">
+                                                <div class="image_text" style="font-size: 13px !important;"><?php echo SMALL;?>(<30cmX30cm)</div>
+                                            </div>
+                                        </div>
+                                        <div class="seventycm">
+                                            <div class="image_selector rdo">
+                                                <input type="radio" value="70" name="data[Filter][sizetype]">
+                                                <img onclick="" src="<?php echo $this->webroot;  ?>site_logo/<?php echo $guidance_image['SiteSetting']['medium_size_pic'] ?>" class="img-responsive">
+                                                <div class="image_text"><?php echo MEDIUM;?>(<70cmX70cm)</div>
+                                            </div>
+                                        </div>
+                                        <div class="nintycm">
+                                            <div class="image_selector rdo">
+                                                <input type="radio" value="100" name="data[Filter][sizetype]">
+                                                <img onclick="" src="<?php echo $this->webroot;  ?>site_logo/<?php echo $guidance_image['SiteSetting']['large_size_pic'] ?>" class="img-responsive">
+                                                <div class="image_text"><?php echo LARGE;?>(>70cmX70cm)</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="content-holder2">
+                                        <div class="clearfix"></div>
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="room_post_by">
+                                                <img src="<?php echo $this->webroot;  ?>site_logo/<?php echo $guidance_image['SiteSetting']['header_pic'] ?>" alt="" />
+                                                <p><?php echo ORIENTATIONPREFER; ?>? </p>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="land-squre">
+                                            <div class="image_selector rdo1">
+                                                <input type="checkbox" value="3" name="data[Filter][orientationType][]">
+                                                <img onclick="" src="<?php echo $this->webroot;  ?>site_logo/<?php echo $guidance_image['SiteSetting']['horizontal_pic'] ?>" class="img-responsive">
+
+                                            </div>
+                                        </div>
+                                        <div class="protrat-squre">
+                                            <div class="image_selector rdo1">
+                                                <input type="checkbox" value="2" name="data[Filter][orientationType][]">
+                                                <img onclick="" src="<?php echo $this->webroot;  ?>site_logo/<?php echo $guidance_image['SiteSetting']['vertical_pic'] ?>" class="img-responsive">
+
+                                            </div>
+                                        </div>
+                                        <div class="thirtycm">
+                                            <div class="image_selector rdo1">
+                                                <input type="checkbox" value="1" name="data[Filter][orientationType][]">
+                                                <img onclick="" src="<?php echo $this->webroot;  ?>site_logo/<?php echo $guidance_image['SiteSetting']['square_pic'] ?>" class="img-responsive">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="properties" class="tab-pane fade">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="content-holder2">
+                                        <h4><?php echo COLOR1;?></h4>
+                                        <hr>
+                                        <select class="form-control" name="data[Filter][sel_col]">
+                                            <option value=""><?php echo SELECT;?></option>
+                                            <?php if(!empty($colors)) {
+			        		                foreach($colors as $color) {?>
+                                            <option value="<?php echo $color['Color']['id']; ?>"><?php echo $color['Color']['name']; ?></option>
+
+                                            <?php }} ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="content-holder2">
+                                        <div class="clearfix"></div>
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="room_post_by">
+                                                <img src="<?php echo $this->webroot;  ?>site_logo/<?php echo $guidance_image['SiteSetting']['header_pic'] ?>" alt="" />
+                                                <p><?php echo PREFERPRODUCT;?>? </p>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="col-md-6 col-sm-6">
+                                            <div class="orginal image_selector rdo2" id="guidetype1">
+                                                <input type="radio" value="1" name="data[Filter][producttype]" id="guide_type">
+                                                <img src="<?php echo $this->webroot;  ?>site_logo/<?php echo $guidance_image['SiteSetting']['original_pic'] ?>"/>
+                                            </div>
+                                            <?php echo ORIGINAL2;?>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">
+                                            <div class="orginal image_selector rdo2" id="guidetype2">
+                                                <input type="radio" value="2" name="data[Filter][producttype]" id="guide_type">
+                                                <img src="<?php echo $this->webroot;  ?>site_logo/<?php echo $guidance_image['SiteSetting']['reproduction_pic'] ?>"/>
+                                            </div>
+                                            <?php echo REPRODUKTION;?>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="content-holder2">
+                                        <div class="clearfix"></div>
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="room_post_by">
+                                                <img src="<?php echo $this->webroot;  ?>site_logo/<?php echo $guidance_image['SiteSetting']['header_pic'] ?>" alt="" />
+                                                <p><?php echo BUDGETLIMIT; ?>? </p>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="data[Filter][load]" class="form-control" value="load">
+                                        <div class="clearfix"></div>
+                                        <div class="bandwidth-hold">
+                                            <span>EUR</span>
+                                            <input value="" class="text_cls" name="data[Filter][guide_price_from]" type="text">
+                                            <span>to EUR</span> <input value="" class="text_cls" name="data[Filter][guide_price_to]" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--<div class="col-lg-12 tab-content-holding">
+
+                </div>-->
+            </form>
+        </div>
+    </div>
+</section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+    function submit_form()
+    {
+        /*var value = document.getElementById("guide_type").value;
+         alert(value);
+         var action ="<?php echo $this->webroot; ?>products/reproduction/MA==";
+         alert(action);
+         return false;
+         document.getElementById('FilterGuidanceForm').action = action;*/
+        var checkedAtLeastOneRoom = false;
+        var checkedAtLeastOnesytyle = false;
+        var checkedProductType = false;
+        $('input:checkbox[name*="data[Filter][styleroom]"]').each(function() {
+            if ($(this).is(":checked")) {
+                checkedAtLeastOneRoom = true;
+            }
+        });
+
+        $('input:checkbox[name*="data[Filter][stylepic]"]').each(function() {
+            if ($(this).is(":checked")) {
+                checkedAtLeastOnesytyle = true;
+            }
+        });
+
+        $('input:radio[name*="data[Filter][producttype]"]').each(function() {
+            if ($(this).is(":checked")) {
+                checkedProductType = true;
+            }
+        });
+
+        if(checkedAtLeastOneRoom == false){
+            alert("<?php echo CHOSEONEROOMSTYLE;?>");
+            return false;
+        }
+
+        if(checkedAtLeastOnesytyle == false){
+            alert("<?php echo CHOSEONEPICTURESTYLE;?>");
+            return false;
+        }
+
+        if(checkedProductType == false){
+            alert("<?php echo CHOSEONEPRODUCTTYPE;?>");
+            return false;
+        }
+        document.getElementById('FilterGuidanceForm').submit();
+    }
+</script>
+
+

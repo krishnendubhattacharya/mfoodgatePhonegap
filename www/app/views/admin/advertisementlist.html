@@ -1,0 +1,112 @@
+<div ng-controller="advertisementCtrl">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+                <div ng-if="advertisementView == 'view'">
+                    <header class="panel-heading">
+                        Advertisement
+                        <span class="tools pull-right">
+                            <a class="fa fa-chevron-down" href="javascript:;"></a>
+                            <a class="fa fa-times" href="javascript:;"></a>
+                         </span>
+                    </header>
+                    <div class="panel-body">
+                        <div class="btn-group">
+                            <button class="btn btn-primary" id="editable-sample_new" ng-click ="addAdvertisement()">
+                                Add Advertisement
+                            </button>
+                        </div>
+                        <table id="advertisementsList" class="table  table-hover general-table">
+                            <thead>
+                            <tr>
+                                <th> Id</th>
+                                <th class="hidden-phone">Title</th>
+                                <th class="hidden-phone">Price</th>
+                                <th class="hidden-phone">Offer Price</th>
+                                <th class="hidden-phone">Offer Type</th>
+                                <th>Action</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr ng-repeat="item in alladvertisement">
+                                <td>
+                                    {{item.id}}
+                                </td>
+                                <td >{{item.title}}</td>
+                                <td >{{item.price}}</td>
+                                <td >{{item.offer_price}}</td>
+                                <td >{{item.offer_type}}</td>
+                                <td ><a class="btn btn-default edit" ui-sref="admin.advertisementedit({advertisementId:item.id,restaurantId:item.restaurant_id})" >Edit</a>
+                                    <a class="btn btn-default delete" href="javascript:;" ng-click="deleteAdvertisement(item.id)"
+                                            >Delete</a></td>
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div ng-if="advertisementView == 'edit'">
+                    <header class="panel-heading">
+                        Advertisement
+                    </header>
+                    <div class="panel-body">
+                        <form role="form" ng-submit="saveAdvertisement()" enctype="multipart/form-data">
+
+                            <div class="form-group">
+                                <label for="title">Advertisement Title</label>
+                                <input type="text" required placeholder="Enter Advertisement Title"  id="title" ng-model="item.title" class="form-control">
+                                <input type="hidden"  ng-model="item.id" >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="title">Url</label>
+                                <input type="text" required placeholder="Enter Url"  id="url" ng-model="item.url" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ad_image">Image</label>
+                                <input type="file"  id="ad_image" ng-model="item.ad_image" base-sixty-four-input>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="from_date">From Date</label>
+                                <input type="text" data-ng-datepicker data-ng-options="datepickerOptions" required placeholder="From Date"  id="from_date" ng-model="item.from_date" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="to_date">To Date</label>
+                                <input type="text" data-ng-datepicker data-ng-options="datepickerOptions" required placeholder="To Date"  id="to_date" ng-model="item.to_date" class="form-control">
+                            </div>
+
+                            <div class="form-group" ng-init="getOfferType()">
+                                <label for="position">Select Position</label>
+                                <select required="required" class="form-control" id="position" ng-model="item.position">
+                                    <option value="">--Select Position--</option></option>
+                                    <option value="Top">Top</option>
+                                    <option value="Bottom">Bottom</option>
+                                </select>
+                            </div>
+
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="item.is_active" ng-true-value="1" ng-false-value="0"> Is Active
+                                </label>
+                            </div>
+
+
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                            <button class="btn btn-danger" type="button" ng-click="cancelAdvertisement()">Cancel</button>
+                        </form>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</div>

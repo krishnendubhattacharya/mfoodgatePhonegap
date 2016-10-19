@@ -1,0 +1,405 @@
+<!--Web header-->
+<!--<div ng-controller="loginCtrl">-->
+<div ng-controller="advertisedetailCtrl">
+<div class="container phone-hide">
+    <div class="news">
+        <!--<div class="left-col">
+            <div class="banner"><img src="{{bannernews.image}}" alt=""/></div>
+            <div class="all-news">
+                <h1>All News</h1>
+                <div class="news-item" ng-repeat="news in allnews">
+                    <div class="pix"><img src="{{news.image}}" width="264" height="167"  alt=""/></div>
+                    <div class="dsc">
+                        <h1><a ui-sref="frontend.newsdetail({ newsId: news.id })">{{news.title}}</a></h1>
+                        <p>{{news.description | limitTo:300}}...</p>
+                        <div class="posted"><strong>Posted on:</strong> {{news.date}} | By: Admin
+                            <span>View ({{news.views}})</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+        <div class="left-col">
+            <div class="news-details">
+                <div class="img-box">
+                    <img src="{{allnews.restaurant.image_url}}" alt=""/> </div>
+                <div class="desc">
+                    <h1>{{allnews.restaurant.title}}</h1>
+                    <p ng-bind-html="allnews.restaurant.description"></p>
+                    <div class="posted"><strong>Merchant :</strong> {{allnews.merchant.merchant_name}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="right-col">
+            <div id="tabs-container">
+                <ul class="tabs-menu">
+                    <li ng-class="{'current':topTab==1}" ng-click="setActiveTab(1)"><a href="javascript:void(0);">Latest Update</a></li>
+                    <li ng-class="{'current':topTab==3}" ng-click="setActiveTab(3)"><a href="javascript:void(0);">Hot Ads</a></li>
+                    <li ng-class="{'current':topTab==2}" ng-click="setActiveTab(2)"><a href="javascript:void(0);">All Ads</a></li>
+                </ul>
+                        <div style="border:  none;" class="tab">
+                            <div ng-if="topTab==1">
+                                <div class="latest-news">
+
+                                    <div class="ln-news">
+                                        <ul>
+                                            <li ng-repeat="latestbanner in updatebanner | limitTo:5">
+                                                <!--<div class="n-pix"><img src="{{latestbanner.image_url}}" alt=""/></div>-->
+                                                <div class="n-dsc" style="width:100%;">
+                                                    <a ui-sref="frontend.advertisedetail({advertiseId:latestbanner.id})"><p>{{latestbanner.title | limitTo:100}}</p></a>
+
+                                                </div>
+                                            </li>
+                                            <!--<li>
+                                                <div class="n-pix"><img src="app/assets/Images/n-pix-n.jpg" alt=""/></div>
+                                                <div class="n-dsc">
+                                                    <p><a href="">Lorem ipsum dolor sit amet, consectetur adipiscing elit</a></p>
+                                                    <p>Minim veniam, quis nostrud exercitation ullamco </p>
+                                                </div>
+                                            </li>-->
+
+                                        </ul>
+                                    </div>
+                                    <!--<div class="text-center">
+
+                                        <dir-pagination-controls boundary-links="true"  template-url="app/views/dirPagination.tpl.html" pagination-id="tab1"></dir-pagination-controls>
+
+                                    </div>-->
+                                </div>
+                            </div>
+                            <div ng-if="topTab==3">
+                                <div class="latest-news">
+
+                                    <div class="ln-news">
+                                        <ul>
+                                            <li ng-repeat="latest in hotAds | limitTo:5">
+
+                                                <!--<div class="n-pix"><img src="{{latest.image_url}}" alt=""/></div>-->
+                                                <div class="n-dsc" style="width:100%;">
+                                                    <a ui-sref="frontend.advertisedetail({advertiseId:latest.id})"><p>{{latest.title | limitTo:100}}</p></a>
+
+                                                </div>
+                                            </li>
+                                            <!--<li>
+                                                <div class="n-pix"><img src="app/assets/Images/n-pix-n.jpg" alt=""/></div>
+                                                <div class="n-dsc">
+                                                    <p><a href="">Lorem ipsum dolor sit amet, consectetur adipiscing elit</a></p>
+                                                    <p>Minim veniam, quis nostrud exercitation ullamco </p>
+                                                </div>
+                                            </li>-->
+
+                                        </ul>
+                                    </div>
+                                    <!--<div class="text-center">
+
+                                        <dir-pagination-controls boundary-links="true"  template-url="app/views/dirPagination.tpl.html" pagination-id="tab2"></dir-pagination-controls>
+
+                                    </div>-->
+                                </div>
+                            </div>
+
+                            <div ng-if="topTab==2">
+                                <div class="latest-news">
+
+                                    <div class="ln-news">
+                                        <ul>
+                                            <li dir-paginate="latest in latestnews | itemsPerPage: pageSize" current-page="currentPage" pagination-id="tab3">
+                                                <!--<div class="n-pix"><img src="{{latest.image_url}}" alt=""/></div>-->
+                                                <div class="n-dsc" style="width:100%;">
+                                                    <a ui-sref="frontend.advertisedetail({advertiseId:latest.id})"><p>{{latest.title | limitTo:100}}</p></a>
+
+                                                </div>
+                                            </li>
+                                            <!--<li>
+                                                <div class="n-pix"><img src="app/assets/Images/n-pix-n.jpg" alt=""/></div>
+                                                <div class="n-dsc">
+                                                    <p><a href="">Lorem ipsum dolor sit amet, consectetur adipiscing elit</a></p>
+                                                    <p>Minim veniam, quis nostrud exercitation ullamco </p>
+                                                </div>
+                                            </li>-->
+
+                                        </ul>
+                                    </div>
+                                    <div class="text-center">
+
+                                        <dir-pagination-controls boundary-links="true"  template-url="app/views/dirPagination.tpl.html" pagination-id="tab3"></dir-pagination-controls>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+        </div>
+
+            <div id="tabs-container1">
+                <ul class="tabs-menu">
+                    <li ng-class="{'current':bottomTab==1}" ng-click="setBottomTab(1)"><a href="javascript:void(0);">Event</a></li>
+                    <li ng-class="{'current':bottomTab==2}" ng-click="setBottomTab(2)"><a href="javascript:void(0);">Promo</a></li>
+                    <li ng-class="{'current':bottomTab==3}" ng-click="setBottomTab(3)"><a href="javascript:void(0);">Restaurant</a></li>
+                </ul>
+                <div style="border:  none;" class="tab">
+                    <div ng-if="bottomTab==1">
+                        <div class="latest-news">
+
+                            <!--<div class="ln-news">
+                                <ul>
+                                    <li ng-repeat="latestbanner in updatebanner | limitTo:5">
+                                        <div class="n-pix"><img src="{{latestbanner.image_url}}" alt=""/></div>
+                                        <div class="n-dsc">
+                                            <a ui-sref="frontend.bannerdetail({bannerId:latestbanner.id})"><p ng-bind-html="latestbanner.description | limitTo:20"></p></a>
+
+                                        </div>
+                                    </li>
+
+
+                                </ul>
+                            </div>-->
+
+                            <div class="most-viewed">
+                                <ul>
+                                    <li ng-repeat="featuredAdsinfo in featuredAds | limitTo:5">
+                                        <div class="v-pix"><a ui-sref="frontend.bannerdetail({bannerId:featuredAdsinfo.id})"><img src="{{featuredAdsinfo.image_url}}" alt=""/></a></div>
+                                        <div class="v-dsc">
+                                            <p><a ui-sref="frontend.bannerdetail({bannerId:featuredAdsinfo.id})">{{featuredAdsinfo.title}}</a></p>
+                                            <p ng-bind-html="featuredAdsinfo.description | limitTo:30"></p>
+
+                                            <!--<p ng-bind-html="featuredinfo.description | limitTo:30"></p>
+                                            <div class="posted"><strong>Posted on:</strong> {{mostview.date}} | By: Admin
+                                                <span>View ({{mostview.views}})</span></div>-->
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div  ng-if="bottomTab==2">
+                        <div class="latest-news">
+
+                            <div class="most-viewed">
+                                <ul>
+                                    <li ng-repeat="featuredinfo in featuredPromo | limitTo:5">
+                                        <div class="v-pix"><a ui-sref="frontend.promodetails({ promoId: featuredinfo.id })"><img src="{{featuredinfo.image}}" alt=""/></a></div>
+                                        <div class="v-dsc">
+                                            <p><a ui-sref="frontend.promodetails({ promoId: featuredinfo.id })">{{featuredinfo.title}}</a></p>
+                                            <p>Price : {{featuredinfo.price | number}}</p>
+                                            <!--<p ng-bind-html="featuredAdsinfo.description | limitTo:30"></p>
+                                            <div class="posted"><strong>Posted on:</strong> {{mostview.date}} | By: Admin
+                                                <span>View ({{mostview.views}})</span></div>-->
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div  ng-if="bottomTab==3">
+                        <div class="latest-news">
+
+                            <div class="most-viewed">
+                                <ul>
+                                    <li ng-repeat="featuredinfo in featureRes | limitTo:5">
+                                        <div class="v-pix"><a ui-sref="frontend.restaurentpromo({ restaurantId: featuredinfo.id })"><img src="{{featuredinfo.logo}}" alt=""/></a></div>
+                                        <div class="v-dsc">
+                                            <p><a ui-sref="frontend.restaurentpromo({ restaurantId: featuredinfo.id })">{{featuredinfo.title}}</a></p>
+                                            <p><a ui-sref="frontend.restaurentpromo({ restaurantId: featuredinfo.id })">{{featuredinfo.sub_title}}</a></p>
+                                            <!--<p>Price : {{featuredinfo.price | number}}</p>-->
+                                            <!--<p ng-bind-html="featuredAdsinfo.description | limitTo:30"></p>
+                                            <div class="posted"><strong>Posted on:</strong> {{mostview.date}} | By: Admin
+                                                <span>View ({{mostview.views}})</span></div>-->
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <style>
+        .tabs-menu li{border-color: #dedfde; background-color: #f1f1f1; color: #000;}
+        .tabs-menu li a{ color: #000;}
+
+        #tabs-container { margin-top:  1px; margin-bottom: 15px;}
+    </style>
+
+
+</div>
+<div class="m-news tablet-hide">
+    <!--<div class="left-col">
+        <div class="banner"><img src="{{bannernews.image}}" alt=""/></div>
+        <div class="all-news">
+            <h1>All News</h1>
+            <div class="news-item" ng-repeat="news in allnews">
+                <div class="pix"><img src="{{news.image}}" width="264" height="167"  alt=""/></div>
+                <div class="dsc">
+                    <h1><a ui-sref="frontend.newsdetail({ newsId: news.id })">{{news.title}}</a></h1>
+                    <p>{{news.description | limitTo:300}}...</p>
+                    <div class="posted"><strong>Posted on:</strong> {{news.date}} | By: Admin
+                        <span>View ({{news.views}})</span></div>
+                </div>
+            </div>
+        </div>
+    </div>-->
+    <div class="left-col">
+        <div class="news-details">
+            <div class="img-box">
+                <img src="{{allnews.banner.image_url}}" alt=""/> </div>
+            <div class="desc">
+                <h1>{{allnews.restaurant.title}}</h1>
+                <p ng-bind-html="allnews.banner.description"></p>
+                <div class="posted"><strong>Merchant :</strong> {{allnews.merchant.merchant_name}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="right-col">
+        <div class="latest-news">
+            <h1>Latest Update</h1>
+            <div class="ln-news">
+                <ul>
+                    <li ng-repeat="latest in latestnews | limitTo:10">
+                        <div class="n-pix"><img src="{{latest.image_url}}" alt=""/></div>
+                        <div class="n-dsc">
+                            <p><a ui-sref="frontend.bannerdetail({bannerId:latest.id})"><p ng-bind-html="latest.description | limitTo:20"></p></a></p>
+
+                        </div>
+                    </li>
+                    <!--<li>
+                        <div class="n-pix"><img src="app/assets/Images/n-pix-n.jpg" alt=""/></div>
+                        <div class="n-dsc">
+                            <p><a href="">Lorem ipsum dolor sit amet, consectetur adipiscing elit</a></p>
+                            <p>Minim veniam, quis nostrud exercitation ullamco </p>
+                        </div>
+                    </li>-->
+
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="dx-clearfix"></div>
+</div>
+<!--</div>-->
+<script>
+    /*$(document).ready(function() {
+        $(".tabs-menu a").click(function(event) {
+            event.preventDefault();
+            $(this).parent().addClass("current");
+            $(this).parent().siblings().removeClass("current");
+            var tab = $(this).attr("href");
+            $(".tab-content").not(tab).css("display", "none");
+            $(tab).fadeIn();
+        });
+
+        $(".tabs-menu1 a").click(function(event) {
+            event.preventDefault();
+            $(this).parent().addClass("current");
+            $(this).parent().siblings().removeClass("current");
+            var tab = $(this).attr("href");
+            $(".tab-content1").not(tab).css("display", "none");
+            $(tab).fadeIn();
+        });
+    });*/
+</script>
+
+<style>
+    .pagination {
+        display: inline-block;
+        padding-left: 0;
+        margin: 20px 0;
+        border-radius: 4px;
+    }
+    .pagination > li {
+        display: inline;
+    }
+    .pagination > li > a,
+    .pagination > li > span {
+        position: relative;
+        float: left;
+        padding: 6px 12px;
+        margin-left: -1px;
+        line-height: 1.42857143;
+        color: #428bca;
+        text-decoration: none;
+        background-color: #fff;
+        border: 1px solid #ddd;
+    }
+    .pagination > li:first-child > a,
+    .pagination > li:first-child > span {
+        margin-left: 0;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+    }
+    .pagination > li:last-child > a,
+    .pagination > li:last-child > span {
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+    }
+    .pagination > li > a:hover,
+    .pagination > li > span:hover,
+    .pagination > li > a:focus,
+    .pagination > li > span:focus {
+        color: #2a6496;
+        background-color: #eee;
+        border-color: #ddd;
+    }
+    .pagination > .active > a,
+    .pagination > .active > span,
+    .pagination > .active > a:hover,
+    .pagination > .active > span:hover,
+    .pagination > .active > a:focus,
+    .pagination > .active > span:focus {
+        z-index: 2;
+        color: #fff;
+        cursor: default;
+        background-color: #428bca;
+        border-color: #428bca;
+    }
+    .pagination > .disabled > span,
+    .pagination > .disabled > span:hover,
+    .pagination > .disabled > span:focus,
+    .pagination > .disabled > a,
+    .pagination > .disabled > a:hover,
+    .pagination > .disabled > a:focus {
+        color: #999;
+        cursor: not-allowed;
+        background-color: #fff;
+        border-color: #ddd;
+    }
+    .pagination-lg > li > a,
+    .pagination-lg > li > span {
+        padding: 10px 16px;
+        font-size: 18px;
+    }
+    .pagination-lg > li:first-child > a,
+    .pagination-lg > li:first-child > span {
+        border-top-left-radius: 6px;
+        border-bottom-left-radius: 6px;
+    }
+    .pagination-lg > li:last-child > a,
+    .pagination-lg > li:last-child > span {
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 6px;
+    }
+    .pagination-sm > li > a,
+    .pagination-sm > li > span {
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+    .pagination-sm > li:first-child > a,
+    .pagination-sm > li:first-child > span {
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+    }
+    .pagination-sm > li:last-child > a,
+    .pagination-sm > li:last-child > span {
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+    }
+
+</style>

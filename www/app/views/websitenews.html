@@ -1,0 +1,116 @@
+<!--Web header-->
+<div ng-controller="websitenewsCtrl">
+
+    <div ng-include="'app/views/partials/merchant_header.html'"></div>
+    <div class="dx-clearfix"></div>
+
+
+
+    <!--Section - 1-->
+    <div style="margin-top:0;" class="container phone-hide">
+        <!--Left menu-->
+        <div class="category-left phone-hide">
+            <h1>Restaurants</h1>
+            <div ng-include="'app/views/partials/merchant_leftbar.html'"></div>
+        </div>
+        <!--Featured Promo-->
+        <div class="featured-Promo" >
+            <h1>Events & News</h1>
+            <div class="menu-cont">
+                <div class="merchant-card" ng-repeat="menu in allnews" ng-if="allnews">
+                    <div class="card-img">
+                        <img src="{{menu.image_url}}" alt=""/> </div>
+                    <div class="card-dsc">
+                        <a ui-sref="frontend.newsdetail({ newsId: menu.id })"> <h1>{{menu.title}}</h1></a>
+                        <h2 ng-bind-html="menu.description"></h2>
+                        <!--<p class="price">Price: <span>IDR{{menu.price}}</span></p>-->
+                    </div>
+                </div>
+                <div class="merchant-card" ng-repeat="menu in allnews" ng-if="!allnews || allnews.length==0">
+                    <h1 style="text-align: center">No news found.</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tablet-hide">
+        <div ng-include="'app/views/partials/merchant_leftbar.html'"></div>
+
+    </div>
+
+    <div style="margin-top:0;" class="tablet-hide">
+        <!--Left menu-->
+        <!--<div ng-include="'app/views/partials/merchant_leftbar.html'"></div>-->
+        <!--Featured Promo-->
+        <div class="m-featured-Promo" >
+            <h1>Events & News</h1>
+            <div class="m-menu-cont">
+                <div class="m-merchant-card" ng-repeat="menu in allnews" ng-if="allnews">
+                    <div class="m-card-img">
+                        <img src="{{menu.image_url}}" alt=""/> </div>
+                    <div class="card-dsc">
+                        <h1>{{menu.title}}</h1>
+                        <h2 ng-bind-html="menu.description"></h2>
+                        <!--<p class="price">Price: <span>IDR{{menu.price}}</span></p>-->
+                    </div>
+                </div>
+                <div class="merchant-card" ng-repeat="menu in allnews" ng-if="!allnews || allnews.length==0">
+                    <h1 style="text-align: center">No news found.</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--mobile promo-->
+    <!--<div class="m-about tablet-hide">
+
+        <div class="left-col">
+            <div class="latest-news">
+                <h1>Events & News</h1>
+                <div class="most-viewed">
+
+                    <div class="v-pix"><img src="{{merchant.image}}" alt=""/></div>
+                    <div class="v-dsc">
+                        <h4>{{merchant.merchant_name}}</h4>
+                        <p><span>Email:</span> {{merchant.email}}</p>
+                        <p ng-if="merchant.phone"><span>Phone:</span> {{merchant.phone}}</p>
+                        <p ng-if="merchant.address"><span>Address:</span> {{merchant.address}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right-col">
+            <div class="banner">
+                <p><img src="{{restaurant.logo_url}}" alt=""/></p>
+                <h1>{{restaurant.title}}</h1>
+                <P><span>Subtitle:</span>{{restaurant.sub_title}}</P>
+                <h2>Description:</h2>
+                <p>{{restaurant.description}}</p>
+            </div>
+            <div class="all-news" ng-if="restaurant.outlets.length>0">
+                <h1>Our Outlets</h1>
+                <div class="news-item"  ng-repeat="outlet in restaurant.outlets">
+                    <div class="pix"><img src="{{outlet.image_url}}" width="264" height="167"  alt=""/></div>
+                    <div class="dsc">
+                        <h1>{{outlet.title}}</h1>
+                        <P><span>Business Hours:</span>{{outlet.business_hours}}</P>
+                        <P><span>Address:</span>{{outlet.address}}</P>
+                        <h2>Description:</h2>
+                        <p>{{outlet.description}}</p>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>-->
+    <!--end-->
+
+    <div class="dx-clearfix"></div>
+
+
+</div>
+
+

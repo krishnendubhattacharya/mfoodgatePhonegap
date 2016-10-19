@@ -1,0 +1,23 @@
+<!--Web header-->
+<div ng-controller="cmsCtrl">
+    <div class="container ng-scope">
+        <div class="voucher-section phone-hide">
+            <h1>{{pagedetails.title}}</h1>
+            <div ng-if="pageName=='contact-us'">
+                <ng-map center="15.8669606,101.30007" zoom="6">
+                    <marker position="15.8669606,101.30007"></marker>
+                </ng-map>
+                <div class="clearfix" style="margin-bottom: 20px;"></div>
+            </div>
+
+            <div ng-bind-html="pagedetails.content" style="line-height: 25px;">
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+

@@ -1,0 +1,92 @@
+<div ng-controller="locationlistCtrl">
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+                <div ng-if="locationView == 'view'">
+                <header class="panel-heading">
+                    Location
+                        <span class="tools pull-right">
+                            <a class="fa fa-chevron-down" href="javascript:;"></a>
+                            <a class="fa fa-times" href="javascript:;"></a>
+                         </span>
+                </header>
+                <div class="panel-body">
+                    <div class="btn-group">
+                        <button class="btn btn-primary" id="editable-sample_new" ng-click ="addLocation()">
+                            Add Location
+                        </button>
+                    </div>
+                    <table id="locationsList" class="table  table-hover general-table">
+                        <thead>
+                        <tr>
+                            <th> Id</th>
+                            <th class="hidden-phone">Name</th>
+                            <th>Action</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr ng-repeat="item in alllocation">
+                            <td>
+                                {{item.id}}
+                            </td>
+                            <td >{{item.city}}</td>
+                            <td ><a class="btn btn-default edit" href="javascript:;" ng-click ="editLocation(item)">Edit</a>
+                                <a class="btn btn-default delete" href="javascript:;" ng-click="deleteLocation(item.id)"
+                                   >Delete</a></td>
+
+                        </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+
+                <div ng-if="locationView == 'edit'">
+                    <header class="panel-heading">
+                        Location
+                    </header>
+                    <div class="panel-body">
+                        <form role="form" ng-submit="saveLocation()">
+                            <div class="form-group" >
+                                <label for="exampleInputName">Select Country</label>
+                                <select class="form-control" ng-model="item.country_id">
+                                    <option value="">--Select Country--</option></option>
+                                    <option ng-repeat="country in countryList | orderBy:'country_name' " value="{{country.id}}">{{country.country_name}}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputName">City Name</label>
+                                <input type="text" required placeholder="Enter City Name"  id="exampleInputName" ng-model="item.city" class="form-control">
+                                <input type="hidden"  ng-model="item.id" >
+                            </div>
+
+
+
+                            <!--<div class="form-group">
+                                <label for="exampleInputFile">File input</label>
+                                <input type="file" id="exampleInputFile">
+                                <p class="help-block">Example block-level help text here.</p>
+                            </div>-->
+                           <!--<div ng-dropdown-multiselect="" options="example1data" selected-model="example1model"></div>-->
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="item.is_active" ng-true-value="1" ng-false-value="0"> Is Active
+                                </label>
+                            </div>
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                            <button class="btn btn-danger" type="button" ng-click="cancelLocation()">Cancel</button>
+                        </form>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</div>

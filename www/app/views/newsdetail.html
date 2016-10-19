@@ -1,0 +1,211 @@
+<!--Web header-->
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5742fe39425e31de"></script>
+<!--<div ng-controller="loginCtrl">-->
+<div class="container phone-hide" ng-controller="newsdetailCtrl">
+    <div class="news">
+        <!--<div class="left-col">
+            <div class="banner"><img src="{{bannernews.image}}" alt=""/></div>
+            <div class="all-news">
+                <h1>All News</h1>
+                <div class="news-item" ng-repeat="news in allnews">
+                    <div class="pix"><img src="{{news.image}}" width="264" height="167"  alt=""/></div>
+                    <div class="dsc">
+                        <h1><a ui-sref="frontend.newsdetail({ newsId: news.id })">{{news.title}}</a></h1>
+                        <p>{{news.description | limitTo:300}}...</p>
+                        <div class="posted"><strong>Posted on:</strong> {{news.date}} | By: Admin
+                            <span>View ({{news.views}})</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+        <div class="left-col">
+            <div class="news-details">
+                <div class="img-box">
+                    <img src="{{allnews.image}}" alt=""/> </div>
+                <div class="desc">
+                    <h1>{{allnews.title}}</h1>
+                    <p ng-bind-html="allnews.description"></p>
+                    <div class="posted"><strong>Posted on:</strong> {{allnews.date}} | By: Admin<span>View ({{allnews.views}})</span></div>
+                </div>
+                <div class="share">
+                    <p></p>
+                    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                    <div class="addthis_sharing_toolbox"></div>
+                 <li>
+                     <!--<a  href="javascript:void(0);" onclick="fbsharedialog('{{allnews.id}}','<?php echo $img;?>','{{allnews.title}}','Posted on:{{allnews.date}} | By: Admin | View {{allnews.views}}')" class="fa fa-facebook">TEST</a>-->
+                     <a  href="javascript:void(0);" ng-click="fbsharedialog()" class="fa fa-facebook">
+                     <img src="app/assets/Images/s-icon-1.png" width="25" height="25" >
+                     </a>
+                     
+                     <a  href="http://twitter.com/intent/tweet?text=&amp;url={{pageLink}}&amp;related=" target="_blank" class="fa fa-facebook">
+                     <img src="app/assets/Images/s-icon-2.png" width="25" height="25" >
+                     </a>
+                     
+                     <a  href="javascript:void(0);" ng-click="fbsharedialog()" class="fa fa-facebook">
+                     <img src="app/assets/Images/s-icon-1.png" width="25" height="25" >
+                     </a>
+                 </li>
+                </div>
+            </div>
+        </div>
+        <div class="right-col">
+            <div class="latest-news">
+                <h1>Latest Update</h1>
+                <div class="ln-news">
+                    <ul>
+                        <li ng-repeat="latest in latestnews | limitTo:4">
+                            <div class="n-pix"><img src="{{latest.image}}" alt=""/></div>
+                            <div class="n-dsc">
+                                <p><a ui-sref="frontend.newsdetail({ newsId: latest.id })">{{latest.title}}</a></p>
+                                <p ng-bind-html="latest.description | limitTo:20"></p>
+                            </div>
+                        </li>
+                        <!--<li>
+                            <div class="n-pix"><img src="app/assets/Images/n-pix-n.jpg" alt=""/></div>
+                            <div class="n-dsc">
+                                <p><a href="">Lorem ipsum dolor sit amet, consectetur adipiscing elit</a></p>
+                                <p>Minim veniam, quis nostrud exercitation ullamco </p>
+                            </div>
+                        </li>-->
+
+                    </ul>
+                </div>
+            </div>
+            <div class="latest-news">
+                <h1>Popular</h1>
+                <div class="most-viewed">
+                    <ul>
+                        <li ng-repeat="mostview in mostviews | limitTo:4">
+                            <div class="v-pix"><img src="{{mostview.image}}" alt=""/></div>
+                            <div class="v-dsc">
+                                <p><a ui-sref="frontend.newsdetail({ newsId: mostview.id })">{{mostview.title}}</a></p>
+                                <p ng-bind-html="mostview.description | limitTo:30"></p>
+                                <div class="posted"><strong>Posted on:</strong> {{mostview.date}} | By: Admin
+                                    <span>View ({{mostview.views}})</span></div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<div class="m-news tablet-hide" ng-controller="newsdetailCtrl">
+    <!--<div class="left-col">
+        <div class="banner"><img src="{{bannernews.image}}" alt=""/></div>
+        <div class="all-news">
+            <h1>All News</h1>
+            <div class="news-item" ng-repeat="news in allnews">
+                <div class="pix"><img src="{{news.image}}" width="264" height="167"  alt=""/></div>
+                <div class="dsc">
+                    <h1><a ui-sref="frontend.newsdetail({ newsId: news.id })">{{news.title}}</a></h1>
+                    <p>{{news.description | limitTo:300}}...</p>
+                    <div class="posted"><strong>Posted on:</strong> {{news.date}} | By: Admin
+                        <span>View ({{news.views}})</span></div>
+                </div>
+            </div>
+        </div>
+    </div>-->
+    <div class="left-col">
+        <div class="news-details">
+            <div class="img-box">
+                <img src="{{allnews.image}}" alt=""/> </div>
+            <div class="desc">
+                <h1>{{allnews.title}}</h1>
+                <p ng-bind-html="allnews.description"></p>
+                <div class="posted"><strong>Posted on:</strong> {{allnews.date}} | By: Admin<span>View ({{allnews.views}})</span></div>
+            </div>
+        </div>
+    </div>
+    <div class="right-col">
+        <div class="latest-news">
+            <h1>Latest Update</h1>
+            <div class="ln-news">
+                <ul>
+                    <li ng-repeat="latest in latestnews | limitTo:4">
+                        <div class="n-pix"><img src="{{latest.image}}" alt=""/></div>
+                        <div class="n-dsc">
+                            <p><a ui-sref="frontend.newsdetail({ newsId: latest.id })">{{latest.title}}</a></p>
+                            <p ng-bind-html="latest.description | limitTo:20"></p>
+                        </div>
+                    </li>
+                    <!--<li>
+                        <div class="n-pix"><img src="app/assets/Images/n-pix-n.jpg" alt=""/></div>
+                        <div class="n-dsc">
+                            <p><a href="">Lorem ipsum dolor sit amet, consectetur adipiscing elit</a></p>
+                            <p>Minim veniam, quis nostrud exercitation ullamco </p>
+                        </div>
+                    </li>-->
+
+                </ul>
+            </div>
+        </div>
+        <div class="latest-news">
+            <h1>Popular</h1>
+            <div class="most-viewed">
+                <ul>
+                    <li ng-repeat="mostview in mostviews | limitTo:4">
+                        <div class="v-pix"><img src="{{mostview.image}}" alt=""/></div>
+                        <div class="v-dsc">
+                            <p><a ui-sref="frontend.newsdetail({ newsId: mostview.id })">{{mostview.title}}</a></p>
+                            <p ng-bind-html="mostview.description | limitTo:30"></p>
+                            <div class="posted"><strong>Posted on:</strong> {{mostview.date}} | By: Admin
+                                <span>View ({{mostview.views}})</span></div>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="dx-clearfix"></div>
+<script>
+function fbsharedialog(link,image,title,description){
+		var attachment = {
+				     'name':title,
+				     'description':description,
+				     'caption': 'Stake Me',
+				     'href':'<?php echo $SITE_URL ?>/scores/stakes/'+link,
+				     'media':[{'type':'image',
+				     'src':image,
+				     'href':'<?php echo $SITE_URL ?>'
+				      }]
+				   };
+		console.log(attachment);		   
+		FB.ui({
+			method: 'feed',
+			name:title,
+			link: '<?php echo $SITE_URL ?>/scores/stakes/'+link,
+			picture: image,
+			caption: 'Stake Me',
+			description: description,
+			message: 'I just found this Super Cool Website!',
+			display: 'iframe',
+			width: 300,
+			height: 150
+		});
+	}
+	
+	
+window.fbAsyncInit = function() {
+        FB.init({
+        appId: '646829092146685',
+        status: true,
+        cookie: true,
+        xfbml: true
+        });
+    };
+    (function(d){
+        var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement('script'); js.id = id; js.async = true;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        ref.parentNode.insertBefore(js, ref);
+    }(document));
+</script>
+<!--</div>-->

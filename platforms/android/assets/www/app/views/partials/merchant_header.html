@@ -1,0 +1,42 @@
+<div ng-controller="merchantheaderCtrl">
+	<div class="container phone-hide">
+		<div class="merchant-nav">
+			<ul>
+				<li><p><a ui-sref="frontend.merchantmembership({v_id:v_id,id:merchant_id,res_id:res_id})" ui-sref-active="active" href="#">{{allicons[10].title}}</a></p></li>
+				<li><p><a ui-sref="frontend.websitefeatureds({v_id:v_id,id:merchant_id,res_id:res_id})" ui-sref-active="active">{{allicons[11].title}}</a></p></li>
+				<li><p><a ui-sref="frontend.websitemenus({v_id:v_id,id:merchant_id,res_id:res_id})" ui-sref-active="active">{{allicons[12].title}}</a></p></li>
+				<li><p><a ui-sref="frontend.websitenews({v_id:v_id,id:merchant_id,res_id:res_id})" ui-sref-active="active">{{allicons[13].title}}</a></p></li>
+				<li ng-if="memberId"><p><a href="http://52.39.33.188/Member_Ship/MasterData/member_reward_redeem_mfoodgate.aspx?MemberID={{memberId}}&MerchantID={{merchantId}}&OutletID={{resId}}" target="_blank">{{allicons[14].title}}</a></p></li>
+				<li><p><a ui-sref="frontend.websitepromos({v_id:v_id,id:merchant_id,res_id:res_id})" ui-sref-active="active">{{allicons[15].title}}</a></p></li>
+				<li><p><a ui-sref="frontend.websiteabout({v_id:v_id,id:merchant_id,res_id:res_id})" ui-sref-active="active">{{allicons[16].title}}</a></p></li>
+			</ul>
+		</div>
+	</div>
+	<div class="m-myaccount-details tablet-hide">
+	<div class="m-left-panel2 tablet-hide" style="border-bottom: solid 1px #eaeaea;">
+
+		<h1 style="padding-left: 15px;" ng-if="merheaderShow"><img src="{{headerImage}}"  alt="" width="35" height="35"/>{{merheaderShow}}<span ng-if="merheaderShow" style="float: right; margin-right: 15px;" ng-click="backLink({{v_id}},{{merchant_id}},{{res_id}})"><img src="{{allicons[26].image_url}}"  alt=""/></span></h1>
+		<ul ng-if="!merheaderShow">
+
+			<!--<li><p><a ui-sref="frontend.merchantmembership({v_id:v_id,id:merchant_id,res_id:res_id})" ui-sref-active="active" href="#"><h1><img src="{{allicons[14].image_url}}" width="35" height="35"  alt=""/></h1>Home</a></p></li>
+			<li><p><a ui-sref="frontend.websitefeatureds({v_id:v_id,id:merchant_id,res_id:res_id})" ui-sref-active="active"><h1><img src="{{allicons[13].image_url}}" width="35" height="35"  alt=""/></h1>Feature Menu</a></p></li>
+			<li><p><a ui-sref="frontend.websitemenus({v_id:v_id,id:merchant_id,res_id:res_id})" ui-sref-active="active"><h1><img src="{{allicons[12].image_url}}" width="35" height="35"  alt=""/></h1>All Menu</a></p></li>
+			<li><p><a ui-sref="frontend.websitenews({v_id:v_id,id:merchant_id,res_id:res_id})" ui-sref-active="active"><h1><img src="{{allicons[11].image_url}}" width="35" height="35"  alt=""/></h1>Events & News</a></p></li>
+			<li ng-if="memberId"><p><a href="http://52.39.33.188/Member_Ship/MasterData/member_reward_redeem_mfoodgate.aspx?MemberID={{memberId}}&MerchantID={{merchantId}}&OutletID={{resId}}" target="_blank"><h1><img src="{{allicons[10].image_url}}" width="35" height="35"  alt=""/></h1>Membership</a></p></li>
+			<li><p><a ui-sref="frontend.websitepromos({v_id:v_id,id:merchant_id,res_id:res_id})" ui-sref-active="active"><h1><img src="{{allicons[9].image_url}}" width="35" height="35"  alt=""/></h1>Promotion</a></p></li>
+			<li><p><a ui-sref="frontend.websiteabout({v_id:v_id,id:merchant_id,res_id:res_id})" ui-sref-active="active"><h1><img src="{{allicons[8].image_url}}" width="35" height="35"  alt=""/></h1>About Us</a></p></li>-->
+
+
+			<li><p><a ng-click="headerLink('Home','{{allicons[10].id}}')" ui-sref="frontend.merchantmembership({v_id:v_id,id:merchant_id,res_id:res_id})" ui-sref-active="active" href="#"><h1><img src="{{allicons[10].image_url}}" width="35" height="35"  alt=""/></h1>{{allicons[10].title}}</a></p></li>
+			<li><p><a ng-click="headerLink('Feature Menu','{{allicons[11].id}}')" ui-sref="frontend.websitefeatureds({v_id:v_id,id:merchant_id,res_id:res_id})" ui-sref-active="active"><h1><img src="{{allicons[11].image_url}}" width="35" height="35"  alt=""/></h1>{{allicons[11].title}}</a></p></li>
+			<li><p><a ng-click="headerLink('All Menu','{{allicons[12].id}}')" ui-sref="frontend.websitemenus({v_id:v_id,id:merchant_id,res_id:res_id})" ui-sref-active="active"><h1><img src="{{allicons[12].image_url}}" width="35" height="35"  alt=""/></h1>{{allicons[12].title}}</a></p></li>
+			<li><p><a ng-click="headerLink('Events & News','{{allicons[13].id}}')" ui-sref="frontend.websitenews({v_id:v_id,id:merchant_id,res_id:res_id})" ui-sref-active="active"><h1><img src="{{allicons[13].image_url}}" width="35" height="35"  alt=""/></h1>{{allicons[13].title}}</a></p></li>
+			<li ng-if="memberId"><p><a href="http://52.39.33.188/Member_Ship/MasterData/member_reward_redeem_mfoodgate.aspx?MemberID={{memberId}}&MerchantID={{merchantId}}&OutletID={{resId}}" target="_blank"><h1><img src="{{allicons[14].image_url}}" width="35" height="35"  alt=""/></h1>{{allicons[14].title}}</a></p></li>
+			<li><p><a ng-click="headerLink('Promotion','{{allicons[15].id}}')" ui-sref="frontend.websitepromos({v_id:v_id,id:merchant_id,res_id:res_id})" ui-sref-active="active"><h1><img src="{{allicons[15].image_url}}" width="35" height="35"  alt=""/></h1>{{allicons[15].title}}</a></p></li>
+			<li><p><a ng-click="headerLink('About Us','{{allicons[16].id}}')" ui-sref="frontend.websiteabout({v_id:v_id,id:merchant_id,res_id:res_id})" ui-sref-active="active"><h1><img src="{{allicons[16].image_url}}" width="35" height="35"  alt=""/></h1>{{allicons[16].title}}</a></p></li>
+			<li><p><a ng-click="headerLink('Member Info','{{allicons[25].id}}')" ui-sref="frontend.merchantmemberinfo({v_id:v_id,id:merchant_id,res_id:res_id})" ui-sref-active="active"><h1><img src="{{allicons[25].image_url}}" width="35" height="35"  alt=""/></h1>{{allicons[25].title}}</a></p></li>
+			<li><p><a ui-sref="frontend.mymembership" ui-sref-active="active"><h1><img src="{{allicons[29].image_url}}" width="35" height="35"  alt=""/></h1>{{allicons[29].title}}</a></p></li>
+		</ul>
+	</div>
+		</div>
+</div>

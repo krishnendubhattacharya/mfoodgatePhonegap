@@ -1,0 +1,279 @@
+<!--Web header-->
+<div ng-controller="merchantmembershiplistCtrl">
+
+    <div class="container phone-hide">
+        <div class="myaccount-details">
+            <h1>Edit Profile</h1>
+            <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+
+            <div class="profile-details"  ng-show="!edit_mode">
+                <!--<div id="button" dx-button="{-->
+                                <!--text: 'Add Menu',-->
+                                <!--onClick: changeView }" ></div>-->
+                <!--<input type="button" ng-click="refresh_grid()" value="Refresh">-->
+                <div id="gridContainer" dx-data-grid="dataGridOptions"></div>
+
+            </div>
+
+            <div class="profile-details" ng-show="edit_mode">
+                <div class="form">
+                    <div class="dx-fieldset">
+                        <div class="dx-field">
+                            <div class="dx-field-label">Title</div>
+                            <div class="dx-field-value">
+                                <div dx-text-box="textBox.title" ng-model="menuInfo.title"></div>
+                            </div>
+                        </div>
+
+                        <div class="dx-field">
+                            <div class="dx-field-label">Description</div>
+                            <div class="dx-field-value">
+                                <div dx-text-area="textArea"  ng-model="menuInfo.description"></div>
+                            </div>
+                        </div>
+
+                        <!--<div class="dx-field">
+                            <div class="dx-field-label">Username</div>
+                            <div class="dx-field-value">
+                                <div dx-text-box="textBox.username" dx-validator="usernameValidationRules" ng-model="username"></div>
+                            </div>
+                        </div>-->
+                        <div class="dx-field">
+                            <div class="dx-field-label">Price</div>
+                            <div class="dx-field-value">
+                                <div dx-text-box="textBox.price"  ng-model="menuInfo.price"></div>
+                            </div>
+                        </div>
+
+                        <div class="dx-field">
+                            <div class="dx-field-label">Image</div>
+                            <div class="dx-field-value">
+                                <div dx-file-uploader="textBox.image"></div>
+                            </div>
+                        </div>
+
+                        <div class="dx-field">
+                            <div class="dx-field-label"></div>
+                            <div class="dx-field-value">
+                                <img src="{{menuInfo.imageurl}}" ng-if="menuInfo.imageurl" width="200">
+                            </div>
+                        </div>
+
+                        <div class="dx-field">
+                            <div class="dx-field-label">Is Active</div>
+                            <div class="dx-field-value">
+                                <div dx-check-box="{
+                                    text: '',
+                                    value: '1'
+                                }" style="float: left" ng-model="menuInfo.status"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--<div id="summary" dx-validation-summary="{ }"></div>-->
+                    <div id="button" dx-button="{
+                                text: 'Submit',
+                                type: 'success',
+                                onClick: save_menu }" ></div>
+
+                    <div id="button" dx-button="{
+                                text: 'Cancel',
+                                onClick: changeView }" ></div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="m-myaccount-details tablet-hide">
+
+        <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+        <h1>Edit Profile</h1>
+        <div class="m-profile-details">
+            <div class="form">
+                <div class="dx-fieldset">
+                    <div class="dx-field">
+                        <div class="dx-field-label">Merchant Name</div>
+                        <div class="dx-field-value">
+                            <div dx-text-box="textBox.merchant_name"  ng-model="userInfo.merchant_name"></div>
+
+
+                        </div>
+                    </div>
+
+                    <div class="dx-field">
+                        <div class="dx-field-label">Email</div>
+                        <div class="dx-field-value">
+                            <div dx-text-box="textBox.email" dx-validator="emailValidationRules" ng-model="userInfo.email"></div>
+                        </div>
+                    </div>
+                    <!--<div class="dx-field">
+                        <div class="dx-field-label">Username</div>
+                        <div class="dx-field-value">
+                            <div dx-text-box="textBox.username" dx-validator="usernameValidationRules" ng-model="username"></div>
+                        </div>
+                    </div>-->
+                    <div class="dx-field">
+                        <div class="dx-field-label">Phone</div>
+                        <div class="dx-field-value">
+                            <div dx-text-box="textBox.phone"  ng-model="userInfo.phone"></div>
+                        </div>
+                    </div>
+                    <div class="dx-field">
+                        <div class="dx-field-label">Address</div>
+                        <div class="dx-field-value">
+                            <div dx-text-area="textArea"  ng-model="userInfo.address"></div>
+                        </div>
+                    </div>
+                    <div class="dx-field">
+                        <div class="dx-field-label">About Us</div>
+                        <div class="dx-field-value">
+                            <div dx-text-area="textArea"  ng-model="userInfo.about_me"></div>
+                        </div>
+                    </div>
+
+                </div>
+                <!--<div id="summary" dx-validation-summary="{ }"></div>-->
+                <div id="button" dx-button="{
+                                text: 'Submit',
+                                type: 'success',
+                                onClick: validateAndSubmit }" ></div>
+            </div>
+        </div>
+
+    </div>
+    <div class="dx-clearfix"></div>
+    <!--<div class="container phone-hide">
+        <div class="transaction-details">
+            <h1>Transaction Details</h1>
+            <table>
+                <tr>
+                    <td width="15%" class="header-color">Transaction Date</td>
+                    <td width="14%" class="header-color">Transaction ID</td>
+                    <td width="33%" class="header-color">Transaction Description</td>
+                    <td width="13%" class="header-color">Debit (mPts)</td>
+                    <td width="12%" class="header-color">Credit (mPts)</td>
+                    <td width="13%" class="header-color">Total (mPts)</td>
+                </tr>
+                <tr>
+                    <td><div class="select-box"><select>
+                        <option>Select</option>
+                        <option>Select</option>
+                        <option>Select</option>
+                    </select></div></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><div class="select-box"><select>
+                        <option>Select</option>
+                        <option>Select</option>
+                        <option>Select</option>
+                    </select></div></td>
+                </tr>
+                <tr>
+                    <td>7/1/2015</td>
+                    <td>TRN120953549</td>
+                    <td>Brought Forward Balance</td>
+                    <td>250,000</td>
+                    <td>0</td>
+                    <td>250,000</td>
+                </tr>
+                <tr>
+                    <td>7/1/2015</td>
+                    <td>TRN120953549</td>
+                    <td>Brought Forward Balance</td>
+                    <td>250,000</td>
+                    <td>0</td>
+                    <td>250,000</td>
+                </tr>
+                <tr>
+                    <td>7/1/2015</td>
+                    <td>TRN120953549</td>
+                    <td>Brought Forward Balance</td>
+                    <td>250,000</td>
+                    <td>0</td>
+                    <td>250,000</td>
+                </tr>
+                <tr>
+                    <td>7/1/2015</td>
+                    <td>TRN120953549</td>
+                    <td>Brought Forward Balance</td>
+                    <td>250,000</td>
+                    <td>0</td>
+                    <td>250,000</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="m-transaction-details tablet-hide">
+        <h1>Transaction Details</h1>
+        <table>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction Date</td>
+                <td>7/1/2015</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction ID</td>
+                <td>TRN120953549</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction Description</td>
+                <td>Brought Forward Balance</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Debit (mPts)</td>
+                <td>250,000</td>
+            </tr>
+            <tr>
+                <td width="12%" class="m-header-color">Credit (mPts)</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td width="13%" class="m-header-color">Total (mPts)</td>
+                <td>250,000</td>
+            </tr>
+            </tr>
+        </table>
+
+    </div>
+
+    <div class="m-transaction-details tablet-hide">
+        <h1>Transaction Details</h1>
+        <table>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction Date</td>
+                <td>7/1/2015</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction ID</td>
+                <td>TRN120953549</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction Description</td>
+                <td>Brought Forward Balance</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Debit (mPts)</td>
+                <td>250,000</td>
+            </tr>
+            <tr>
+                <td width="12%" class="m-header-color">Credit (mPts)</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td width="13%" class="m-header-color">Total (mPts)</td>
+                <td>250,000</td>
+            </tr>
+            </tr>
+        </table>
+
+    </div>
+
+    <div class="dx-clearfix"></div>-->
+</div>
+
+

@@ -1,0 +1,31 @@
+<!--Web header-->
+<div ng-controller="merchantofferCtrl">
+
+    <div class="container phone-hide">
+        <div class="myaccount-details">
+            <h1>My Offer</h1>
+                <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+
+            <div class="profile-details">
+                <h3>Offer</h3>
+                <div id="gridContainer" dx-data-grid="dataGridOptions"></div>
+
+
+            </div>
+
+        </div>
+    </div>
+    <div class="m-myaccount-details tablet-hide">
+
+        <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+        <h1>My Offer</h1>
+        <div class="m-profile-details">
+            <div id="gridContainer" dx-data-grid="dataGridOptions"></div>
+        </div>
+
+    </div>
+
+
+</div>
+
+

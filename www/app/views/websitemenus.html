@@ -1,0 +1,95 @@
+<!--Web header-->
+<div ng-controller="websitemenusCtrl">
+
+    <div ng-include="'app/views/partials/merchant_header.html'"></div>
+    <div class="dx-clearfix"></div>
+
+
+
+    <!--Section - 1-->
+    <div style="margin-top:0;" class="container phone-hide">
+        <!--Left menu-->
+        <div class="category-left phone-hide">
+            <h1>Restaurants</h1>
+            <div ng-include="'app/views/partials/merchant_leftbar.html'"></div>
+        </div>
+
+        <!--Featured Promo-->
+        <div class="featured-Promo">
+            <!--<h1>Featured Promo</h1>-->
+            <div class="menu-cont">
+                <div class="newcar">
+                    <div class="item" ng-repeat="menu in sliderImages">
+                        <div class="pro-item" style="width: 98% !important;">
+                            <img src="{{menu.image_url}}" alt=""/>
+                            <!--<div class="p-circle">50%</div>-->
+                            <div class="desc">
+                                <div class="txt">
+                                    <h2>{{menu.title}}</h2>
+                                    <p class="price">IDR{{menu.price}}</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dx-clearfix"></div>
+            <h1 style="margin-top:20px;" ng-click="cats.hide=!cats.hide" ng-repeat-start="cats in featuredMenus">{{cats.name}}</h1>
+            <div class="menu-cont" ng-if="!cats.hide" ng-repeat-end>
+                <div class="menu-list">
+                    <p ng-repeat="menu in cats.menus">{{menu.title}}: <span>IDR{{menu.price | number}}</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tablet-hide">
+        <div ng-include="'app/views/partials/merchant_leftbar.html'"></div>
+
+    </div>
+
+
+
+    <!--mobile promo-->
+    <div class="m-featured-Promo tablet-hide">
+        <!--<h1>Featured Promo</h1>-->
+        <div class="m-menu-cont">
+            <div class="newcarl">
+            <div class="item" ng-repeat="menu in sliderImages">
+                <div class="pro-item">
+                    <img src="{{menu.image_url}}" width="406" height="255"  alt=""/>
+                    <!--<div class="p-circle">50%</div>-->
+                    <div class="desc">
+                        <div class="txt">
+                            <h2>{{menu.title}}</h2>
+                            <p class="price">IDR{{menu.price | number}}</p>
+                        </div>
+
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="dx-clearfix"></div>
+        <h1 style="margin-top:20px;"  ng-click="cats.hide=!cats.hide" ng-repeat-start="cats in featuredMenus">{{cats.name}}</h1>
+        <div class="m-menu-cont" ng-repeat-end  ng-if="!cats.hide">
+            <div class="m-menu-list">
+                
+                <p ng-repeat="menu in cats.menus"><span style="float:left;width:70%;">{{menu.title}}:</span> <span>IDR{{menu.price | number}}</span></p>
+            </div>
+        </div>
+    </div>
+    <!--end-->
+
+    <div class="dx-clearfix"></div>
+
+
+</div>
+<style>
+    .menu-cont .item
+    {
+        width:100% !important;
+
+    }
+</style>
+

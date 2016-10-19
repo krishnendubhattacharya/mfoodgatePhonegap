@@ -1,0 +1,438 @@
+<!--Web header-->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5742fe39425e31de"></script>
+<div ng-controller="swapvoucherdetailCtrl">
+
+    <!--<div class="container phone-hide">
+        <div class="voucher-details">
+            <h1>Voucher Detail</h1>
+                <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+
+            <div class="profile-details">
+
+                <div class="img-box">
+                    <div class="pro-item">
+                        <div class="logo-box">
+                            <div class="p-circle">5X</div>
+                            <img src="{{voucherInfo.voucher_details.image}}" width="218" height="100"  alt=""/>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="desc-box">
+                    <h1>{{voucherInfo.voucher_details.title}}</h1>
+                    <p ng-bind-html="voucherInfo.voucher_details.description"></p>
+
+                    <div class="pay-box">
+                        <p>DISCOUNT  &nbsp; &nbsp; &nbsp;<span class="discount">{{voucherInfo.voucher_details.offer_percent}}%</span></p>
+                        <p>Sold  &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;<span class="sold">{{voucherInfo.total_sold}}</span></p>
+                    </div>
+                    <div class="pay-box">
+                        <p>Share &nbsp; &nbsp; &nbsp;<img src="app/assets/Images/share.png" width="244" height="29"  alt=""/></p>
+                    </div>
+                    <div class="merchant">
+                        <div class="merchant-logo"><img src="{{voucherInfo.restaurant_details.logo}}" width="163" height="138"  alt=""/></div>
+                        <div class="merchant-dsc">
+                            <h2>{{voucherInfo.restaurant_details.title}}</h2>
+                            <p>{{voucherInfo.restaurant_details.address}}</p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </div>
+    <div class="m-myaccount-details tablet-hide">
+
+        <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+        <h1>Voucher Detail</h1>
+
+        <div class="m-profile-details">
+            <div class="img-box">
+                <div class="pro-item">
+                    <div class="logo-box">
+                        <div class="p-circle">5X</div>
+                        <img src="{{voucherInfo.voucher_details.image}}" width="218" height="100"  alt=""/>
+                    </div>
+
+                </div>
+            </div>
+            <div class="desc-box">
+                <h1>{{voucherInfo.voucher_details.title}}</h1>
+                <p ng-bind-html="voucherInfo.voucher_details.description"></p>
+
+                <div class="pay-box">
+                    <p>DISCOUNT  &nbsp; &nbsp; &nbsp;<span class="discount">{{voucherInfo.voucher_details.offer_percent}}%</span></p>
+                    <p>Sold  &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;<span class="sold">{{voucherInfo.total_sold}}</span></p>
+                </div>
+                <div class="pay-box">
+                    <p>Share &nbsp; &nbsp; &nbsp;<img src="app/assets/Images/share.png" width="244" height="29"  alt=""/></p>
+                </div>
+                <div class="merchant">
+                    <div class="merchant-logo"><img src="{{voucherInfo.restaurant_details.logo}}" width="163" height="138"  alt=""/></div>
+                    <div class="merchant-dsc">
+                        <h2>{{voucherInfo.restaurant_details.title}}</h2>
+                        <p>{{voucherInfo.restaurant_details.address}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>-->
+
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+
+
+
+        <div class="container phone-hide">
+            <div class="item-details">
+
+                <div class="details">
+                    <div class="banner-main">
+                        <!--<p>{{restaurant.title}}</p>-->
+                        <h1>{{promodetails.title}} </h1>
+                        <div >
+                            <div>
+                                <p ng-if="promodetails.offer_type_id != 3"><b>Voucher Value : </b>IDR{{promodetails.price | number}}</p>
+                                <p ng-if="promodetails.offer_type_id == 3"><b>Voucher Value : </b>IDR{{promodetails.price | number}}</p>
+
+                                <!--<p><b>Discounted Price : </b>IDR{{promodetails.offer_price | number}} <span class="p-circle">{{promodetails.offer_percent}}%</span></p>
+                                <p>{{promodetails.conditions==1?'And':'Or'}}</p>
+                                <p><b>M-points : </b>{{promodetails.mpoints}}</p>
+                                <p><b>Quantity Sold : </b>{{promodetails.buy_count}}</p>
+                                <p><b>Quantity Available : </b>{{promodetails.quantity - promodetails.buy_count}}</p>-->
+
+
+                                <p><b>Voucher Validation Start Date : </b>{{promodetails.item_start_date}}</p>
+                                <p><b>Voucher Expired Date : </b>{{promodetails.item_expire_date}}</p>
+                                <p><b>Swap Offer Start Date : </b>{{swapvoucherInfo.swap_start_date}}</p>
+                                <p><b>Swap Offer End Date : </b>{{swapvoucherInfo.swap_end_date}}</p>
+                                <p><b>Voucher Validation Start Hour : </b>{{promodetails.item_start_hour}}</p>
+                                <p><b>Voucher Validation End Hour : </b>{{promodetails.item_end_hour}}</p>
+                                <p><b>Including Holiday : </b>{{promodetails.including_holidays==1?'Yes':'No'}}</p>
+                                <p><b>Validation Days : </b><span ng-repeat="day in offer_days | orderBy : '2'">{{day.day}}, </span> </p>
+                                <p ng-if="swapvoucherInfo.swap_expire_date_status"><b>Time Left : </b><p style="color:green" countdown='' date="{{swapvoucherInfo.swap_expire_date}}" ng-if="swapvoucherInfo.swap_expire_date && swapvoucherInfo.swap_expire_date_status">&nbsp;</p></p>
+                                <p ng-if="!swapvoucherInfo.swap_expire_date_status"><b>Time Left : </b><p style="color:green" ng-if="!swapvoucherInfo.swap_expire_date_status">Closed&nbsp;</p></p>
+                                <p><b>About Merchant : </b>{{about_me}}</p>
+                                <!--<p countdown='' date='{{promodetails.expire_date}}'>&nbsp;</p>-->
+                            </div>
+                            <div style="padding-top: 25px;" class="dx-clearfix"></div>
+                            <div ng-if="loggedindetails && promodetails.status!='Expired' && swapvoucherInfo.Status!='Expired'" id="button" dx-button="{
+                                text: 'Bid',
+                                type: 'success',
+                                height:'40px',
+                                width:'130px',
+                                onClick: add_to_bid }" >
+
+                            </div>
+
+                        </div>
+                        <div style="padding-top: 25px;" class="dx-clearfix"></div>
+                        <div class="banner featured_carousel3">
+
+                            <div ng-repeat="relatedImg in related_images" class="item">
+                                <img src="{{relatedImg.image}}" alt=""/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="share">
+                        <p>Share this deal
+                            <!--<a href="#"-->
+                            <!--socialshare-->
+                            <!--socialshare-provider="twitter"-->
+                            <!--socialshare-text="720kb AngularJS Socialshare"-->
+                            <!--socialshare-hashtags="angularjs, angular-socialshare"-->
+                            <!--socialshare-url="http://720kb.net">-->
+                            <!--Share me-->
+                            <!--</a>-->
+                            <!--<a href="#"-->
+                            <!--socialshare-->
+                            <!--socialshare-provider="facebook"-->
+                            <!--socialshare-text="promodetails.title"-->
+                            <!--socialshare-description = "promodetails.description">-->
+                            <!--Share me-->
+                            <!--</a>-->
+                            <!--<span><img src="app/assets/Images/icon-mail.png" width="20" height="20"  alt=""/></span><span><img src="app/assets/Images/icon-f.png" width="20" height="20"  alt=""/></span><span><img src="app/assets/Images/icon-t.png" width="20" height="20"  alt=""/></span></p>-->
+                            <!--<span class='st_sharethis_large' displayText='ShareThis'></span>-->
+                            <!--<span class='st_facebook_large' displayText='Facebook'></span>-->
+                            <!--<span class='st_twitter_large' displayText='Tweet'></span>-->
+                            <!--<span class='st_linkedin_large' displayText='LinkedIn'></span>-->
+                            <!--<span class='st_pinterest_large' displayText='Pinterest'></span>-->
+                            <!--<span class='st_email_large' displayText='Email'></span>-->
+                        </p>
+                        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                        <div class="addthis_sharing_toolbox"></div>
+                    </div>
+                    <div class="highlights" ng-bind-html="promodetails.description">
+
+                    </div>
+                    <div class="highlights" ng-bind-html="promodetails.benefits">
+
+                    </div>
+                    <!--<div class="highlights" ng-repeat="restaurantInfo in restaurant">
+                        <div class="merchant-dsc">
+                            <h2>{{restaurantInfo.title}}</h2>
+                            <p>{{restaurantInfo.sub_title}}</p>
+                            <p ng-bind-html="restaurantInfo.description"></p>
+                            <h2 ng-if="restaurantInfo.outlets.length">Outlets</h2>
+                            <ul>
+                                <li ng-repeat="outletsInfo in restaurantInfo.outlets">
+                                    <p style="cursor: pointer;" ng-click="changeMap(outletsInfo)">{{outletsInfo.title}}</p>
+                                    <p style="cursor: pointer;" ng-click="changeMap(outletsInfo)">{{outletsInfo.address}}</p>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>-->
+                    <div class="highlights" ng-repeat="restaurantInfo1 in restaurant">
+
+                        <h1>{{restaurantInfo1.title}}</h1>
+                        <p>{{restaurantInfo1.sub_title}}</p>
+                        <p ng-bind-html="restaurantInfo1.description"></p>
+                        <h1 ng-if="restaurantInfo1.outlets.length">Outlets</h1>
+                        <ul ng-repeat="outletsInfo in restaurantInfo1.outlets">
+
+                            <li style="cursor: pointer;" ng-click="changeMap(outletsInfo)">{{outletsInfo.title}}</li>
+                            <li style="cursor: pointer;" ng-click="changeMap(outletsInfo)">{{outletsInfo.address}}</li>
+
+
+                        </ul>
+
+                    </div>
+                    <div class="location">
+                        <div class="map"><!--<img src="app/assets/Images/map.png" alt=""/>-->
+                            <ng-map center="{{mapaddress}}" zoom="6">
+                                <marker position="{{mapaddress}}"></marker>
+                            </ng-map>
+                        </div>
+                        <div class="address">
+                            <h1>{{maptitle}}</h1>
+                            <p>{{mapaddress}}</p>
+                        </div>
+                        <div style="clear: both"></div>
+                    </div>
+                    <div style="text-align:right">
+                        <div ng-if="loggedindetails && promodetails.status!='Expired' && swapvoucherInfo.Status!='Expired'" id="button" dx-button="{
+                                text: 'Bid',
+                                type: 'success',
+                                height:'40px',
+                                width:'130px',
+                                onClick: add_to_bid }" ></div>
+                        <div style="clear: both;margin-bottom: 10px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="m-item-details tablet-hide">
+
+            <div class="details">
+                <div class="banner-main">
+                    <!--<p>{{restaurant.title}}</p>-->
+                    <h1>{{promodetails.title}} </h1>
+                    <div >
+                        <div>
+                            <p><b>Voucher Value : </b>IDR{{promodetails.price | number}}</p>
+                            <!--<p><b>Discounted Price : </b>IDR{{promodetails.offer_price | number}} <span class="p-circle">{{promodetails.offer_percent}}%</span></p>
+                            <p>{{promodetails.conditions==1?'And':'Or'}}</p>
+                            <p><b>M-points : </b>{{promodetails.mpoints}}</p>
+
+
+                            <p><b>Quantity Sold : </b>{{promodetails.buy_count}}</p>
+                            <p><b>Quantity Available : </b>{{promodetails.quantity - promodetails.buy_count}}</p>-->
+
+
+                            <p><b>Voucher Validation Start Date : </b>{{promodetails.item_start_date}}</p>
+                            <p><b>Voucher Expired Date : </b>{{promodetails.item_expire_date}}</p>
+                            <p><b>Voucher Validation Start Hour : </b>{{promodetails.item_start_hour}}</p>
+                            <p><b>Voucher Validation End Hour : </b>{{promodetails.item_end_hour}}</p>
+                            <p><b>Including Holiday : </b>{{promodetails.including_holidays==1?'Yes':'No'}}</p>
+                            <p><b>Validation Days : </b><span ng-repeat="day in offer_days | orderBy : '2'">{{day.day}}, </span> </p>
+                            <p ng-if="swapvoucherInfo.swap_expire_date_status"><b>Time Left : </b><p style="color:green" countdown='' date="{{swapvoucherInfo.swap_expire_date}}" ng-if="swapvoucherInfo.swap_expire_date && swapvoucherInfo.swap_expire_date_status">&nbsp;</p></p>
+                                <p ng-if="!swapvoucherInfo.swap_expire_date_status"><b>Time Left : </b><p style="color:green" ng-if="!swapvoucherInfo.swap_expire_date_status">Closed&nbsp;</p></p>
+                            <p><b>About Merchant : </b>{{about_me}}</p>
+                            <!--<p countdown='' date='{{promodetails.expire_date}}'>&nbsp;</p>-->
+                        </div>
+                        <div style="padding-top: 25px;" class="dx-clearfix"></div>
+                        <div ng-if="loggedindetails && promodetails.status!='Expired' && swapvoucherInfo.Status!='Expired'" id="button" dx-button="{
+                                text: 'Bid',
+                                type: 'success',
+                                height:'40px',
+                                width:'130px',
+                                onClick: add_to_bid }" >
+
+                            </div>
+                        <div class="clearfix" style="margin-bottom: 10px;"></div>
+                    </div>
+                    <div style="padding-top: 25px;" class="dx-clearfix"></div>
+                    <div class="banner featured_carousel2">
+
+                        <div ng-repeat="relatedImg in related_images" class="item">
+                            <img src="{{relatedImg.image}}" alt=""/>
+                        </div>
+                    </div>
+                    <!--<div class="banner"><img src="{{promodetails.image}}" alt=""/></div>-->
+                </div>
+
+                <div class="share">
+                    <p>Share this deal</p>
+                    <div class="addthis_sharing_toolbox"></div>
+                </div>
+                <div class="highlights" ng-bind-html="promodetails.description">
+
+                </div>
+                <div class="highlights" ng-bind-html="promodetails.benefits">
+
+                </div>
+                <div class="highlights" ng-repeat="restaurantInfo in restaurant">
+
+                    <h1>{{restaurantInfo.title}}</h1>
+                    <p>{{restaurantInfo.sub_title}}</p>
+                    <p ng-bind-html="restaurantInfo.description"></p>
+                    <h1 ng-if="restaurantInfo.outlets.length">Outlets</h1>
+                    <ul ng-repeat="outletsInfo in restaurantInfo.outlets">
+
+                        <li ng-click="changeMap(outletsInfo)">{{outletsInfo.title}}</li>
+                        <li ng-click="changeMap(outletsInfo)">{{outletsInfo.address}}</li>
+
+
+                    </ul>
+
+                </div>
+                <div class="location">
+                    <div class="map"><!--<img src="app/assets/Images/map.png" alt=""/>-->
+                        <ng-map center="{{mapaddress}}" zoom="6">
+                            <marker position="{{mapaddress}}"></marker>
+                        </ng-map>
+                    </div>
+                    <div class="address">
+                        <h1>{{maptitle}}</h1>
+                        <p>{{mapaddress}}</p>
+                    </div>
+                    <div style="clear: both"></div>
+                </div>
+                <div style="text-align:right">
+                    <div ng-if="loggedindetails && promodetails.status!='Expired' && swapvoucherInfo.Status!='Expired'" id="button" dx-button="{
+                                text: 'Bid',
+                                type: 'success',
+                                height:'40px',
+                                width:'130px',
+                                onClick: add_to_bid }" ></div>
+                    <div style="clear: both;margin-bottom: 10px;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="new-Promo phone-hide">
+                <h1>Related Products</h1>
+                <div class="featured_carousel">
+                    <div ng-repeat="related in related_products" class="item">
+                        <div class="pro-item2">
+                            <img src="{{related.image}}" width="406" height="255"  alt=""/>
+                            <div class="p-circle" >{{related.offer_percent}}%</div>
+                            <div class="desc">
+                                <div class="txt">
+                                    <h2 ng-bind="related.title"></h2>
+                                    <p ng-bind="related.offer_to_date"></p>
+                                </div>
+                                <div class="view-btn">
+                                    <a ui-sref="frontend.promodetails({ promoId: related.id })" ><img width="66" height="42" alt="" src="app/assets/Images/view-btn.png"></a>
+                                    <!--<p date="May 06,2016 23:59:59" countdown="" class="ng-isolate-scope">4d 6h 51m 38s</p>-->
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--<li>
+                        <div class="pro-item">
+                            <img src="app/assets/Images/pro-3.png" width="406" height="255"  alt=""/>
+                            <div class="p-circle">50%</div>
+                            <div class="desc">
+                                <div class="txt">
+                                    <h2>Paket Hemat Sowe</h2>
+                                    <p>11D:21H:50M:20S</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="pro-item">
+                            <img src="app/assets/Images/pro-3.png" width="406" height="255"  alt=""/>
+                            <div class="p-circle">50%</div>
+                            <div class="desc">
+                                <div class="txt">
+                                    <h2>Paket Hemat Sowe</h2>
+                                    <p>11D:21H:50M:20S</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </li>-->
+
+
+                </div>
+            </div>
+        </div>
+        <div class="m-new-Promo tablet-hide">
+            <h1>Related Products</h1>
+            <div class="featured_carousell">
+                <div ng-repeat="related in related_products" class="item">
+                    <div class="pro-item">
+                        <img src="{{related.image}}" width="406" height="255"  alt=""/>
+                        <div class="p-circle" >{{related.offer_percent}}%</div>
+                        <div class="desc">
+                            <div class="txt">
+                                <h2 ng-bind="related.title"></h2>
+                                <p ng-bind="related.offer_to_date"></p>
+                            </div>
+                            <div class="view-btn">
+                                <a ui-sref="frontend.promodetails({ promoId: related.id })" ><img width="66" height="42" alt="" src="app/assets/Images/view-btn.png"></a>
+                                <!--<p date="May 06,2016 23:59:59" countdown="" class="ng-isolate-scope">4d 6h 51m 38s</p>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--<li>
+                    <div class="pro-item">
+                        <img src="app/assets/Images/pro-3.png" width="406" height="255"  alt=""/>
+                        <div class="p-circle">50%</div>
+                        <div class="desc">
+                            <div class="txt">
+                                <h2>Paket Hemat Sowe</h2>
+                                <p>11D:21H:50M:20S</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="pro-item">
+                        <img src="app/assets/Images/pro-3.png" width="406" height="255"  alt=""/>
+                        <div class="p-circle">50%</div>
+                        <div class="desc">
+                            <div class="txt">
+                                <h2>Paket Hemat Sowe</h2>
+                                <p>11D:21H:50M:20S</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </li>-->
+
+
+            </div>
+        </div>
+
+
+    <style>
+        .new-Promo .pro-item{ height:  154px !important;}
+    </style>
+
+
+</div>
+
+

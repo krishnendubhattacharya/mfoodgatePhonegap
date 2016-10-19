@@ -1,0 +1,64 @@
+<div ng-controller="outleteditCtrl">
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+
+                <div >
+                    <header class="panel-heading">
+                        Outlet Edit
+                    </header>
+                    <div class="panel-body">
+                        <form role="form" ng-submit="saveOutlet()" enctype="multipart/form-data">
+
+                            <div class="form-group">
+                                <label for="title">Outlet ID</label>
+                                <input type="text" required placeholder="Enter Outlet Id"  id="outlet_id" ng-model="item.outlet_id" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputName">Outlet Name</label>
+                                <input type="text" required placeholder="Enter Outlet Name"  id="exampleInputName" ng-model="item.title" class="form-control">
+                                <input type="hidden"  ng-model="item.id" >
+                                <input type="hidden"  ng-model="item.restaurant_id" >
+                            </div>
+
+                            <div class="form-group" ng-init="">
+                                <label for="exampleInputName">Select Location</label>
+                                <div ng-dropdown-multiselect="" id="location_id" options="locCat" selected-model="item.location_id"></div>
+                                <!--<select class="form-control" ng-model="item.location_id">-->
+                                    <!--<option value="">&#45;&#45;Select Location&#45;&#45;</option></option>-->
+                                    <!--<option ng-repeat="location in locationList | orderBy:'city' " value="{{location.id}}">{{location.city}}</option>-->
+                                <!--</select>-->
+                            </div>
+
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <input required places-auto-complete id="address" ng-model="item.address" class="form-control" on-place-changed="placeChanged()"/>
+                                <input type="hidden"  ng-model="item.lat" >
+                                <input type="hidden"  ng-model="item.lng" >
+                            </div>
+
+                            <div class="form-group" ng-init="getCategories()">
+                                <label for="exampleInputName">Select Category</label>
+                                <div ng-dropdown-multiselect=""  options="allCat" selected-model="item.category_id"></div>
+                            </div>
+
+
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="item.is_active" ng-true-value="1" ng-false-value="0"> Is Active
+                                </label>
+                            </div>
+
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                            <button class="btn btn-danger" type="button" ng-click="cancelOutlet()">Cancel</button>
+                        </form>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</div>

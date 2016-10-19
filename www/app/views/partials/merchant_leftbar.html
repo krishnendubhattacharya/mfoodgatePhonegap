@@ -1,0 +1,18 @@
+<div ng-controller="merchantleftbarCtrl" class="phone-hide">
+
+		<ul >
+			<li ng-repeat="restaurant in restaurants"><a href="javascript:void(0);" ng-click="changerestaurant(restaurant)" style="color:red;">{{restaurant.title}}</a></li>
+		</ul>
+	</div>
+	<div ng-controller="merchantleftbarCtrl" class="tablet-hide">
+	<div style="padding-top: 15px;" class="dx-clearfix"></div>
+	<div class="m-merchant-nav2 tablet-hide" ng-if="restaurantShow"><h1>Restaurants</h1></div>
+	<div class="m-myaccount-details tablet-hide" ng-if="restaurantShow">
+	<div class="m-left-panel2 tablet-hide">
+
+		<ul>
+			<li ng-repeat="restaurant in restaurants"><p><a href="javascript:void(0);" ng-click="changerestaurant(restaurant)"><h1><img src="{{restaurant.iconurl}}" width="35" height="35"  alt=""/></h1>{{restaurant.title}}</a></p></li>
+		</ul>
+	</div>
+	</div>
+</div>

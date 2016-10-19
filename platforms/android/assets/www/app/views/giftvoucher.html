@@ -1,0 +1,236 @@
+<!--Web header-->
+<!--Web header-->
+<!--<div ng-controller="loginCtrl">-->
+
+<div class="container phone-hide" ng-controller="giftvoucherCtrl">
+    <div class="gifts">
+        <div class="left-col">
+
+            <div class="all-gifts">
+                <h1>Give Voucher</h1>
+                <div class="news-item">
+                    <div class="pix"><img src="{{voucherInfo.voucher_details.image}}" style="width:100%; height:auto;"  alt=""/></div>
+                    <div class="dsc">
+                        <h1>{{voucherInfo.voucher_details.title}}</h1>
+                        <p ng-bind-html-unsafe="voucherInfo.voucher_details.description | limitTo:500"></p>
+                        <div class="posted"><strong>Price:</strong> {{voucherInfo.voucher_details.price}} </div>
+                        <div class="posted"><strong>Expire On:</strong> {{voucherInfo.voucher_details.to_date}} </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right-col">
+            <div class="latest-news">
+                <h1>Give Details</h1>
+                <div class="form" ng-hide="detailsView || detailsViewNonUser">
+                    <div class="dx-fieldset">
+                        <div class="dx-field">
+                            <div class="dx-field-label">Email</div>
+                            <div class="dx-field-value">
+                                <div dx-text-box="textBox.gift_email" ng-model="gift_email"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div id="summary" dx-validation-summary="{ }"></div>-->
+                    <div id="check" dx-button="{
+                                text: 'Check',
+                                type: 'success',
+                                onClick: check }" ></div>
+                </div>
+                <div class="form" ng-show="detailsView">
+                    <div class="dx-fieldset">
+                        <div class="dx-field">
+                            <div class="dx-field-label">Name</div>
+                            <div class="dx-field-value">
+                                {{userDetail.first_name + " " + userDetail.last_name}}
+                            </div>
+                        </div>
+                        <div class="dx-field">
+                            <div class="dx-field-label">Email</div>
+                            <div class="dx-field-value">
+                                {{userDetail.email}}
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div id="summary" dx-validation-summary="{ }"></div>-->
+                    <div id="confirm" dx-button="{
+                                text: 'Confirm',
+                                type: 'success',
+                                onClick: saveGift }" ></div>
+                    <div id="cancel" dx-button="{
+                                text: 'Cancel',
+                                type: 'success',
+                                onClick: cancel }" ></div>
+                </div>
+                <div class="dx-clearfix"></div>
+                <div class="form" ng-show="detailsViewNonUser">
+
+                        <div class="dx-field">
+                            <div class="dx-field-label">Email</div>
+                            <div class="dx-field-value">
+                                {{email}}
+                            </div>
+                        </div>
+                    <div class="dx-fieldset">
+                        <div class="dx-field-label">&nbsp;</div>
+                        <div class="dx-field">
+                            This email is not registered in mFoodGate. If you want to give the voucher clcik on 'Confirm'
+                        </div>
+                    </div>
+                    <!--<div id="summary" dx-validation-summary="{ }"></div>-->
+                    <div id="confirm" dx-button="{
+                                text: 'Confirm',
+                                type: 'success',
+                                onClick: saveGift }" ></div>
+                    <div id="cancel" dx-button="{
+                                text: 'Cancel',
+                                type: 'success',
+                                onClick: cancel }" ></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="m-gifts tablet-hide" ng-controller="giftvoucherCtrl">
+    <div class="left-col">
+
+        <div class="all-gifts">
+            <h1>Give Voucher</h1>
+            <div class="news-item" ng-repeat="news in allnews">
+                <div class="pix"><img src="{{news.image}}" width="264" height="167"  alt=""/></div>
+                <div class="dsc">
+                    <h1><a ui-sref="frontend.newsdetail({ newsId: news.id })">{{news.title}}</a></h1>
+                    <p ng-bind-html="news.description | limitTo:300"></p>
+                    <div class="posted"><strong>Posted on:</strong> {{news.date}} | By: Admin
+                        <span>View ({{news.views}})</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="right-col">
+        <div class="latest-news">
+            <h1>Give Details</h1>
+            <div class="form" ng-hide="detailsView">
+                <div class="dx-fieldset">
+                    <div class="dx-field">
+                        <div class="dx-field-label">Email</div>
+                        <div class="dx-field-value">
+                            <div dx-text-box="textBox.gift_email" ng-model="gift_email"></div>
+                        </div>
+                    </div>
+                </div>
+                <!--<div id="summary" dx-validation-summary="{ }"></div>-->
+                <div  dx-button="{
+                                text: 'Check',
+                                type: 'success',
+                                onClick: check }" ></div>
+            </div>
+            <div class="form" ng-show="detailsView">
+                <div class="dx-fieldset">
+                    <div class="dx-field">
+                        <div class="dx-field-label">Name</div>
+                        <div class="dx-field-value">
+                            {{userDetail.first_name + " " + userDetail.last_name}}
+                        </div>
+                    </div>
+                    <div class="dx-field">
+                        <div class="dx-field-label">Email</div>
+                        <div class="dx-field-value">
+                            {{userDetail.email}}
+                        </div>
+                    </div>
+                </div>
+                <!--<div id="summary" dx-validation-summary="{ }"></div>-->
+                <div  dx-button="{
+                                text: 'Confirm',
+                                type: 'success',
+                                onClick: saveGift }" ></div>
+                <div  dx-button="{
+                                text: 'Cancel',
+                                type: 'success',
+                                onClick: cancel }" ></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="dx-clearfix"></div>
+<style>
+.gifts {
+    border: 1px solid #dedede;
+    height: auto;
+    margin: 25px 0;
+    overflow: hidden;
+    padding: 20px;
+    width: 100%;
+}
+.gifts .left-col {
+    width: 44%;
+    float: left;
+    margin: 0;
+}
+.gifts .left-col .all-gifts {
+     width: 100%;
+     height: auto;
+     margin: 20px 0 0;
+ }
+.gifts .left-col .all-gifts .news-item {
+    width: 91%;
+    height: auto;
+    overflow: hidden;
+    padding: 15px;
+    border-right: solid 1px #c5c5c5;
+  }
+.gifts .left-col .all-gifts .news-item .pix {
+       width: 36%;
+       height: auto;
+       margin-right: 3%;
+       float: left;
+   }
+.gifts .left-col .all-gifts .news-item .dsc {
+        width: 60%;
+        height: auto;
+        margin: 0;
+        float: left;
+    }
+.gifts .left-col .all-gifts .news-item .dsc h1 {
+    padding: 0;
+    margin: 0 0 10px;
+    font-size: 24px;
+    line-height: 30px;
+    color: #329432;
+}
+.gifts .left-col .all-gifts .news-item .dsc p {
+    padding: 0;
+    margin: 0 0 10px;
+    font-size: 16px;
+    line-height: 22px;
+    color: #585858;
+}
+.gifts .left-col .all-gifts .news-item .dsc .posted {
+    font-size: 14px;
+    color: #5b5b5b;
+    padding: 0;
+    margin: 0;
+}
+.gifts .right-col {
+    width: 56%;
+    float: right;
+    margin: 0;
+    border: solid 0px green;
+}
+.gifts .right-col .latest-news {
+     width: 98%;
+     height: auto;
+     background: #fff;
+     overflow: hidden;
+     margin-bottom: 15px;
+ }
+</style>
+<!--</div>-->
+
+
+
+
+

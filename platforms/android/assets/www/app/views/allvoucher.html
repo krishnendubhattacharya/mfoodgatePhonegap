@@ -1,0 +1,159 @@
+<!--Web header-->
+<div ng-controller="allvoucherCtrl">
+
+    <div class="container phone-hide">
+        <div class="myaccount-details">
+            <h1>{{allicontext[3].title}}</h1>
+                <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+
+            <div class="profile-details brt-none">
+                <!--<h3>All Voucher</h3>
+                <div class="reseller-section phone-hide" style="border:none;">
+
+                    <ul>
+                        <li ng-repeat="voucherDetail in voucherInfo">
+                            <div class="pro-item">
+                                <div class="logo-box">
+                                    <div class="p-circle">{{voucherDetail.offer_percent}}%</div>
+                                    <img src="{{voucherDetail.image}}" width="218" height="100"  alt=""/>
+                                </div>
+                                <div class="desc">
+                                    <h2>{{voucherDetail.title}}</h2>
+
+                                    <div class="price">
+                                        <h2>RP {{voucherDetail.price-((voucherDetail.price*voucherDetail.offer_percent)/100)}}</h2>
+                                        <p>RP {{voucherDetail.price}}</p>
+
+
+                                    </div>
+                                    <div class="pts">
+                                        <p>{{voucherDetail.buy_count}} Sold</p>
+                                        <p> <button class="btn-default" ng-click="voucherdetails(voucherDetail.voucher_id)">Details</button></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+
+                        <button class="btn-default" ng-click="">Load More</button>
+                    </ul>
+
+                </div>-->
+                <div class="pvoucher-section phone-hide">
+                    <h1 ng-click="firstShowHide()">ALL VOUCHER</h1>
+                    <ul class="pt-0" ng-show="first_show">
+                        <li ng-repeat="voucherDetail in voucherInfo">
+                            <div class="pro-item" style="height: auto">
+                                <div class="logo-box">
+                                    <!--<div class="p-circle">5X</div>-->
+                                    <a ui-sref="frontend.voucherdetail({ voucherId: voucherDetail.voucher_id })"><img src="{{voucherDetail.image}}" width="218" height="100"  alt=""/></a>
+                                </div>
+                                <div class="desc">
+                                    <h2>{{voucherDetail.title}}</h2>
+                                    <h2>MFG-000000000{{voucherDetail.voucher_id}}</h2>
+                                    <h3>{{voucherDetail.offer_percent}}% off</h3>
+                                    <p class="price">Price <span>IDR{{voucherDetail.price | number}}</span> </p>
+                                    <p class="price">Offer Price  <span>IDR{{voucherDetail.price-((voucherDetail.price*voucherDetail.offer_percent)/100) | number}}</span></p>
+                                    <div class="btn_o"><a ui-sref="frontend.voucherdetail({ voucherId: voucherDetail.voucher_id })">Detail</a></div>
+                                    <div class="btn_g" ng-if="voucherDetail.voucher_status == 0"><a ui-sref="frontend.vouchersell({ voucherId: voucherDetail.voucher_id })">Resell</a></div>
+                                    <!--<div class="btn_o" style="float: none;margin: 8px auto;clear: both"><a ui-sref="frontend.voucherdetail({ voucherId: voucherDetail.voucher_id })">Export</a></div>-->
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="dx-clearfix"></div>
+                <div class="pvoucher-section phone-hide">
+                    <h1 ng-click="secondShowHide()">EXPIRE SOON VOUCHER</h1>
+                    <ul ng-show="second_show">
+                        <li ng-repeat="voucherDetail in soonVoucherInfo">
+                            <div class="pro-item" style="height: auto">
+                                <div class="logo-box">
+                                    <!--<div class="p-circle">5X</div>-->
+                                    <a ui-sref="frontend.voucherdetail({ voucherId: voucherDetail.voucher_id })"><img src="{{voucherDetail.image}}" width="218" height="100"  alt=""/></a>
+                                </div>
+                                <div class="desc">
+                                    <h2>{{voucherDetail.title}}</h2>
+                                    <h3>{{voucherDetail.offer_percent}}% off</h3>
+                                    <p class="price">Price <span>IDR{{voucherDetail.price | number}}</span> </p>
+                                    <p class="price">Offer Price  <span>IDR{{voucherDetail.price-((voucherDetail.price*voucherDetail.offer_percent)/100) | number}}</span></p>
+                                    <div class="btn_o"><a ui-sref="frontend.voucherdetail({ voucherId: voucherDetail.voucher_id })">Detail</a></div>
+
+
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <!--<h3>All Voucher</h3>-->
+                <!--<div id="gridContainer" dx-data-grid="dataGridOptions"></div>-->
+
+                <!--<h3>Expire soon Voucher</h3>-->
+                <!--<div id="gridContainer2" dx-data-grid="dataGridOptions2"></div>-->
+            </div>
+
+        </div>
+    </div>
+    <div class="m-myaccount-details tablet-hide">
+
+        <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+        <h1>{{allicontext[3].title}}</h1>
+        <div class="m-profile-details">
+            <div class="m-pvoucher-section tablet-hide">
+                <h1 class="mb-0" ng-click="firstShowHide()">ALL VOUCHER</h1>
+                <ul class="new-border" ng-show="first_show">
+                    <li ng-repeat="voucherDetail in voucherInfo">
+                        <div class="pro-item">
+                            <div class="logo-box">
+                                <!--<div class="p-circle">5X</div>-->
+                                <a ui-sref="frontend.voucherdetail({ voucherId: voucherDetail.voucher_id })"><img src="{{voucherDetail.image}}" width="218" height="100"  alt=""/></a>
+                            </div>
+                            <div class="desc">
+                                <h2>{{voucherDetail.title}}</h2>
+                                <h2>MFG-000000000{{voucherDetail.voucher_id}}</h2>
+                                <h3>{{voucherDetail.offer_percent}}% off</h3>
+                                <p class="price">Price <span>IDR{{voucherDetail.price | number}}</span> </p>
+                                <p class="price">Offer Price  <span>IDR{{voucherDetail.price-((voucherDetail.price*voucherDetail.offer_percent)/100) | number}}</span></p>
+                                <div  class="btn_o"><a ui-sref="frontend.voucherdetail({ voucherId: voucherDetail.voucher_id })">Detail</a></div>
+                                <div ng-if="voucherDetail.voucher_status == 0" class="btn_g"><a ui-sref="frontend.vouchersell({ voucherId: voucherDetail.voucher_id })">Resell</a></div>
+                                <!--<div class="btn_g"><a href="">Give Friend</a></div>-->
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="dx-clearfix"></div>
+            <div class="m-pvoucher-section tablet-hide">
+                <h1 class="mb-0" ng-click="secondShowHide()">EXPIRE SOON VOUCHER</h1>
+                <ul class="new-border" ng-show="second_show">
+                    <li ng-repeat="voucherDetail in soonVoucherInfo">
+                        <div class="pro-item">
+                            <div class="logo-box">
+                                <!--<div class="p-circle">5X</div>-->
+                                <a ui-sref="frontend.voucherdetail({ voucherId: voucherDetail.voucher_id })"><img src="{{voucherDetail.image}}" width="218" height="100"  alt=""/></a>
+                            </div>
+                            <div class="desc">
+
+                                <h2>{{voucherDetail.title}}</h2>
+                                <h3>{{voucherDetail.offer_percent}}% off</h3>
+                                <p class="price">Price <span>IDR{{voucherDetail.price | number}}</span> </p>
+                                <p class="price">Offer Price  <span>IDR{{voucherDetail.price-((voucherDetail.price*voucherDetail.offer_percent)/100) | number}}</span></p>
+                                <div class="btn_o"><a ui-sref="frontend.voucherdetail({ voucherId: voucherDetail.voucher_id })">Detail</a></div>
+
+                                <!--<div class="btn_g"><a href="">Give Friend</a></div>-->
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+

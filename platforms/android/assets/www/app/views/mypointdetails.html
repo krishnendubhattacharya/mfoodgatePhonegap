@@ -1,0 +1,65 @@
+<!--Web header-->
+<div ng-controller="mypointsdetailsCtrl">
+
+    <div class="container phone-hide">
+        <div class="myaccount-details">
+            <h1>{{allicontext[8].title}}</h1>
+                <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+
+            <div class="profile-details">
+                <h3><span style="float:left;">Points Detail</span><span style="float:right;"><div id="button" dx-button="{
+                                text: 'BACk',
+                                onClick: gotoback }" ></div></span></h3>
+                <div id="gridContainer" dx-data-grid="dataGridOptions"></div>
+            </div>
+
+        </div>
+    </div>
+    <div class="m-myaccount-details tablet-hide">
+        <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+        <h1>{{allicontext[8].title}}</h1>
+        <div class="m-profile-details">
+            <h1>Points Detail</h1>
+            <div class="m-transaction-details tablet-hide" ng-repeat="voucherDetail in voucherInfo">
+                <h1>{{voucherDetail.point_name}}</h1>
+                <table>
+                    <tr>
+                        <td width="30%" class="m-header-color">Name of Points</td>
+                        <td>{{voucherDetail.point_name}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Merchants</td>
+                        <td>{{voucherDetail.merchant_name}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">source</td>
+                        <td>{{voucherDetail.source}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Transaction</td>
+                        <td>{{voucherDetail.transaction}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Quantity</td>
+                        <td>{{voucherDetail.available_point}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Transaction Date</td>
+                        <td>{{voucherDetail.transaction_date}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Expire Date</td>
+                        <td>{{voucherDetail.expire_date}}</td>
+                    </tr>
+                </table>
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+

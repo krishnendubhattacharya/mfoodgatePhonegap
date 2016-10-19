@@ -1,0 +1,193 @@
+<!--Web header-->
+<style>
+    .right-side {
+        position: absolute;
+        right: 1px;
+        top: 6px;
+    }
+</style>
+<div ng-controller="myeventtemplateCtrl">
+
+    <div class="container phone-hide">
+        <div class="myaccount-details">
+            <h1>{{allicontext[31].title}}</h1>
+            <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+
+            <div class="profile-details"  ng-show="!edit_mode">
+                <div style="margin: 10px;" id="button" dx-button="{
+                                text: 'Add Template',
+                                onClick: changeView }" ></div>
+                
+                <div id="gridContainer" dx-data-grid="dataGridOptions"></div>
+
+            </div>
+
+            <div class="profile-details" ng-show="edit_mode">
+                <div class="form">
+                    <div class="dx-fieldset">
+                        <div class="dx-field">
+                            <div class="dx-field-label">Title</div>
+                            <div class="dx-field-value">
+                                <div dx-text-box="textBox.title" ng-model="event.title"></div>
+                            </div>
+                        </div>
+
+                        <div class="dx-field">
+                            <div class="dx-field-label">Template</div>
+                            <div class="dx-field-value">
+                                <div dx-text-area="textArea"  ng-model="event.content"></div>
+                            </div>
+                        </div>
+
+                        <!--<div class="dx-field">
+                            <div class="dx-field-label">Cover Image</div>
+                            <div class="dx-field-value">
+                                <div dx-file-uploader="textBox.image"></div>
+                            </div>
+                        </div>
+                        <div class="dx-field">
+                            <div class="dx-field-label"></div>
+                            <div class="dx-field-value">
+                                <img src="{{event.imageurl}}" ng-if="event.imageurl" width="200">
+                            </div>
+                        </div>-->
+                        
+
+                        
+
+                        <div class="dx-field">
+                            <div class="dx-field-label">Is Active</div>
+                            <div class="dx-field-value">
+                                <div dx-check-box="{
+                                    text: '',
+                                    value: '1'
+                                }" style="float: left" ng-model="event.is_active"></div>
+                            </div>
+                        </div>
+
+                        <div class="dx-field">
+                            <div class="dx-field-label">&nbsp;</div>
+                            <div class="dx-field-value">
+                                <div id="button" dx-button="{
+                                text: 'Submit',
+                                type: 'success',
+                                onClick: save_event }" ></div>
+
+                                <div id="button" dx-button="{
+                                text: 'Cancel',
+                                onClick: changeView }" ></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--<div id="summary" dx-validation-summary="{ }"></div>-->
+
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="m-myaccount-details tablet-hide">
+
+        <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+        <h1>{{allicontext[9].title}}</h1>
+        <div class="m-profile-details" ng-show ="!edit_mode">
+            <div style="margin: 5px;" id="button" dx-button="{
+                text: 'Add Template',
+                onClick: changeView }" ></div>
+        <div class="m-transaction-details tablet-hide mb-15" ng-repeat="voucherDetail in eventInfo">
+            <h1>{{voucherDetail.title}}</h1>
+            <table>
+                <tr>
+                    <td width="30%" class="m-header-color">Title</td>
+                    <td>{{voucherDetail.title}}</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Created On</td>
+                    <td>{{voucherDetail.created_on}}</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Status</td>
+                    <td>{{voucherDetail.status}}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                <div class="nwe-btn" ng-if="voucherDetail.status != 'Completed'"><span class="dx-button" ng-click="edit_event({{voucherDetail.id}})">Edit</span></div>
+                <div class="nwe-btn"><span class="dx-button"  ng-click="image_event({{voucherDetail.id}})">Image</span></div>
+                <div class="nwe-btn"><span class="dx-button" ng-click="delete_menu({{voucherDetail.id}})">Delete</span></div>
+                </td>
+                </tr>
+            </table>
+
+        </div>
+       </div>
+        
+
+        <div class="m-profile-details" ng-show="edit_mode">
+            <div class="form">
+                <div class="dx-fieldset">
+                    <div class="dx-field">
+                            <div class="dx-field-label">Title</div>
+                            <div class="dx-field-value">
+                                <div dx-text-box="textBox.title" ng-model="event.title"></div>
+                            </div>
+                        </div>
+
+                        <div class="dx-field">
+                            <div class="dx-field-label">Template</div>
+                            <div class="dx-field-value">
+                                <div dx-text-area="textArea"  ng-model="event.content"></div>
+                            </div>
+                        </div>
+
+                        <div class="dx-field">
+                            <div class="dx-field-label">Cover Image</div>
+                            <div class="dx-field-value">
+                                <div dx-file-uploader="textBox.image"></div>
+                            </div>
+                        </div>
+                        <div class="dx-field">
+                            <div class="dx-field-label"></div>
+                            <div class="dx-field-value">
+                                <img src="{{event.imageurl}}" ng-if="event.imageurl" width="200">
+                            </div>
+                        </div>
+                        
+
+                        
+
+                        <div class="dx-field">
+                            <div class="dx-field-label">Is Active</div>
+                            <div class="dx-field-value">
+                                <div dx-check-box="{
+                                    text: '',
+                                    value: '1'
+                                }" style="float: left" ng-model="event.is_active"></div>
+                            </div>
+                        </div>
+
+                    <div id="button" dx-button="{
+                                text: 'Submit',
+                                type: 'success',
+                                onClick: save_event }" ></div>
+
+                    <div id="button" dx-button="{
+                                text: 'Cancel',
+                                onClick: changeView }" ></div>
+
+                </div>
+                <!--<div id="summary" dx-validation-summary="{ }"></div>-->
+
+
+
+            </div>
+        </div>
+
+    </div>
+    <div class="dx-clearfix"></div>
+    
+</div>
+
+

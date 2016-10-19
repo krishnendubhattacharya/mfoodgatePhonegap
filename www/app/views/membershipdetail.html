@@ -1,0 +1,91 @@
+<!--Web header-->
+<div>
+
+    <div class="container phone-hide">
+        <div class="voucher-details">
+            <h1>Membership Detail</h1>
+                <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+
+            <div class="profile-details">
+
+                <div class="img-box">
+                    <div class="pro-item">
+                        <div class="logo-box">
+                            <div class="p-circle">5X</div>
+                            <img src="{{voucherInfo.voucher_details.image}}" width="218" height="100"  alt=""/>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="desc-box">
+                    <h1>{{voucherInfo.voucher_details.title}}</h1>
+                    <p ng-bind-html="voucherInfo.voucher_details.benefits"></p>
+
+                    <div class="pay-box">
+                        <p>DISCOUNT  &nbsp; &nbsp; &nbsp;<span class="discount">{{voucherInfo.voucher_details.offer_percent}}%</span></p>
+                        <p>Sold  &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;<span class="sold">{{voucherInfo.total_sold}}</span></p>
+                    </div>
+                    <div class="pay-box">
+                        <p>Share &nbsp; &nbsp; &nbsp;<img src="app/assets/Images/share.png" width="244" height="29"  alt=""/></p>
+                    </div>
+                    <div class="merchant">
+                        <div class="merchant-logo"><img src="{{voucherInfo.restaurant_details.logo}}" width="163" height="138"  alt=""/></div>
+                        <div class="merchant-dsc">
+                            <h2>{{voucherInfo.restaurant_details.title}}</h2>
+                            <p>{{voucherInfo.restaurant_details.address}}</p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </div>
+    <div class="m-myaccount-details tablet-hide">
+
+        <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+        <h1>Membership Detail</h1>
+
+        <div class="m-profile-details">
+
+            <div class="img-box">
+                <div class="pro-item">
+                    <div class="logo-box">
+                        <div class="p-circle">5X</div>
+                        <img src="{{voucherInfo.voucher_details.image}}" width="218" height="100"  alt=""/>
+                    </div>
+
+                </div>
+            </div>
+            <div class="desc-box">
+                <h1>{{voucherInfo.voucher_details.title}}</h1>
+                <p ng-bind-html="voucherInfo.voucher_details.benefits"></p>
+
+                <div class="pay-box">
+                    <p>DISCOUNT  &nbsp; &nbsp; &nbsp;<span class="discount">{{voucherInfo.voucher_details.offer_percent}}%</span></p>
+                    <p>Sold  &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;<span class="sold">{{voucherInfo.total_sold}}</span></p>
+                </div>
+                <div class="pay-box">
+                    <p>Share &nbsp; &nbsp; &nbsp;<img src="app/assets/Images/share.png" width="244" height="29"  alt=""/></p>
+                </div>
+                <div class="merchant">
+                    <div class="merchant-logo"><img src="{{voucherInfo.restaurant_details.logo}}" width="163" height="138"  alt=""/></div>
+                    <div class="merchant-dsc">
+                        <h2>{{voucherInfo.restaurant_details.title}}</h2>
+                        <p>{{voucherInfo.restaurant_details.address}}</p>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+

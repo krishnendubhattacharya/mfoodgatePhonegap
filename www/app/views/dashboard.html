@@ -1,0 +1,253 @@
+<!--Web header-->
+<div ng-controller="dashboardCtrl">
+
+
+	
+	
+	
+	
+	<div class="container phone-hide">
+    <div class="myaccount-details">
+        <h1>DASHBOARD</h1>
+         <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+        
+        
+        <div class="profile-details mb-15 new_profile">
+        	<h1 ng-click="firstShowHide()">PROFILE</h1>
+            <div ng-show="first_show" class="dash-board">
+                    <p style="font-size: 18px;">{{userInfo.first_name}} {{userInfo.last_name}}</p>
+                    <p><span class="title">Member Since:</span> <span class="val">{{userInfo.registration_date}}</span></p>
+                    <p><span class="title">Mobile Phone:</span> <span class="val">{{userInfo.phone}}</span></p>
+
+                    <p><span class="title">Email/Login Name:</span> <span class="val">{{userInfo.email}}</span></p>
+                    <p><span class="title">Favourite Food:</span> <span class="val" ><span style="width:100%;float:left;" ng-repeat="cat in userInfo.categories">{{cat.category}},</span> </span></p>
+                    <div class="clear-fix" style="margin-top: 20px;"></div>
+                </div>
+        </div>
+        <div class="profile-details mb-15 new_profile">
+        	<h1 ng-click="secondShowHide()">MY POINT</h1>
+            <div ng-show="second_show" class="dash-board">
+            	<div class="p-box">
+                	<ul>
+                    	<li ng-repeat="user_point in user_point_details">
+                        	<h1 ng-if="user_point.point_name=='mCash'">{{user_point.point_name}}</h1>
+                        	<h2 ng-if="user_point.point_name!='mCash'">{{user_point.point_name}}</h2>
+                            <div ng:class="{true:'circle_or', false:'circle_gr'}[user_point.point_name=='mCash']">{{user_point.total_remaining_point}}</div>
+                            <p style=" font-weight: bold;" ng:class="{true:'color-or', false:'color-gr'}[user_point.point_name=='mCash']" >Nearest Expired : {{user_point.point_expire_date}}</p>
+                            <p ng:class="{true:'color-or', false:'color-gr'}[user_point.point_name=='mCash']">Last {{user_point.point_name}} Get : {{user_point.last_point_date}}</p>
+                           
+                        </li>
+                        <!--<li>
+                        	<h2>mPoint</h2>
+                            <div class="circle_gr">125,000</div>
+                            <p class="color-gr">Nearest Expired : 30 Aug 2017</p>
+                            <p class="color-gr">Last mCash Get : 9 Sept 2016</p>
+                         </li>-->
+                        	
+                    </ul>
+                </div>
+                 <div class="clear-fix" style="margin-top: 20px;"></div>
+            </div>
+        </div>
+        <div class="profile-details mb-15 new_profile">
+        	<h1 ng-click="thirdShowHide()">MY DEAL</h1>
+            <div ng-show="third_show" class="dash-board">
+            <div class="item">
+                <h1>SUMMARIES</h1>
+                <div class="cont">
+                	<ul>
+                		<li>
+		                   <div class="title">Active Voucher:</div>
+		                   <div class="val">{{user_voucher_details.active_voucher}}</div>
+		               </li>
+		               
+                        <li>
+		                   <div class="title">Nearest Expired:</div>
+		                   <div class="val">{{user_voucher_details.nearest_active_voucher}}</div>
+                        </li>
+                        <li>
+		                   <div class="title">Resell Voucher:</div>
+		                   <div class="val">{{user_voucher_details.resell_voucher}}</div>
+		              </li>
+		              
+                        <li>
+		                   <div class="title">Nearest Offer Expired:</div>
+		                   <div class="val">{{user_voucher_details.nearest_active_resell_voucher}}</div>
+                        </li>
+                        
+                        <li>
+		                   <div class="title">Swap Voucher:</div>
+		                   <div class="val">{{user_voucher_details.swap_voucher}}</div>
+                        </li>
+                        
+                        <li>
+		                   <div class="title">Nearest Offer Expired:</div>
+		                   <div class="val">{{user_voucher_details.nearest_active_swap_voucher}}</div>
+                        </li>
+                        
+                        <li>
+		                   <div class="title">Active Membership:</div>
+		                   <div class="val">{{user_voucher_details.membership_voucher}}</div>
+                        </li>
+                        
+                        <li>
+		                   <div class="title">Nearest Membership Expired:</div>
+		                   <div class="val">{{user_voucher_details.nearest_active_membership_voucher}}</div>
+                        </li>
+                    
+                        <li>
+		                   <div class="title">Event Offer:</div>
+		                   <div class="val">{{user_voucher_details.event_voucher}}</div>
+                        </li>
+                        
+                        <li>
+		                   <div class="title">Nearest Offer Expired:</div>
+		                   <div class="val">{{user_voucher_details.nearest_active_event_voucher}}</div>
+                        </li>
+                        
+                        <li>
+		                   <div class="title">Item Cart:</div>
+		                   <div class="val">{{user_voucher_details.cart_voucher}}</div>
+                        </li>
+                        
+                        <li>
+		                   <div class="title">Nearest Offer Expired:</div>
+		                   <div class="val">{{user_voucher_details.nearest_active_cart_voucher}}</div>
+                        </li>
+                        
+                    </ul>
+                </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        </div>
+    </div>
+    <div class="m-myaccount-details tablet-hide">
+        
+		   <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+        
+        <h1>DASHBOARD</h1>
+        	<div class="m-profile-details br-0 mb-0 pb-0 ">
+        	<h1 ng-click="firstShowHide()">PROFILE</h1>
+            <div class="new-border">
+            <div ng-show="first_show" class="m-dash-board">
+                    <p style="font-size: 18px;">{{userInfo.first_name}} {{userInfo.last_name}}</p>
+                    <p><span class="title">Member Since:</span> <span class="val">{{userInfo.registration_date}}</span></p>
+                    <p><span class="title">Mobile Phone:</span> <span class="val">{{userInfo.phone}}</span></p>
+
+                    <p><span class="title">Email/Login Name:</span> <span class="val">{{userInfo.email}}</span></p>
+                    <p><span class="title">Favourite Food:</span> 
+                    <span class="val" ><span style="width:100%;float:left;" ng-repeat="cat in userInfo.categories">{{cat.category}},</span> </span></p>
+                    <div class="clear-fix" style="margin-top: 20px;"></div>
+            </div>
+            </div>
+          </div>
+          <div class="m-profile-details br-0 mb-0 pb-0 ">
+        	<h1 ng-click="secondShowHide()">MY POINT</h1>
+        	  <div class="new-border">
+            <div ng-show="second_show" class="m-dash-board">
+            	<div class="p-box">
+                	<ul>
+                    	<li ng-repeat="user_point in user_point_details">
+                        	<h1 ng-if="user_point.point_name=='mCash'">{{user_point.point_name}}</h1>
+                        	<h2 ng-if="user_point.point_name!='mCash'">{{user_point.point_name}}</h2>
+                            <div ng:class="{true:'circle_or', false:'circle_gr'}[user_point.point_name=='mCash']">{{user_point.total_remaining_point}}</div>
+                            <p style=" font-weight: bold;" ng:class="{true:'color-or', false:'color-gr'}[user_point.point_name=='mCash']" >Nearest Expired : {{user_point.point_expire_date}}</p>
+                            <p ng:class="{true:'color-or', false:'color-gr'}[user_point.point_name=='mCash']">Last {{user_point.point_name}} Get : {{user_point.last_point_date}}</p>
+                           
+                        </li>
+                    </ul>
+                </div>
+                 <div class="clear-fix" style="margin-top: 20px;"></div>
+            </div>
+            </div>
+          </div>
+          <div class="m-profile-details br-0 mb-0 pb-0 m-new_profile">
+        	<h1 ng-click="thirdShowHide()">MY DEAL</h1>
+        	  <div class="new-border">
+            <div ng-show="third_show" class="m-dash-board">
+            <div class="item">
+            	 <h1>SUMMARIES</h1>
+                <div class="cont">
+                	<ul>
+                		<li>
+		                   <div class="title">Active Voucher:</div>
+		                   <div class="val">{{user_voucher_details.active_voucher}}</div>
+		               </li>
+		               
+                        <li>
+		                   <div class="title">Nearest Expired:</div>
+		                   <div class="val">{{user_voucher_details.nearest_active_voucher}}</div>
+                        </li>
+                        <li>
+		                   <div class="title">Resell Voucher:</div>
+		                   <div class="val">{{user_voucher_details.resell_voucher}}</div>
+		              </li>
+		              
+                        <li>
+		                   <div class="title">Nearest Offer Expired:</div>
+		                   <div class="val">{{user_voucher_details.nearest_active_resell_voucher}}</div>
+                        </li>
+                        
+                        <li>
+		                   <div class="title">Swap Voucher:</div>
+		                   <div class="val">{{user_voucher_details.swap_voucher}}</div>
+                        </li>
+                        
+                        <li>
+		                   <div class="title">Nearest Offer Expired:</div>
+		                   <div class="val">{{user_voucher_details.nearest_active_swap_voucher}}</div>
+                        </li>
+                        
+                        <li>
+		                   <div class="title">Active Membership:</div>
+		                   <div class="val">{{user_voucher_details.membership_voucher}}</div>
+                        </li>
+                        
+                        <li>
+		                   <div class="title">Nearest Membership Expired:</div>
+		                   <div class="val">{{user_voucher_details.nearest_active_membership_voucher}}</div>
+                        </li>
+                    
+                        <li>
+		                   <div class="title">Event Offer:</div>
+		                   <div class="val">{{user_voucher_details.event_voucher}}</div>
+                        </li>
+                        
+                        <li>
+		                   <div class="title">Nearest Offer Expired:</div>
+		                   <div class="val">{{user_voucher_details.nearest_active_event_voucher}}</div>
+                        </li>
+                        
+                        <li>
+		                   <div class="title">Item Cart:</div>
+		                   <div class="val">{{user_voucher_details.cart_voucher}}</div>
+                        </li>
+                        
+                        <li>
+		                   <div class="title">Nearest Offer Expired:</div>
+		                   <div class="val">{{user_voucher_details.nearest_active_cart_voucher}}</div>
+                        </li>
+                    </ul>
+                </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        
+        
+        </div>
+    <div class="dx-clearfix"></div>
+    
+
+    <div class="dx-clearfix"></div>
+   
+</div>
+<style>
+.new_profile{width:80%;}
+.m-new_profile{width:94%;}
+.m-new_profile h1{border: 1px solid #e8e8e8;}
+</style>
+

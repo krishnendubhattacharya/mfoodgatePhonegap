@@ -1,0 +1,84 @@
+<div ng-controller="promomasterimageCtrl">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+                <div ng-if="promoView == 'view'">
+                    <header class="panel-heading">
+                        Promo Image
+                        <span class="tools pull-right">
+                            <a class="fa fa-chevron-down" href="javascript:;"></a>
+                            <a class="fa fa-times" href="javascript:;"></a>
+                         </span>
+                    </header>
+                    <div class="panel-body">
+                        <div class="btn-group">
+                            <button class="btn btn-primary" id="editable-sample_new" ng-click ="addPromo()">
+                                Add Image
+                            </button>
+                        </div>
+                        <table ng-if="tableshow" id="promosList" class="table  table-hover general-table">
+                            <thead>
+                            <tr>
+                                <th> Id</th>
+                                <th>Image</th>
+                                <th>Action</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr ng-repeat="item in allpromo">
+                                <td>
+                                    {{item.id}}
+                                </td>
+                                <td>
+                                    <img src="{{item.image}}" width="200">
+                                </td>
+
+                                <td>
+                                    <a class="btn btn-default delete" href="javascript:;" ng-click="deletePromo(item.id)"
+                                            >Delete</a></td>
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div ng-if="promoView == 'edit'">
+                    <header class="panel-heading">
+                        Promo Image
+                    </header>
+                    <div class="panel-body">
+                        <form role="form" ng-submit="savePromo()" enctype="multipart/form-data">
+
+                            <!--<div class="form-group">
+                                <label for="category_id">Select Restaurants</label>
+                                <select id="restaurants" ng-model="item.restaurant_id" required  class="form-control" ng-change="getOutlet(item.restaurant_id)">
+                                    <option value="">Select</option>
+                                    <option ng-repeat="restaurant in restaurants" value="{{restaurant.id}}">{{restaurant.title}}</option>
+                                </select>
+                            </div>-->
+
+
+
+                            <div class="form-group">
+                                <label for="image">Image</label>
+                                <input type="file"  id="image" ng-model="item.image" base-sixty-four-input>
+                                <img data-ng-src="data:{{item.image.filetype}};base64,{{item.image.base64}}" width="300" ng-if="item.image">
+                            </div>
+
+
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                            <button class="btn btn-danger" type="button" ng-click="cancelPromo()">Cancel</button>
+                        </form>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</div>

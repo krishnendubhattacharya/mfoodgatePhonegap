@@ -1,0 +1,149 @@
+<!--Web header-->
+<div ng-controller="websiteaboutCtrl">
+
+    <div ng-include="'app/views/partials/merchant_header.html'"></div>
+    <div class="dx-clearfix"></div>
+
+
+
+    <!--Section - 1-->
+    <div style="margin-top:0;" class="container phone-hide">
+        <!--Left menu-->
+        <div class="category-left phone-hide">
+            <h1>Restaurants</h1>
+        <div ng-include="'app/views/partials/merchant_leftbar.html'"></div>
+            </div>
+        <!--Featured Promo-->
+        <div class="featured-Promo">
+            <div class="about">
+
+                <div class="right-col">
+                    <div class="banner">
+                        <div class="left-col">
+                            <h1>{{restaurant.title}}</h1>
+                            <P><span>Subtitle:</span>{{restaurant.sub_title}}</P>
+                            <h2>Description:</h2>
+                            <p>{{restaurant.description}}</p>
+                        </div>
+                        <div class="right-col"><img src="{{restaurant.logo_url}}" alt=""/></div>
+
+                        <!--<p><img src="{{restaurant.logo_url}}" alt=""/></p>
+                        <h1>{{restaurant.title}}</h1>
+                        <P><span>Subtitle:</span>{{restaurant.sub_title}}</P>
+                        <h2>Description:</h2>
+                        <p>{{restaurant.description}}</p>-->
+                    </div>
+                    <div class="all-news" ng-if="restaurant.outlets.length>0">
+                        <h1>Our Outlets</h1>
+                        <div class="news-item" ng-repeat="outlet in restaurant.outlets" style="margin-bottom: 25px;">
+                            <div class="pix"><img src="{{outlet.image_url}}" width="264" height="167"  alt=""/></div>
+                            <div class="dsc">
+                                <h1>{{outlet.title}}</h1>
+                                <P><span>Business Hours:</span>{{outlet.business_hours}}</P>
+                                <P><span>Address:</span>{{outlet.address}}</P>
+                                <h2>Description:</h2>
+                                <p>{{outlet.description}}</p>
+                                <!--<a href="javascript:void(0)" ng-click="showDetails = ! showDetails" style="font-size: 16px;color:rgb(120,154,50)">Click here for Map</a>-->
+                                <div class="map"><!--<img src="app/assets/Images/map.png" alt=""/>-->
+                                    <ng-map center="{{outlet.address}}" zoom="6">
+                                        <marker title="{{outlet.title}}" position="{{outlet.lat}},{{outlet.lng}}" ></marker>
+                                    </ng-map>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="map" ng-if="showMap"><!--<img src="app/assets/Images/map.png" alt=""/>-->
+                        <ng-map center="{{mapaddress}}" zoom="6">
+                            <marker position="{{mapaddress}}"></marker>
+                        </ng-map>
+                    </div>
+                    <div class="latest-news">
+                        <h1>About Us</h1>
+                        <div class="most-viewed">
+
+                            <div class="v-pix"><img src="{{merchant.image}}" alt=""/></div>
+                            <div class="v-dsc">
+                                <h4>{{merchant.merchant_name}}</h4>
+                                <p><span>Email:</span> {{merchant.email}}</p>
+                                <p ng-if="merchant.phone"><span>Phone:</span> {{merchant.phone}}</p>
+                                <p ng-if="merchant.address"><span>Address:</span> {{merchant.address}}</p>
+                                <!--<h5>Descriptions</h5>-->
+                                <!--<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>-->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="tablet-hide">
+        <div ng-include="'app/views/partials/merchant_leftbar.html'"></div>
+
+    </div>
+    <!--mobile promo-->
+    <div class="m-about tablet-hide">
+        <div class="right-col">
+            <div class="banner">
+                <p><img src="{{restaurant.logo_url}}" alt=""/></p>
+                <h1>{{restaurant.title}}</h1>
+                <P><span>Subtitle:</span>{{restaurant.sub_title}}</P>
+                <h2>Description:</h2>
+                <p>{{restaurant.description}}</p>
+            </div>
+            <div class="all-news" ng-if="restaurant.outlets.length>0">
+                <h1>Our Outlets</h1>
+                <div class="news-item"  ng-repeat="outlet in restaurant.outlets" style="margin-bottom: 25px;">
+                    <div class="pix"><img src="{{outlet.image_url}}" width="264" height="167"  alt=""/></div>
+                    <div class="dsc">
+                        <h1>{{outlet.title}}</h1>
+                        <P><span>Business Hours:</span>{{outlet.business_hours}}</P>
+                        <P><span>Address:</span>{{outlet.address}}</P>
+                        <h2>Description:</h2>
+                        <p>{{outlet.description}}</p>
+                        <!--<a href="javascript:void(0)" ng-click="changeMap(outlet)" style="font-size: 16px;color:rgb(120,154,50)">Click here for Map</a>-->
+                        <div class="map"><!--<img src="app/assets/Images/map.png" alt=""/>-->
+                            <ng-map center="{{outlet.address}}" zoom="5">
+                                <marker title="{{outlet.title}}" position="{{outlet.lat}},{{outlet.lng}}" ></marker>
+                            </ng-map>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="map" ng-if="showMap"><!--<img src="app/assets/Images/map.png" alt=""/>-->
+                <ng-map center="{{mapaddress}}" zoom="6">
+                    <marker position="{{mapaddress}}"></marker>
+                </ng-map>
+            </div>
+        </div>
+        <div class="left-col">
+            <div class="latest-news">
+                <h1>About Us</h1>
+                <div class="most-viewed">
+
+                    <div class="v-pix"><img src="{{merchant.image}}" alt=""/></div>
+                    <div class="v-dsc">
+                        <h4>{{merchant.merchant_name}}</h4>
+                        <p><span>Email:</span> {{merchant.email}}</p>
+                        <p ng-if="merchant.phone"><span>Phone:</span> {{merchant.phone}}</p>
+                        <p ng-if="merchant.address"><span>Address:</span> {{merchant.address}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end-->
+
+    <div class="dx-clearfix"></div>
+
+
+</div>
+
+

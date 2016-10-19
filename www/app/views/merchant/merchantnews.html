@@ -1,0 +1,457 @@
+<!--Web header-->
+<div ng-controller="merchantnewsCtrl">
+
+    <div class="container phone-hide">
+        <div class="myaccount-details">
+            <h1>{{allicontext[24].title}}</h1>
+            <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+
+            <div class="profile-details"  ng-show="!edit_mode">
+                <div id="button" dx-button="{
+                                text: 'Add News',
+                                onClick: changeView }" ></div>
+                <!--<input type="button" ng-click="refresh_grid()" value="Refresh">-->
+                <div id="gridContainer" dx-data-grid="dataGridOptions"></div>
+
+            </div>
+
+            <div class="profile-details" ng-show="edit_mode">
+                <div class="form">
+                    <div class="dx-fieldset">
+                        <!--<div class="dx-field">
+                            <div class="dx-field-label">Restaurants</div>
+                            <div class="dx-field-value">
+                                <div dx-tag-box="textBox.restaurant1"></div>
+                            </div>
+                        </div>-->
+                        <div class="dx-field">
+                            <div class="dx-field-label">Restaurants</div>
+                            <div class="dx-field-value">
+                                <div class="tagBox" dx-tag-box="{
+
+                                placeholder: 'Select Restaurant',
+                                displayExpr: 'title',
+                                values:selectedLocation,
+                                onInitialized : inialLoc,
+                                bindingOptions: {
+                                    valueExpr: 'id',
+                                    values: {
+
+                                        dataPath: 'areaList'
+                                    }
+                                }
+                            }"></div>
+                            </div>
+                        </div>
+
+                        <div class="dx-field">
+                            <div class="dx-field-label">Title</div>
+                            <div class="dx-field-value">
+                                <div dx-text-box="textBox.title" ng-model="menuInfo.title"></div>
+                            </div>
+                        </div>
+
+                        <div class="dx-field">
+                            <div class="dx-field-label">Description</div>
+                            <div class="dx-field-value">
+                                <div dx-text-area="textArea"  ng-model="menuInfo.description"></div>
+                            </div>
+                        </div>
+
+                        <!--<div class="dx-field">
+                            <div class="dx-field-label">Username</div>
+                            <div class="dx-field-value">
+                                <div dx-text-box="textBox.username" dx-validator="usernameValidationRules" ng-model="username"></div>
+                            </div>
+                        </div>-->
+                        <div class="dx-field">
+                            <div class="dx-field-label">Event Published Date</div>
+                            <div class="dx-field-value">
+                                <div dx-date-box="dateBox.published_date" ng-model="menuInfo.published_date"></div>
+                            </div>
+                        </div>
+
+                        <div class="dx-field">
+                            <div class="dx-field-label">Image</div>
+                            <div class="dx-field-value">
+                                <div dx-file-uploader="textBox.image"></div>
+                            </div>
+                        </div>
+
+                        <div class="dx-field">
+                            <div class="dx-field-label"></div>
+                            <div class="dx-field-value">
+                                <img src="{{menuInfo.imageurl}}" ng-if="menuInfo.imageurl" width="200">
+                            </div>
+                        </div>
+
+                        <div class="dx-field">
+                            <div class="dx-field-label">Is Featured</div>
+                            <div class="dx-field-value">
+                                <div dx-check-box="{
+                                    text: '',
+                                    value: '1'
+                                }" style="float: left" ng-model="menuInfo.featured_event"></div>
+                            </div>
+                        </div>
+                        <div class="dx-field">
+                            <div class="dx-field-label">Post to Public</div>
+                            <div class="dx-field-value">
+                                <div dx-check-box="{
+                                    text: '',
+                                    value: '1'
+                                }" style="float: left" ng-model="menuInfo.post_to_public"></div>
+                            </div>
+                        </div>
+                        <div class="dx-field">
+                            <div class="dx-field-label">Is Special</div>
+                            <div class="dx-field-value">
+                                <div dx-check-box="{
+                                    text: '',
+                                    value: '1'
+                                }" style="float: left" ng-model="menuInfo.special_event"></div>
+                            </div>
+                        </div>
+
+                        <!--<div class="dx-field">-->
+                            <!--<div class="dx-field-label">Is Active</div>-->
+                            <!--<div class="dx-field-value">-->
+                                <!--<div dx-check-box="{-->
+                                    <!--text: '',-->
+                                    <!--value: '1'-->
+                                <!--}" style="float: left" ng-model="menuInfo.is_active"></div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+
+                    </div>
+                    <!--<div id="summary" dx-validation-summary="{ }"></div>-->
+                    <div id="button" dx-button="{
+                                text: 'Submit',
+                                type: 'success',
+                                onClick: save_menu }" ></div>
+
+                    <div id="button" dx-button="{
+                                text: 'Cancel',
+                                onClick: changeView }" ></div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="m-myaccount-details tablet-hide">
+
+        <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+        <h1>{{allicontext[24].title}}</h1>
+        <div class="m-profile-details"  ng-show="!edit_mode">
+            <div class="new-search"> <input type="text" placeholder="Search.." ng-model="test"></div>
+            <div style="margin-top: 15px; margin-bottom: 10px; width: 35%; float:  right;" id="button" dx-button="{
+                                text: 'Add News',
+                                onClick: changeView }" ></div>
+
+            <!--<div ng-repeat="voucher in voucherInfo" style="border-top:1px solid #EAEAEA;margin-top:10px;padding-top: 5px;">
+                <div>
+                    <p style="font-size:larger;"><b>{{voucher.title}}</b></p>
+                    <img src="{{voucher.imageurl}}" width="100%" ng-if="voucher.imageurl">
+
+                    <p>Active: <i>{{voucher.is_active==1?'Yes':'No'}}</i></p>
+                    <p>Featured: <i>{{voucher.featured_event==1?'Yes':'No'}}</i></p>
+                </div>
+
+                <p>
+                <div id="button" dx-button="{
+                    text: 'Edit' }" ng-click="edit_menu(voucher)"></div>
+                <div id="button" dx-button="{
+                    text: 'Delete' }" ng-click="delete_menu(voucher);" ></div>
+                </p>
+            </div>-->
+            <div class="dx-clearfix"></div>
+            <div class="m-transaction-details tablet-hide" ng-repeat="voucherDetail in voucherInfo | filter:test">
+                <h1>{{voucherDetail.title}}</h1>
+                <table>
+                    <tr>
+                        <td  colspan="2"><img src="{{voucherDetail.imageurl}}" width="100%" ng-if="voucherDetail.imageurl"></td>
+
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Active</td>
+                        <td>{{voucherDetail.is_active==1?'Yes':'No'}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Featured</td>
+                        <td>{{voucherDetail.featured_event==1?'Yes':'No'}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="nwe-btn"><span class="dx-button" ng-click="edit_menu({{voucherDetail}})">EDIT</span></div>
+                            <div class="nwe-btn"><span class="dx-button" ng-click="delete_menu({{voucherDetail}})">DELETE</span></div>
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+
+
+        </div>
+
+        <div class="m-profile-details"  ng-show="edit_mode">
+            <div class="form">
+                <div class="dx-fieldset">
+                    <!--<div class="dx-field">
+                        <div class="dx-field-label">Restaurants</div>
+                        <div class="dx-field-value">
+                            <div dx-tag-box="textBox.restaurant"></div>
+                        </div>
+                    </div>-->
+                    <div class="dx-field">
+                        <div class="dx-field-label">Restaurants</div>
+                        <div class="dx-field-value">
+                            <div class="tagBox" dx-tag-box="{
+
+                                placeholder: 'Select Restaurant',
+                                displayExpr: 'title',
+                                values:selectedLocationMob,
+                                onInitialized : inialLocMob,
+                                bindingOptions: {
+                                    valueExpr: 'id',
+                                    values: {
+
+                                        dataPath: 'areaList'
+                                    }
+                                }
+                            }"></div>
+                        </div>
+                    </div>
+
+                    <div class="dx-field">
+                        <div class="dx-field-label">Title</div>
+                        <div class="dx-field-value">
+                            <div dx-text-box="textBox.title" ng-model="menuInfo.title"></div>
+                        </div>
+                    </div>
+
+                    <div class="dx-field">
+                        <div class="dx-field-label">Description</div>
+                        <div class="dx-field-value">
+                            <div dx-text-area="textArea"  ng-model="menuInfo.description"></div>
+                        </div>
+                    </div>
+
+                    <!--<div class="dx-field">
+                        <div class="dx-field-label">Username</div>
+                        <div class="dx-field-value">
+                            <div dx-text-box="textBox.username" dx-validator="usernameValidationRules" ng-model="username"></div>
+                        </div>
+                    </div>-->
+                    <div class="dx-field">
+                        <div class="dx-field-label">Event Published Date</div>
+                        <div class="dx-field-value">
+                            <div dx-date-box="dateBox.published_date" ng-model="menuInfo.published_date"></div>
+                        </div>
+                    </div>
+
+                    <div class="dx-field">
+                        <div class="dx-field-label">Image</div>
+                        <div class="dx-field-value">
+                            <div dx-file-uploader="textBox.image"></div>
+                        </div>
+                    </div>
+
+                    <div class="dx-field">
+                        <div class="dx-field-label"></div>
+                        <div class="dx-field-value">
+                            <img src="{{menuInfo.imageurl}}" ng-if="menuInfo.imageurl" width="200">
+                        </div>
+                    </div>
+
+                    <div class="dx-field">
+                        <div class="dx-field-label">Is Featured</div>
+                        <div class="dx-field-value">
+                            <div dx-check-box="{
+                                    text: '',
+                                    value: '1'
+                                }" style="float: left" ng-model="menuInfo.featured_event"></div>
+                        </div>
+                    </div>
+                    <div class="dx-field">
+                        <div class="dx-field-label">Post to Public</div>
+                        <div class="dx-field-value">
+                            <div dx-check-box="{
+                                    text: '',
+                                    value: '1'
+                                }" style="float: left" ng-model="menuInfo.post_to_public"></div>
+                        </div>
+                    </div>
+                    <div class="dx-field">
+                        <div class="dx-field-label">Is Special</div>
+                        <div class="dx-field-value">
+                            <div dx-check-box="{
+                                    text: '',
+                                    value: '1'
+                                }" style="float: left" ng-model="menuInfo.special_event"></div>
+                        </div>
+                    </div>
+
+                    <!--<div class="dx-field">-->
+                    <!--<div class="dx-field-label">Is Active</div>-->
+                    <!--<div class="dx-field-value">-->
+                    <!--<div dx-check-box="{-->
+                    <!--text: '',-->
+                    <!--value: '1'-->
+                    <!--}" style="float: left" ng-model="menuInfo.is_active"></div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+
+
+                </div>
+                <!--<div id="summary" dx-validation-summary="{ }"></div>-->
+                <div id="button" dx-button="{
+                                text: 'Submit',
+                                type: 'success',
+                                onClick: save_menu }" ></div>
+
+                <div id="button" dx-button="{
+                                text: 'Cancel',
+                                onClick: changeView }" ></div>
+
+
+            </div>
+        </div>
+
+    </div>
+    <div class="dx-clearfix"></div>
+    <!--<div class="container phone-hide">
+        <div class="transaction-details">
+            <h1>Transaction Details</h1>
+            <table>
+                <tr>
+                    <td width="15%" class="header-color">Transaction Date</td>
+                    <td width="14%" class="header-color">Transaction ID</td>
+                    <td width="33%" class="header-color">Transaction Description</td>
+                    <td width="13%" class="header-color">Debit (mPts)</td>
+                    <td width="12%" class="header-color">Credit (mPts)</td>
+                    <td width="13%" class="header-color">Total (mPts)</td>
+                </tr>
+                <tr>
+                    <td><div class="select-box"><select>
+                        <option>Select</option>
+                        <option>Select</option>
+                        <option>Select</option>
+                    </select></div></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><div class="select-box"><select>
+                        <option>Select</option>
+                        <option>Select</option>
+                        <option>Select</option>
+                    </select></div></td>
+                </tr>
+                <tr>
+                    <td>7/1/2015</td>
+                    <td>TRN120953549</td>
+                    <td>Brought Forward Balance</td>
+                    <td>250,000</td>
+                    <td>0</td>
+                    <td>250,000</td>
+                </tr>
+                <tr>
+                    <td>7/1/2015</td>
+                    <td>TRN120953549</td>
+                    <td>Brought Forward Balance</td>
+                    <td>250,000</td>
+                    <td>0</td>
+                    <td>250,000</td>
+                </tr>
+                <tr>
+                    <td>7/1/2015</td>
+                    <td>TRN120953549</td>
+                    <td>Brought Forward Balance</td>
+                    <td>250,000</td>
+                    <td>0</td>
+                    <td>250,000</td>
+                </tr>
+                <tr>
+                    <td>7/1/2015</td>
+                    <td>TRN120953549</td>
+                    <td>Brought Forward Balance</td>
+                    <td>250,000</td>
+                    <td>0</td>
+                    <td>250,000</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="m-transaction-details tablet-hide">
+        <h1>Transaction Details</h1>
+        <table>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction Date</td>
+                <td>7/1/2015</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction ID</td>
+                <td>TRN120953549</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction Description</td>
+                <td>Brought Forward Balance</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Debit (mPts)</td>
+                <td>250,000</td>
+            </tr>
+            <tr>
+                <td width="12%" class="m-header-color">Credit (mPts)</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td width="13%" class="m-header-color">Total (mPts)</td>
+                <td>250,000</td>
+            </tr>
+            </tr>
+        </table>
+
+    </div>
+
+    <div class="m-transaction-details tablet-hide">
+        <h1>Transaction Details</h1>
+        <table>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction Date</td>
+                <td>7/1/2015</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction ID</td>
+                <td>TRN120953549</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction Description</td>
+                <td>Brought Forward Balance</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Debit (mPts)</td>
+                <td>250,000</td>
+            </tr>
+            <tr>
+                <td width="12%" class="m-header-color">Credit (mPts)</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td width="13%" class="m-header-color">Total (mPts)</td>
+                <td>250,000</td>
+            </tr>
+            </tr>
+        </table>
+
+    </div>
+
+    <div class="dx-clearfix"></div>-->
+</div>
+
+

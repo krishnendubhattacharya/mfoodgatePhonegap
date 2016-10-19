@@ -1,0 +1,113 @@
+<div ng-controller="merchanteditCtrl">
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+
+                <div >
+                    <header class="panel-heading">
+                        Merchant Edit
+                    </header>
+                    <div class="panel-body">
+                        <form role="form" ng-submit="saveMerchant()" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="last_name">Merchant ID</label>
+                                <input type="text" required placeholder="Enter Merchant ID"  id="merchant_id" ng-model="item.merchant_id" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="first_name">First Name</label>
+                                <input type="text" required placeholder="Enter First Name"  id="first_name" ng-model="item.first_name" class="form-control">
+                                <input type="hidden"  ng-model="item.id" >
+                                <input type="hidden"  ng-model="item.user_type_id" >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="last_name">Last Name</label>
+                                <input type="text" required placeholder="Enter Last Name"  id="last_name" ng-model="item.last_name" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="merchant_name">Merchant Name</label>
+                                <input type="text" required placeholder="Enter Merchant Name"  id="merchant_name" ng-model="item.merchant_name" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="merchant_name">About Us</label>
+                                <!--<input type="text" required placeholder="Enter About Us"  id="about_me" ng-model="item.about_me" class="form-control">-->
+                                <textarea placeholder="Enter About Us" id="about_me" ng-model="item.about_me" ckeditor class="form-control"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="merchant_name">Merchant Address</label>
+                                <input type="text" required placeholder="Enter Merchant Address"  id="address" ng-model="item.address" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="merchant_name">Merchant Location</label>
+                                <select id="locations" ng-model="item.location_id"  class="form-control">
+                                    <option value="">Select</option>
+                                    <option ng-repeat="location in locations" ng-selected="location.id==item.location_id" value="{{location.id}}">{{location.city}}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="merchant_name">Bank Name</label>
+                                <input type="text"  placeholder="Enter Bank Name"  id="name" ng-model="bank.name" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="merchant_name">Bank Account No</label>
+                                <input type="text"  placeholder="Enter Bank Account No"  id="account_no" ng-model="bank.account_no" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="merchant_name">Name of Bank assignment</label>
+                                <input type="text"  placeholder="Enter Bank assignment"  id="assignment" ng-model="bank.assignment" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="merchant_name">Bank Address</label>
+                                <input type="text"  placeholder="Enter Bank Address"  id="address" ng-model="bank.address" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="merchant_name">Finance Email Address</label>
+                                <input type="email"  placeholder="Finance Email Address"  id="finance_email" ng-model="bank.finance_email" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="merchant_name">Sales Email Address</label>
+                                <input type="email"  placeholder="Finance Email Address"  id="sales_email" ng-model="bank.sales_email" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" required placeholder="Enter Email"  id="email" ng-model="item.email" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="image">Image</label>
+                                <input type="file"  id="image" ng-model="item.image" base-sixty-four-input>
+                                <img data-ng-src="data:{{item.image.filetype}};base64,{{item.image.base64}}" width="200" ng-if="item.image">
+                                <img src="{{image_url}}" ng-if="image_url && !item.image" width="200">
+                            </div>
+
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="item.is_active" ng-true-value="1" ng-false-value="0"> Is Active
+                                </label>
+                            </div>
+
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                            <button class="btn btn-danger" type="button" ng-click="cancelMerchant()">Cancel</button>
+                        </form>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</div>

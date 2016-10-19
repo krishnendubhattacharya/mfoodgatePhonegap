@@ -1,0 +1,177 @@
+<!--Web header-->
+<div ng-controller="voucherdetailCtrl" >
+
+    <div class="container phone-hide">
+        <div class="voucher-details item-details">
+            <h1>Voucher Detail</h1>
+                <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+
+            <div style="border: none;" class="profile-details">
+
+                <div class="img-box">
+                    <div class="pro-item">
+
+                        <div class="logo-box featured_carousel3" ng-if="showslider" >
+
+                            <div ng-repeat="relatedImg in related_images" class="item" >
+                                <img src="{{relatedImg.image}}" alt="" style="width:100%;"/>
+                            </div>
+                        </div>
+<div class="dx-clearfix"></div>
+                        <div style="font-size: 16px;font-weight: bold;text-align: center;">MFG-000000000{{voucherInfo.voucher_details.id}}</div>
+                        <div class="logo-box" ng-if="qrlink" style="text-align: center" >
+                            <!--<div class="p-circle">5X</div>-->
+                            <img src="{{qrlink}}" alt="" style="width:100%"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="desc-box details">
+                    <h1>{{voucherInfo.voucher_details.title}}</h1>
+                    <p ng-bind-html="voucherInfo.voucher_details.description"></p>
+                    <div class="btns" ng-if="voucherInfo.voucher_details.voucher_status == 0">
+                        <!--<div class="btns" ng-if="voucherInfo.voucher_details.resale == 0 && voucherInfo.voucher_owner.to_user_id == loggedindetails.id">-->
+                        <span class="btn_g"><a href="">USE VOUCHER</a></span> 
+                        <span class="btn_g" ng-if="voucherInfo.status != 'Expired'"><a href="javascript:void(0);" ng-click="boucherResell()">RESELL</a></span> 
+                        <span class="btn_or" ng-if="voucherInfo.status != 'Expired'"><a href="javascript:void(0);" ng-click="bocherGift()">GIVE FRIEND</a></span>
+                        <span class="btn_or" ng-if="voucherInfo.status != 'Expired'"><a href="javascript:void(0);" ng-click="swapvoucher(voucherInfo.voucher_details.offer_id)">SWAP</a></span>
+                    </div>
+                    <div class="pay-box">
+                        <p ng-if="promodetails.offer_type_id != 3"><b>Voucher Value : </b>IDR {{promodetails.price | number}}</p>
+                        <p ng-if="promodetails.offer_type_id == 3"><b>Voucher Value : </b>IDR{{promodetails.price | number}}</p>
+                        <!--<p><b>Discount : </b>{{promodetails.offer_percent}}%</p>-->
+                        <p><b>Discounted Price : </b>IDR {{promodetails.offer_price | number}}</p>
+                        <p><b>Voucher Validation Start Date : </b>{{voucherInfo.voucher_details.item_start_date}}</p>
+                        <p><b>Voucher Expired Date : </b>{{voucherInfo.voucher_details.item_expire_date}}</p>
+                        <p><b>Voucher Validation Start Hour : </b>{{voucherInfo.voucher_details.item_start_hour}}</p>
+                        <p><b>Voucher Validation End Hour : </b>{{voucherInfo.voucher_details.item_end_hour}}</p>
+                        <p><b>Including Holiday : </b>{{voucherInfo.voucher_details.including_holidays==1?'Yes':'No'}}</p>
+                        <p><b>Validation Days : </b><span ng-repeat="day in offer_days | orderBy : '2'">{{day.day}}, </span> </p>
+
+                    </div>
+                    <div class="pay-box">
+                        <p>Share &nbsp; &nbsp; &nbsp;<img src="app/assets/Images/share.png" width="244" height="29"  alt=""/></p>
+                    </div>
+                    <!--<div class="merchant">-->
+                        <!--<div class="merchant-logo"><img src="{{voucherInfo.restaurant_details.logo}}" width="163" height="138"  alt=""/></div>-->
+                        <!--<div class="merchant-dsc">-->
+                            <!--<h2>{{voucherInfo.restaurant_details.title}}</h2>-->
+                            <!--<p>{{voucherInfo.restaurant_details.address}}</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <div class="highlights" ng-repeat="restaurantInfo1 in restaurant">
+
+                        <h1>{{restaurantInfo1.title}}</h1>
+                        <p>{{restaurantInfo1.sub_title}}</p>
+                        <p ng-bind-html="restaurantInfo1.description"></p>
+                        <h1 ng-if="restaurantInfo1.outlets.length">Outlets</h1>
+                        <ul ng-repeat="outletsInfo in restaurantInfo1.outlets">
+
+                            <li style="cursor: pointer;" >{{outletsInfo.title}}</li>
+                            <li style="cursor: pointer;" >{{outletsInfo.address}}</li>
+
+
+                        </ul>
+
+                    </div>
+                    <!--<div class="location">
+                        <div class="map">
+                            <ng-map center="{{mapaddress}}" zoom="6">
+                                <marker position="{{mapaddress}}"></marker>
+                            </ng-map>
+                        </div>
+                        <div class="address">
+                            <h1>{{maptitle}}</h1>
+                            <p>{{mapaddress}}</p>
+                        </div>
+                        <div style="clear: both"></div>
+                    </div>-->
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </div>
+    <div class="m-voucher-details tablet-hide m-item-details">
+        <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+        <h1>Voucher Detail</h1>
+
+        <div style="border: none;" class="m-profile-details">
+
+            <div class="img-box">
+                <div class="pro-item">
+
+                    <div class="logo-box featured_carousel2">
+
+                        <div ng-repeat="relatedImg in related_images2">
+                            <img src="{{relatedImg.image}}" alt="" style="width:100%;"/>
+                        </div>
+                    </div>
+                    <div style="font-size: 16px;font-weight: bold;text-align: center;">MFG-000000000{{voucherInfo.voucher_details.id}}</div>
+                    <div class="logo-box" ng-if="qrlink" style="text-align: center">
+                        <!--<div class="p-circle">5X</div>-->
+                        <img src="{{qrlink}}" alt="" width="100%"/>
+                    </div>
+
+                </div>
+            </div>
+            <div class="desc-box details">
+                <h1>{{voucherInfo.voucher_details.title}}</h1>
+                <p ng-bind-html="voucherInfo.voucher_details.description"></p>
+                <div class="btns" ng-if="voucherInfo.voucher_details.resale == 0 && voucherInfo.voucher_owner.to_user_id == loggedindetails.id">
+                    <span class="btn_g"><a href="">USE VOUCHER</a></span>
+                    <span class="btn_g" ng-if="voucherInfo.status != 'Expired'"><a href="javascript:void(0);" ng-click="boucherResell()">RESELL</a></span> 
+                    <span class="btn_or" ng-if="voucherInfo.status != 'Expired'"><a href="javascript:void(0);" ng-click="bocherGift()">GIVE FRIEND</a></span>
+                    <span class="btn_or" ng-if="voucherInfo.status != 'Expired'"><a href="javascript:void(0);" ng-click="swapvoucher(voucherInfo.voucher_details.offer_id)">SWAP</a></span>
+                </div>
+                <div class="pay-box">
+                    <p ng-if="promodetails.offer_type_id != 3"><b>Voucher Value : </b>IDR{{promodetails.price | number}}</p>
+                    <p ng-if="promodetails.offer_type_id == 3"><b>Voucher Value : </b>IDR{{promodetails.price | number}}</p>
+                    <!--<p><b>Discount : </b>{{promodetails.offer_percent}}%</p>-->
+                    <p><b>Discounted Price : </b>IDR{{promodetails.offer_price | number}}</p>
+
+                    <p><b>Voucher Validation Start Date : </b>{{voucherInfo.voucher_details.item_start_date}}</p>
+                    <p><b>Voucher Expired Date : </b>{{voucherInfo.voucher_details.item_expire_date}}</p>
+                    <p><b>Voucher Validation Start Hour : </b>{{voucherInfo.voucher_details.item_start_hour}}</p>
+                    <p><b>Voucher Validation End Hour : </b>{{voucherInfo.voucher_details.item_end_hour}}</p>
+                    <p><b>Including Holiday : </b>{{voucherInfo.voucher_details.including_holidays==1?'Yes':'No'}}</p>
+                    <p><b>Validation Days : </b><span ng-repeat="day in offer_days | orderBy : '2'">{{day.day}}, </span> </p>
+                </div>
+                <div class="pay-box">
+                    <p>Share &nbsp; &nbsp; &nbsp;<img src="app/assets/Images/share.png" width="244" height="29"  alt=""/></p>
+                </div>
+                <div class="highlights" ng-repeat="restaurantInfo1 in restaurant">
+
+                    <h1>{{restaurantInfo1.title}}</h1>
+                    <p>{{restaurantInfo1.sub_title}}</p>
+                    <p ng-bind-html="restaurantInfo1.description"></p>
+                    <h1 ng-if="restaurantInfo1.outlets.length">Outlets</h1>
+                    <ul ng-repeat="outletsInfo in restaurantInfo1.outlets">
+
+                        <li style="cursor: pointer;" >{{outletsInfo.title}}</li>
+                        <li style="cursor: pointer;" >{{outletsInfo.address}}</li>
+
+
+                    </ul>
+
+                </div>
+                <!--<div class="merchant">
+                    <div class="merchant-logo"><img src="{{voucherInfo.restaurant_details.logo}}" width="163" height="138"  alt=""/></div>
+                    <div class="merchant-dsc">
+                        <h2>{{voucherInfo.restaurant_details.title}}</h2>
+                        <p>{{voucherInfo.restaurant_details.address}}</p>
+                    </div>
+                </div>-->
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+

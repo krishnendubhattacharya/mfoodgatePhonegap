@@ -1,0 +1,71 @@
+<div ng-controller="leftbarCtrl">
+<div class="left-side sticky-left-side" style="overflow: hidden;" tabindex="5000">
+
+    <!--logo and iconic logo start-->
+    <div class="logo">
+        <a href="index.html"><img src="app/assets/Images/logo.jpg" alt="" width="70%"></a>
+    </div>
+
+    <div class="logo-icon text-center">
+        <a href="index.html"><img src="app/assets/Images/logo.jpg" alt="" width="70%"></a>
+    </div>
+    <!--logo and iconic logo end-->
+
+
+    <div class="left-side-inner">
+
+        <!-- visible to small devices only -->
+        <div class="visible-xs hidden-sm hidden-md hidden-lg">
+            <div class="media logged-user">
+                <img alt="" src="app/assets/admin/images/photos/user-avatar.png" class="media-object">
+                <div class="media-body">
+                    <h4><a href="#">John Doe</a></h4>
+                    <span>"Hello There..."</span>
+                </div>
+            </div>
+
+            <h5 class="left-nav-title">Account Information</h5>
+            <ul class="nav nav-pills nav-stacked custom-nav">
+                <li><a href="#"><i class="fa fa-user"></i> <span>Profile</span></a></li>
+                <li><a href="#"><i class="fa fa-cog"></i> <span>Settings</span></a></li>
+                <li><a href="#"><i class="fa fa-sign-out"></i> <span>Sign Out</span></a></li>
+            </ul>
+        </div>
+
+        <!--sidebar nav start-->
+        <ul class="nav nav-pills nav-stacked custom-nav">
+            <li class=""><a ui-sref="admin.index"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
+            <li class=""><a ui-sref="admin.categorylist" ><i class="fa fa-home"></i> <span>Category</span></a></li>
+            <li class=""><a ui-sref="admin.locationlist" ><i class="fa fa-home"></i> <span>Location</span></a></li>
+            <li class=""><a ui-sref="admin.newslist"><i class="fa fa-laptop"></i> <span>News</span></a></li>
+            <li class=""><a ui-sref="admin.memberlist"><i class="fa fa-laptop"></i> <span>Member</span></a></li>
+            <li class=""><a ui-sref="admin.merchantlist"><i class="fa fa-laptop"></i> <span>Merchant</span></a></li>
+            <li class=""><a ui-sref="admin.resturantlist"><i class="fa fa-laptop"></i> <span>Resturant</span></a></li>
+            <li class=""><a ui-sref="admin.settings"><i class="fa fa-laptop"></i> <span>Settings</span></a></li>
+            <li class=""><a ui-sref="admin.promomasterlist"><i class="fa fa-laptop"></i> <span>Promo Master</span></a></li>
+            <li class=""><a ui-sref="admin.pointmasterlist"><i class="fa fa-laptop"></i> <span>Point Master</span></a></li>
+            <li class=""><a ui-sref="admin.blogsmasterlist"><i class="fa fa-laptop"></i> <span>Blogs Master</span></a></li>
+            <li class=""><a ui-sref="admin.emailtemplate"><i class="fa fa-laptop"></i> <span>Email Template</span></a></li>
+            <li class=""><a ui-sref="admin.smsmgmt"><i class="fa fa-laptop"></i> <span>SMS Management</span></a></li>
+            <li class=""><a ui-sref="admin.banner"><i class="fa fa-laptop"></i> <span>Banner</span></a></li>
+            <li class=""><a ui-sref="admin.advertisementmanagement"><i class="fa fa-laptop"></i> <span>Advertisement</span></a></li>
+            <li class=""><a ui-sref="admin.iconlist"><i class="fa fa-laptop"></i> <span>Icon Master</span></a></li>
+
+
+            <!--<li class="menu-list"><a href="javascript:;"><i class="fa fa-laptop"></i> <span>Layouts</span></a>
+                <ul class="sub-menu-list">
+                    <li><a href="javascript:;"> Blank Page</a></li>
+                    <li><a href="javascript:;"> Boxed Page</a></li>
+                    <li><a href="javascript:;"> Sidebar Collapsed</a></li>
+                    <li><a href="javascript:;"> Horizontal Menu</a></li>
+
+                </ul>
+            </li>-->
+            
+
+        </ul>
+        <!--sidebar nav end-->
+
+    </div>
+</div>
+    </div>

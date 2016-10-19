@@ -1,0 +1,104 @@
+<div ng-controller="outletlistCtrl">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+                <div ng-if="outletView == 'view'">
+                    <header class="panel-heading">
+                        Outlet
+                        <span class="tools pull-right">
+                            <a class="fa fa-chevron-down" href="javascript:;"></a>
+                            <a class="fa fa-times" href="javascript:;"></a>
+                         </span>
+                    </header>
+                    <div class="panel-body">
+                        <div class="btn-group">
+                            <button class="btn btn-primary" id="editable-sample_new" ng-click ="addOutlet()">
+                                Add Outlet
+                            </button>
+                        </div>
+                        <table id="outletsList" class="table  table-hover general-table">
+                            <thead>
+                            <tr>
+                                <th> Id</th>
+                                <th class="hidden-phone">Name</th>
+                                <th class="hidden-phone">Address</th>
+                                <th>Action</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr ng-repeat="item in alloutlet">
+                                <td>
+                                    {{item.id}}
+                                </td>
+                                <td >{{item.title}}</td>
+                                <td >{{item.address}}</td>
+                                <td ><a class="btn btn-default edit" ui-sref="admin.outletedit({outletId:item.id})" >Edit</a>
+                                    <a class="btn btn-default delete" href="javascript:;" ng-click="deleteOutlet(item.id)"
+                                            >Delete</a></td>
+
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div ng-if="outletView == 'edit'">
+                    <header class="panel-heading">
+                        Outlet
+                    </header>
+                    <div class="panel-body">
+                        <form role="form" ng-submit="saveOutlet()" enctype="multipart/form-data">
+
+                            <div class="form-group">
+                                <label for="title">Outlet ID</label>
+                                <input type="text" required placeholder="Enter Outlet Id"  id="outlet_id" ng-model="item.outlet_id" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="title">Outlet Name</label>
+                                <input type="text" required placeholder="Enter Outlet Name"  id="title" ng-model="item.title" class="form-control">
+                                <input type="hidden"  ng-model="item.id" >
+                                <input type="hidden"  ng-model="item.restaurant_id" >
+                            </div>
+
+                            <div class="form-group" ng-init="getLocation()">
+                                <label for="location_id">Select Location</label>
+                                <div ng-dropdown-multiselect="" id="location_id" options="locCat" selected-model="item.location_id"></div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <!--<input type="text" required placeholder="Enter address" class="form-control" id="address" places-auto-complete ng-model="item.address" types="address" on-place-changed="item.placeChanged()" />-->
+                                <input required places-auto-complete id="address" ng-model="item.address" class="form-control" on-place-changed="placeChanged()"/>
+                                <input type="hidden"  ng-model="item.lat" >
+                                <input type="hidden"  ng-model="item.lng" >
+                            </div>
+
+                            <div class="form-group" ng-init="getCategories()">
+                                <label for="category_id">Select Category</label>
+                                <div ng-dropdown-multiselect="" id="category_id" options="allCat" selected-model="item.category_id"></div>
+                            </div>
+
+
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="item.is_active" ng-true-value="1" ng-false-value="0"> Is Active
+                                </label>
+                            </div>
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                            <button class="btn btn-danger" type="button" ng-click="cancelOutlet()">Cancel</button>
+                        </form>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</div>

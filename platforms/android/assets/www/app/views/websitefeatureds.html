@@ -1,0 +1,75 @@
+<!--Web header-->
+<div ng-controller="websitefeaturedsCtrl">
+
+    <div ng-include="'app/views/partials/merchant_header.html'"></div>
+    <div class="dx-clearfix"></div>
+
+
+
+    <!--Section - 1-->
+    <div style="margin-top:0;" class="container phone-hide">
+        <!--Left menu-->
+        <div class="category-left phone-hide">
+            <h1>Restaurants</h1>
+            <div ng-include="'app/views/partials/merchant_leftbar.html'"></div>
+        </div>
+
+        <!--Featured Promo-->
+        <div class="featured-Promo" ng-repeat="cats in featuredMenus" ng-if="featuredMenus">
+            <h1 ng-click="cats.hide=!cats.hide">{{cats.name}}</h1>
+            <div class="menu-cont" ng-if="!cats.hide">
+                <div class="merchant-card" ng-repeat="menu in cats.menus">
+                    <div class="card-img">
+                        <img src="{{menu.image_url}}" alt=""/> </div>
+                    <div class="card-dsc">
+                        <h1 style="color:#309030;">{{menu.title}}</h1>
+                        <h2 style="color:#000;">{{menu.description}} </h2>
+                        <p class="price">Price: <span>IDR{{menu.price | number}}</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="featured-Promo" ng-if="!featuredMenus || featuredMenus.length==0">
+            <h1 style="text-align: center">No menus found.</h1>
+        </div>
+
+    </div>
+    <div class="tablet-hide">
+        <div ng-include="'app/views/partials/merchant_leftbar.html'"></div>
+
+    </div>
+
+
+
+    <!--mobile promo-->
+    <div class="m-featured-Promo tablet-hide" ng-repeat="cats in featuredMenus" ng-if="featuredMenus">
+        <h1  ng-click="cats.hide=!cats.hide">{{cats.name}}</h1>
+        <div class="m-menu-cont" ng-if="!cats.hide">
+            <div class="m-merchant-card tablet-hide"  ng-repeat="menu in cats.menus">
+                <div class="card-img">
+                    <img src="{{menu.image_url}}" alt=""/> </div>
+                <div class="card-dsc">
+                    <h1 style="color:#309030;">{{menu.title}}</h1>
+                    <h2 style="color:#000;">{{menu.description}}</h2>
+                    <p class="price">Price: <span>IDR{{menu.price | number}}</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="m-featured-Promo tablet-hide" ng-if="!featuredMenus || featuredMenus.length==0">
+        <h1>No menus found.</h1>
+    </div>
+    <!--end-->
+
+    <div class="dx-clearfix"></div>
+
+
+</div>
+<style>
+    .merchant-card {
+        border-bottom: 1px solid #e1e1e1;
+    }
+</style>
+
+

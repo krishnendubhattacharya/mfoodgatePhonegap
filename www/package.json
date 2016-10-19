@@ -1,0 +1,16 @@
+{
+  "name": "mFood",
+  "private": true,
+  "devDependencies": {
+    "karma-coverage": "^0.5.3",
+    "karma-firefox-launcher": "^0.1.7",
+    "karma-jasmine": "*",
+    "karma-phantomjs-launcher": "*"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+        "test": "node_modules/.bin/karma start karma.conf.js"
+    }
+}

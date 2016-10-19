@@ -1,0 +1,134 @@
+<div ng-controller="merchantuserlistCtrl">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+                <div ng-if="promoView == 'view'">
+                    <header class="panel-heading">
+                        Merchant User
+                        <span class="tools pull-right">
+                            <a class="fa fa-chevron-down" href="javascript:;"></a>
+                            <a class="fa fa-times" href="javascript:;"></a>
+                         </span>
+                    </header>
+                    <div class="panel-body">
+                        <div class="btn-group">
+                            <button class="btn btn-primary" id="editable-sample_new" ng-click ="addPromo()">
+                                New Login
+                            </button>
+                        </div>
+                        <table id="promosList" class="table  table-hover general-table">
+                            <thead>
+                            <tr>
+                                <th class="hidden-phone">Name</th>
+                                <th class="hidden-phone">Email</th>
+                                <th class="hidden-phone">Access</th>
+                                <th>Action</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr ng-repeat="item in allpromo">
+                                <td >{{item.first_name}} {{item.last_name}}</td>
+                                <td >{{item.email}}</td>
+                                <td >{{item.roll=='1'?'Back Office':''}}
+                                    {{item.roll=='2'?'Operational':''}}
+                                    {{item.roll=='3'?'Admin':''}}
+                                </td>
+                                <td ><a class="btn btn-default edit" href="javascript:void(0);" ng-click="editPromo(item)" >Edit</a>
+                                    <a class="btn btn-default delete" href="javascript:;" ng-click="deletePromo(item.id)"
+                                            >Delete</a></td>
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div ng-if="promoView == 'edit'">
+                    <header class="panel-heading">
+                        Login Detail
+                    </header>
+                    <div class="panel-body">
+                        <form role="form" ng-submit="savePromo()" enctype="multipart/form-data">
+
+                            <!--<div class="form-group">-->
+                                <!--<label for="category_id">Select Restaurants</label>-->
+                                <!--<select id="restaurants" ng-model="item.restaurant_id" required  class="form-control" ng-change="getOutlet(item.restaurant_id)">-->
+                                    <!--<option value="">Select</option>-->
+                                    <!--<option ng-repeat="restaurant in restaurants" value="{{restaurant.id}}">{{restaurant.title}}</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+
+                            <!--<div class="form-group">-->
+                                <!--<label for="category_id">Select Outlet</label>-->
+                                <!--<div ng-required ng-dropdown-multiselect="" id="outlet_id" options="allOutlet" selected-model="item.outlet_id"></div>-->
+                            <!--</div>-->
+
+
+
+                            <div class="form-group">
+                                <label for="title">First Name</label>
+                                <input type="text" required placeholder="Enter First Name"  id="first_name" ng-model="item.first_name" class="form-control">
+                                <input type="hidden"  ng-model="item.id">
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label for="value">Last Name</label>
+                                <input type="text" required placeholder="Enter Last Name"  id="last_name" ng-model="item.last_name" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="price">Email</label>
+                                <input type="email"  required placeholder="Enter Email"  id="email" ng-model="item.email" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="value">password</label>
+                                <input type="password" required placeholder="Enter Password"  id="password" ng-model="item.password" ng-required="!item.id" class="form-control">
+                            </div>
+
+                            <!--<div class="form-group">-->
+                                <!--<label for="title">Access Type</label>-->
+                                <!--<select id="user_id" ng-model="item.roll" required  class="form-control" >-->
+                                    <!--<option value="">Select</option>-->
+                                    <!--<option value="{{merchant.id}}" ng-selected="merchant.id==item.roll" ng-repeat="merchant in merchants">{{merchant.merchant_name}}</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+
+
+                            <div class="form-group">
+                                <label for="title">Access Type</label>
+                                <select id="type" ng-model="item.roll" required  class="form-control">
+                                    <option value="">Select</option>
+                                    <option value="1">Back Office</option>
+                                    <option value="2">Operational</option>
+                                    <option value="3">Admin</option>
+                                </select>
+                                <input type="hidden"  ng-model="item.id" >
+                            </div>
+
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="item.is_active" ng-true-value="1" ng-false-value="0"> Is Active
+                                </label>
+                            </div>
+
+
+
+
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                            <button class="btn btn-danger" type="button" ng-click="cancelPromo()">Cancel</button>
+                        </form>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</div>

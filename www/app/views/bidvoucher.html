@@ -1,0 +1,229 @@
+<!--Web header-->
+<div ng-controller="bidvoucherCtrl">
+
+    <div class="container phone-hide">
+        <div class="myaccount-details">
+            <h1>{{allicontext[4].title}}</h1>
+                <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+
+            <div class="profile-details brt-none mb-15">
+                <h3 ng-click="firstShowHide()">My Resell Voucher</h3>
+                
+                <div ng-show="first_show" id="gridContainer" dx-data-grid="dataGridOptions"></div>
+                
+            </div>
+            <div class="profile-details brt-none mb-15">
+                <h3 ng-click="secondShowHide()">My Bid for Other’s Resell Voucher</h3>
+                
+                <div ng-show="second_show"  id="gridContainer3" dx-data-grid="dataGridOptions3"></div>
+                
+            </div>
+            <div class="profile-details brt-none mb-15">
+                <h3 ng-click="thirdShowHide()">Resell Voucher List</h3>
+
+                <div ng-show="third_show"  id="gridContainer2" dx-data-grid="dataGridOptions22"></div>
+
+            </div>
+
+
+        </div>
+    </div>
+    <div class="m-myaccount-details tablet-hide">
+
+        <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+        <h1>{{allicontext[4].title}}</h1>
+        <div class="m-profile-details br-0 mb-0 pb-0">
+            <h1 ng-click="firstShowHide()">My Resell Voucher</h1>
+            <div class="new-border">
+            	<div ng-show="first_show" class="m-transaction-details tablet-hide" ng-repeat="voucherDetail in voucherInfo">
+                <h1>{{voucherDetail.title}}</h1>
+                <table>
+                    <tr>
+                        <td width="30%" class="m-header-color">Voucher Value</td>
+                        <td>{{voucherDetail.voucher_price}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Purchase Price</td>
+                        <td>{{voucherDetail.purchase_price}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Reseller Price</td>
+                        <td>{{voucherDetail.price}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Points</td>
+                        <td>{{voucherDetail.points}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Highest Bid</td>
+                        <td>{{voucherDetail.high_bid}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Expired Date</td>
+                        <td>{{voucherDetail.expire_date}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Resell Posted Date</td>
+                        <td>{{voucherDetail.created_on}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Status</td>
+                        <td>{{voucherDetail.status}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="nwe-btn" ng-if="voucherDetail.status != 'Expired'"><span class="dx-button" ng-click="bidderList({{voucherDetail.voucher_resale_id}})">Bidder</span></div>
+                            <div class="nwe-btn"><span class="dx-button" ng-click="detailVoucher({{voucherDetail.voucher_resale_id}},{{voucherDetail.offer_id}})">Detail</span></div>
+                            <div class="nwe-btn" ng-if="voucherDetail.status != 'Expired'"><span class="dx-button" ng-click="cancelResell({{voucherDetail.voucher_resale_id}},{{voucherDetail.voucher_id}})">Cancel</span></div>
+                            <!--<div class="nwe-btn"><span class="dx-button" ng-click="event_bidder({{voucherDetail.id}})">Bidder</span></div>-->
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            </div>
+        </div>
+
+        <div class="m-profile-details br-0 mb-0 pb-0">
+            <h1 ng-click="secondShowHide()">My Bid for Other’s Resell Voucher</h1>
+            <div class="new-border">
+            	<div ng-show="second_show" class="m-transaction-details tablet-hide mb-15" ng-repeat="voucherDetail in voucherInfo1">
+                <h1>{{voucherDetail.title}}</h1>
+                <table>
+                    <tr>
+                        <td width="30%" class="m-header-color">Voucher Value</td>
+                        <td>{{voucherDetail.voucher_price}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Bid Price</td>
+                        <td>{{voucherDetail.bid_price}}</td>
+                    </tr>
+                    <!--<tr>
+                        <td width="30%" class="m-header-color">Purchase Price</td>
+                        <td>{{voucherDetail.purchase_price}}</td>
+                    </tr>-->
+                    
+                    <tr>
+                        <td width="30%" class="m-header-color">Bid Points</td>
+                        <td>{{voucherDetail.bid_points}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Expire Date</td>
+                        <td>{{voucherDetail.to_date}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Bid Date</td>
+                        <td>{{voucherDetail.created_on}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Status</td>
+                        <td>{{voucherDetail.Status}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div ng-if="voucherDetail.Status != 'Accepted' && voucherDetail.Status != 'Expired'" class="nwe-btn"><span class="dx-button" ng-click="bidEdit({{voucherDetail.bid_id}},{{voucherDetail.voucher_resale_id}})">Edit</span></div>
+                            <div ng-if="voucherDetail.Status == 'Accepted' && loggedindetails.id == voucherDetail.user_id" class="nwe-btn"><span class="dx-button" ng-click="add_to_cart({{voucherDetail.voucher_resale_id}},{{voucherDetail.offer_id}})">Add To Cart</span></div>
+                            <div class="nwe-btn"><span class="dx-button" ng-click="detailVoucher({{voucherDetail.voucher_resale_id}},{{voucherDetail.offer_id}})">Detail</span></div>
+                            
+                            <div ng-if="voucherDetail.Status != 'Accepted' && voucherDetail.Status != 'Expired'" class="nwe-btn"><span class="dx-button" ng-click="cancelBid({{voucherDetail.bid_id}},{{voucherDetail.voucher_id}})">Cancel</span></div>
+
+                            <!--<div class="nwe-btn"><span class="dx-button" ng-click="event_bidder({{voucherDetail.id}})">Bidder</span></div>-->
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            </div>
+        </div>
+
+        <div class="m-profile-details br-0 mb-0 pb-0">
+            <h1 ng-click="thirdShowHide()">Resell Voucher List</h1>
+            <div class="new-border">
+            	<div ng-show="third_show" class="m-transaction-details tablet-hide mb-15" ng-repeat="voucherDetail in soonVoucherInfo">
+                <h1>{{voucherDetail.title}}</h1>
+                <table>
+                    <tr>
+                        <td width="30%" class="m-header-color">Resell Price</td>
+                        <td>{{voucherDetail.price}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Vouchire Price</td>
+                        <td>{{voucherDetail.voucher_price}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Expire Date</td>
+                        <td>{{voucherDetail.expire_date}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Resell Date</td>
+                        <td>{{voucherDetail.created_on}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="nwe-btn" ng-if="voucherDetail.Status != 'Expired'"><span class="dx-button" ng-click="addbid({{voucherDetail.voucher_resale_id}},{{voucherDetail.voucher_id}})">Bid</span></div>
+                            <div class="nwe-btn"><span class="dx-button" ng-click="detailVoucher({{voucherDetail.voucher_resale_id}},{{voucherDetail.offer_id}})">Detail</span></div>
+
+                            <!--<div class="nwe-btn"><span class="dx-button" ng-click="event_bidder({{voucherDetail.id}})">Bidder</span></div>-->
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            </div>
+        </div>
+        <!--<div class="m-profile-details">
+            <h3 style="font-size: 18px; line-height: 30px; padding: 10px;">Resell Voucher posted by me</h3>
+            <div dx-list="{onInitialized:loadList}">
+                <div data-options="dxTemplate: { name: 'item' }">  
+                    <div>
+                        <p style="font-size:larger;"><b>{{title}}</b></p>
+                        <p>Price: <i>{{price}}</i></p>
+                        <p>Expire Date: <i>{{expire_date}}</i></p>
+                    </div>
+
+                    <p>
+
+                    </p>
+                </div>
+            </div>
+
+
+            <h3 style="font-size: 18px; line-height: 30px; padding: 10px;">Bidded by ownself</h3>
+
+            <div dx-list="{onInitialized:loadList1}">
+                <div data-options="dxTemplate: { name: 'item' }">
+
+                    <div>
+                        <p style="font-size:larger;"><b>{{title}}</b></p>
+                        <p>Bid Price: <i>{{price}}</i></p>
+                        <p>To Date: <i>{{to_date}}</i></p>
+                        <p>Status: <i>{{Status}}</i></p>
+                    </div>
+
+                    <p>
+
+                    </p>
+                </div>
+            </div>
+
+            <h3 style="font-size: 18px; line-height: 30px; padding: 10px;">Bid on voucher</h3>
+
+            <div dx-list="{onInitialized:loadList2}">
+                <div data-options="dxTemplate: { name: 'item' }">
+
+                    <div style="display:inline-block; margin: 5px;">
+                        <p style="font-size:larger;"><b>{{title}}</b></p>
+                        <p>Price: <i>{{price}}</i></p>
+                        <p>Expire Date: <i>{{expire_date}}</i></p>
+                    </div>
+
+                    <p>
+
+                    </p>
+                </div>
+            </div>
+        </div>-->
+
+    </div>
+
+
+</div>
+
+

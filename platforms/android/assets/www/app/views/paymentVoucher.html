@@ -1,0 +1,354 @@
+<!--Web header-->
+<!--<div ng-controller="paymentVoucherCtrl" mn-touch swipe-right="goto_page('voucher')" swipe-left="goto_page('membership')">-->
+<div ng-controller="paymentVoucherCtrl">
+<div class="container">
+    <!--<div class="voucher-section phone-hide">
+        <h1>Voucher</h1>
+        <ul>
+            <li ng-repeat="voucherDetail in voucherInfo">
+                <div class="pro-item">
+                    <div class="logo-box">
+                        <a ui-sref="frontend.promodetails({ promoId: voucherDetail.id })"><img src="{{voucherDetail.image}}" width="218" height="100"  alt=""/></a>
+                    </div>
+                    <div class="desc">
+
+                        <h2>{{voucherDetail.offer_percent}}% off</h2>
+                        <p class="price">Price <span>IDR{{voucherDetail.price}}</span> </p>
+                        <p class="price">Offer Price  <span>IDR{{voucherDetail.price-((voucherDetail.price*voucherDetail.offer_percent)/100)}}</span></p>
+                        <div class="btn_o"><a ui-sref="frontend.promodetails({ promoId: voucherDetail.id })">Detail</a></div>
+                    </div>
+                </div>
+            </li>
+
+        </ul>
+    </div>-->
+    <div class="dx-clearfix"></div>
+    <div class="new-Promo phone-hide" ng-if="specialInfo.length != 0">
+        <h1 ng-click="specialShowHide()">{{specialTitle}}</h1>
+        <ul ng-show="special_promo_show">
+            <li ng-repeat="specialDetail in specialInfo">
+                <div class="pro-item">
+                    <img src="{{specialDetail.image}}" width="406" height="255"  alt=""/>
+                    <div class="p-circle">{{specialDetail.offer_percent}}%</div>
+                    <div class="desc">
+                        <div class="txt">
+                            <h2>{{specialDetail.title}}</h2>
+                            <p>{{specialDetail.special_tag}}</p>
+                            <!--<p><timer end-time="specialDetail.end_time">{{days}}D:{{hours}}H:{{minutes}}M:{{seconds}}S</timer></p> -->
+                            <p><b>Sold :</b>&nbsp;{{specialDetail.buy_count}}&nbsp;&nbsp;&nbsp;<b>Available :</b>&nbsp;{{specialDetail.quantity - specialDetail.buy_count}}</p>
+                            <p class="price"><span>IDR{{specialDetail.price | number}}</span> IDR{{specialDetail.price-((specialDetail.price*specialDetail.offer_percent)/100) | number}}</p>
+                        </div>
+                        <div class="view-btn">
+                            <a ui-sref="frontend.promodetails({ promoId: specialDetail.id })"><img src="app/assets/Images/view-btn.png" width="66" height="42"  alt=""/></a>
+                            <!--<p><timer end-time="specialDetail.end_time">{{days}}D:{{hours}}H:{{minutes}}M:{{seconds}}S</timer></p>-->
+                            <p countdown='' date='{{specialDetail.offer_to_date}}'>&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="dx-clearfix"></div>
+    <div class="new-Promo phone-hide" ng-if="newPromoInfo.length != 0">
+        <h1 ng-click="newShowHide()">New Promo <span>({{newPromoCount}} new)</span></h1>
+        <ul ng-show="new_promo_show">
+            <li ng-repeat="newPromoDetail in newPromoInfo">
+                <div class="pro-item">
+                    <img src="{{newPromoDetail.image}}" width="406" height="255"  alt=""/>
+                    <div class="p-circle">{{newPromoDetail.offer_percent}}%</div>
+                    <div class="desc">
+                        <div class="txt">
+                            <h2>{{newPromoDetail.title}}</h2>
+                            <!--<p><timer end-time="newPromoDetail.end_time">{{days}}D:{{hours}}H:{{minutes}}M:{{seconds}}S</timer></p>-->
+                            <p><b>Sold :</b>&nbsp;{{newPromoDetail.buy_count}}&nbsp;&nbsp;&nbsp;<b>Available :</b>&nbsp;{{newPromoDetail.quantity - newPromoDetail.buy_count}}</p>
+                            <p class="price"><span>IDR{{newPromoDetail.price | number}}</span> IDR{{newPromoDetail.price-((newPromoDetail.price*newPromoDetail.offer_percent)/100) | number}}</p>
+                        </div>
+                        <div class="view-btn">
+                            <a ui-sref="frontend.promodetails({ promoId: newPromoDetail.id })"><img src="app/assets/Images/view-btn.png" width="66" height="42"  alt=""/></a>
+                            <p countdown='' date='{{newPromoDetail.offer_to_date}}'>&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="dx-clearfix"></div>
+    <div class="new-Promo phone-hide" ng-if="hotSellingInfo.length != 0">
+        <h1 ng-click="hotShowHide()">Hot Selling Promo</h1>
+        <ul ng-show="hot_promo_show">
+            <li ng-repeat="hotSellingDetail in hotSellingInfo">
+                <div class="pro-item">
+                    <img src="{{hotSellingDetail.image}}" width="406" height="255"  alt=""/>
+                    <div class="p-circle">{{hotSellingDetail.offer_percent}}%</div>
+                    <div class="desc">
+                        <div class="txt">
+                            <h2>{{hotSellingDetail.title}}</h2>
+                            <p><b>Sold :</b>&nbsp;{{hotSellingDetail.buy_count}}&nbsp;&nbsp;&nbsp;<b>Available :</b>&nbsp;{{hotSellingDetail.quantity - hotSellingDetail.buy_count}}</p>
+
+                            <p class="price"><span>IDR{{hotSellingDetail.price | number}}</span> IDR{{hotSellingDetail.price-((hotSellingDetail.price*hotSellingDetail.offer_percent)/100) | number}}</p>
+                        </div>
+                        <div class="view-btn">
+                            <a ui-sref="frontend.promodetails({ promoId: hotSellingDetail.id })"><img src="app/assets/Images/view-btn.png" width="66" height="42"  alt=""/></a>
+                            <p countdown='' date='{{hotSellingDetail.offer_to_date}}'>&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+
+
+        </ul>
+    </div>
+    <div class="dx-clearfix"></div>
+    <div class="new-Promo phone-hide" ng-if="lastDayPromoInfo.length != 0">
+        <h1 ng-click="lastShowHide()">Last Days Promo</h1>
+        <ul ng-show="last_promo_show">
+            <li ng-repeat="lastDayPromoDetail in lastDayPromoInfo">
+                <div class="pro-item">
+                    <img src="{{lastDayPromoDetail.image}}" width="406" height="255"  alt=""/>
+                    <div class="p-circle">{{lastDayPromoDetail.offer_percent}}%</div>
+                    <div class="desc">
+                        <div class="txt">
+                            <h2>{{lastDayPromoDetail.title}}</h2>
+                            <!--<p>11D:21H:50M:20S</p>-->
+                            <p><b>Sold :</b>&nbsp;{{lastDayPromoDetail.buy_count}}&nbsp;&nbsp;&nbsp;<b>Available :</b>&nbsp;{{lastDayPromoDetail.quantity - lastDayPromoDetail.buy_count}}</p>
+                            <p class="price"><span>IDR{{lastDayPromoDetail.price | number}}</span> IDR{{lastDayPromoDetail.price-((lastDayPromoDetail.price*lastDayPromoDetail.offer_percent)/100) | number}}</p>
+                        </div>
+                        <div class="view-btn">
+                            <a ui-sref="frontend.promodetails({ promoId: lastDayPromoDetail.id })"><img src="app/assets/Images/view-btn.png" width="66" height="42"  alt=""/></a>
+                            <p countdown='' date='{{lastDayPromoDetail.offer_to_date}}'>&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+
+
+        </ul>
+    </div>
+    <div class="dx-clearfix"></div>
+
+
+
+    <div class="new-Promo phone-hide" ng-if="voucherPaymentInfo.length != 0">
+        <h1 ng-click="allShowHide()">All Promo</h1>
+        <ul ng-show="all_promo_show">
+            <li ng-repeat="lastDayPromoDetail in voucherPaymentInfo">
+                <div class="pro-item">
+                    <img src="{{lastDayPromoDetail.image}}" width="406" height="255"  alt=""/>
+                    <div class="p-circle">{{lastDayPromoDetail.offer_percent}}%</div>
+                    <div class="desc">
+                        <div class="txt">
+                            <h2>{{lastDayPromoDetail.title}}</h2>
+                            <!--<p>11D:21H:50M:20S</p>-->
+                            <p><b>Sold :</b>&nbsp;{{lastDayPromoDetail.buy_count}}&nbsp;&nbsp;&nbsp;<b>Available :</b>&nbsp;{{lastDayPromoDetail.quantity - lastDayPromoDetail.buy_count}}</p>
+                            <p class="price"><span>IDR{{lastDayPromoDetail.price | number}}</span> IDR{{lastDayPromoDetail.price-((lastDayPromoDetail.price*lastDayPromoDetail.offer_percent)/100) | number}}</p>
+                        </div>
+                        <div class="view-btn">
+                            <a ui-sref="frontend.promodetails({ promoId: lastDayPromoDetail.id })"><img src="app/assets/Images/view-btn.png" width="66" height="42"  alt=""/></a>
+                            <p countdown='' date='{{lastDayPromoDetail.offer_to_date}}'>&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+
+
+        </ul>
+    </div>
+    <div class="dx-clearfix"></div>
+    <div class="new-Promo phone-hide" ng-if="specialInfo.length == 0 && newPromoInfo.length == 0 && hotSellingInfo.length == 0 && lastDayPromoInfo.length == 0 && voucherPaymentInfo.length == 0">
+        <div style="width:100%;text-align: center">
+            <h1>There is no promo on this category</h1>
+        </div>
+    </div>
+
+
+</div>
+
+    <div class="m-new-Promo tablet-hide" ng-if="specialInfo.length != 0">
+        <h1 ng-click="specialShowHide()">{{specialTitle}}</h1>
+        <ul ng-show="special_promo_show">
+            <li ng-repeat="specialDetail in specialInfo">
+                <div class="pro-item">
+                    <img src="{{specialDetail.image}}" width="406" height="255"  alt=""/>
+                    <div class="p-circle">{{specialDetail.offer_percent}}%</div>
+                    <div class="desc">
+                        <div class="txt">
+                            <h2>{{specialDetail.title}}</h2>
+                            <p>{{specialDetail.special_tag}}</p>
+                            <!--<p><timer end-time="specialDetail.end_time">{{days}}D:{{hours}}H:{{minutes}}M:{{seconds}}S</timer></p>-->
+                            <p><b>Sold :</b>&nbsp;{{specialDetail.buy_count}}&nbsp;&nbsp;&nbsp;<b>Available :</b>&nbsp;{{specialDetail.quantity - specialDetail.buy_count}}</p>
+                            <p class="price"><span>IDR{{specialDetail.price | number}}</span> IDR{{specialDetail.price-((specialDetail.price*specialDetail.offer_percent)/100) | number}}</p>
+                        </div>
+                        <div class="view-btn">
+                            <a ui-sref="frontend.promodetails({ promoId: specialDetail.id })"><img src="app/assets/Images/view-btn.png" width="66" height="42"  alt=""/></a>
+                            <p countdown='' date='{{specialDetail.offer_to_date}}'>&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="dx-clearfix"></div>
+
+    <div class="m-new-Promo tablet-hide" ng-if="newPromoInfo.length != 0">
+        <h1 ng-click="newShowHide()">New Promo <span>({{newPromoCount}} new)</span></h1>
+        <ul ng-show="new_promo_show">
+            <li ng-repeat="newPromoDetail in newPromoInfo">
+                <div class="pro-item">
+                    <img src="{{newPromoDetail.image}}" width="406" height="255"  alt=""/>
+                    <div class="p-circle">{{newPromoDetail.offer_percent}}%</div>
+                    <div class="desc">
+                        <div class="txt">
+                            <h2>{{newPromoDetail.title}}</h2>
+                            <!--<p><timer end-time="newPromoDetail.end_time">{{days}}D:{{hours}}H:{{minutes}}M:{{seconds}}S</timer></p>-->
+                            <p><b>Sold :</b>&nbsp;{{newPromoDetail.buy_count}}&nbsp;&nbsp;&nbsp;<b>Available :</b>&nbsp;{{newPromoDetail.quantity - newPromoDetail.buy_count}}</p>
+                            <p class="price"><span>IDR{{newPromoDetail.price | number}}</span> IDR{{newPromoDetail.price-((newPromoDetail.price*newPromoDetail.offer_percent)/100) | number}}</p>
+                        </div>
+                        <div class="view-btn">
+                            <a ui-sref="frontend.promodetails({ promoId: newPromoDetail.id })"><img src="app/assets/Images/view-btn.png" width="66" height="42"  alt=""/></a>
+                            <p countdown='' date='{{newPromoDetail.offer_to_date}}'>&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="dx-clearfix"></div>
+    <div class="m-new-Promo tablet-hide" ng-if="hotSellingInfo.length != 0">
+        <h1 ng-click="hotShowHide()">Hot Selling Promo</h1>
+        <ul ng-show="hot_promo_show">
+            <li ng-repeat="hotSellingDetail in hotSellingInfo">
+                <div class="pro-item">
+                    <img src="{{hotSellingDetail.image}}" width="406" height="255"  alt=""/>
+                    <div class="p-circle">{{hotSellingDetail.offer_percent}}%</div>
+                    <div class="desc">
+                        <div class="txt">
+                            <h2>{{hotSellingDetail.title}}</h2>
+                            <!--<p>11D:21H:50M:20S</p>-->
+                            <p><b>Sold :</b>&nbsp;{{hotSellingDetail.buy_count}}&nbsp;&nbsp;&nbsp;<b>Available :</b>&nbsp;{{hotSellingDetail.quantity - hotSellingDetail.buy_count}}</p>
+                            <p class="price"><span>IDR{{hotSellingDetail.price | number}}</span> IDR{{hotSellingDetail.price-((hotSellingDetail.price*hotSellingDetail.offer_percent)/100) | number}}</p>
+                        </div>
+                        <div class="view-btn">
+                            <a ui-sref="frontend.promodetails({ promoId: hotSellingDetail.id })"><img src="app/assets/Images/view-btn.png" width="66" height="42"  alt=""/></a>
+                            <p countdown='' date='{{hotSellingDetail.offer_to_date}}'>&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+
+
+        </ul>
+    </div>
+    <div class="dx-clearfix"></div>
+    <div class="m-new-Promo tablet-hide" ng-if="lastDayPromoInfo.length != 0">
+        <h1 ng-click="lastShowHide()">Last Days Promo</h1>
+        <ul ng-show="last_promo_show">
+            <li ng-repeat="lastDayPromoDetail in lastDayPromoInfo">
+                <div class="pro-item">
+                    <img src="{{lastDayPromoDetail.image}}" width="406" height="255"  alt=""/>
+                    <div class="p-circle">{{lastDayPromoDetail.offer_percent}}%</div>
+                    <div class="desc">
+                        <div class="txt">
+                            <h2>{{lastDayPromoDetail.title}}</h2>
+                            <!--<p>11D:21H:50M:20S</p>-->
+                            <p><b>Sold :</b>&nbsp;{{lastDayPromoDetail.buy_count}}&nbsp;&nbsp;&nbsp;<b>Available :</b>&nbsp;{{lastDayPromoDetail.quantity - lastDayPromoDetail.buy_count}}</p>
+                            <p class="price"><span>IDR{{lastDayPromoDetail.price | number}}</span> IDR{{lastDayPromoDetail.price-((lastDayPromoDetail.price*lastDayPromoDetail.offer_percent)/100) | number}}</p>
+                        </div>
+                        <div class="view-btn"><a ui-sref="frontend.promodetails({ promoId: lastDayPromoDetail.id })"><img src="app/assets/Images/view-btn.png" width="66" height="42"  alt=""/></a>
+                            <p countdown='' date='{{lastDayPromoDetail.offer_to_date}}'>&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+
+
+        </ul>
+    </div>
+    <div class="dx-clearfix"></div>
+    <div class="m-new-Promo tablet-hide" ng-if="voucherPaymentInfo.length != 0">
+        <h1 ng-click="allShowHide()">All Promo</h1>
+        <ul ng-show="all_promo_show">
+            <li ng-repeat="lastDayPromoDetail in voucherPaymentInfo">
+                <div class="pro-item">
+                    <img src="{{lastDayPromoDetail.image}}" width="406" height="255"  alt=""/>
+                    <div class="p-circle">{{lastDayPromoDetail.offer_percent}}%</div>
+                    <div class="desc">
+                        <div class="txt">
+                            <h2>{{lastDayPromoDetail.title}}</h2>
+                            <!--<p>11D:21H:50M:20S</p>-->
+                            <p><b>Sold :</b>&nbsp;{{lastDayPromoDetail.buy_count}}&nbsp;&nbsp;&nbsp;<b>Available :</b>&nbsp;{{lastDayPromoDetail.quantity - lastDayPromoDetail.buy_count}}</p>
+                            <p class="price"><span>IDR{{lastDayPromoDetail.price | number}}</span> IDR{{lastDayPromoDetail.price-((lastDayPromoDetail.price*lastDayPromoDetail.offer_percent)/100) | number}}</p>
+                        </div>
+                        <div class="view-btn">
+                            <a ui-sref="frontend.promodetails({ promoId: lastDayPromoDetail.id })"><img src="app/assets/Images/view-btn.png" width="66" height="42"  alt=""/></a>
+                            <p countdown='' date='{{lastDayPromoDetail.offer_to_date}}'>&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+
+
+        </ul>
+    </div>
+    <div class="dx-clearfix"></div>
+
+    <div class="m-new-Promo tablet-hide" ng-if="specialInfo.length == 0 && newPromoInfo.length == 0 && hotSellingInfo.length == 0 && lastDayPromoInfo.length == 0 && voucherPaymentInfo.length == 0">
+        <div style="width:100%;text-align: center;font-size:15px;padding-top: 20px;">
+            <h1>There is no promo on this category</h1>
+        </div>
+    </div>
+<div class="dx-clearfix"></div>
+<!--<div class="container">
+    <div class="expire-section phone-hide">
+        <h1>Expire Soon</h1>
+        <ul>
+            <li ng-repeat="voucherExpireSoonDetail in voucherExpireSoonInfo">
+                <div class="pro-item">
+                    <div class="logo-box">
+
+                        <a ui-sref="frontend.promodetails({ promoId: voucherExpireSoonDetail.id })"><img src="{{voucherExpireSoonDetail.image}}" width="218" height="100"  alt=""/></a>
+                    </div>
+                    <div class="desc">
+
+                        <h2>{{voucherExpireSoonDetail.offer_percent}}% off</h2>
+                        <p class="price">Price <span>IDR{{voucherExpireSoonDetail.price}}</span> </p>
+                        <p class="price">Offer Price  <span>IDR{{voucherExpireSoonDetail.price-((voucherExpireSoonDetail.price*voucherExpireSoonDetail.offer_percent)/100)}}</span></p>
+                        <div class="btn_o"><a ui-sref="frontend.promodetails({ promoId: voucherExpireSoonDetail.id })">Detail</a></div>
+
+                    </div>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+</div>
+
+    <div class="m-expire-section tablet-hide">
+        <h1>Expire Soon</h1>
+        <ul>
+            <li ng-repeat="voucherExpireSoonDetail in voucherExpireSoonInfo">
+                <div class="pro-item">
+                    <div class="logo-box">
+
+                        <a ui-sref="frontend.promodetails({ promoId: voucherExpireSoonDetail.id })"><img src="{{voucherExpireSoonDetail.image}}" width="218" height="100"  alt=""/></a>
+                    </div>
+                    <div class="desc">
+
+                        <h2>{{voucherExpireSoonDetail.offer_percent}}% off</h2>
+                        <p class="price">Price <span>IDR{{voucherExpireSoonDetail.price}}</span> </p>
+                        <p class="price">Offer Price  <span>IDR{{voucherExpireSoonDetail.price-((voucherExpireSoonDetail.price*voucherExpireSoonDetail.offer_percent)/100)}}</span></p>
+                        <div class="btn_o"><a ui-sref="frontend.promodetails({ promoId: voucherExpireSoonDetail.id })">Detail</a></div>
+
+                    </div>
+                </div>
+            </li>
+
+        </ul>
+    </div>-->
+</div>

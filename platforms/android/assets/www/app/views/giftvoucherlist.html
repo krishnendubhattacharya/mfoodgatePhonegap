@@ -1,0 +1,136 @@
+<!--Web header-->
+<div ng-controller="giftvoucherlistCtrl">
+
+    <div class="container phone-hide">
+        <div class="myaccount-details">
+            <h1>{{allicontext[6].title}}</h1>
+            <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+
+            <div class="profile-details brt-none mb-15">
+                <h3 ng-click="firstShowHide()">Give Voucher</h3>
+                <div ng-show="first_show" id="gridContainer" dx-data-grid="dataGridOptions2"></div>
+				</div>
+                <div class="profile-details brt-none mb-15">
+                <h3 ng-click="secondShowHide()">Received Gift Voucher</h3>
+                <div ng-show="second_show" id="gridContainer2" dx-data-grid="dataGridOptions"></div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="m-myaccount-details tablet-hide">
+        <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+        <h1>{{allicontext[6].title}}</h1>
+
+        <div class="m-profile-details br-0 mb-0 pb-0">
+            <h1 ng-click="firstShowHide()">Give Voucher</h1>
+            <div class="new-border">
+            	<div ng-show="first_show" class="m-transaction-details tablet-hide mb-15" ng-repeat="voucherDetail in voucherInfo2">
+                <h1>{{voucherDetail.voucher_name}}</h1>
+                <table>
+                    <tr>
+                        <td width="30%" class="m-header-color">Voucher Value</td>
+                        <td>{{voucherDetail.resturant_name}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Price</td>
+                        <td>{{voucherDetail.price}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Expire Date</td>
+                        <td>{{voucherDetail.offer_to_date}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">To Friend Name</td>
+                        <td>{{voucherDetail.friend}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Friend Email</td>
+                        <td>{{voucherDetail.friend_email}}</td>
+                    </tr>
+                </table>
+            </div>
+            </div>
+        </div>
+
+        <div class="m-profile-details br-0 mb-0 pb-0">
+            <h1 ng-click="secondShowHide()">Received Gift Voucher</h1>
+            <div class="new-border">
+            	<div ng-show="second_show" class="m-transaction-details tablet-hide mb-15" ng-repeat="voucherDetail in voucherInfo">
+                <h1>{{voucherDetail.voucher_name}}</h1>
+                <table>
+                    <tr>
+                        <td width="30%" class="m-header-color">Voucher Value</td>
+                        <td>{{voucherDetail.resturant_name}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Price</td>
+                        <td>{{voucherDetail.price}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Expire Date</td>
+                        <td>{{voucherDetail.offer_to_date}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">From Friend Name</td>
+                        <td>{{voucherDetail.friend}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Friend Email</td>
+                        <td>{{voucherDetail.friend_email}}</td>
+                    </tr>
+                </table>
+            </div>
+            </div>
+        </div>
+
+        <!--<div class="m-profile-details">
+            <h3 style="font-size: 18px; line-height: 30px; padding: 10px;">Give Voucher</h3>
+            <div dx-list="{
+      onInitialized:loadList
+    }">
+
+                <div  data-options="dxTemplate: { name: 'item' }">
+
+                    <div style="display:inline-block; margin: 5px;">
+                        <p style="font-size:larger;"><b>{{voucher_name}}</b></p>
+                        <p>Resturant Name: <i>{{resturant_name}}</i></p>
+                        <p>Price: <i>{{price}}</i></p>
+                        <p>To Friend Name: <i>{{friend}}</i></p>
+                        <p>Friend Email: <i>{{friend_email}}</i></p>
+                        <p>Expire Date: <i>{{offer_to_date}}</i></p>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="dx-clearfix"></div>
+
+            <h3 style="font-size: 18px; line-height: 30px; padding: 10px;">Received Gift Voucher</h3>
+            <div dx-list="{
+      onInitialized:loadExpiredPointList
+    }">
+
+                <div data-options="dxTemplate: { name: 'item' }">
+
+                    <div style="display:inline-block; margin: 5px;">
+                        <p style="font-size:larger;"><b>{{voucher_name}}</b></p>
+                        <p>Resturant Name: <i>{{resturant_name}}</i></p>
+                        <p>Price: <i>{{price}}</i></p>
+                        <p>From Friend Name: <i>{{friend}}</i></p>
+                        <p>Friend Email: <i>{{friend_email}}</i></p>
+                        <p>Expire Date: <i>{{offer_to_date}}</i></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>-->
+
+    </div>
+
+
+</div>
+
+

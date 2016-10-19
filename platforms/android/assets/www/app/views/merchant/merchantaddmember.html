@@ -1,0 +1,115 @@
+<!--Web header-->
+<div ng-controller="merchantaddmemberCtrl">
+    <div class="container phone-hide">
+        <div class="myaccount-details">
+            <h1>Add Member</h1>
+            <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+
+            <div class="profile-details">
+                <div class="form">
+                    <div class="dx-fieldset">
+                        <div class="dx-field">
+                            <div class="dx-field-label">Membership</div>
+                            <div class="dx-field-value">
+                                <div dx-select-box="selectBox.simple" dx-validator="membershipValidationRules" ng-model="membership_id"></div>
+                            </div>
+                        </div>
+                        <div class="dx-field">
+                            <div class="dx-field-label">User Type</div>
+                            <div class="dx-field-value">
+                                <div dx-radio-group="radioGroup.changeLayout" dx-validator="radioValidationRules"  name="user_type_id" ng-model="user_type" ></div>
+                            </div>
+                        </div>
+                        <div class="dx-field" ng-show="selectedType=='New User'">
+                            <div class="dx-field-label">Email</div>
+                            <div class="dx-field-value">
+                                <div dx-text-box="textBox.username" ng-model="username"></div>
+                            </div>
+                        </div>
+
+                        <div class="dx-field" ng-show="selectedType=='Existing User'">
+                            <div class="dx-field-label">User code</div>
+                            <div class="dx-field-value">
+                                <div dx-text-box="textBox.user_code"  ng-model="user_code"></div>
+                            </div>
+                        </div>
+
+                        <!--<div class="dx-field">
+                            <div class="dx-field-label">Category</div>
+                            <div class="dx-field-value">
+                                <div dx-select-box="selectBox.simple" ng-model="offer.sel"></div>
+                            </div>
+                        </div>-->
+
+
+
+
+                    </div>
+                    <!--<div id="summary" dx-validation-summary="{ }"></div>-->
+                    <div id="button" dx-button="{
+                                text: 'Submit',
+                                type: 'success',
+                                onClick: validateAndSubmit }" ></div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="m-myaccount-details tablet-hide">
+
+        <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+        <h1>Add Member</h1>
+        <div class="m-profile-details">
+            <div class="form">
+                <div class="dx-fieldset">
+                    <div class="dx-field">
+                        <div class="dx-field-label">Membership</div>
+                        <div class="dx-field-value">
+                            <div dx-select-box="selectBox.simple" dx-validator="membershipValidationRules" ng-model="membership_id"></div>
+                        </div>
+                    </div>
+                    <div class="dx-field">
+                        <div class="dx-field-label">User Type</div>
+                        <div class="dx-field-value">
+                            <div dx-radio-group="radioGroup.changeLayout" dx-validator="radioValidationRules"  name="user_type_id" ng-model="user_type" ></div>
+                        </div>
+                    </div>
+                    <div class="dx-field" ng-show="selectedType=='New User'">
+                        <div class="dx-field-label">Email</div>
+                        <div class="dx-field-value">
+                            <div dx-text-box="textBox.username" ng-model="username"></div>
+                        </div>
+                    </div>
+
+                    <div class="dx-field" ng-show="selectedType=='Existing User'">
+                        <div class="dx-field-label">User code</div>
+                        <div class="dx-field-value">
+                            <div dx-text-box="textBox.user_code"  ng-model="user_code"></div>
+                        </div>
+                    </div>
+
+                    <!--<div class="dx-field">
+                        <div class="dx-field-label">Category</div>
+                        <div class="dx-field-value">
+                            <div dx-select-box="selectBox.simple" ng-model="offer.sel"></div>
+                        </div>
+                    </div>-->
+
+
+
+
+                </div>
+                <!--<div id="summary" dx-validation-summary="{ }"></div>-->
+                <div id="button" dx-button="{
+                                text: 'Submit',
+                                type: 'success',
+                                onClick: validateAndSubmit }" ></div>
+            </div>
+        </div>
+
+    </div>
+    <div class="dx-clearfix"></div>
+</div>
+
+

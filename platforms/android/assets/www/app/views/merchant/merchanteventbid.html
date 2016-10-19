@@ -1,0 +1,244 @@
+<!--Web header-->
+<div ng-controller="merchanteventbidCtrl">
+
+    <div class="container phone-hide">
+        <div class="myaccount-details">
+            <h1>Event Bid</h1>
+                <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+
+            <div class="profile-details">
+                <div class="form">
+                    <div class="dx-fieldset">
+                        <div class="dx-field">
+                            <div class="dx-field-label">Bid Price</div>
+                            <div class="dx-field-value">
+                                <div dx-text-box="textBox.price"   ng-model="price"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="dx-field">
+                            <div class="dx-field-label">Restaurant</div>
+                            <div class="dx-field-value">
+                                <div dx-select-box="textBox.restaurant" ng-model="restaurant_id"></div>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="dx-field">
+                            <div class="dx-field-label">Outlet</div>
+                            <div class="dx-field-value">
+                                <div dx-select-box="textBox.outlet" ng-model="outlet_id"></div>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="dx-field">
+                            <div class="dx-field-label">Contact Person</div>
+                            <div class="dx-field-value">
+                                <div dx-text-box="textBox" ng-model="contact_person"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="dx-field">
+                            <div class="dx-field-label">Contact Phone</div>
+                            <div class="dx-field-value">
+                                <div dx-text-box="textBox" ng-model="contact_phone"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="dx-field">
+                            <div class="dx-field-label">Event Offer Bid Template</div>
+                            <div class="dx-field-value">
+                                <div dx-select-box="textBox.template" ng-model="template_id"></div>
+                            </div>
+                        </div>
+
+                        <div class="dx-field">
+                            <div class="dx-field-label">Description</div>
+                            <div class="dx-field-value">
+                                <div dx-text-area="textArea.description" ng-model="description"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="profile-details" style="width:100%; position:relative; overflow:hidden;"  ng-show="!edit_mode">
+						 <div id="button" dx-button="{
+						                 text: 'Add Image',
+						                 onClick: changeView }" ></div>
+						 <!--<input type="button" ng-click="refresh_grid()" value="Refresh">-->
+                         <div class="img-bx">
+                         	<ul id="templateImg">
+                            		  <li ng-repeat="voucher in voucherInfo" id="{{voucher.image}}">
+		                           	<div class="closed" ng-click="removeTemplateImage('{{voucher.image}}')">X</div>
+		                           	<img style="height: 100px;" src="{{serviceurl}}template_images/{{voucher.image}}">
+		                           </li>
+                            </ul>
+                         </div>
+						 
+                         	
+                         </div>
+
+					  </div>
+
+					  <div class="profile-details" style="width:100%" ng-show="edit_mode">
+						 <div class="form">
+						     <div class="dx-fieldset">
+
+
+						         <div class="dx-field">
+						             <div class="dx-field-label">Image</div>
+						             <div class="dx-field-value">
+						                 <div dx-file-uploader="textBox.image"></div>
+						             </div>
+						         </div>
+
+
+
+						     </div>
+						     
+
+						     <div id="button" dx-button="{
+						                 text: 'Cancel',
+						                 onClick: changeView }" ></div>
+
+
+						 </div>
+					  </div>
+
+
+
+					<div id="button" dx-button="{
+                                text: 'Submit',
+                                type: 'success',
+                                onClick: saveEventBid }" ></div>		
+
+                    </div>
+                    <!--<div id="summary" dx-validation-summary="{ }"></div>-->
+                    
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="m-myaccount-details tablet-hide">
+
+            <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+            <h1>Event Bid</h1>
+            <div class="m-profile-details">
+                <div class="form">
+                    <div class="dx-fieldset">
+                        <div class="dx-field">
+                            <div class="dx-field-label">Bid Price</div>
+                            <div class="dx-field-value">
+                                <div dx-text-box="textBox.price"   ng-model="price"></div>
+                            </div>
+                        </div>
+
+                        <div class="dx-field">
+                            <div class="dx-field-label">Restaurant</div>
+                            <div class="dx-field-value">
+                                <div dx-select-box="textBox.restaurantmob" ng-model="restaurant_id"></div>
+
+                            </div>
+                        </div>
+
+                        <div class="dx-field">
+                            <div class="dx-field-label">Outlet</div>
+                            <div class="dx-field-value">
+                                <div dx-select-box="textBox.outletmob" ng-model="outlet_id"></div>
+
+                            </div>
+                        </div>
+
+                        <div class="dx-field">
+                            <div class="dx-field-label">Contact Person</div>
+                            <div class="dx-field-value">
+                                <div dx-text-box="textBox" ng-model="contact_person"></div>
+                            </div>
+                        </div>
+
+                        <div class="dx-field">
+                            <div class="dx-field-label">Contact Phone</div>
+                            <div class="dx-field-value">
+                                <div dx-text-box="textBox" ng-model="contact_phone"></div>
+                            </div>
+                        </div>
+
+                        <div class="dx-field">
+                            <div class="dx-field-label">Event Offer Bid Template</div>
+                            <div class="dx-field-value">
+                                <div dx-select-box="textBox.templatemob" ng-model="template_id"></div>
+                            </div>
+                        </div>
+
+                        <div class="dx-field">
+                            <div class="dx-field-label">Description</div>
+                            <div class="dx-field-value">
+                                <div dx-text-area="textArea.descriptionmob" ng-model="description"></div>
+                            </div>
+                        </div>
+
+                        <div class="profile-details" style="width:100%; position:relative; overflow:hidden;"  ng-show="!edit_mode">
+                            <div id="button" dx-button="{
+						                 text: 'Add Image',
+						                 onClick: changeView }" ></div>
+                            <!--<input type="button" ng-click="refresh_grid()" value="Refresh">-->
+                            <div class="img-bx">
+                                <ul id="templateImg">
+                                    <li ng-repeat="voucher in voucherInfo" id="{{voucher.image}}">
+                                        <div class="closed" ng-click="removeTemplateImage('{{voucher.image}}')">X</div>
+                                        <img style="height: 100px;" src="{{serviceurl}}template_images/{{voucher.image}}">
+                                    </li>
+                                </ul>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="profile-details" style="width:100%" ng-show="edit_mode">
+                        <div class="form">
+                            <div class="dx-fieldset">
+
+
+                                <div class="dx-field">
+                                    <div class="dx-field-label">Image</div>
+                                    <div class="dx-field-value">
+                                        <div dx-file-uploader="textBox.image"></div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+
+                            <div id="button" dx-button="{
+						                 text: 'Cancel',
+						                 onClick: changeView }" ></div>
+
+
+                        </div>
+                    </div>
+
+
+
+                    <div id="button" dx-button="{
+                                text: 'Submit',
+                                type: 'success',
+                                onClick: saveEventBid }" ></div>
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+

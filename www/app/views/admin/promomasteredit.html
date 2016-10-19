@@ -1,0 +1,245 @@
+<div ng-controller="promomastereditCtrl">
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+
+                <div >
+                    <header class="panel-heading">
+                        Promo Edit
+                    </header>
+                    <div class="panel-body">
+                        <form role="form" ng-submit="savePromo()" enctype="multipart/form-data">
+                            <!--<div class="form-group">
+                                <label for="category_id">Select Restaurants</label>
+                                <select id="restaurants"
+                                        ng-model="item.restaurant_id" required
+                                        class="form-control"
+                                        ng-change="getOutlet(item.restaurant_id)">
+                                    <option value="">Select</option>
+                                    <option ng-repeat="restaurant in restaurants" ng-selected="restaurant.id==item.restaurant_id" value="{{restaurant.id}}" ng-selected="">{{restaurant.title}}</option>
+                                </select>
+                            </div>-->
+
+                            <div class="form-group">
+                                <label for="exampleInputName">Select Merchant</label>
+                                <select class="form-control" ng-model="item.merchant_id" ng-change="getRestaurent(item.merchant_id)">
+                                    <option value="">--Select Merchant--</option></option>
+                                    <option ng-repeat="merchant in merchantList | orderBy:'merchant_name' " ng-selected="merchant.id==item.merchant_id" value="{{merchant.id}}" ng-selected="">{{merchant.merchant_name}}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="category_id">Select Restaurants</label>
+                                <div ng-required ng-dropdown-multiselect="" id="restaurant_id" options="allRestaurent" selected-model="item.restaurant_id" events="yourEvents"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="category_id">Select Outlet</label>
+                                <div ng-required ng-dropdown-multiselect="" id="outlet_id" options="allOutlet" selected-model="item.outlet_id"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="title">Promo Id</label>
+                                <input type="text" required placeholder="Enter Promo Id"  id="id" ng-model="item.visible_id" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="title">Promo Title</label>
+                                <input type="text" required placeholder="Enter Promo Title"  id="title" ng-model="item.title" class="form-control">
+                                <input type="hidden"  ng-model="item.id" >
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea placeholder="Enter Description" required  id="description" ng-model="item.description" ckeditor class="form-control"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description">Benefits</label>
+                                <textarea placeholder="Enter Benefits" required id="benefits" ng-model="item.benefits" ckeditor class="form-control"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="price">Quantity</label>
+                                <input type="text" required placeholder="Enter Quantity"  id="quantity" ng-model="item.quantity" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="category_id">Needed Point Name</label>
+                                <select id="restaurants" ng-model="item.point_master_id" required  class="form-control"">
+                                <option value="">Select Point</option>
+                                <option ng-repeat="point in pointmasterlist | orderBy:'name' " ng-selected="point.id==item.point_master_id" value="{{point.id}}">{{point.name}}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="price">Point Needed</label>
+                                <input type="text" required placeholder="Point Needed"  id="mpoints" ng-model="item.mpoints" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="category_id">Condition</label>
+                                <select id="condition" ng-model="item.conditions" required  class="form-control"">
+
+                                    <option value="0" ng-selected="item.condition==0">Or</option>
+                                    <option value="1" ng-selected="item.condition==1">And</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="price">Price</label>
+                                <input type="text" required placeholder="Enter Price"  id="price" ng-model="item.price" class="form-control" ng-blur="getOfferPrice()">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="price">Offer Percent</label>
+                                <input type="text" required placeholder="Enter Offer Percent"  id="offer_percent" ng-model="item.offer_percent" class="form-control" ng-blur="getOfferPrice()">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="price">Offer Price</label>
+                                <input type="text" required placeholder="Enter Offer Price"  id="offer_price" ng-model="item.offer_price" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="category_id">Given Point Name</label>
+                                <select id="given_point_master_id" ng-model="item.given_point_master_id" required  class="form-control">
+                                <option value="">Select Point</option>
+                                <option ng-repeat="point in pointmasterlist | orderBy:'name' " ng-selected="point.id==item.given_point_master_id" value="{{point.id}}">{{point.name}}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="price">Point Given</label>
+                                <input type="text" required placeholder="Enter M-points Given"  id="mpoints_given" ng-model="item.mpoints_given" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="category_id">Direct Redeem</label>
+                                <select id="direct_redeem" ng-model="item.direct_redeem" required  class="form-control">
+                                    <option value="0" ng-selected="item.direct_redeem==0">No</option>
+                                    <option value="1" ng-selected="item.direct_redeem==1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="category_id">Posting Type</label>
+                                <select id="posting_type" ng-model="item.posting_type" required  class="form-control">
+                                    <option value="P" ng-selected="item.posting_type=='P'">Public</option>
+                                    <option value="M" ng-selected="item.posting_type=='M'">Merchant</option>
+                                    <option value="B" ng-selected="item.posting_type=='B'">Both</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="category_id">Item Validation Start Date from</label>
+                                <select id="start_date_type" ng-model="item.start_date_type" required  class="form-control">
+                                    <option value="F" ng-selected="item.start_date_type=='F'">Fixed Date</option>
+                                    <option value="P" ng-selected="item.start_date_type=='P'">Purchase Date</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group" ng-if="item.start_date_type=='F'">
+                                <label for="price">Item Start Fixed Date</label>
+                                <input type="text" data-ng-datepicker data-ng-options="datepickerOptions" placeholder="Item Start Fixed Date"  id="item_start_date" ng-model="item.item_start_date" class="form-control" ng-blur="calculate_expire_date()">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="price">Item Validation in Days</label>
+                                <input type="text" required placeholder="Item Validation in Days"  id="valid_days" ng-model="item.valid_days" class="form-control" ng-blur="calculate_expire_date()">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="price">Item Expired Date</label>
+                                <input type="text" readonly required placeholder="Item Expired Date"  id="item_expire_date" ng-model="item.item_expire_date" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="category_id">Item Validation Days</label>
+                                <div ng-required ng-dropdown-multiselect="" id="days" options="weekdays" selected-model="item.weekdays" ></div>
+                            </div>
+
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="item.including_holidays" ng-true-value="1" ng-false-value="0"> Including Holidays
+                                </label>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="price">Item Validation Start Hour</label>
+                                <input ui-timepicker="timePickerOptions" ng-model="item.item_start_hour" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="price">Item Validation End Hour</label>
+                                <input type="text" ui-timepicker="timePickerOptions" required id="item_end_hour" ng-model="item.item_end_hour" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="price">Promo Start Date</label>
+                                <input type="text" data-ng-datepicker data-ng-options="datepickerOptions" placeholder="Promo Start Date"  id="offer_from_date" ng-model="item.offer_from_date" class="form-control" ng-blur="calculate_expire_date()">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="price">Promo End Date</label>
+                                <input type="text" data-ng-datepicker data-ng-options="datepickerOptions" required placeholder="Promo End Date"  id="offer_to_date" ng-model="item.offer_to_date" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="price">Maximum Purchased No.</label>
+                                <input type="text" required placeholder="Maximum Purchased No"  id="max_purchased" ng-model="item.max_purchased" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="image">Image</label>
+                                <input type="file"  id="image" ng-model="item.image" base-sixty-four-input>
+                                <img data-ng-src="data:{{item.image.filetype}};base64,{{item.image.base64}}" width="200" ng-if="item.image">
+                                <img src="{{item.image_url}}" ng-if="item.image_url && !item.image" width="200">
+                            </div>
+
+                            <div class="form-group" ng-init="getOfferType()">
+                                <label for="offer_type_id">Select Offer Type</label>
+                                <select required="required" class="form-control" id="offer_type_id" ng-model="item.offer_type_id">
+                                    <option value="">--Select Offer Type--</option></option>
+                                    <option ng-repeat="offerType in offerTypeList | orderBy:'name' " ng-selected="offerType.id==item.offer_type_id"  value="{{offerType.id}}">{{offerType.name}}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group" ng-init="getCategories()">
+                                <label for="category_id">Select Category</label>
+                                <div required="required" ng-dropdown-multiselect="" id="category_id" options="allCat" selected-model="item.category_id"></div>
+                            </div>
+
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="item.is_featured" ng-true-value="1" ng-false-value="0"> Is Featured
+                                </label>
+                            </div>
+
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="item.is_special" ng-true-value="1" ng-false-value="0"> Is Special
+                                </label>
+                                <input type="text" required placeholder="Enter Special Title" ng-if="item.is_special==1" id="title" ng-model="item.special_tag" class="form-control">
+                            </div>
+
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="item.is_active" ng-true-value="1" ng-false-value="0"> Is Active
+                                </label>
+                            </div>
+
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                            <button class="btn btn-danger" type="button" ng-click="cancelPromo()">Cancel</button>
+                        </form>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</div>

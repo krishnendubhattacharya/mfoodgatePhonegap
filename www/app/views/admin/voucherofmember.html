@@ -1,0 +1,102 @@
+<div ng-controller="voucherofmemberCtrl">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+                <div ng-if="voucherView == 'view'">
+                    <header class="panel-heading">
+                        List of Voucher
+                        <span class="tools pull-right">
+                            <a class="fa fa-chevron-down" href="javascript:;"></a>
+                            <a class="fa fa-times" href="javascript:;"></a>
+                         </span>
+                    </header>
+                    <div class="panel-body">
+
+                        <table id="vouchersList" class="table  table-hover general-table">
+                            <thead>
+                            <tr>
+
+                                <th class="hidden-phone">Title</th>
+                                <th class="hidden-phone">Price</th>
+                                <th class="hidden-phone">Offer Price</th>
+                                <th class="hidden-phone">From Date</th>
+                                <th class="hidden-phone">To Date</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr ng-repeat="item in allVoucher">
+
+                                <td >{{item.title}} </td>
+                                <td >${{item.price}}</td>
+                                <td >${{item.offer_price}}</td>
+                                <td >{{item.offer_from_date}}</td>
+                                <td >{{item.offer_to_date}}</td>
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div ng-if="voucherView == 'edit'">
+                    <header class="panel-heading">
+                        Voucher Details
+                    </header>
+                    <div class="panel-body">
+                        <form role="form" ng-submit="saveLocation()">
+                            <div class="form-group" >
+                                <label ><b>First name</b>: {{item.first_name}} </label>
+                            </div>
+
+                            <div class="form-group" >
+                                <label ><b>Last name</b>: {{item.last_name}} </label>
+                            </div>
+
+                            <div class="form-group" >
+                                <label ><b>Email</b>: {{item.email}} </label>
+                            </div>
+
+                            <div class="form-group" >
+                                <label ><b>Registration Date</b>: {{item.registration_date}} </label>
+                            </div>
+
+                            <div class="form-group" >
+                                <label ><b>Last Loged In</b>: {{item.last_login}} </label>
+                            </div>
+
+                            <div class="form-group" >
+                                <label ><b>Phone</b>: {{item.phone}} </label>
+                            </div>
+
+                            <div class="form-group" >
+                                <label ><b>Address</b>: {{item.address}} </label>
+                            </div>
+
+                            <div class="form-group" >
+                                <label ><b>Gender</b>: {{item.gender}} </label>
+                            </div>
+
+                            <div class="form-group" >
+                                <label ><b>M-Points</b> : {{item.points}} </label>
+                            </div>
+
+                            <div class="form-group" >
+                                <label >{{item.image_url}} </label>
+                            </div>
+
+                            <button class="btn btn-danger" type="button" ng-click="cancelvoucher()">Back</button>
+                        </form>
+
+                    </div>
+                </div>
+
+
+            </section>
+        </div>
+    </div>
+
+</div>

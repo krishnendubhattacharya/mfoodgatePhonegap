@@ -1,0 +1,10 @@
+{
+  "name": "sanookbids",
+  "app_id": "a4b9513b",
+  "proxies": [
+    {
+      "path": "/webservices_ionic",
+      "proxyUrl": "http://www.sanookbids.com/webservices_ionic"
+    }
+  ]
+}

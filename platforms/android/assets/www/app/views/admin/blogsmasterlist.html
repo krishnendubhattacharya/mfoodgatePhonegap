@@ -1,0 +1,113 @@
+<div ng-controller="blogsmasterlistCtrl">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+                <div ng-if="promoView == 'view'">
+                    <header class="panel-heading">
+                        Blogs
+                        <span class="tools pull-right">
+                            <a class="fa fa-chevron-down" href="javascript:;"></a>
+                            <a class="fa fa-times" href="javascript:;"></a>
+                         </span>
+                    </header>
+                    <div class="panel-body">
+                        <div class="btn-group">
+                            <button class="btn btn-primary" id="editable-sample_new" ng-click ="addPromo()">
+                                Add Blog
+                            </button>
+                        </div>
+                        <table id="promosList" class="table  table-hover general-table">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th class="hidden-phone">Title</th>
+                                <!--<th class="hidden-phone">User</th>-->
+                                <th class="hidden-phone">Posted On</th>
+                                <th class="hidden-phone">Is Active</th>
+                                <th>Action</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr ng-repeat="item in allpromo">
+                                <td>
+                                    {{item.id}}
+                                </td>
+                                <td >{{item.title}}</td>
+                                <!--<td>{{item.user_name}}</td>-->
+                                <td >{{item.posted_on}}</td>
+                                <td >{{item.is_active=='1'?'Yes':'No'}}</td>
+                                <td ><a class="btn btn-default edit" href="javascript:void(0);" ng-click="editPromo(item)" >Edit</a>
+                                    <a class="btn btn-default delete" href="javascript:;" ng-click="deletePromo(item.id)"
+                                            >Delete</a></td>
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div ng-if="promoView == 'edit'">
+                    <header class="panel-heading">
+                        Add Blog
+                    </header>
+                    <div class="panel-body">
+                        <form role="form" ng-submit="savePromo()" enctype="multipart/form-data">
+
+                            <!--<div class="form-group">-->
+                                <!--<label for="category_id">Select Restaurants</label>-->
+                                <!--<select id="restaurants" ng-model="item.restaurant_id" required  class="form-control" ng-change="getOutlet(item.restaurant_id)">-->
+                                    <!--<option value="">Select</option>-->
+                                    <!--<option ng-repeat="restaurant in restaurants" value="{{restaurant.id}}">{{restaurant.title}}</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+
+                            <!--<div class="form-group">-->
+                                <!--<label for="category_id">Select Outlet</label>-->
+                                <!--<div ng-required ng-dropdown-multiselect="" id="outlet_id" options="allOutlet" selected-model="item.outlet_id"></div>-->
+                            <!--</div>-->
+                            <!---<div class="form-group">
+                                <label for="title">User</label>
+                                <select id="user_id" ng-model="item.user_id" required  class="form-control" >
+                                    <option value="">Select</option>
+                                    <option value="{{merchant.id}}" ng-selected="merchant.id==item.user_id" ng-repeat="merchant in merchants">{{merchant.first_name}} {{merchant.last_name}}</option>
+                                </select>
+                            </div>-->
+
+                            <div class="form-group">
+                                <label for="title">Title</label>
+                                <input type="text" required placeholder="Enter Blog Title"  id="title" ng-model="item.title" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea placeholder="Enter Description"  id="description" ng-model="item.description" ckeditor class="form-control"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="image">Image</label>
+                                <input type="file"  id="image" ng-model="item.image" base-sixty-four-input>
+                                <img src="{{item.image_url}}" ng-if="item.image_url" width="200">
+                            </div>
+
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="item.is_active" ng-true-value="1" ng-false-value="0"> Is Active
+                                </label>
+                            </div>
+
+
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                            <button class="btn btn-danger" type="button" ng-click="cancelPromo()">Cancel</button>
+                        </form>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</div>

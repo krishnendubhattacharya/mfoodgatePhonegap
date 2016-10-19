@@ -1,0 +1,367 @@
+<!--Web header-->
+<div ng-controller="profileCtrl">
+
+    <div class="container phone-hide">
+        <div class="myaccount-details">
+            <h1>{{allicontext[2].title}}</h1>
+                <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+
+            <div class="profile-details">
+                <div class="form">
+                    <div class="dx-fieldset">
+                        <div class="dx-field">
+                            <div class="dx-field-label">First Name</div>
+                            <div class="dx-field-value">
+                                <div dx-text-box="textBox.first_name"  ng-model="userInfo.first_name"></div>
+
+
+                            </div>
+                        </div>
+                        <div class="dx-field">
+                            <div class="dx-field-label">Last Name</div>
+                            <div class="dx-field-value">
+                                <div dx-text-box="textBox.last_name"  ng-model="userInfo.last_name"></div>
+                            </div>
+                        </div>
+                        <div class="dx-field">
+                            <div class="dx-field-label">Email</div>
+                            <div class="dx-field-value">
+                                <div dx-text-box="textBox.email" dx-validator="emailValidationRules" ng-model="userInfo.email"></div>
+                            </div>
+                        </div>
+                        <!--<div class="dx-field">
+                            <div class="dx-field-label">Username</div>
+                            <div class="dx-field-value">
+                                <div dx-text-box="textBox.username" dx-validator="usernameValidationRules" ng-model="username"></div>
+                            </div>
+                        </div>-->
+                        <div class="dx-field">
+                            <div class="dx-field-label">Phone</div>
+                            <div class="dx-field-value">
+                                <div dx-text-box="textBox.phone"  ng-model="userInfo.phone"></div>
+                            </div>
+                        </div>
+                        <div class="dx-field">
+                            <div class="dx-field-label">Gender</div>
+                            <div class="dx-field-value">
+                                <div dx-select-box="selectBox.simple" ng-model="userInfo.gender"></div>
+                            </div>
+                        </div>
+
+                        <div class="dx-field">
+                            <div class="dx-field-label">Date of Birth</div>
+                            <div class="dx-field-value">
+                                <div dx-date-box="dateBox.dob" ng-model="userInfo.dob"></div>
+                            </div>
+                        </div>
+                        <div class="dx-field">
+                            <div class="dx-field-label">Occupation</div>
+                            <div class="dx-field-value">
+                                <div dx-text-box="textBox.occupation"  ng-model="userInfo.occupation"></div>
+                            </div>
+                        </div>
+                        <div class="dx-field">
+                            <div class="dx-field-label">City</div>
+                            <div class="dx-field-value">
+                                <div dx-select-box="selectBox.location" ng-model="userInfo.location_id"></div>
+                            </div>
+                        </div>
+                        <div class="dx-field">
+                            <div class="dx-field-label">Address</div>
+                            <div class="dx-field-value">
+                                <!--<div dx-text-box ng-model="userInfo.address"></div>-->
+                                <div class="dx-field-value dx-texteditor" style="width:100%">
+                                    <!--<div dx-text-area="textArea"  ng-model="menuInfo.address"></div>-->
+                                    <input places-auto-complete id="address" ng-model="userInfo.address" class="dx-texteditor-input" on-place-changed="placeChanged()"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dx-field">
+                            <div class="dx-field-label">About Me</div>
+                            <div class="dx-field-value">
+                                <div dx-text-area="textArea"  ng-model="userInfo.about_me"></div>
+                            </div>
+                        </div>
+
+                        <div class="dx-field">
+                            <div class="dx-field-label">Favourite Food</div>
+                            <div class="dx-field-value">
+                                <div class="tagBox" dx-tag-box="{
+                                placeholder: 'Select Foods',
+                                displayExpr: 'name',
+                                onInitialized:init_food,
+                                bindingOptions: {
+                                    valueExpr: 'id',
+                                    values: {
+
+                                        dataPath: 'capitals'
+                                    }
+                                }
+                            }"></div>
+                            </div>
+                        </div>
+                        <div class="dx-field">
+                            <div class="dx-field-value">
+                        <div id="button" dx-button="{
+                                text: 'Submit',
+                                type: 'success',
+                                onClick: validateAndSubmit }" ></div>
+                                </div>
+                            </div>
+                    </div>
+
+                    <!--<div>
+                        <p><b>Selected state capitals:</b></p>
+                        <ul ng-repeat="capital in capitals">
+                            <li>
+                                <p>"{{capital}}"</p>
+                            </li>
+                        </ul>
+                    </div>-->
+                    <!--<div id="summary" dx-validation-summary="{ }"></div>-->
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="m-myaccount-details tablet-hide">
+
+        <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+
+        <div class="m-profile-details">
+            <div class="form">
+                <div class="dx-fieldset">
+                    <div class="dx-field">
+                        <div class="dx-field-label">First Name</div>
+                        <div class="dx-field-value">
+                            <div dx-text-box="textBox.first_name"  ng-model="userInfo.first_name"></div>
+
+
+                        </div>
+                    </div>
+                    <div class="dx-field">
+                        <div class="dx-field-label">Last Name</div>
+                        <div class="dx-field-value">
+                            <div dx-text-box="textBox.last_name"  ng-model="userInfo.last_name"></div>
+                        </div>
+                    </div>
+                    <div class="dx-field">
+                        <div class="dx-field-label">Email</div>
+                        <div class="dx-field-value">
+                            <div dx-text-box="textBox.email" dx-validator="emailValidationRules" ng-model="userInfo.email"></div>
+                        </div>
+                    </div>
+                    <!--<div class="dx-field">
+                        <div class="dx-field-label">Username</div>
+                        <div class="dx-field-value">
+                            <div dx-text-box="textBox.username" dx-validator="usernameValidationRules" ng-model="username"></div>
+                        </div>
+                    </div>-->
+                    <div class="dx-field">
+                        <div class="dx-field-label">Phone</div>
+                        <div class="dx-field-value">
+                            <div dx-text-box="textBox.phone"  ng-model="userInfo.phone"></div>
+                        </div>
+                    </div>
+                    <div class="dx-field">
+                        <div class="dx-field-label">Gender</div>
+                        <div class="dx-field-value">
+                            <div dx-select-box="selectBox.simple" ng-model="userInfo.gender"></div>
+                        </div>
+                    </div>
+
+                    <div class="dx-field">
+                        <div class="dx-field-label">Date of Birth</div>
+                        <div class="dx-field-value">
+                            <div dx-date-box="dateBox.dob" ng-model="userInfo.dob"></div>
+                        </div>
+                    </div>
+                    <div class="dx-field">
+                        <div class="dx-field-label">Occupation</div>
+                        <div class="dx-field-value">
+                            <div dx-text-box="textBox.occupation"  ng-model="userInfo.occupation"></div>
+                        </div>
+                    </div>
+                    <div class="dx-field">
+                        <div class="dx-field-label">City</div>
+                        <div class="dx-field-value">
+                            <div dx-select-box="selectBox.location" ng-model="userInfo.location_id"></div>
+                        </div>
+                    </div>
+                    <div class="dx-field">
+                        <div class="dx-field-label">Address</div>
+                        <div class="dx-field-value">
+                            <div dx-text-box ng-model="userInfo.address"></div>
+                        </div>
+                    </div>
+                    <div class="dx-field">
+                        <div class="dx-field-label">About Me</div>
+                        <div class="dx-field-value">
+                            <div dx-text-area="textArea"  ng-model="userInfo.about_me"></div>
+                        </div>
+                    </div>
+
+                    <div class="dx-field">
+                        <div class="dx-field-label">Favourite Food</div>
+                        <div class="dx-field-value">
+                            <div class="tagBox" dx-tag-box="{
+                                placeholder: 'Select Foods',
+                                displayExpr: 'name',
+                                onInitialized:init_food_mob,
+                                bindingOptions: {
+                                    valueExpr: 'id',
+                                    values: {
+
+                                        dataPath: 'capitals'
+                                    }
+                                }
+                            }"></div>
+                        </div>
+                    </div>
+                    <div id="button" dx-button="{
+                                text: 'Submit',
+                                type: 'success',
+                                onClick: validateAndSubmit }" ></div>
+                </div>
+                <!--<div id="summary" dx-validation-summary="{ }"></div>-->
+
+            </div>
+        </div>
+
+    </div>
+    <div class="dx-clearfix"></div>
+    <!--<div class="container phone-hide">
+        <div class="transaction-details">
+            <h1>Transaction Details</h1>
+            <table>
+                <tr>
+                    <td width="15%" class="header-color">Transaction Date</td>
+                    <td width="14%" class="header-color">Transaction ID</td>
+                    <td width="33%" class="header-color">Transaction Description</td>
+                    <td width="13%" class="header-color">Debit (mPts)</td>
+                    <td width="12%" class="header-color">Credit (mPts)</td>
+                    <td width="13%" class="header-color">Total (mPts)</td>
+                </tr>
+                <tr>
+                    <td><div class="select-box"><select>
+                        <option>Select</option>
+                        <option>Select</option>
+                        <option>Select</option>
+                    </select></div></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><div class="select-box"><select>
+                        <option>Select</option>
+                        <option>Select</option>
+                        <option>Select</option>
+                    </select></div></td>
+                </tr>
+                <tr>
+                    <td>7/1/2015</td>
+                    <td>TRN120953549</td>
+                    <td>Brought Forward Balance</td>
+                    <td>250,000</td>
+                    <td>0</td>
+                    <td>250,000</td>
+                </tr>
+                <tr>
+                    <td>7/1/2015</td>
+                    <td>TRN120953549</td>
+                    <td>Brought Forward Balance</td>
+                    <td>250,000</td>
+                    <td>0</td>
+                    <td>250,000</td>
+                </tr>
+                <tr>
+                    <td>7/1/2015</td>
+                    <td>TRN120953549</td>
+                    <td>Brought Forward Balance</td>
+                    <td>250,000</td>
+                    <td>0</td>
+                    <td>250,000</td>
+                </tr>
+                <tr>
+                    <td>7/1/2015</td>
+                    <td>TRN120953549</td>
+                    <td>Brought Forward Balance</td>
+                    <td>250,000</td>
+                    <td>0</td>
+                    <td>250,000</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="m-transaction-details tablet-hide">
+        <h1>Transaction Details</h1>
+        <table>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction Date</td>
+                <td>7/1/2015</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction ID</td>
+                <td>TRN120953549</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction Description</td>
+                <td>Brought Forward Balance</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Debit (mPts)</td>
+                <td>250,000</td>
+            </tr>
+            <tr>
+                <td width="12%" class="m-header-color">Credit (mPts)</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td width="13%" class="m-header-color">Total (mPts)</td>
+                <td>250,000</td>
+            </tr>
+            </tr>
+        </table>
+
+    </div>
+
+    <div class="m-transaction-details tablet-hide">
+        <h1>Transaction Details</h1>
+        <table>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction Date</td>
+                <td>7/1/2015</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction ID</td>
+                <td>TRN120953549</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction Description</td>
+                <td>Brought Forward Balance</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Debit (mPts)</td>
+                <td>250,000</td>
+            </tr>
+            <tr>
+                <td width="12%" class="m-header-color">Credit (mPts)</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td width="13%" class="m-header-color">Total (mPts)</td>
+                <td>250,000</td>
+            </tr>
+            </tr>
+        </table>
+
+    </div>
+
+    <div class="dx-clearfix"></div>-->
+</div>
+
+

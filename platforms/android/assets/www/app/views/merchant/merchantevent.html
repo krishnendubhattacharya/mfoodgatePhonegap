@@ -1,0 +1,261 @@
+<!--Web header-->
+
+<div ng-controller="merchanteventCtrl">
+
+    <div class="container phone-hide">
+        <div class="myaccount-details">
+            <h1>{{allicontext[28].title}}</h1>
+            <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+
+            <div class="profile-details brt-none mb-15">
+			 <h3 ng-click="secondShowHide()">My Event Offer list</h3>
+                <div ng-show="second_show" id="gridContainer" dx-data-grid="dataGridOptionsMy"></div>
+            </div>
+            
+            <div class="profile-details brt-none mb-15">
+			 <h3 ng-click="firstShowHide()">Event Offer list</h3>
+                <div ng-show="first_show" id="gridContainer" dx-data-grid="dataGridOptions"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="m-myaccount-details tablet-hide">
+
+        <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+        <h1>{{allicontext[28].title}}</h1>
+        
+        
+        <div class="m-profile-details br-0 mb-0 pb-0">
+            <h1 ng-click="secondShowHide()">My Bid on Event Offer </h1>
+            <!--<div class="new-search"> <input type="text" placeholder="Search.." ng-model="test"></div>-->
+            <div class="dx-clearfix"></div>
+            <div class="new-border">
+        <div class="m-transaction-details tablet-hide" ng-show="second_show" ng-repeat="voucherDetail in eventMyInfo | filter:test">
+            <h1>{{voucherDetail.title}}</h1>
+            <table>
+                <tr>
+                    <td width="30%" class="m-header-color">Offer Start Date</td>
+                    <td>{{voucherDetail.offer_from_date}}</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Offer End Date</td>
+                    <td>{{voucherDetail.offer_to_date}}</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Event Date</td>
+                    <td>{{voucherDetail.event_date}}</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Event Start Time</td>
+                    <td>{{voucherDetail.event_start_time}}</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Event End Time</td>
+                    <td>{{voucherDetail.event_end_time}}</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Price</td>
+                    <td>{{voucherDetail.price}}</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Status</td>
+                    <td>{{voucherDetail.status}}</td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2">
+                        <div class="nwe-btn"><span class="dx-button" ng-click="event_detail({{voucherDetail.id}})">DETAIL</span></div>
+                       
+                    </td>
+
+                </tr>
+            </table>
+        </div>
+        </div>
+            </div>
+            
+            
+        <div class="m-profile-details br-0 mb-0 pb-0">
+            <h1 ng-click="firstShowHide()">Event Offer list</h1>
+            <!--<div class="new-search"> <input type="text" placeholder="Search.." ng-model="test"></div>-->
+            <div class="dx-clearfix"></div>
+            <div class="new-border">
+        <div class="m-transaction-details tablet-hide" ng-show="first_show" ng-repeat="voucherDetail in eventInfo | filter:test">
+            <h1>{{voucherDetail.title}}</h1>
+            <table>
+                <tr>
+                    <td width="30%" class="m-header-color">Offer Start Date</td>
+                    <td>{{voucherDetail.offer_from_date}}</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Offer End Date</td>
+                    <td>{{voucherDetail.offer_to_date}}</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Event Date</td>
+                    <td>{{voucherDetail.event_date}}</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Event Start Time</td>
+                    <td>{{voucherDetail.event_start_time}}</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Event End Time</td>
+                    <td>{{voucherDetail.event_end_time}}</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Bid Price</td>
+                    <td>{{voucherDetail.bid_price}}</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Status</td>
+                    <td>{{voucherDetail.status}}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="nwe-btn"><span class="dx-button" ng-click="event_detail({{voucherDetail.id}})">DETAIL</span></div>
+                        <div class="nwe-btn" ng-if="!voucherDetail.is_bid"><span class="dx-button" ng-click="event_bid({{voucherDetail.id}})">BID</span></div>
+                    </td>
+
+                </tr>
+            </table>
+        </div>
+        </div>
+            </div>    
+
+
+    </div>
+    <div class="dx-clearfix"></div>
+    <!--<div class="container phone-hide">
+        <div class="transaction-details">
+            <h1>Transaction Details</h1>
+            <table>
+                <tr>
+                    <td width="15%" class="header-color">Transaction Date</td>
+                    <td width="14%" class="header-color">Transaction ID</td>
+                    <td width="33%" class="header-color">Transaction Description</td>
+                    <td width="13%" class="header-color">Debit (mPts)</td>
+                    <td width="12%" class="header-color">Credit (mPts)</td>
+                    <td width="13%" class="header-color">Total (mPts)</td>
+                </tr>
+                <tr>
+                    <td><div class="select-box"><select>
+                        <option>Select</option>
+                        <option>Select</option>
+                        <option>Select</option>
+                    </select></div></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><div class="select-box"><select>
+                        <option>Select</option>
+                        <option>Select</option>
+                        <option>Select</option>
+                    </select></div></td>
+                </tr>
+                <tr>
+                    <td>7/1/2015</td>
+                    <td>TRN120953549</td>
+                    <td>Brought Forward Balance</td>
+                    <td>250,000</td>
+                    <td>0</td>
+                    <td>250,000</td>
+                </tr>
+                <tr>
+                    <td>7/1/2015</td>
+                    <td>TRN120953549</td>
+                    <td>Brought Forward Balance</td>
+                    <td>250,000</td>
+                    <td>0</td>
+                    <td>250,000</td>
+                </tr>
+                <tr>
+                    <td>7/1/2015</td>
+                    <td>TRN120953549</td>
+                    <td>Brought Forward Balance</td>
+                    <td>250,000</td>
+                    <td>0</td>
+                    <td>250,000</td>
+                </tr>
+                <tr>
+                    <td>7/1/2015</td>
+                    <td>TRN120953549</td>
+                    <td>Brought Forward Balance</td>
+                    <td>250,000</td>
+                    <td>0</td>
+                    <td>250,000</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="m-transaction-details tablet-hide">
+        <h1>Transaction Details</h1>
+        <table>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction Date</td>
+                <td>7/1/2015</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction ID</td>
+                <td>TRN120953549</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction Description</td>
+                <td>Brought Forward Balance</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Debit (mPts)</td>
+                <td>250,000</td>
+            </tr>
+            <tr>
+                <td width="12%" class="m-header-color">Credit (mPts)</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td width="13%" class="m-header-color">Total (mPts)</td>
+                <td>250,000</td>
+            </tr>
+            </tr>
+        </table>
+
+    </div>
+
+    <div class="m-transaction-details tablet-hide">
+        <h1>Transaction Details</h1>
+        <table>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction Date</td>
+                <td>7/1/2015</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction ID</td>
+                <td>TRN120953549</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction Description</td>
+                <td>Brought Forward Balance</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Debit (mPts)</td>
+                <td>250,000</td>
+            </tr>
+            <tr>
+                <td width="12%" class="m-header-color">Credit (mPts)</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td width="13%" class="m-header-color">Total (mPts)</td>
+                <td>250,000</td>
+            </tr>
+            </tr>
+        </table>
+
+    </div>
+
+    <div class="dx-clearfix"></div>-->
+</div>
+
+

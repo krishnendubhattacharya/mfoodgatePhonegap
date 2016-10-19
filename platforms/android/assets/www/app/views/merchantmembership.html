@@ -1,0 +1,111 @@
+<!--Web header-->
+<div ng-controller="merchantmembershipCtrl">
+
+    <div ng-include="'app/views/partials/merchant_header.html'"></div>
+    <div class="dx-clearfix"></div>
+    <div class="container phone-hide">
+        <!--<div ng-include="'app/views/partials/merchant_leftbar.html'"></div>-->
+        <div class="category-left phone-hide">
+            <h1>Restaurants</h1>
+            <div ng-include="'app/views/partials/merchant_leftbar.html'"></div>
+        </div>
+        <div class="featured-Promo">
+            <div class="merchant-card" ng-repeat="feature in featuredPromo | limitTo:1">
+                <div class="card-img">
+                    <a ui-sref="frontend.newsdetail({newsId:feature.id})" style="color: #339933"><img src="{{feature.image_url}}" alt=""/></a> </div>
+                <div class="card-dsc">
+                    <h1><a ui-sref="frontend.newsdetail({newsId:feature.id})" style="color: #339933">{{feature.title}}</a></h1>
+                    <!--<h2>Give all the benefits of a mFoodGate card</h2>-->
+                    <p ng-bind-html="feature.description"></p>
+                    <!--<a ui-sref="frontend.newsdetail({newsId:feature.id})" style="color: #339933">Details</a>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tablet-hide">
+        <div ng-include="'app/views/partials/merchant_leftbar.html'"></div>
+
+    </div>
+    <div class="m-merchant-card tablet-hide" ng-repeat="feature in featuredPromo | limitTo:1">
+        <div class="card-img">
+            <a ui-sref="frontend.newsdetail({newsId:feature.id})" style="color: #339933">
+                <img src="{{feature.image_url}}" alt=""/>
+            </a>
+        </div>
+        <div class="card-dsc">
+            <h1><a ui-sref="frontend.newsdetail({newsId:feature.id})" style="color: #339933">{{feature.title}}</a></h1>
+            <!--<h2>Give all the benefits of a mFoodGate card</h2>-->
+            <p ng-bind-html="feature.description"></p>
+            <!--<p>Click Here</p>-->
+        </div>
+    </div>
+    <div class="dx-clearfix"></div>
+    <div class="container phone-hide">
+        <div class="three-box owecar">
+
+                <div ng-repeat="special in specialPromo" class="item">
+                    <div class="card-item">
+                        <h1 ><a ui-sref="frontend.newsdetail({newsId:special.id})">{{special.title | limitTo:28}}</a></h1>
+                        <div class="card-box"><a ui-sref="frontend.newsdetail({newsId:special.id})"><img src="{{special.image_url}}" alt="" height="100%" width="100%"/></a></div>
+                        <!--<p ng-bind-html="special.description"></p>-->
+                    </div>
+                </div>
+                <!--<li>-->
+                    <!--<div class="card-item">-->
+                        <!--<h1>Sign In</h1>-->
+                        <!--<div class="card-box"><img src="app/assets/Images/card-3.png" alt=""/></div>-->
+                        <!--<p>Lorem ipsum dolor siconsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>-->
+                    <!--</div>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<div class="card-item">-->
+                        <!--<h1>Corporate Gift</h1>-->
+                        <!--<div class="card-box">-->
+
+                            <!--<div class="card-img"><img src="app/assets/Images/card-4.png" alt=""/></div>-->
+                            <!--<p>Lorem ipsum dolor siconsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</li>-->
+            </div>
+    </div>
+    <div class="m-three-box tablet-hide">
+        <div class="owecar1">
+            <div ng-repeat="special in specialPromo" class="item">
+                <div class="card-item">
+                    <h1 ><a ui-sref="frontend.newsdetail({newsId:special.id})">{{special.title | limitTo:28}}</a></h1>
+                    <div class="card-box"><a ui-sref="frontend.newsdetail({newsId:special.id})"><img src="{{special.image_url}}" alt="" height="100%" width="100%"/></a></div>
+                    <!--<p ng-bind-html="special.description"></p>-->
+                </div>
+            </div>
+        </div>
+        <!--<ul>-->
+            <!--<li>-->
+                <!--<div class="card-item">-->
+                    <!--<h1>Register Your Card</h1>-->
+                    <!--<div class="card-box"><img src="app/assets/Images/card-2.png" alt=""/></div>-->
+                    <!--<p>Lorem ipsum dolor siconsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>-->
+                <!--</div>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<div class="card-item">-->
+                    <!--<h1>Sign In</h1>-->
+                    <!--<div class="card-box"><img src="app/assets/Images/card-3.png" alt=""/></div>-->
+                    <!--<p>Lorem ipsum dolor siconsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>-->
+                <!--</div>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<div class="card-item">-->
+                    <!--<h1>Corporate Gift</h1>-->
+                    <!--<div class="card-box"><img src="app/assets/Images/card-4.png" alt=""/></div>-->
+                    <!--<p>Lorem ipsum dolor siconsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>-->
+                <!--</div>-->
+            <!--</li>-->
+        <!--</ul>-->
+    </div>
+
+    <div class="dx-clearfix"></div>
+    
+</div>
+
+

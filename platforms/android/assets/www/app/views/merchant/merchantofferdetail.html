@@ -1,0 +1,65 @@
+<!--Web header-->
+<div ng-controller="merchantofferdetailCtrl">
+
+    <div class="container phone-hide">
+        <div class="voucher-details">
+            <h1>Offer Detail</h1>
+                <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+
+            <div class="profile-details">
+
+                <div class="img-box">
+                    <div class="pro-item">
+                        <div class="logo-box">
+                            <div class="p-circle">5X</div>
+                            <img src="{{offerImagePath}}" width="218" height="100"  alt="" style="width:218px"/>
+
+                        </div>
+
+                    </div>
+                    <form>
+                        <input type="file" id="i_file" name="file" ng-file-select="onFileSelect($files)" />
+                    </form>
+                </div>
+                <div class="desc-box">
+                    <h1>{{voucherInfo.offer_details.title}}</h1>
+                    <p>{{voucherInfo.offer_details.description}}</p>
+                    <!--<div class="btns">
+                        <span class="btn_g"><a href="">USE VOUCHER</a></span> <span class="btn_g"><a href="javascript:void(0);" ng-click="boucherResell()">RESELL</a></span> <span class="btn_or"><a href="javascript:void(0);" ng-click="bocherGift()">GIVE FRIEND</a></span>
+                    </div>-->
+                    <div class="pay-box">
+                        <p>DISCOUNT  &nbsp; &nbsp; &nbsp;<span class="discount">{{voucherInfo.offer_details.offer_percent}}%</span></p>
+                        <p>Sold  &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;<span class="sold">{{voucherInfo.total_sold}}</span></p>
+                    </div>
+                    <!--<div class="pay-box">
+                        <p>Share &nbsp; &nbsp; &nbsp;<img src="app/assets/Images/share.png" width="244" height="29"  alt=""/></p>
+                    </div>
+                    <div class="merchant">
+                        <div class="merchant-logo"><img src="{{voucherInfo.restaurant_details.logo}}" width="163" height="138"  alt=""/></div>
+                        <div class="merchant-dsc">
+                            <h2>{{voucherInfo.restaurant_details.title}}</h2>
+                            <p>{{voucherInfo.restaurant_details.address}}</p>
+                        </div>
+                    </div>-->
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </div>
+    <div class="m-myaccount-details tablet-hide">
+
+        <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+        <h1>Offer Detail</h1>
+        <div class="m-profile-details">
+            <div id="gridContainer" dx-data-grid="dataGridOptions"></div>
+        </div>
+
+    </div>
+
+
+</div>
+
+

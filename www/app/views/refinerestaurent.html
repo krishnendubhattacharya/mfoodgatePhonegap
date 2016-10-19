@@ -1,0 +1,139 @@
+<!--Web Body-->
+
+<div ng-controller="refinerestaurentCtrl">
+<!--<div class="container phone-hide">
+    <div class="ads-banner"><img src="app/assets/Images/banner.jpg" width="1081" height="88"  alt=""/></div>
+</div>
+<div class="m-banner moblie-potrait">
+    <div class="m-ads-banner">
+        <img src="app/assets/Images/m-banner.png" alt="" width="320px"/>
+    </div>
+</div>-->
+<!--mobile Body-->
+
+<!--Section - 1-->
+<div class="container phone-hide">
+    <!--Left menu-->
+    
+
+    <div class="category-left">
+        <h1>Browse Categories</h1>
+        <ul>
+            <li ng-repeat="catdetail in catInfo"><a ui-sref="frontend.refinerestaurent({ categoryId: catdetail.id })"><img src="{{catdetail.icon_url}}" width="20" height="20" ng-if="catdetail.icon_url" style="margin-right: 15px;"/>{{catdetail.name}}</a></li>
+
+            <!--<li><a href="">Western Food (39)</a></li>
+            <li><a href="">Indonesian Food (108)</a></li>
+            <li><a href="">Japanese Food (65)</a></li>
+            <li><a href="">Warong Kopi (27)</a></li>
+            <li><a href="">Food Court (8)</a></li>
+            <li><a href="">All Restaurants (280)</a></li>-->
+        </ul>
+
+
+        <div class="owl-carousel1 new-Promo">
+            <div class="item pro-item" ng-repeat="featuredCatDetail in ads">
+                <a ui-sref="frontend.advertisedetail({advertiseId:featuredCatDetail.id})"><img src="{{featuredCatDetail.image_url}}"  alt=""/></a>
+                <div class="desc" ng-if="featuredCatDetail.title">
+                    <h3 class="ng-binding">{{featuredCatDetail.title}}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Featured Promo-->
+
+<div class="category-f">
+    <div style="border: none; margin: 0;" class="restaurant-Promo phone-hide">
+        <h1>{{categoryInfo.name}}</h1>
+        <ul>
+            <li ng-repeat="restaurantDetail in restaurantInfo">
+                <div class="pro-item">
+                    <div class="logo-box"><img src="{{restaurantDetail.logo}}" alt=""/></div>
+                    <div class="desc">
+                        <h2>{{restaurantDetail.title}}</h2>
+                        <h3>{{restaurantDetail.sub_title}}</h3>
+                        <div class="btn"><a ui-sref="frontend.restaurentpromo({ restaurantId: restaurantDetail.id })">View All Promo</a></div>
+                    </div>
+                </div>
+            </li>
+            <!--<li>
+                <div class="pro-item">
+                    <img src="app/assets/Images/pro-1.png" width="406" height="255"  alt=""/>
+                    <div class="p-circle">50%</div>
+                    <div class="desc">
+                        <div class="txt">
+                            <h2>Voucher Oel Merdeka</h2>
+                            <p>Bekasi</p>
+                            <p class="price"><span>IDR150.000</span> IDR75.000</p>
+                        </div>
+                        <div class="view-btn"><a ui-sref="frontend.promodetails"><img src="app/assets/Images/view-btn.png" width="66" height="42"  alt=""/></a></div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="pro-item">
+                    <img src="app/assets/Images/pro-2.png" width="406" height="255"  alt=""/>
+                    <div class="p-circle">50%</div>
+                    <div class="desc">
+                        <div class="txt">
+                            <h2>Voucher Oel Merdeka</h2>
+                            <p>Bekasi</p>
+                            <p class="price"><span>IDR150.000</span> IDR75.000</p>
+                        </div>
+                        <div class="view-btn"><a href=""><img src="app/assets/Images/view-btn.png" width="66" height="42"  alt=""/></a></div>
+                    </div>
+                </div>
+            </li>-->
+        </ul>
+    </div>
+</div>
+</div>
+<!--mobile promo-->
+    <div class="m-restaurant-Promo tablet-hide">
+        <h1>{{categoryInfo.name}}</h1>
+        <ul>
+            <li ng-repeat="restaurantDetail in restaurantInfo">
+                <div class="pro-item">
+                    <div class="logo-box"><img src="{{restaurantDetail.logo}}" alt=""/></div>
+                    <div class="desc">
+                        <h2>{{restaurantDetail.title}}</h2>
+                        <h3>{{restaurantDetail.sub_title}}</h3>
+                        <div class="btn"><a ui-sref="frontend.restaurentpromo({ restaurantId: restaurantDetail.id })">View All Promo</a></div>
+                    </div>
+                </div>
+            </li>
+            <!--<li>
+                <div class="pro-item">
+                    <img src="app/assets/Images/pro-1.png" width="406" height="255"  alt=""/>
+                    <div class="p-circle">50%</div>
+                    <div class="desc">
+                        <div class="txt">
+                            <h2>Voucher Oel Merdeka</h2>
+                            <p>Bekasi</p>
+                            <p class="price"><span>IDR150.000</span> IDR75.000</p>
+                        </div>
+                        <div class="view-btn"><a ui-sref="frontend.promodetails"><img src="app/assets/Images/view-btn.png" width="66" height="42"  alt=""/></a></div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="pro-item">
+                    <img src="app/assets/Images/pro-2.png" width="406" height="255"  alt=""/>
+                    <div class="p-circle">50%</div>
+                    <div class="desc">
+                        <div class="txt">
+                            <h2>Voucher Oel Merdeka</h2>
+                            <p>Bekasi</p>
+                            <p class="price"><span>IDR150.000</span> IDR75.000</p>
+                        </div>
+                        <div class="view-btn"><a href=""><img src="app/assets/Images/view-btn.png" width="66" height="42"  alt=""/></a></div>
+                    </div>
+                </div>
+            </li>-->
+        </ul>
+    </div>
+<div class="dx-clearfix"></div>
+</div>
+<style>
+    .new-Promo .pro-item{ height:  154px !important;}
+</style>

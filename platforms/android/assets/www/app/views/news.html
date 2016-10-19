@@ -1,0 +1,131 @@
+<!--Web header-->
+<!--<div ng-controller="loginCtrl">-->
+
+<div class="container phone-hide" ng-controller="newsCtrl">
+    <div class="news">
+        <div class="left-col">
+            <div class="banner">
+
+                <h1><a ui-sref="frontend.newsdetail({ newsId: bannernews.id })">{{bannernews.title}}</a></h1>
+                <img src="{{bannernews.image}}" alt=""/>
+            </div>
+            <div class="all-news">
+                <h1>All News</h1>
+                <div class="news-item" ng-repeat="news in allnews">
+                    <div class="pix"><img src="{{news.image}}" width="264" height="167"  alt=""/></div>
+                    <div class="dsc">
+                        <h1><a ui-sref="frontend.newsdetail({ newsId: news.id })">{{news.title}}</a></h1>
+                        <p ng-bind-html="news.description | limitTo:300"></p>
+                        <div class="posted"><strong>Posted on:</strong> {{news.date}} | By: Admin
+                            <span>View ({{news.views}})</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right-col">
+            <div class="latest-news">
+                <h1>Latest Update</h1>
+                <div class="ln-news">
+                    <ul>
+                        <li ng-repeat="latest in latestnews | limitTo:4">
+                            <div class="n-pix"><img src="{{latest.image}}" alt=""/></div>
+                            <div class="n-dsc">
+                                <p><a ui-sref="frontend.newsdetail({ newsId: latest.id })">{{latest.title}}</a></p>
+                                <!--<p ng-bind-html="latest.description | limitTo:20"></p>-->
+                            </div>
+                        </li>
+                        <!--<li>
+                            <div class="n-pix"><img src="app/assets/Images/n-pix-n.jpg" alt=""/></div>
+                            <div class="n-dsc">
+                                <p><a href="">Lorem ipsum dolor sit amet, consectetur adipiscing elit</a></p>
+                                <p>Minim veniam, quis nostrud exercitation ullamco </p>
+                            </div>
+                        </li>-->
+
+                    </ul>
+                </div>
+            </div>
+            <div class="latest-news">
+                <h1>Popular</h1>
+                <div class="most-viewed">
+                    <ul>
+                        <li ng-repeat="mostview in mostviews | limitTo:4">
+                            <div class="v-pix"><img src="{{mostview.image}}" alt=""/></div>
+                            <div class="v-dsc">
+                                <p><a ui-sref="frontend.newsdetail({ newsId: mostview.id })">{{mostview.title}}</a></p><br/>
+                                   <p ng-bind-html="mostview.description | limitTo:30"></p>
+                                <div class="posted"><strong>Posted on:</strong> {{mostview.date}} | By: Admin
+                                    <span>View ({{mostview.views}})</span></div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="m-news tablet-hide" ng-controller="newsCtrl">
+    <div class="left-col">
+        <div class="banner">
+            <h1><a ui-sref="frontend.newsdetail({ newsId: bannernews.id })">{{bannernews.title}}</a></h1>
+            <img src="{{bannernews.image}}" alt=""/>
+        </div>
+        <div class="all-news">
+            <h1>All News</h1>
+            <div class="news-item" ng-repeat="news in allnews">
+                <div class="pix"><img src="{{news.image}}" width="264" height="167"  alt=""/></div>
+                <div class="dsc">
+                    <h1><a ui-sref="frontend.newsdetail({ newsId: news.id })">{{news.title}}</a></h1>
+                    <p ng-bind-html="news.description | limitTo:300"></p>
+                    <div class="posted"><strong>Posted on:</strong> {{news.date}} | By: Admin
+                        <span>View ({{news.views}})</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="right-col">
+        <div class="latest-news">
+            <h1>Latest Update</h1>
+            <div class="ln-news">
+                <ul>
+                    <li ng-repeat="latest in latestnews | limitTo:4">
+                        <div class="n-pix"><img src="{{latest.image}}" alt=""/></div>
+                        <div class="n-dsc">
+                            <p><a ui-sref="frontend.newsdetail({ newsId: latest.id })">{{latest.title}}</a></p>
+                            <!--<p ng-bind-html="latest.description | limitTo:20"></p>-->
+                        </div>
+                    </li>
+                    <!--<li>
+                        <div class="n-pix"><img src="app/assets/Images/n-pix-n.jpg" alt=""/></div>
+                        <div class="n-dsc">
+                            <p><a href="">Lorem ipsum dolor sit amet, consectetur adipiscing elit</a></p>
+                            <p>Minim veniam, quis nostrud exercitation ullamco </p>
+                        </div>
+                    </li>-->
+
+                </ul>
+            </div>
+        </div>
+        <div class="latest-news">
+            <h1>Popular</h1>
+            <div class="most-viewed">
+                <ul>
+                    <li ng-repeat="mostview in mostviews | limitTo:4">
+                        <div class="v-pix"><img src="{{mostview.image}}" alt=""/></div>
+                        <div class="v-dsc">
+                            <p><a ui-sref="frontend.newsdetail({ newsId: mostview.id })">{{mostview.title}}</a></p><br/>
+                            <p ng-bind-html="mostview.description | limitTo:30"></p>
+                            <div class="posted"><strong>Posted on:</strong> {{mostview.date}} | By: Admin
+                                <span>View ({{mostview.views}})</span></div>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="dx-clearfix"></div>
+
+<!--</div>-->

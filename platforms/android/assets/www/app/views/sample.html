@@ -1,0 +1,88 @@
+<!--Web header-->
+<style>
+    #info {
+        width: 200px;
+        height: 200px;
+        text-align: center;
+        margin: 0 auto;
+        margin-top: 10px;
+    }
+
+    #info img {
+        width: 100%;
+    }
+
+    .slideout-container {
+        height: auto;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width:100%;
+    }
+
+    .dx-field-label {
+        width: 70%;
+    }
+</style>
+<div ng-controller="activationCtrl">
+
+    <!--<div class="slideout-container">
+        <div dx-slide-out="{
+        dataSource: data1,
+		onItemClick: showMenu,
+		menuGrouped: true,
+		bindingOptions: {
+			menuVisible: 'menuVisible',
+			swipeEnabled: 'swipeValue'
+		}
+    }">
+            <div data-options="dxTemplate: { name: 'item' }">
+                <div dx-toolbar="{ dataSource: $parent.toolbarItems }">
+                    <div data-options="dxTemplate: { name: 'title' }">
+                        <p>{{$parent.text}}</p>
+                    </div>
+                </div>
+                <div id="info">
+                    <img class="image" ng-src="{{src}}">
+                    <h1>{{price}}</h1>
+                </div>
+                <div class="dx-fieldset">
+                    <div class="dx-fieldset-header">Options:</div>
+                    <div class="dx-field">
+                        <div class="dx-field-label">Swipe to reveal the menu</div>
+                        <div class="dx-field-value" dx-switch="{
+						bindingOptions: {
+                        	value: '$parent.swipeValue'
+						}
+				    }"></div>
+                    </div>
+                </div>
+            </div>
+            <div data-options="dxTemplate: { name: 'menuGroup' }">
+                <b>{{key}}</b>
+            </div>
+        </div>
+    </div>-->
+
+
+
+    <form id="form">
+        <h3>Profile Settings</h3>
+        <div class="dx-fieldset">
+            <div class="dx-field">
+                <div class="dx-field-label">First Name:</div>
+                <div class="dx-field-value" dx-text-box="{value: 'John'}"></div>
+            </div>
+            <div class="dx-field">
+                <div class="dx-field-label">Last Name:</div>
+                <div class="dx-field-value" dx-text-box="{value: 'Smith'}"></div>
+            </div>
+        </div>
+        <div id="fileuploader-container">
+            <div dx-file-uploader="fileUploaderOptions"></div>
+        </div>
+        <div id="button" dx-button="buttonOptions"></div>
+    </form>
+</div>
+
+

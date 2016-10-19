@@ -1,0 +1,164 @@
+<!--Web header-->
+<div ng-controller="swapvoucherCtrl">
+
+    <div class="container phone-hide">
+        <div class="myaccount-details">
+            <h1>{{allicontext[5].title}}</h1>
+                <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+
+            <div class="profile-details brt-none mb-15">
+                <h3 ng-click="firstShowHide()">Swap Voucher</h3>
+                <div ng-show="first_show" id="gridContainer" dx-data-grid="dataGridOptions"></div>
+            </div>
+            
+            <div class="profile-details brt-none mb-15">
+                <h3 ng-click="secondShowHide()">My Bid for Other’s Swap Voucher</h3>
+                <div ng-show="second_show" id="gridContainer2" dx-data-grid="dataGridOptions2"></div>
+            </div>
+            
+            <div class="profile-details brt-none">
+                <h3 ng-click="thirdShowHide()">Swap Voucher List</h3>
+                <div ng-show="third_show" id="gridContainer3" dx-data-grid="dataGridOptions3"></div>
+            </div>
+
+        </div>
+    </div>
+    <div class="m-myaccount-details tablet-hide br-0 mb-0 pb-0">
+
+        <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+        <h1>{{allicontext[5].title}}</h1>
+        <div class="m-profile-details br-0 mb-0 pb-0">
+            <!--<h3>Swap Voucher</h3>
+            <div id="gridContainer" dx-data-grid="dataGridOptions"></div>
+
+            <h3>My Bid for Other’s Swap Voucher</h3>
+            <div id="gridContainer2" dx-data-grid="dataGridOptions2"></div>
+
+            <h3>Swap Voucher List</h3>
+            <div id="gridContainer3" dx-data-grid="dataGridOptions3"></div>-->
+            <h1 ng-click="firstShowHide()">Swap Voucher</h1>
+            <div class="new-border">
+            	<div ng-show="first_show" class="m-transaction-details tablet-hide mb-15" ng-repeat="voucherDetail in voucherInfo">
+                <h1>{{voucherDetail.title}}</h1>
+                <table>
+                    <tr>
+                        <td width="30%" class="m-header-color">Voucher Value</td>
+                        <td>{{voucherDetail.price}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Net Price</td>
+                        <td>{{voucherDetail.netprice}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Expire Swap Offer</td>
+                        <td>{{voucherDetail.offering_end_date}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Expire Date</td>
+                        <td>{{voucherDetail.expire_date}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Highest Bid</td>
+                        <td>{{voucherDetail.high_bid}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Posted On</td>
+                        <td>{{voucherDetail.posted_on}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="nwe-btn"><span class="dx-button" ng-click="detailSwap({{voucherDetail.id}},{{voucherDetail.offer_id}})">Details</span></div>
+                            <div class="nwe-btn" ng-if="voucherDetail.Status!='Expired'"><span class="dx-button" ng-click="cancelSwap({{voucherDetail.id}},{{voucherDetail.voucher_id}})">Cancel</span></div>
+                            <div class="nwe-btn" ng-if="voucherDetail.Status!='Expired'"><span class="dx-button"  ng-click="swapBidder({{voucherDetail.id}})">Bidder</span></div>
+                            <!--<div class="nwe-btn"><span class="dx-button" ng-click="event_bidder({{voucherDetail.id}})">Bidder</span></div>-->
+                        </td>
+                    </tr>
+                </table>
+
+
+            </div>
+            </div>
+            </div>
+        <div class="m-profile-details br-0 mb-0 pb-0">
+
+            <h1 ng-click="secondShowHide()">My Bid for Other’s Swap Voucher</h1>
+            <div class="new-border">
+            	<div ng-show="second_show" class="m-transaction-details tablet-hide mb-15" ng-repeat="voucherDetail in voucherInfo2">
+                <h1>{{voucherDetail.swap_offer.title}}</h1>
+                <table>
+                    <tr>
+                        <td width="30%" class="m-header-color">Value</td>
+                        <td>{{voucherDetail.swap_voucher.price}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Expire Date</td>
+                        <td>{{voucherDetail.expire_date}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Posted Date</td>
+                        <td>{{voucherDetail.posted_on}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Expired Swap Offer</td>
+                        <td>{{voucherDetail.offering_end_date}}</td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan="2">
+                            <div class="nwe-btn"><span class="dx-button" ng-click="detailSwap({{voucherDetail.id}},{{voucherDetail.offer_id}})">Details</span></div>
+                            <div class="nwe-btn" ng-if="voucherDetail.Status!='Expired'"><span class="dx-button" ng-click="swapEdit({{voucherDetail.id}},{{voucherDetail.swap_id}})">Edit</span></div>
+                            <div class="nwe-btn" ng-if="voucherDetail.Status!='Expired'"><span class="dx-button" ng-click="cancelSwapBid({{voucherDetail.id}})">Cancel</span></div>
+                            <!--<div class="nwe-btn"><span class="dx-button" ng-click="event_bidder({{voucherDetail.id}})">Bidder</span></div>-->
+                        </td>
+                    </tr>
+                </table>
+
+
+            </div>
+            </div>
+        </div>
+
+        <div class="m-profile-details br-0 mb-0 pb-0">
+
+            <h1 ng-click="thirdShowHide()">Swap Voucher List</h1>
+            <div class="new-border">
+            	<div ng-show="third_show" class="m-transaction-details tablet-hide mb-15" ng-repeat="voucherDetail in deddy3">
+                <h1>{{voucherDetail.title}}</h1>
+                <table>
+                    <tr>
+                        <td width="30%" class="m-header-color">Voucher Value</td>
+                        <td>{{voucherDetail.price}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Expire Date</td>
+                        <td>{{voucherDetail.expire_date}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Swap Offer Date</td>
+                        <td>{{voucherDetail.posted_on}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Expired Swap Offer</td>
+                        <td>{{voucherDetail.offering_end_date}}</td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+                            <div class="nwe-btn"><span class="dx-button" ng-click="detailSwap({{voucherDetail.id}},{{voucherDetail.offer_id}})">Details</span></div>
+                            <div class="nwe-btn" ng-if="voucherDetail.Status!='Expired'"><span class="dx-button" ng-click="swapBid({{voucherDetail.id}})">Bid</span></div>
+                            <!--<div class="nwe-btn"><span class="dx-button" ng-click="event_bidder({{voucherDetail.id}})">Bidder</span></div>-->
+                        </td>
+                    </tr>
+                </table>
+
+
+            </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+

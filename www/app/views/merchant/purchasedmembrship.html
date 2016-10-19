@@ -1,0 +1,287 @@
+<!--Web header-->
+<div ng-controller="purchasedmembrshipCtrl">
+
+    <div class="container phone-hide">
+        <div class="myaccount-details">
+            <h1>{{allicontext[18].title}}</h1>
+            <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+
+            <div class="profile-details"  ng-show="!edit_mode">
+                <!--<div id="button" dx-button="{
+                                text: 'Add Member',
+                                onClick: changeView }" ></div>-->
+                <!--<input type="button" ng-click="refresh_grid()" value="Refresh">-->
+                <div id="gridContainer" dx-data-grid="dataGridOptions"></div>
+
+            </div>
+
+            <div class="profile-details" ng-show="edit_mode">
+                <div class="form">
+                    <div class="dx-fieldset">
+                        <div class="dx-field">
+                            <div class="dx-field-label">Restaurant</div>
+                            <div class="dx-field-value">
+                                <div dx-select-box="textBox.restaurant" ng-model="menuInfo.restaurant_id"></div>
+                            </div>
+                        </div>
+
+                        <div class="dx-field">
+                            <div class="dx-field-label">Membership Promo</div>
+                            <div class="dx-field-value">
+                                <div dx-select-box="textBox.promos" ng-model="menuInfo.promo_id"></div>
+                            </div>
+                        </div>
+
+                        <div class="dx-field">
+                            <div class="dx-field-label">Merchant Id</div>
+                            <div class="dx-field-value">
+                                <div dx-text-box="textBox.merchant_id" ng-model="menuInfo.merchant_id"></div>
+                            </div>
+                        </div>
+
+                        <div class="dx-field">
+                            <div class="dx-field-label">Member Name</div>
+                            <div class="dx-field-value">
+                                <div dx-text-box="textBox.member_name" ng-model="menuInfo.member_name"></div>
+                            </div>
+                        </div>
+
+                        <div class="dx-field">
+                            <div class="dx-field-label">Member Email</div>
+                            <div class="dx-field-value">
+                                <div dx-text-box="textBox.member_email" ng-model="menuInfo.member_email"></div>
+                            </div>
+                        </div>
+
+                        <div class="dx-field">
+                            <div class="dx-field-label">Mobile Phone</div>
+                            <div class="dx-field-value">
+                                <div dx-text-box="textBox.mobile_phone" ng-model="menuInfo.mobile_phone"></div>
+                            </div>
+                        </div>
+
+                        <div class="dx-field">
+                            <div class="dx-field-label">Address</div>
+                            <div class="dx-field-value">
+                                <div dx-text-area="textArea"  ng-model="menuInfo.address"></div>
+                            </div>
+                        </div>
+
+                        <!--<div class="dx-field">
+                            <div class="dx-field-label">Username</div>
+                            <div class="dx-field-value">
+                                <div dx-text-box="textBox.username" dx-validator="usernameValidationRules" ng-model="username"></div>
+                            </div>
+                        </div>-->
+
+
+                    </div>
+                    <!--<div id="summary" dx-validation-summary="{ }"></div>-->
+                    <div id="button" dx-button="{
+                                text: 'Submit',
+                                type: 'success',
+                                onClick: save_menu }" ></div>
+
+                    <div id="button" dx-button="{
+                                text: 'Cancel',
+                                onClick: changeView }" ></div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="m-myaccount-details tablet-hide">
+
+        <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+        <h1>{{allicontext[18].title}}</h1>
+
+
+        <div class="m-profile-details mt-15 br-0">
+            <div class="new-search"> <input type="text" placeholder="Search.." ng-model="test"></div>
+            <div class="dx-clearfix"></div>
+        <!--<div dx-list="{onInitialized:loadList}">
+            <div data-options="dxTemplate: { name: 'item' }">
+                <div>
+                    <p style="font-size:larger;"><b>{{member_name}}</b></p>
+                    <p>PromoID: <i>{{promo_id}}</i></p>
+                    <p>Date Of Purchase: <i>{{purchased_date}}</i></p>
+                    <p>Merchant Id: <i>{{merchant_id}}</i></p>
+                    <p>Member Id: <i>{{member_membership_id}}</i></p>
+                </div>
+
+                <p>
+                <div id="button" ng-if="member_membership_id==''" dx-button="{
+                    text: 'Add',
+                    onClick: viewDetails({{id}}) }" ></div>
+                </p>
+            </div>
+        </div>-->
+        
+            <div class="m-transaction-details tablet-hide mb-15" ng-repeat="voucherDetail in voucherInfo | filter:test">
+                <h1>{{voucherDetail.promo_id}}</h1>
+                <table>
+                    <tr>
+                        <td width="30%" class="m-header-color">Member Name</td>
+                        <td>{{voucherDetail.member_name}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Promo Id</td>
+                        <td>{{voucherDetail.promo_id}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Date Of Purchase</td>
+                        <td>{{voucherDetail.purchased_date}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Merchant Id</td>
+                        <td>{{voucherDetail.merchant_id}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Member Id</td>
+                        <td>{{voucherDetail.member_membership_id}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div ng-if="voucherDetail.member_membership_id==''" class="nwe-btn"><span class="dx-button" ng-click="viewDetails({{voucherDetail.id}})">ADD</span></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="dx-clearfix"></div>
+    <!--<div class="container phone-hide">
+        <div class="transaction-details">
+            <h1>Transaction Details</h1>
+            <table>
+                <tr>
+                    <td width="15%" class="header-color">Transaction Date</td>
+                    <td width="14%" class="header-color">Transaction ID</td>
+                    <td width="33%" class="header-color">Transaction Description</td>
+                    <td width="13%" class="header-color">Debit (mPts)</td>
+                    <td width="12%" class="header-color">Credit (mPts)</td>
+                    <td width="13%" class="header-color">Total (mPts)</td>
+                </tr>
+                <tr>
+                    <td><div class="select-box"><select>
+                        <option>Select</option>
+                        <option>Select</option>
+                        <option>Select</option>
+                    </select></div></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><div class="select-box"><select>
+                        <option>Select</option>
+                        <option>Select</option>
+                        <option>Select</option>
+                    </select></div></td>
+                </tr>
+                <tr>
+                    <td>7/1/2015</td>
+                    <td>TRN120953549</td>
+                    <td>Brought Forward Balance</td>
+                    <td>250,000</td>
+                    <td>0</td>
+                    <td>250,000</td>
+                </tr>
+                <tr>
+                    <td>7/1/2015</td>
+                    <td>TRN120953549</td>
+                    <td>Brought Forward Balance</td>
+                    <td>250,000</td>
+                    <td>0</td>
+                    <td>250,000</td>
+                </tr>
+                <tr>
+                    <td>7/1/2015</td>
+                    <td>TRN120953549</td>
+                    <td>Brought Forward Balance</td>
+                    <td>250,000</td>
+                    <td>0</td>
+                    <td>250,000</td>
+                </tr>
+                <tr>
+                    <td>7/1/2015</td>
+                    <td>TRN120953549</td>
+                    <td>Brought Forward Balance</td>
+                    <td>250,000</td>
+                    <td>0</td>
+                    <td>250,000</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="m-transaction-details tablet-hide">
+        <h1>Transaction Details</h1>
+        <table>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction Date</td>
+                <td>7/1/2015</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction ID</td>
+                <td>TRN120953549</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction Description</td>
+                <td>Brought Forward Balance</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Debit (mPts)</td>
+                <td>250,000</td>
+            </tr>
+            <tr>
+                <td width="12%" class="m-header-color">Credit (mPts)</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td width="13%" class="m-header-color">Total (mPts)</td>
+                <td>250,000</td>
+            </tr>
+            </tr>
+        </table>
+
+    </div>
+
+    <div class="m-transaction-details tablet-hide">
+        <h1>Transaction Details</h1>
+        <table>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction Date</td>
+                <td>7/1/2015</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction ID</td>
+                <td>TRN120953549</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction Description</td>
+                <td>Brought Forward Balance</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Debit (mPts)</td>
+                <td>250,000</td>
+            </tr>
+            <tr>
+                <td width="12%" class="m-header-color">Credit (mPts)</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td width="13%" class="m-header-color">Total (mPts)</td>
+                <td>250,000</td>
+            </tr>
+            </tr>
+        </table>
+
+    </div>
+
+    <div class="dx-clearfix"></div>-->
+</div>
+
+

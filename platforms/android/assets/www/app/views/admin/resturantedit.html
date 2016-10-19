@@ -1,0 +1,90 @@
+<div ng-controller="resturanteditCtrl">
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+
+                <div >
+                    <header class="panel-heading">
+                        Resturant Edit
+                    </header>
+                    <div class="panel-body">
+                        <form role="form" ng-submit="saveResturant()" enctype="multipart/form-data">
+                            <div class="form-group" ng-init="getMerchant()">
+                                <label for="exampleInputName">Select Merchant</label>
+                                <select class="form-control" ng-model="item.user_id">
+                                    <option value="">--Select Merchant--</option></option>
+                                    <option ng-repeat="merchant in merchantList | orderBy:'merchant_name' " ng-selected="merchant.id==item.user_id" value="{{merchant.id}}">{{merchant.merchant_name}}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputName">Resturant ID</label>
+                                <input type="text" required placeholder="Enter Resturant ID"  id="exampleInputName" ng-model="item.restaurant_id" class="form-control">
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputName">Resturant Name</label>
+                                <input type="text" required placeholder="Enter Resturant Name"  id="exampleInputName" ng-model="item.title" class="form-control">
+                                <input type="hidden"  ng-model="item.id" >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputName">Sub Title</label>
+                                <input type="text" required placeholder="Sub Title"  id="exampleInputName" ng-model="item.sub_title" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea placeholder="Enter Description" required  id="description" ng-model="item.description" ckeditor class="form-control"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputName">Sequence No.</label>
+                                <input type="text" required placeholder="Enter Sequence No."  id="exampleInputName" ng-model="item.seq" class="form-control">
+
+                            </div>
+
+
+
+                            <!--<div class="form-group">
+                                <label for="exampleInputFile">File input</label>
+                                <input type="file" id="exampleInputFile">
+                                <p class="help-block">Example block-level help text here.</p>
+                            </div>-->
+                            <div class="form-group" ng-init="getCategories()">
+                                <label for="exampleInputName">Select Category</label>
+                                <div ng-dropdown-multiselect=""  options="allCat" selected-model="item.category_id"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputName">Image</label>
+                                <input type="file"  id="logo" ng-model="item.logo" base-sixty-four-input>
+                                <img data-ng-src="data:{{item.logo.filetype}};base64,{{item.logo.base64}}" width="200" ng-if="item.logo">
+                                <img src="{{item.image_url}}" ng-if="item.image_url && !item.logo" width="200">
+                            </div>
+
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="item.is_featured" ng-true-value="1" ng-false-value="0"> Is Featured
+                                </label>
+                            </div>
+
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="item.is_active" ng-true-value="1" ng-false-value="0"> Is Active
+                                </label>
+                            </div>
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                            <button class="btn btn-danger" type="button" ng-click="cancelResturant()">Cancel</button>
+                        </form>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</div>

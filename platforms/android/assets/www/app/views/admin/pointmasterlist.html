@@ -1,0 +1,141 @@
+<div ng-controller="pointmasterlistCtrl">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+                <div ng-if="promoView == 'view'">
+                    <header class="panel-heading">
+                        Point Master
+                        <span class="tools pull-right">
+                            <a class="fa fa-chevron-down" href="javascript:;"></a>
+                            <a class="fa fa-times" href="javascript:;"></a>
+                         </span>
+                    </header>
+                    <div class="panel-body">
+                        <div class="btn-group">
+                            <button class="btn btn-primary" id="editable-sample_new" ng-click ="addPromo()">
+                                Add Point
+                            </button>
+                        </div>
+                        <table id="promosList" class="table  table-hover general-table">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th class="hidden-phone">Name</th>
+                                <th class="hidden-phone">Merchant</th>
+                                <th class="hidden-phone">Type</th>
+                                <th class="hidden-phone">Money Point</th>
+                                <th class="hidden-phone">Value In Currency</th>
+                                <th class="hidden-phone">Expire Date</th>
+                                <th>Action</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr ng-repeat="item in allpromo">
+                                <td>
+                                    {{item.id}}
+                                </td>
+                                <td >{{item.name}}</td>
+                                <td >{{item.merchant_name}}</td>
+                                <td >{{item.type=='1'?'Merchants Point':'mFoodGate Point'}}</td>
+                                <td >{{item.money_point=='1'?'Yes':'No'}}</td>
+                                <td >{{item.value}}</td>
+                                <td >{{item.expire_date}}</td>
+                                <td ><a class="btn btn-default edit" href="javascript:void(0);" ng-click="editPromo(item)" >Edit</a>
+                                    <a class="btn btn-default delete" href="javascript:;" ng-click="deletePromo(item.id)"
+                                            >Delete</a></td>
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div ng-if="promoView == 'edit'">
+                    <header class="panel-heading">
+                        Add Point
+                    </header>
+                    <div class="panel-body">
+                        <form role="form" ng-submit="savePromo()" enctype="multipart/form-data">
+
+                            <!--<div class="form-group">-->
+                                <!--<label for="category_id">Select Restaurants</label>-->
+                                <!--<select id="restaurants" ng-model="item.restaurant_id" required  class="form-control" ng-change="getOutlet(item.restaurant_id)">-->
+                                    <!--<option value="">Select</option>-->
+                                    <!--<option ng-repeat="restaurant in restaurants" value="{{restaurant.id}}">{{restaurant.title}}</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+
+                            <!--<div class="form-group">-->
+                                <!--<label for="category_id">Select Outlet</label>-->
+                                <!--<div ng-required ng-dropdown-multiselect="" id="outlet_id" options="allOutlet" selected-model="item.outlet_id"></div>-->
+                            <!--</div>-->
+                            <div class="form-group">
+                                <label for="title">Point Type</label>
+                                <select id="type" ng-model="item.type" required  class="form-control" ng-change="merchantFilter(item.type)">
+                                    <option value="">Select</option>
+                                    <option value="0">mFoodGate Point</option>
+                                    <option value="1">Merchants Point</option>
+                                </select>
+                                <input type="hidden"  ng-model="item.id" >
+                            </div>
+
+                            <div class="form-group" ng-if="merchantFlag">
+                                <label for="title">Merchant</label>
+                                <select id="user_id" ng-model="item.user_id" required  class="form-control" >
+                                    <option value="">Select</option>
+                                    <option value="{{merchant.id}}" ng-selected="merchant.id==item.user_id" ng-repeat="merchant in merchants">{{merchant.merchant_name}}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="title">Name</label>
+                                <input type="text" required placeholder="Enter POint Name"  id="name" ng-model="item.name" class="form-control">
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label for="value">Value in Currency</label>
+                                <input type="text" required placeholder="Enter Value"  id="value" ng-model="item.value" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="title">Money Point</label>
+                                <select id="money_point" ng-model="item.money_point" required  class="form-control" >
+                                    <option value="">Select</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="price">Point Start Date</label>
+                                <input type="text" data-ng-datepicker data-ng-options="datepickerOptions" required placeholder="Start Date"  id="start_date" ng-model="item.start_date" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="value">Point Validation In Days</label>
+                                <input type="number" required placeholder="Enter Validation Days"  id="valid_days" ng-model="item.valid_days" class="form-control" ng-blur="setExpireDate(item.valid_days)" >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="price">Point Expire Date</label>
+                                <input type="text" data-ng-datepicker data-ng-options="datepickerOptions1" required placeholder="Expire Date"  id="expire_date" ng-model="item.expire_date" class="form-control">
+                            </div>
+
+
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                            <button class="btn btn-danger" type="button" ng-click="cancelPromo()">Cancel</button>
+                        </form>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</div>

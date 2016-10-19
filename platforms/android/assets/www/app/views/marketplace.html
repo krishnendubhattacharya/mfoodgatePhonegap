@@ -1,0 +1,249 @@
+<!--Web header-->
+<div ng-controller="marketplaceCtrl">
+    <div class="container phone-hide">
+        <div id="tabs-container">
+            <ul class="tabs-menu">
+                <li class="{{resaleInfo.length && resaleInfo.length>0?'current':''}}" ng-if="resaleInfo.length>0"><a href="javascript:void(0);" class="tab-1">Resell Voucher : {{resaleInfo.length?resaleInfo.length:0}}</a></li>
+                <li class="{{promoInfo.length>0 && (resaleInfo.length==0 || !resaleInfo.length)?'current':''}}" ng-if="promoInfo.length>0"><a href="javascript:void(0);"  class="tab-2">{{promoInfo.length>0 && resaleInfo.length==0?'current':''}}Swap Voucher : {{promoInfo.length?promoInfo.length:0}}</a></li>
+                <li class="{{(promoInfo.length==0 || !promoInfo.length) && (resaleInfo.length==0 || !resaleInfo.length)?'current':''}}"  ng-if="eventInfo.length>0"><a href="javascript:void(0);"  class="tab-3">Event Offer : {{eventInfo.length?eventInfo.length:0}}</a></li>
+                <!--<li><a href="#tab-4">Re-Seller Voucher</a></li>-->
+            </ul>
+            <div class="tab">
+                <div id="tab-1" class="tab-content">
+                        <div class="new-Promo">
+
+                            <ul style="border:none">
+                                <li ng-repeat="resaleDetail in resaleInfo">
+                                    <div class="pro-item">
+
+                                        <img src="{{resaleDetail.image}}" width="406" height="255"  alt=""/>
+                                        <!--<div class="p-circle">{{resaleDetail.offer_percent}}%</div>-->
+                                        <div class="desc">
+                                            <div class="txt">
+                                                <h2 style="text-align: left">{{resaleDetail.title}}</h2>
+                                                <!--<p style="text-align: left"><b>Sold :</b>&nbsp;{{resaleDetail.buy_count}}&nbsp;&nbsp;&nbsp;<b>Available :</b>&nbsp;{{featuredCatDetail.quantity - featuredCatDetail.buy_count}}</p>-->
+
+                                                <!--<p style="text-align: left" class="price"><span>IDR{{resaleDetail.price | number}}</span> IDR{{featuredCatDetail.price-((featuredCatDetail.price*featuredCatDetail.offer_percent)/100) | number}}</p>-->
+                                                <p style="text-align: left"><b>Expire Date:</b>{{resaleDetail.to_date}}</p>
+                                                <p style="text-align: left" class="price"><b>Price:</b> IDR {{resaleDetail.voucher_price | number}}</p>
+                                                <p style="text-align: left" class="price"><b>Resell Price:</b> IDR {{resaleDetail.price | number}}</p>
+
+
+                                            </div>
+                                            <div class="view-btn">
+                                                <a ui-sref="frontend.resellvoucherdetail({ resellId: resaleDetail.voucher_resale_id,promoId: resaleDetail.id })"><img src="app/assets/Images/view-btn-2.png" width="66" height="42"  alt=""/></a>
+                                                <p countdown='' date='{{resaleDetail.expire_date}}'>&nbsp;</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+
+
+                            </ul>
+                                </div>
+                </div>
+                <div id="tab-2" class="tab-content" style="{{promoInfo.length>0 && (resaleInfo.length==0 || !resaleInfo.length)?'display:block':''}}"  ng-if="promoInfo.length>0">
+                    <div class="new-Promo">
+                        <ul style="border:none">
+                            <li ng-repeat="resaleDetail in promoInfo">
+                                <div class="pro-item">
+                                    <img src="{{resaleDetail.image_url}}" width="406" height="255"  alt=""/>
+                                    <div class="p-circle">{{resaleDetail.offer_percent}}%</div>
+                                    <div class="desc">
+                                        <div class="txt">
+                                            <h2 style="text-align: left">{{resaleDetail.title}}</h2>
+                                            <p style="text-align: left"><b>Expire Date:</b>{{resaleDetail.offer_to_date}}</p>
+                                            <p style="text-align: left" class="price"><b>Price:</b> IDR {{resaleDetail.price | number}}</p>
+                                        </div>
+                                        <div class="view-btn">
+                                            <a ui-sref="frontend.swapvoucherdetail({ swapId: resaleDetail.id,promoId: resaleDetail.offer_id })"><img src="app/assets/Images/view-btn-2.png" width="66" height="42"  alt=""/></a>
+                                            <p countdown='' date='{{resaleDetail.expire_date}}'>&nbsp;</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--<div class="pro-item">-->
+                                    <!--<div class="logo-box">-->
+                                        <!--<div class="p-circle">{{resaleDetail.offer_percent}}%</div>-->
+                                        <!--<img src="{{resaleDetail.image_url}}" width="218" height="100"  alt="" ng-click="swapdetails(resaleDetail.voucher_id)"/>-->
+                                    <!--</div>-->
+                                    <!--<div class="desc">-->
+                                        <!--<h2>{{resaleDetail.title}}</h2>-->
+
+                                        <!--<div class="price">-->
+                                            <!--<h2>IDR {{resaleDetail.price-((resaleDetail.price*resaleDetail.offer_percent)/100) | number}}</h2>-->
+                                            <!--<p><span>IDR {{resaleDetail.price | number}}</span></p>-->
+                                            <!--&lt;!&ndash;<p>Highetst Bid {{resaleDetail.high_bid}}</p>-->
+                                            <!--<p>Lowest Bid {{resaleDetail.low_bid}}</p>&ndash;&gt;-->
+
+                                        <!--</div>-->
+                                        <!--<div class="pts">-->
+                                            <!--&lt;!&ndash;<h2>mPts 120</h2>&ndash;&gt;-->
+                                            <!--<p>{{resaleDetail.buy_count}} Sold</p>-->
+                                            <!--<p> <button class="btn-default button-details" ng-click="swapdetails(resaleDetail.voucher_id)">Details</button></p>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="tab-3" class="tab-content" style="{{(promoInfo.length==0 || !promoInfo.length) && (resaleInfo.length==0 || !resaleInfo.length)?'display:block':''}}"  ng-if="eventInfo.length>0">
+                    <div class="reseller-section">
+
+                        <ul style="border:none">
+                            <li ng-repeat="resaleDetail in eventInfo">
+                                <div class="pro-item auot-height" >
+                                    <div class="logo-box">
+                                        <!--<div class="p-circle">{{resaleDetail.offer_percent}}%</div>-->
+                                        <img src="{{resaleDetail.image_url}}" width="218" height="100"  alt="" ng-click="eventdetails(resaleDetail.id)"/>
+                                    </div>
+                                    <div class="desc">
+                                        <h2 style="font-size: 25px;">{{resaleDetail.title}}</h2>
+
+                                        <b class="price" style="width:100%">
+                                            <p><b>Start Date & Time :</b> {{resaleDetail.from_date}}</p>
+                                            <p><b>End Date & Time :</b> {{resaleDetail.to_date}}</p>
+                                            <p><b>Outlet Type :</b> <span ng-repeat="category in resaleDetail.categories" style="text-decoration:none;">{{category.category}},</span></p>
+                                            <p><b>Locations :</b> <span ng-repeat="location in resaleDetail.locations" style="text-decoration:none;">{{location.location}},</span></p>
+                                            <p countdown='' date='{{resaleDetail.expire_date}}' style="float:right;font-weight:bold;">&nbsp;</p>
+                                        </div>
+                                        <div class="pts">
+                                            <!--<h2>mPts 120</h2>-->
+                                            <!--<p>{{resaleDetail.buy_count}} Sold</p>-->
+                                            <p> <button ng-if="eventdetailshow" class="btn-default button-details" ng-click="eventdetails(resaleDetail.id)" style="margin-left:10px;">Details</button><button ng-if="eventdetailshow" class="btn-default button-details" style="margin-left:10px;float:right;">Bid</button></p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+
+                        </ul>
+                    </div>
+
+                </div>
+                <div id="tab-4" class="tab-content">
+                    asaSAsaSAsSSAS
+                </div>
+                </div>
+
+        <div class="dx-clearfix"></div>
+        <div class="new-Promo phone-hide" ng-if="(promoInfo.length==0 || !promoInfo.length) && (resaleInfo.length==0 || !resaleInfo.length) && (eventInfo.length==0 || !eventInfo.length)">
+            <div style="width:100%;text-align: center">
+                <h1>There is no promo on this category</h1>
+            </div>
+        </div>
+            </div>
+
+
+    <div class="m-new-Promo tablet-hide">
+        <h1 ng-click="resellShowHide()"  ng-if="resaleInfo.length>0">Resell Voucher : {{resaleInfo.length?resaleInfo.length:0}}</h1>
+        <ul ng-show="resell_promo_show">
+            <li ng-repeat="resaleDetail in resaleInfo">
+                <div class="pro-item">
+                    <img src="{{resaleDetail.image}}" width="406" height="255"  alt=""/>
+                    <!--<div class="p-circle">{{resaleDetail.offer_percent}}%</div>-->
+                    <div class="desc">
+                        <div class="txt">
+                            <h2 style="text-align: left">{{resaleDetail.title}}</h2>
+
+                            <!--<p style="text-align: left"><b>Sold :</b>&nbsp;{{resaleDetail.buy_count}}&nbsp;&nbsp;&nbsp;<b>Available :</b>&nbsp;{{featuredCatDetail.quantity - featuredCatDetail.buy_count}}</p>-->
+
+                            <!--<p style="text-align: left" class="price"><span>IDR{{resaleDetail.price | number}}</span> IDR{{featuredCatDetail.price-((featuredCatDetail.price*featuredCatDetail.offer_percent)/100) | number}}</p>-->
+                            <p style="text-align: left"><b>Expire Date:</b>{{resaleDetail.to_date}}</p>
+                            <p style="text-align: left" class="price"><b>Price:</b> IDR {{resaleDetail.voucher_price | number}}</p>
+                            <p style="text-align: left" class="price"><b>Resell Price:</b> IDR {{resaleDetail.price | number}}</p>
+
+
+                        </div>
+                        <div class="view-btn">
+                            <a ui-sref="frontend.resellvoucherdetail({ resellId: resaleDetail.voucher_resale_id,promoId: resaleDetail.id })"><img src="app/assets/Images/view-btn-2.png" width="66" height="42"  alt=""/></a>
+                            <p countdown='' date='{{resaleDetail.expire_date}}'>&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+
+        </ul>
+    </div>
+    <div class="dx-clearfix"></div>
+    <div class="m-new-Promo tablet-hide">
+        <h1 ng-click="swapShowHide()"  ng-if="promoInfo.length>0">Swap Voucher : {{promoInfo.length?promoInfo.length:0}}</h1>
+        <ul style="border:none" ng-show="swap_promo_show">
+            <li ng-repeat="resaleDetail in promoInfo">
+                <div class="pro-item">
+                    <img src="{{resaleDetail.image_url}}" width="406" height="255"  alt=""/>
+                    <div class="p-circle">{{resaleDetail.offer_percent}}%</div>
+                    <div class="desc">
+                        <div class="txt">
+                            <h2 style="text-align: left">{{resaleDetail.title}}</h2>
+                            <p style="text-align: left"><b>Expire Date:</b>{{resaleDetail.offer_to_date}}</p>
+                            <p style="text-align: left" class="price"><b>Price:</b> IDR {{resaleDetail.price | number}}</p>
+                        </div>
+                        <div class="view-btn">
+                            <a ui-sref="frontend.swapvoucherdetail({ swapId: resaleDetail.id,promoId: resaleDetail.offer_id })"><img src="app/assets/Images/view-btn-2.png" width="66" height="42"  alt=""/></a>
+                            <p countdown='' date='{{resaleDetail.expire_date}}'>&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+
+        </ul>
+    </div>
+    <div class="dx-clearfix"></div>
+    <div class="m-reseller-section tablet-hide">
+        <h1 ng-click="eventShowHide()" ng-if="eventInfo.length>0">Event Offer : {{eventInfo.length?eventInfo.length:0}}</h1>
+        <ul style="border:none" ng-show="event_promo_show">
+            <li ng-repeat="resaleDetail in eventInfo">
+                <div class="pro-item">
+                    <div class="logo-box">
+                        <!--<div class="p-circle">{{resaleDetail.offer_percent}}%</div>-->
+                        <img src="{{resaleDetail.image_url}}" width="218" height="100"  alt="" ng-click="eventdetails(resaleDetail.id)"/>
+                    </div>
+                    <div class="desc">
+                        <h2>{{resaleDetail.title}}</h2>
+
+                        <b class="price" style="width:100%">
+                            <p><b>Start Date & Time :</b> {{resaleDetail.from_date}}</p>
+                            <p><b>End Date & Time :</b> {{resaleDetail.to_date}}</p>
+                            <p><b>Locations :</b> <span ng-repeat="location in resaleDetail.locations" style="text-decoration:none;">{{location.location}},</span></p>
+                            <p countdown='' date='{{resaleDetail.expire_date}}' style="float:right;font-weight:bold;">&nbsp;</p>
+                    </div>
+                    <div class="pts">
+                        <!--<h2>mPts 120</h2>-->
+                        <!--<p>{{resaleDetail.buy_count}} Sold</p>-->
+                        <!--<p> <button class="btn-default button-details" ng-click="eventdetails(resaleDetail.id)">Details</button></p>-->
+                        <p> <button class="btn-default button-details" ng-click="eventdetails(resaleDetail.id)" style="margin-left:10px;">Details</button><button ng-if="eventdetailshow" class="btn-default button-details" style="margin-left:10px;float:right;">Bid</button></p>
+                    </div>
+                </div>
+            </li>
+
+
+        </ul>
+    </div>
+    <div class="dx-clearfix"></div>
+
+    <div class="m-reseller-section tablet-hide" ng-if="(promoInfo.length==0 || !promoInfo.length) && (resaleInfo.length==0 || !resaleInfo.length) && (eventInfo.length==0 || !eventInfo.length)">
+        <h1 style="text-align: center" >There is no promo on this category</h1>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function() {
+        $(document).on('click',".tabs-menu a",function(event) {
+            event.preventDefault();
+            $(this).parent().addClass("current");
+            $(this).parent().siblings().removeClass("current");
+            var tab = $(this).attr("class").split(' ')[0];
+            $(".tab-content").css("display", "none");
+            //alert(tab);
+            $("#" + tab).css("display", "block");
+        });
+    });
+</script>

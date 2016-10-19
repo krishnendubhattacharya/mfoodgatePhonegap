@@ -1,0 +1,112 @@
+<!--Web header-->
+<div ng-controller="merchantmemberinfoCtrl">
+
+
+    <div ng-include="'app/views/partials/merchant_header.html'"></div>
+    <div class="dx-clearfix"></div>
+
+
+
+
+
+    <!--Section - 1-->
+    <!--<div style="margin-top:0;" class="container phone-hide">
+
+        <div class="category-left phone-hide">
+            <h1>Restaurants</h1>
+            <div ng-include="'app/views/partials/merchant_leftbar.html'"></div>
+        </div>
+
+
+        <div class="featured-Promo">
+
+            <div class="menu-cont">
+                <div class="newcar">
+                    <div class="item" ng-repeat="menu in sliderImages">
+                        <div class="pro-item" style="width: 98% !important;">
+                            <img src="{{menu.image_url}}" alt=""/>
+
+                            <div class="desc">
+                                <div class="txt">
+                                    <h2>{{menu.title}}</h2>
+                                    <p class="price">IDR{{menu.price}}</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dx-clearfix"></div>
+            <h1 style="margin-top:20px;" ng-click="cats.hide=!cats.hide" ng-repeat-start="cats in featuredMenus">{{cats.name}}</h1>
+            <div class="menu-cont" ng-if="!cats.hide" ng-repeat-end>
+                <div class="menu-list">
+                    <p ng-repeat="menu in cats.menus">{{menu.title}}: <span>IDR{{menu.price | number}}</span></p>
+                </div>
+            </div>
+        </div>
+    </div>-->
+    <div class="tablet-hide">
+        <!--<div ng-include="'app/views/partials/merchant_leftbar.html'"></div>-->
+
+    </div>
+
+
+
+    <!--mobile promo-->
+    <div class="m-voucher-details tablet-hide">
+    <div style="border: none;" class="m-profile-details tablet-hide">
+
+        <div class="img-box">
+            <div class="pro-item">
+                <!--<div class="logo-box">
+
+                    <img src="{{voucherInfo.voucher_details.image}}"alt=""/>
+                </div>-->
+                <div class="logo-box featured_carousel2">
+
+                    <div ng-repeat="relatedImg in related_images" class="item">
+                        <img src="{{relatedImg.image}}" alt="" style="width:100%;"/>
+                    </div>
+                </div>
+                <div class="logo-box" ng-if="qrlink" style="text-align: center">
+                    <!--<div class="p-circle">5X</div>-->
+                    <img src="{{qrlink}}" alt="" width="100%"/>
+                </div>
+
+            </div>
+        </div>
+        <div class="desc-box">
+            <h1>{{voucherInfo.voucher_details.title}}</h1>
+            <p ng-bind-html="voucherInfo.voucher_details.description"></p>
+            <p>Member Since: {{start_date}}</p>
+            <p>Member Expire: {{end_date}}</p>
+            <p>Member Id: {{memberId}}</p>
+
+            <!--<div class="merchant">
+                <div class="merchant-logo"><img src="{{voucherInfo.restaurant_details.logo}}" width="163" height="138"  alt=""/></div>
+                <div class="merchant-dsc">
+                    <h2>{{voucherInfo.restaurant_details.title}}</h2>
+                    <p>{{voucherInfo.restaurant_details.address}}</p>
+                </div>
+            </div>-->
+        </div>
+
+
+
+    </div>
+        </div>
+    <!--end-->
+
+    <div class="dx-clearfix"></div>
+
+
+</div>
+<style>
+    .menu-cont .item
+    {
+        width:100% !important;
+
+    }
+</style>
+

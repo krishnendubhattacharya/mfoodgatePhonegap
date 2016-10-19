@@ -1,0 +1,542 @@
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5742fe39425e31de"></script>
+<div ng-controller="resellvoucherdetailCtrl">
+
+    <div class="container phone-hide">
+    <div class="item-details">
+        <div class="offers">
+            <h1>Cart</h1>
+            <div ng-if="cartDetails" class="offer" ng-repeat="cart in cartDetails">
+                <p>
+                    <span>{{cart.offer_title}}:</span> {{cart.restaurant_title}}
+                </p>
+                <div class="price-div">
+                    <div ng-if="cart.event == 0" class="off"><span><input type="checkbox" id="paymentscash" name="paymentscash" ng-model="cart.paymentscash" ng-disabled="{{cart.condtn==1?true:false}}" ng-change="updateCheck(cartDetails,cart.offer_id,'c')"></span>{{cart.offer_percent}}% <span>off</span> </div>
+                    <div class="price-m"><span ng-if="cart.event == 0">{{cart.price}}</span>  IDR{{cart.offer_price | number}}</div>
+                    <div style="clear: both"></div>
+                    <div ng-if="cart.mpoints != 0" class="price-m" style="float: right">{{cart.condtn==1?'And':'Or'}}</div>
+                    <div style="clear: both"></div>
+                    <div ng-if="cart.mpoints != 0" class="off"><span><input type="checkbox" name="payments" id="payments" ng-model="cart.payments" ng-disabled="{{cart.condtn==1?true:false}}" ng-change="updateCheck(cartDetails,cart.offer_id,'p')"></span>{{cart.point_name}}</div>
+                    <div ng-if="cart.mpoints != 0" class="price-m" style="float: right">{{cart.mpoints}}</div>
+                </div>
+                <div class="qty-totals">
+                    <div ng-if="cart.event == 0" class="qty">Qty: <span><input type="text" ng-model="cart.quantity" value="1" ng-change="updateQuantity(cart)"></span></div>
+                    <div class="totals" ><span>Total:</span> IDR{{cart.quantity*cart.offer_price | number}}</div>
+                </div>
+
+                <div class="qty-totals">
+                    <div class="qty" style="width:60%">
+                        <div ng-if="cart.event == 0" class="nwe-btn" ng-click="remove_offer({{cart.offer_id}})" ><span class="dx-button" ng-click="remove_offer({{cart.offer_id}})" style="color:red;">Remove from Cart</span></div>
+                        <div ng-if="cart.event == 1" class="nwe-btn" ng-click="remove_event({{cart.event_id}})" ><span class="dx-button" ng-click="remove_event({{cart.event_id}})" style="color:red;">Remove from Cart</span></div>
+                    </div>
+                    <div ng-if="cart.event == 0" class="totals" style="width:40%" ><span>M-points:</span>{{cart.quantity*cart.mpoints}}</div>
+
+                </div>
+            </div>
+            <!--<div ng-if="cartDetails && loggedindetails" class="offer">
+                <p>
+                    <span>Payment By:-</span>
+                </p>
+                <div class="qty-totals">
+                    <div class="qty">
+                        <input type="radio" name="payments" ng-model="$parent.payments" value="C">Cash
+                    </div>
+                    <div class="qty">
+                        <input type="radio" name="payments" ng-model="$parent.payments" value="P">M-points
+                    </div>
+                    <div class="qty" ng-if="payments=='P'">Available M-points:</div>
+                    <div class="totals" ng-if="payments=='P'">{{mpoints}}</div>
+                </div>
+            </div>-->
+            <div ng-if="cartDetails" class="offer">
+                <div class="qty-totals">
+                    <div class="qty">Total : </div>
+                    <div class="totals" ng-init="getCartTotals()">IDR{{cart_total | number}}</div>
+                    <div ng-repeat="cartpn in cart_ttl_point">
+                    <div class="qty" >{{cartpn.point_name}} : </div>
+                    <div class="totals">{{cartpn.point_value}}</div>
+                        </div>
+                </div>
+            </div>
+
+            <div ng-if="!cartDetails || cartDetails.length==0" class="offer">
+                <p>
+                    <span>No item found.</span>
+                </p>
+            </div>
+
+            <!--<div class="offer">
+                <p>
+                    <span>Offer - 1:</span> Lorem ip dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                </p>
+                <div class="price-div">
+                    <div class="off">64% <span>off</span></div>
+                    <div class="price-m"><span>2,800</span>  $999</div>
+                </div>
+                <div class="qty-totals">
+                    <div class="qty">Qty: <span><input type="text" value="1"></span></div>
+                    <div class="totals"><span>Total:</span> $1400</div>
+                </div>
+            </div>-->
+            <p ng-if="cartDetails"><input type="button" value="BUY NOW" ng-click="pay_now()"></p>
+            <div style="border:  none;" class="owl-carousel1 new-Promo" style="overflow: hidden">
+                <div class="item pro-item" ng-repeat="featuredCatDetail in ads">
+                    <a ui-sref="frontend.advertisedetail({advertiseId:featuredCatDetail.id})">
+                        <img src="{{featuredCatDetail.image_url}}"  alt=""/>
+                        <div class="desc" ng-if="featuredCatDetail.title">
+                            <h3 class="ng-binding">{{featuredCatDetail.title}}</h3>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="details">
+            <div class="banner-main">
+                <!--<p>{{restaurant.title}}</p>-->
+                <h1>{{promodetails.title}} </h1>
+                <div >
+                    <div>
+                    <p ng-if="promodetails.offer_type_id != 3"><b>Voucher Value : </b>IDR{{promodetails.price | number}}</p>
+                        <p><b>Reseller Name : </b>{{resell_user_details.first_name}} {{resell_user_details.last_name}}</p>
+                        <!--<p><b>Discount : </b>{{promodetails.offer_percent}}%</p>-->
+                    <p><b>Resell Price : </b>IDR{{promodetails.resell_price | number}} </p>
+                        <p>{{promodetails.operator==1?'And':'Or'}}</p>
+                        <p><b>M-points : </b>{{promodetails.resell_point}}</p>
+                        <!--<p><b>Quantity Sold : </b>{{promodetails.buy_count}}</p>
+                        <p><b>Quantity Available : </b>{{promodetails.quantity - promodetails.buy_count}}</p>-->
+
+
+                        <p><b>Voucher Validation Start Date : </b>{{promodetails.item_start_date}}</p>
+                        <p><b>Voucher Expired Date : </b>{{promodetails.item_expire_date}}</p>
+                        <p><b>Resell Offer Start Date : </b>{{promodetails.resell_start_date}}</p>
+                        <p><b>Resell Offer End Date : </b>{{promodetails.resell_end_date}}</p>
+                        <p><b>Voucher Validation Start Hour : </b>{{promodetails.item_start_hour}}</p>
+                        <p><b>Voucher Validation End Hour : </b>{{promodetails.item_end_hour}}</p>
+                        <p><b>Including Holiday : </b>{{promodetails.including_holidays==1?'Yes':'No'}}</p>
+                        <p><b>Validation Days : </b><span ng-repeat="day in offer_days | orderBy : '2'">{{day.day}}, </span> </p>
+                        <p ng-if="promodetails.resell_expire_date_status">
+                        	<b>Time Left : </b>
+                        	<p ng-if="promodetails.resell_expire_date_status && promodetails.resell_expire_date" style="color:green" countdown='' date="{{promodetails.resell_expire_date}}">&nbsp;</p>
+                        </p>
+                        <p ng-if="!promodetails.resell_expire_date_status"><b>Time Left : </b><p ng-if="!promodetails.resell_expire_date_status" style="color:green">Closed&nbsp;</p></p>
+                        <p><b>About Merchant : </b>{{about_me}}</p>
+                        <!--<p countdown='' date='{{promodetails.expire_date}}'>&nbsp;</p>-->
+                    </div>
+                    <div style="padding-top: 25px;" class="dx-clearfix"></div>
+                    <div ng-if="loggedinid == promodetails.resell_bidder" id="button" dx-button="{
+                                text: 'Add to Cart',
+                                type: 'success',
+                                height:'40px',
+                                width:'130px',
+                                onClick: add_to_cart }" >
+
+                    </div>
+
+                </div>
+                <div style="padding-top: 25px;" class="dx-clearfix"></div>
+                <div class="banner featured_carousel3">
+
+                        <div ng-repeat="relatedImg in related_images" class="item">
+                    <img src="{{relatedImg.image}}" alt=""/>
+                            </div>
+                </div>
+            </div>
+
+            <div class="share">
+                <p>Share this deal
+                    <!--<a href="#"-->
+                       <!--socialshare-->
+                       <!--socialshare-provider="twitter"-->
+                       <!--socialshare-text="720kb AngularJS Socialshare"-->
+                       <!--socialshare-hashtags="angularjs, angular-socialshare"-->
+                       <!--socialshare-url="http://720kb.net">-->
+                        <!--Share me-->
+                    <!--</a>-->
+                    <!--<a href="#"-->
+                       <!--socialshare-->
+                       <!--socialshare-provider="facebook"-->
+                       <!--socialshare-text="promodetails.title"-->
+                       <!--socialshare-description = "promodetails.description">-->
+                        <!--Share me-->
+                    <!--</a>-->
+                    <!--<span><img src="app/assets/Images/icon-mail.png" width="20" height="20"  alt=""/></span><span><img src="app/assets/Images/icon-f.png" width="20" height="20"  alt=""/></span><span><img src="app/assets/Images/icon-t.png" width="20" height="20"  alt=""/></span></p>-->
+                    <!--<span class='st_sharethis_large' displayText='ShareThis'></span>-->
+                    <!--<span class='st_facebook_large' displayText='Facebook'></span>-->
+                    <!--<span class='st_twitter_large' displayText='Tweet'></span>-->
+                    <!--<span class='st_linkedin_large' displayText='LinkedIn'></span>-->
+                    <!--<span class='st_pinterest_large' displayText='Pinterest'></span>-->
+                    <!--<span class='st_email_large' displayText='Email'></span>-->
+                </p>
+                <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                <div class="addthis_sharing_toolbox"></div>
+            </div>
+            <div class="highlights" ng-bind-html="promodetails.description">
+
+            </div>
+            <div class="highlights" ng-bind-html="promodetails.benefits">
+
+            </div>
+            <!--<div class="highlights" ng-repeat="restaurantInfo in restaurant">
+                <div class="merchant-dsc">
+                    <h2>{{restaurantInfo.title}}</h2>
+                    <p>{{restaurantInfo.sub_title}}</p>
+                    <p ng-bind-html="restaurantInfo.description"></p>
+                    <h2 ng-if="restaurantInfo.outlets.length">Outlets</h2>
+                    <ul>
+                        <li ng-repeat="outletsInfo in restaurantInfo.outlets">
+                            <p style="cursor: pointer;" ng-click="changeMap(outletsInfo)">{{outletsInfo.title}}</p>
+                            <p style="cursor: pointer;" ng-click="changeMap(outletsInfo)">{{outletsInfo.address}}</p>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>-->
+            <div class="highlights" ng-repeat="restaurantInfo1 in restaurant">
+
+                    <h1>{{restaurantInfo1.title}}</h1>
+                    <p>{{restaurantInfo1.sub_title}}</p>
+                    <p ng-bind-html="restaurantInfo1.description"></p>
+                    <h1 ng-if="restaurantInfo1.outlets.length">Outlets</h1>
+                    <ul ng-repeat="outletsInfo in restaurantInfo1.outlets">
+
+                            <li style="cursor: pointer;" ng-click="changeMap(outletsInfo)">{{outletsInfo.title}}</li>
+                            <li style="cursor: pointer;" ng-click="changeMap(outletsInfo)">{{outletsInfo.address}}</li>
+
+
+                    </ul>
+
+            </div>
+            <div class="location">
+                <div class="map"><!--<img src="app/assets/Images/map.png" alt=""/>-->
+                    <ng-map center="{{mapaddress}}" zoom="6">
+                        <marker position="{{mapaddress}}"></marker>
+                    </ng-map>
+                </div>
+                <div class="address">
+                    <h1>{{maptitle}}</h1>
+                    <p>{{mapaddress}}</p>
+                </div>
+                <div style="clear: both"></div>
+            </div>
+            <div style="text-align:right">
+            	<div ng-if="loggedinid == promodetails.resell_bidder" id="button" dx-button="{
+                                text: 'Add to Cart',
+                                type: 'success',
+                                height:'40px',
+                                width:'130px',
+                                onClick: add_to_cart }" >
+
+                    </div>
+                
+                <div style="clear: both;margin-bottom: 10px;"></div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="m-item-details tablet-hide">
+        <div class="offers">
+            <h1>Cart</h1>
+            <div ng-if="cartDetails" class="offer" ng-repeat="cart in cartDetails">
+                <p>
+                    <span>{{cart.offer_title}}:</span> {{cart.restaurant_title}}
+                </p>
+                <!--<div class="price-div">
+                    <div class="off">{{cart.offer_percent}}% <span>off</span></div>
+                    <div class="price-m"><span>{{cart.price}}</span>  IDR{{cart.offer_price | number}}</div>
+                    <div style="clear: both"></div>
+                    <div class="price-m" style="float: right">{{cart.condtn==1?'And':'Or'}}</div>
+                    <div style="clear: both"></div>
+                    <div class="off">{{cart.point_name}}</div>
+                    <div class="price-m" style="float: right">{{cart.mpoints}}</div>
+                </div>-->
+                <div class="price-div">
+                    <div ng-if="cart.event == 0" class="off"><span><input type="checkbox" id="paymentscash" name="paymentscash" ng-model="cart.paymentscash" ng-disabled="{{cart.condtn==1?true:false}}" ng-change="updateCheck(cartDetails,cart.offer_id,'c')"></span>{{cart.offer_percent}}% <span>off</span> </div>
+                    <div class="price-m"><span ng-if="cart.event == 0">{{cart.price}}</span>  IDR{{cart.offer_price | number}}</div>
+                    <div style="clear: both"></div>
+                    <div ng-if="cart.mpoints != 0" class="price-m" style="float: right">{{cart.condtn==1?'And':'Or'}}</div>
+                    <div style="clear: both"></div>
+                    <div ng-if="cart.mpoints != 0" class="off"><span><input type="checkbox" name="payments" id="payments" ng-model="cart.payments" ng-disabled="{{cart.condtn==1?true:false}}" ng-change="updateCheck(cartDetails,cart.offer_id,'p')"></span>{{cart.point_name}}</div>
+                    <div ng-if="cart.mpoints != 0" class="price-m" style="float: right">{{cart.mpoints}}</div>
+                </div>
+                <div class="qty-totals">
+                    <div ng-if="cart.event == 0" class="qty">Qty: <span><input type="text" ng-model="cart.quantity" value="1" ng-change="updateQuantity(cart)"></span></div>
+                    <div class="totals" ><span>Total:</span> IDR{{cart.quantity*cart.offer_price | number}}</div>
+                </div>
+
+                <div class="qty-totals">
+                    <div class="qty" style="width:60%">
+                        <div ng-if="cart.event == 0" class="nwe-btn" ng-click="remove_offer({{cart.offer_id}})" ><span class="dx-button" ng-click="remove_offer({{cart.offer_id}})" style="color:red;">Remove from Cart</span></div>
+                        <div ng-if="cart.event == 1" class="nwe-btn" ng-click="remove_event({{cart.event_id}})" ><span class="dx-button" ng-click="remove_event({{cart.event_id}})" style="color:red;">Remove from Cart</span></div>
+                    </div>
+                    <div ng-if="cart.event == 0" class="totals" style="width:40%" ><span>M-points:</span>{{cart.quantity*cart.mpoints}}</div>
+
+                </div>
+            </div>
+
+            <!--<div ng-if="cartDetails && loggedindetails" class="offer">
+                <p>
+                    <span>Payment By:-</span>
+                </p>
+                <div class="qty-totals">
+                    <div class="qty">
+                        <input type="radio" name="payments" ng-model="$parent.payments" value="C">Cash
+                    </div>
+                    <div class="qty">
+                        <input type="radio" name="payments" ng-model="$parent.payments" value="P">M-points
+                    </div>
+                    <div class="qty" ng-if="payments=='P'">Available M-points:</div>
+                    <div class="totals" ng-if="payments=='P'">{{mpoints}}</div>
+                </div>
+            </div>-->
+            <div ng-if="cartDetails" class="offer">
+                <div class="qty-totals">
+                    <div class="qty">Total : </div>
+                    <div class="totals" ng-init="getCartTotals()">IDR{{cart_total | number}}</div>
+                    <div ng-repeat="cartpn in cart_ttl_point">
+                        <div class="qty" >{{cartpn.point_name}} : </div>
+                        <div class="totals">{{cartpn.point_value}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-if="!cartDetails || cartDetails.length==0" class="offer">
+                <p>
+                    <span>No item found.</span>
+                </p>
+            </div>
+
+            <!--<div class="offer">
+                <p>
+                    <span>Offer - 1:</span> Lorem ip dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                </p>
+                <div class="price-div">
+                    <div class="off">64% <span>off</span></div>
+                    <div class="price-m"><span>2,800</span>  $999</div>
+                </div>
+                <div class="qty-totals">
+                    <div class="qty">Qty: <span><input type="text" value="1"></span></div>
+                    <div class="totals"><span>Total:</span> $1400</div>
+                </div>
+            </div>-->
+
+            <p ng-if="cartDetails"><input type="button" value="BUY NOW" ng-click="pay_now()"></p>
+            <!--<div class="owl-carousel1">-->
+                <!--<div class="item" ng-repeat="featuredCatDetail in ads">-->
+                    <!--<a ui-sref="frontend.advertisedetail({advertiseId:featuredCatDetail.id})">-->
+                        <!--<img src="{{featuredCatDetail.image_url}}"  alt=""/>-->
+                        <!--<p>{{featuredCatDetail.title}}</p>-->
+                    <!--</a>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div class="details">
+            <div class="banner-main">
+                <!--<p>{{restaurant.title}}</p>-->
+                <h1>{{promodetails.title}} </h1>
+                <div >
+                    <div>
+                    <p ng-if="promodetails.offer_type_id != 3"><b>Voucher Value : </b>IDR{{promodetails.price | number}}</p>
+                        <p><b>Reseller Name : </b>{{resell_user_details.first_name}} {{resell_user_details.last_name}}</p>
+                        <!--<p><b>Discount : </b>{{promodetails.offer_percent}}%</p>-->
+                    <p><b>Resell Price : </b>IDR{{promodetails.resell_price | number}} </p>
+                        <p>{{promodetails.operator==1?'And':'Or'}}</p>
+                        <p><b>M-points : </b>{{promodetails.resell_point}}</p>
+                        <!--<p><b>Quantity Sold : </b>{{promodetails.buy_count}}</p>
+                        <p><b>Quantity Available : </b>{{promodetails.quantity - promodetails.buy_count}}</p>-->
+
+
+                        <p><b>Voucher Validation Start Date : </b>{{promodetails.item_start_date}}</p>
+                        <p><b>Voucher Expired Date : </b>{{promodetails.item_expire_date}}</p>
+                        <p><b>Resell Offer Start Date : </b>{{promodetails.resell_start_date}}</p>
+                        <p><b>Resell Offer End Date : </b>{{promodetails.resell_end_date}}</p>
+                        <p><b>Voucher Validation Start Hour : </b>{{promodetails.item_start_hour}}</p>
+                        <p><b>Voucher Validation End Hour : </b>{{promodetails.item_end_hour}}</p>
+                        <p><b>Including Holiday : </b>{{promodetails.including_holidays==1?'Yes':'No'}}</p>
+                        <p><b>Validation Days : </b><span ng-repeat="day in offer_days | orderBy : '2'">{{day.day}}, </span> </p>
+                        <p ng-if="promodetails.resell_expire_date_status"><b>Time Left : </b>
+                        	<p ng-if="promodetails.resell_expire_date_status && promodetails.resell_expire_date" style="color:green" countdown='' date="{{promodetails.resell_expire_date}}" >&nbsp;</p>
+                        </p>
+                        <p ng-if="!promodetails.resell_expire_date_status"><b>Time Left : </b><p ng-if="!promodetails.resell_expire_date_status" style="color:green">Closed&nbsp;</p></p>
+                        <p><b>About Merchant : </b>{{about_me}}</p>
+                        <!--<p countdown='' date='{{promodetails.expire_date}}'>&nbsp;</p>-->
+                    </div>
+                    <div style="padding-top: 25px;" class="dx-clearfix"></div>
+                    <div ng-if="loggedinid == promodetails.resell_bidder" id="button" dx-button="{
+                                text: 'Add to Cart',
+                                type: 'success',
+                                height:'40px',
+                                width:'130px',
+                                onClick: add_to_cart }" >
+
+                    </div>
+
+                </div>
+                <div style="padding-top: 25px;" class="dx-clearfix"></div>
+                <div class="banner featured_carousel2">
+
+                    <div ng-repeat="relatedImg in related_images" class="item">
+                        <img src="{{relatedImg.image}}" alt=""/>
+                    </div>
+                </div>
+                <!--<div class="banner"><img src="{{promodetails.image}}" alt=""/></div>-->
+            </div>
+
+            <div class="share">
+                <p>Share this deal</p>
+                <div class="addthis_sharing_toolbox"></div>
+            </div>
+            <div class="highlights" ng-bind-html="promodetails.description">
+
+            </div>
+            <div class="highlights" ng-bind-html="promodetails.benefits">
+
+            </div>
+            <div class="highlights" ng-repeat="restaurantInfo in restaurant">
+
+                    <h1>{{restaurantInfo.title}}</h1>
+                    <p>{{restaurantInfo.sub_title}}</p>
+                    <p ng-bind-html="restaurantInfo.description"></p>
+                    <h1 ng-if="restaurantInfo.outlets.length">Outlets</h1>
+                    <ul ng-repeat="outletsInfo in restaurantInfo.outlets">
+
+                            <li ng-click="changeMap(outletsInfo)">{{outletsInfo.title}}</li>
+                            <li ng-click="changeMap(outletsInfo)">{{outletsInfo.address}}</li>
+
+
+                    </ul>
+
+            </div>
+            <div class="location">
+                <div class="map"><!--<img src="app/assets/Images/map.png" alt=""/>-->
+                    <ng-map center="{{mapaddress}}" zoom="6">
+                        <marker position="{{mapaddress}}"></marker>
+                    </ng-map>
+                </div>
+                <div class="address">
+                    <h1>{{maptitle}}</h1>
+                    <p>{{mapaddress}}</p>
+                </div>
+                <div style="clear: both"></div>
+            </div>
+            <div style="text-align:right">
+            	<div ng-if="loggedinid == promodetails.resell_bidder" id="button" dx-button="{
+                                text: 'Add to Cart',
+                                type: 'success',
+                                height:'40px',
+                                width:'130px',
+                                onClick: add_to_cart }" >
+
+                    </div>
+                
+                <div style="clear: both;margin-bottom: 10px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="new-Promo phone-hide">
+            <h1>Related Products</h1>
+            <div class="featured_carousel">
+                <div ng-repeat="related in related_products" class="item">
+                    <div class="pro-item2">
+                        <img src="{{related.image}}" width="406" height="255"  alt=""/>
+                        <div class="p-circle" >{{related.offer_percent}}%</div>
+                        <div class="desc">
+                            <div class="txt">
+                                <h2 ng-bind="related.title"></h2>
+                                <p ng-bind="related.offer_to_date"></p>
+                            </div>
+                            <div class="view-btn">
+                                <a ui-sref="frontend.promodetails({ promoId: related.id })" ><img width="66" height="42" alt="" src="app/assets/Images/view-btn.png"></a>
+                                <!--<p date="May 06,2016 23:59:59" countdown="" class="ng-isolate-scope">4d 6h 51m 38s</p>-->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!--<li>
+                    <div class="pro-item">
+                        <img src="app/assets/Images/pro-3.png" width="406" height="255"  alt=""/>
+                        <div class="p-circle">50%</div>
+                        <div class="desc">
+                            <div class="txt">
+                                <h2>Paket Hemat Sowe</h2>
+                                <p>11D:21H:50M:20S</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="pro-item">
+                        <img src="app/assets/Images/pro-3.png" width="406" height="255"  alt=""/>
+                        <div class="p-circle">50%</div>
+                        <div class="desc">
+                            <div class="txt">
+                                <h2>Paket Hemat Sowe</h2>
+                                <p>11D:21H:50M:20S</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </li>-->
+
+
+            </div>
+        </div>
+    </div>
+    <div class="m-new-Promo tablet-hide">
+        <h1>Related Products</h1>
+        <div class="featured_carousell">
+            <div ng-repeat="related in related_products" class="item">
+                <div class="pro-item">
+                    <img src="{{related.image}}" width="406" height="255"  alt=""/>
+                    <div class="p-circle" >{{related.offer_percent}}%</div>
+                    <div class="desc">
+                        <div class="txt">
+                            <h2 ng-bind="related.title"></h2>
+                            <p ng-bind="related.offer_to_date"></p>
+                        </div>
+                        <div class="view-btn">
+                            <a ui-sref="frontend.promodetails({ promoId: related.id })" ><img width="66" height="42" alt="" src="app/assets/Images/view-btn.png"></a>
+                            <!--<p date="May 06,2016 23:59:59" countdown="" class="ng-isolate-scope">4d 6h 51m 38s</p>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--<li>
+                <div class="pro-item">
+                    <img src="app/assets/Images/pro-3.png" width="406" height="255"  alt=""/>
+                    <div class="p-circle">50%</div>
+                    <div class="desc">
+                        <div class="txt">
+                            <h2>Paket Hemat Sowe</h2>
+                            <p>11D:21H:50M:20S</p>
+                        </div>
+
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="pro-item">
+                    <img src="app/assets/Images/pro-3.png" width="406" height="255"  alt=""/>
+                    <div class="p-circle">50%</div>
+                    <div class="desc">
+                        <div class="txt">
+                            <h2>Paket Hemat Sowe</h2>
+                            <p>11D:21H:50M:20S</p>
+                        </div>
+
+                    </div>
+                </div>
+            </li>-->
+
+
+        </div>
+    </div>
+</div>
+
+<style>
+    .new-Promo .pro-item{ height:  154px !important;}
+</style>

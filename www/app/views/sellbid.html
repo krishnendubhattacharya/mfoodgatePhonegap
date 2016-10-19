@@ -1,0 +1,67 @@
+<!--Web header-->
+<div ng-controller="bidvoucherCtrl">
+
+    <div class="container phone-hide">
+        <div class="myaccount-details">
+            <h1>Bid</h1>
+                <!--<div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>-->
+
+
+                <div class="form">
+                    <div class="dx-fieldset">
+                        <div class="dx-field">
+                            <div class="dx-field-label">Bid Price</div>
+                            <div class="dx-field-value">
+                                <div dx-text-box="textBox.bid_price"   ng-model="bid_price"></div>
+
+
+                            </div>
+                        </div>
+
+
+
+
+
+                    </div>
+                    <!--<div id="summary" dx-validation-summary="{ }"></div>-->
+                    <div id="button" dx-button="{
+                                text: 'Submit',
+                                type: 'success',
+                                onClick: saveBid }" ></div>
+                </div>
+
+
+
+        </div>
+    </div>
+    <div class="m-myaccount-details tablet-hide">
+
+        <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+        <h1>Bid</h1>
+        <div class="m-profile-details">
+            <div class="form">
+                <div class="dx-fieldset">
+                    <div class="dx-field">
+                        <div class="dx-field-label">Bid Price</div>
+                        <div class="dx-field-value">
+                            <div dx-text-box="textBox.bid_price"   ng-model="bid_price"></div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+                <!--<div id="summary" dx-validation-summary="{ }"></div>-->
+                <div id="button" dx-button="{
+                                text: 'Submit',
+                                type: 'success',
+                                onClick: saveBid }" ></div>
+            </div>
+        </div>
+
+    </div>
+    <div class="dx-clearfix"></div>
+
+</div>
+
+

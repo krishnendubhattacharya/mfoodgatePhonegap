@@ -1,0 +1,311 @@
+<!--Web header-->
+<div ng-controller="addswapvoucherCtrl">
+
+    <div class="container phone-hide">
+        <div class="myaccount-details">
+            <h1>Bid</h1>
+                <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+
+            <div class="profile-details">
+                <div class="form">
+                    <div class="dx-fieldset">
+                        <div class="dx-field">
+                            <div class="dx-field-label">Description</div>
+                            <div class="dx-field-value">
+                                <div dx-text-area="textArea"  ng-model="description"></div>
+                            </div>
+                        </div>
+                        <div class="dx-field">
+                            <div class="dx-field-label">Outlet Type</div>
+                            <div class="dx-field-value">
+                                <div class="tagBox" dx-tag-box="{
+
+                                placeholder: 'Select Type',
+                                displayExpr: 'name',
+                                values:selectedTypes,
+                                onInitialized : inialType,
+                                bindingOptions: {
+                                    valueExpr: 'id',
+                                    values: {
+
+                                        dataPath: 'typeList'
+                                    }
+                                }
+                            }"></div>
+                            </div>
+                        </div>
+
+                        <div class="dx-field">
+                            <div class="dx-field-label">Outlet Location</div>
+                            <div class="dx-field-value">
+                                <div class="tagBox" dx-tag-box="{
+
+                                placeholder: 'Select Location',
+                                displayExpr: 'city',
+                                values:selectedLocation,
+                                onInitialized : inialLoc,
+                                bindingOptions: {
+                                    valueExpr: 'id',
+                                    values: {
+
+                                        dataPath: 'areaList'
+                                    }
+                                }
+                            }"></div>
+                            </div>
+                        </div>
+                        <div class="dx-field">
+                            <div class="dx-field-label">Offering Start Date </div>
+                            <div class="dx-field-value">
+                                <div dx-date-box="dateBox.offering_start_date" ng-model="offering_start_date"></div>
+                            </div>
+                        </div>
+                        <div class="dx-field">
+                            <div class="dx-field-label">Offering End Date </div>
+                            <div class="dx-field-value">
+                                <div dx-date-box="dateBox.offering_end_date" ng-model="offering_end_date"></div>
+                            </div>
+                        </div>
+                        <div class="dx-field">
+                            <div class="dx-field-label">&nbsp;</div>
+                            <div class="dx-field-value">
+                                <div id="button" dx-button="{
+                                text: 'Submit',
+                                type: 'success',
+                                onClick: swapvoucherADD }" ></div>
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+                    <!--<div id="summary" dx-validation-summary="{ }"></div>-->
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="m-myaccount-details tablet-hide">
+
+        <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+        <h1>Bid</h1>
+        <div class="m-profile-details">
+            <div class="form">
+                <div class="dx-fieldset">
+                    <div class="dx-field">
+                        <div class="dx-field-label">Description</div>
+                        <div class="dx-field-value">
+                            <div dx-text-area="textArea"  ng-model="description"></div>
+                        </div>
+                    </div>
+
+                    <div class="dx-field">
+                        <div class="dx-field-label">Outlet Type</div>
+                        <div class="dx-field-value">
+                            <div class="tagBox" dx-tag-box="{
+
+                                placeholder: 'Select Type',
+                                displayExpr: 'name',
+                                values:selectedTypesMob,
+                                onInitialized : inialTypeMob,
+                                bindingOptions: {
+                                    valueExpr: 'id',
+                                    values: {
+
+                                        dataPath: 'typeListMob'
+                                    }
+                                }
+                            }"></div>
+                        </div>
+                    </div>
+
+                    <div class="dx-field">
+                        <div class="dx-field-label">Outlet Location</div>
+                        <div class="dx-field-value">
+                            <div class="tagBox" dx-tag-box="{
+
+                                placeholder: 'Select Location',
+                                displayExpr: 'city',
+                                values:selectedLocationMob,
+                                onInitialized : inialLocMob,
+                                bindingOptions: {
+                                    valueExpr: 'id',
+                                    values: {
+
+                                        dataPath: 'areaListMob'
+                                    }
+                                }
+                            }"></div>
+                        </div>
+                    </div>
+
+                    <div class="dx-field">
+                        <div class="dx-field-label">Offering Start Date </div>
+                        <div class="dx-field-value">
+                            <div dx-date-box="dateBox.offering_start_date" ng-model="offering_start_date"></div>
+                        </div>
+                    </div>
+                    <div class="dx-field">
+                        <div class="dx-field-label">Offering End Date </div>
+                        <div class="dx-field-value">
+                            <div dx-date-box="dateBox.offering_end_date" ng-model="offering_end_date"></div>
+                        </div>
+                    </div>
+
+                    <div class="dx-field">
+                        <div class="dx-field-label">&nbsp;</div>
+                        <div class="dx-field-value">
+                            <div id="button" dx-button="{
+                                text: 'Submit',
+                                type: 'success',
+                                onClick: swapvoucherADD }" ></div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+                <!--<div id="summary" dx-validation-summary="{ }"></div>-->
+
+            </div>
+        </div>
+
+    </div>
+    <div class="dx-clearfix"></div>
+    <!--<div class="container phone-hide">
+        <div class="transaction-details">
+            <h1>Transaction Details</h1>
+            <table>
+                <tr>
+                    <td width="15%" class="header-color">Transaction Date</td>
+                    <td width="14%" class="header-color">Transaction ID</td>
+                    <td width="33%" class="header-color">Transaction Description</td>
+                    <td width="13%" class="header-color">Debit (mPts)</td>
+                    <td width="12%" class="header-color">Credit (mPts)</td>
+                    <td width="13%" class="header-color">Total (mPts)</td>
+                </tr>
+                <tr>
+                    <td><div class="select-box"><select>
+                        <option>Select</option>
+                        <option>Select</option>
+                        <option>Select</option>
+                    </select></div></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><div class="select-box"><select>
+                        <option>Select</option>
+                        <option>Select</option>
+                        <option>Select</option>
+                    </select></div></td>
+                </tr>
+                <tr>
+                    <td>7/1/2015</td>
+                    <td>TRN120953549</td>
+                    <td>Brought Forward Balance</td>
+                    <td>250,000</td>
+                    <td>0</td>
+                    <td>250,000</td>
+                </tr>
+                <tr>
+                    <td>7/1/2015</td>
+                    <td>TRN120953549</td>
+                    <td>Brought Forward Balance</td>
+                    <td>250,000</td>
+                    <td>0</td>
+                    <td>250,000</td>
+                </tr>
+                <tr>
+                    <td>7/1/2015</td>
+                    <td>TRN120953549</td>
+                    <td>Brought Forward Balance</td>
+                    <td>250,000</td>
+                    <td>0</td>
+                    <td>250,000</td>
+                </tr>
+                <tr>
+                    <td>7/1/2015</td>
+                    <td>TRN120953549</td>
+                    <td>Brought Forward Balance</td>
+                    <td>250,000</td>
+                    <td>0</td>
+                    <td>250,000</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="m-transaction-details tablet-hide">
+        <h1>Transaction Details</h1>
+        <table>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction Date</td>
+                <td>7/1/2015</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction ID</td>
+                <td>TRN120953549</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction Description</td>
+                <td>Brought Forward Balance</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Debit (mPts)</td>
+                <td>250,000</td>
+            </tr>
+            <tr>
+                <td width="12%" class="m-header-color">Credit (mPts)</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td width="13%" class="m-header-color">Total (mPts)</td>
+                <td>250,000</td>
+            </tr>
+            </tr>
+        </table>
+
+    </div>
+
+    <div class="m-transaction-details tablet-hide">
+        <h1>Transaction Details</h1>
+        <table>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction Date</td>
+                <td>7/1/2015</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction ID</td>
+                <td>TRN120953549</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Transaction Description</td>
+                <td>Brought Forward Balance</td>
+            </tr>
+            <tr>
+                <td width="30%" class="m-header-color">Debit (mPts)</td>
+                <td>250,000</td>
+            </tr>
+            <tr>
+                <td width="12%" class="m-header-color">Credit (mPts)</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td width="13%" class="m-header-color">Total (mPts)</td>
+                <td>250,000</td>
+            </tr>
+            </tr>
+        </table>
+
+    </div>-->
+
+    <div class="dx-clearfix"></div>
+</div>
+
+

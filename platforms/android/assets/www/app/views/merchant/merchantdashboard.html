@@ -1,0 +1,1640 @@
+<!--Web header-->
+<div ng-controller="merchantdashboardCtrl">
+    <div class="container">
+        <div class="myaccount-details phone-hide">
+            <h1>{{allicontext[27].title}}</h1>
+            <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+
+            <!-- ngIf: specialInfo.length != 0 -->
+            <div class="flot-rightDiv">
+            <div class="new-Promo mt-0">
+            <h3 ng-click="summeryTabShowHide()">Summary</h3>
+            <div class="summery" ng-show="summeryTab">
+                <div class="date-pi">
+                    <ul>
+
+                        <li>From: <span class="calendar" dx-date-box="dateBox.from_date" ng-model="userInfo.from_date"></span></li>
+                        <li>To: <span class="calendar" dx-date-box="dateBox.to_date" ng-model="userInfo.to_date"></span></li>
+                        <li><div dx-button="{
+                                text: 'Submit',
+                                type: 'success',
+                                onClick: validateAndSubmit }" id="button" class="dx-widget dx-button-has-text dx-button dx-button-success" tabindex="0" onclick="void(0)" role="button" aria-label="Submit"><div class="dx-template-wrapper ng-scope dx-button-content"><dx-icon></dx-icon><span ng-bind="text" ng-class="{ 'dx-button-text' : !!text }" class="ng-binding dx-button-text">Submit</span><!-- ngIf: scopeValue --></div></div></li>
+
+                    </ul>
+                </div>
+                <ul>
+                    <li>
+                        <div class="item">
+                            <h1>Merchant Summary</h1>
+                            <div class="cont">
+                                <ul>
+                                    <li>
+                                        <div class="title">Restaurants</div>
+                                        <div class="val">{{uptodateInfo.restaurant_count  | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Outlets</div>
+                                        <div class="val">{{uptodateInfo.outlet_count  | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Active Outlets</div>
+                                        <div class="val">{{uptodateInfo.active_outlet_count  | number}}</div>
+                                    </li>
+                                    <lI><h1>Top Redeem</h1></lI>
+                                    <li>
+                                        <div class="title">{{rangeInfo.first_redeem_restaurant}}</div>
+                                        <div class="val">{{rangeInfo.first_redeem_value | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{rangeInfo.second_redeem_restaurant}}</div>
+                                        <div class="val">{{rangeInfo.second_redeem_value  | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{rangeInfo.third_redeem_restaurant}}</div>
+                                        <div class="val">{{rangeInfo.third_redeem_value  | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{rangeInfo.fourth_redeem_restaurant}}</div>
+                                        <div class="val">{{rangeInfo.fourth_redeem_value  | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{rangeInfo.fifth_redeem_restaurant}}</div>
+                                        <div class="val">{{rangeInfo.fifth_redeem_value  | number}}</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item">
+                            <h1>Member Summary</h1>
+                            <div class="cont">
+                                <ul>
+                                    <li>
+                                        <div class="title">Member List</div>
+                                        <div class="val">{{rangeInfo.all_user_count  | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Female Member List</div>
+                                        <div class="val">{{rangeInfo.female_user_count  | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Male Member List</div>
+                                        <div class="val">{{rangeInfo.male_user_count  | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Member Active</div>
+                                        <div class="val">{{rangeInfo.active_member_user_count  | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Female Member Active</div>
+                                        <div class="val">{{rangeInfo.active_female_user_count  | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Male Member Active</div>
+                                        <div class="val">{{rangeInfo.active_male_user_count  | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Non Active Member</div>
+                                        <div class="val">{{rangeInfo.inactive_member_user_count  | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">New Member</div>
+                                        <div class="val">{{rangeInfo.all_user_count  | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Unactivated</div>
+                                        <div class="val">{{rangeInfo.unactivated_member_count  | number}}</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item">
+                            <h1>Up to {{rangeInfo.show_end_date}}</h1>
+                            <div class="cont">
+                                <ul>
+                                    <li>
+                                        <div class="title">All Promotion</div>
+                                        <div class="val">{{uptodateInfo.all_promo | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">All Feature Promo</div>
+                                        <div class="val">{{uptodateInfo.all_featured_promo | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">All Banner</div>
+                                        <div class="val">{{uptodateInfo.all_banner | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">All Advertising</div>
+                                        <div class="val">{{uptodateInfo.all_add | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Active Promotion</div>
+                                        <div class="val">{{uptodateInfo.all_active_promo | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Active Feat Promo</div>
+                                        <div class="val">{{uptodateInfo.all_active_featured_promo | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Active Banner</div>
+                                        <div class="val">{{uptodateInfo.all_active_banner | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Active Advertising</div>
+                                        <div class="val">{{uptodateInfo.all_active_add | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Hot Promotion</div>
+                                        <div class="val">{{uptodateInfo.all_hot_promo | number}}</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item">
+                            <h1>{{rangeInfo.show_start_date}} to {{rangeInfo.show_end_date}}</h1>
+                            <div class="cont">
+                                <ul>
+                                    <li>
+                                        <div class="title">View Promo</div>
+                                        <div class="val">{{rangeInfo.promo_visit_count | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Redeem Promo</div>
+                                        <div class="val">{{rangeInfo.redeem_promo_count | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Unredeem Promo</div>
+                                        <div class="val">{{rangeInfo.unredeem_promo_count | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Target Click Banner</div>
+                                        <div class="val">{{rangeInfo.total_target_banner | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Actual Click Banner</div>
+                                        <div class="val">{{rangeInfo.total_actual_banner | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Target Click Advertise</div>
+                                        <div class="val">{{rangeInfo.total_target_add | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Actual Click Advertise</div>
+                                        <div class="val">{{rangeInfo.total_actual_add | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">View News</div>
+                                        <div class="val">{{rangeInfo.news_visit_count | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Visit Website</div>
+                                        <div class="val">{{rangeInfo.website_visit_count | number}}</div>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <ul>
+                    <li>
+                        <div class="item2">
+                            <div class="graph" ng-if="reshow">
+                                <!--<img src="app/assets/Images/bar-chart-movies.gif"  alt=""/> </div>-->
+
+
+                                <div id="abc" dx-chart="{
+                            dataSource: dataSource,
+                            series: {
+                                argumentField: 'day',
+                                valueField: 'oranges',
+                                name: 'Member',
+                                type: 'bar',
+                                color: '#ffa500'
+                            }
+                        }"></div>
+                            </div>
+                    </li>
+                    <li>
+                        <div class="item2">
+                            <div class="graph" ng-if="reshow1">
+                                <!--<img src="app/assets/Images/bar-chart-movies.gif"  alt=""/> </div>-->
+                                <div id="abc" dx-chart="{
+                            dataSource: dataSource1,
+                            series: {
+                                argumentField: 'day',
+                                valueField: 'oranges',
+                                name: 'New Member',
+                                type: 'line',
+                                color: '#ffa500'
+                            }
+                        }"></div>
+                            </div>
+                    </li>
+                    <li>
+                        <div class="item">
+                            <h1>Member</h1>
+                            <div class="cont">
+                                <ul>
+                                    <li>
+                                        <div class="title">All</div>
+                                        <div class="val">{{member_graph.all | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Active(A)</div>
+                                        <div class="val">{{member_graph.active_user | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Non Active(N A)</div>
+                                        <div class="val">{{member_graph.inactive_user | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Female(F)</div>
+                                        <div class="val">{{member_graph.female_user | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Male(M)</div>
+                                        <div class="val">{{member_graph.male_user | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Purchased Member(P M)</div>
+                                        <div class="val">{{member_graph.purchase_member | number}}</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item">
+                            <h1>New Member</h1>
+                            <div class="cont">
+                                <ul>
+                                    <li>
+                                        <div class="title">{{month_name.first}}</div>
+                                        <div class="val">{{new_member_graph.first | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{month_name.second}}</div>
+                                        <div class="val">{{new_member_graph.second | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{month_name.third}}</div>
+                                        <div class="val">{{new_member_graph.third | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{month_name.fourth}}</div>
+                                        <div class="val">{{new_member_graph.fourth | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{month_name.fifth}}</div>
+                                        <div class="val">{{new_member_graph.fifth | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{month_name.sixth}}</div>
+                                        <div class="val">{{new_member_graph.sixth | number}}</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item2">
+                            <div class="graph" ng-if="reshow3">
+                                <!--<img src="app/assets/Images/bar-chart-movies.gif"  alt=""/>-->
+                                <div id="abc" dx-chart="{
+                            dataSource: dataSource3,
+                            series: {
+                                argumentField: 'day',
+                                valueField: 'oranges',
+                                name: 'Spending',
+                                type: 'line',
+                                color: '#ffa500'
+                            }
+                        }"></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item2">
+                            <div class="graph" ng-if="reshow2">
+                                <!--<img src="app/assets/Images/bar-chart-movies.gif"  alt=""/> </div>-->
+                                <div id="abc" dx-chart="{
+                            dataSource: dataSource2,
+                            series: {
+                                argumentField: 'day',
+                                valueField: 'oranges',
+                                name: 'Promo Visit',
+                                type: 'line',
+                                color: '#ffa500'
+                            }
+                        }"></div>
+                            </div>
+                    </li>
+
+                    <li>
+                        <div class="item">
+                            <h1>Member Spending in IDR 1,000</h1>
+                            <div class="cont">
+                                <ul>
+                                    <li>
+                                        <div class="title">{{month_name.first}}</div>
+                                        <div class="val">{{order_graph.first | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{month_name.second}}</div>
+                                        <div class="val">{{order_graph.second | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{month_name.third}}</div>
+                                        <div class="val">{{order_graph.third | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{month_name.fourth}}</div>
+                                        <div class="val">{{order_graph.fourth | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{month_name.fifth}}</div>
+                                        <div class="val">{{order_graph.fifth | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{month_name.sixth}}</div>
+                                        <div class="val">{{order_graph.sixth | number}}</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item">
+                            <h1>Page and Promo Visit</h1>
+                            <div class="cont">
+                                <ul>
+                                    <li>
+                                        <div class="title">{{month_name.first}}</div>
+                                        <div class="val">{{promo_graph.first | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{month_name.second}}</div>
+                                        <div class="val">{{promo_graph.second | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{month_name.third}}</div>
+                                        <div class="val">{{promo_graph.third | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{month_name.fourth}}</div>
+                                        <div class="val">{{promo_graph.fourth | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{month_name.fifth}}</div>
+                                        <div class="val">{{promo_graph.fifth | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{month_name.sixth}}</div>
+                                        <div class="val">{{promo_graph.sixth | number}}</div>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+
+
+                </ul>
+
+                <!--<ul>
+
+
+                </ul>-->
+            </div>
+
+
+        </div>
+
+                <div class="clearfix"></div>
+                <div class="new-Promo">
+                    <h3 ng-click="transactionTabShowHide()">Transaction</h3>
+                    <div class="transaction" ng-show="transactionTab">
+                        <div class="t-form">
+                            <ul>
+                                <li>
+                                    <div class="datediv">
+                                        <ul>
+
+                                            <li>From: <span class="calendar" dx-date-box="dateBox.start_date" ng-model="userInfo.start_date"></span></li>
+                                            <li>To: <span class="calendar" dx-date-box="dateBox.end_date" ng-model="userInfo.end_date"></span></li>
+                                            <!--<li><div dx-button="{
+                                                text: 'Submit',
+                                                type: 'success',
+                                                onClick: validateAndSubmit }" id="button" class="dx-widget dx-button-has-text dx-button dx-button-success" tabindex="0" onclick="void(0)" role="button" aria-label="Submit"><div class="dx-template-wrapper ng-scope dx-button-content"><dx-icon></dx-icon><span ng-bind="text" ng-class="{ 'dx-button-text' : !!text }" class="ng-binding dx-button-text">Submit</span></div></div></li>-->
+                                        </ul>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="label">Restaurant:</div>
+                                    <div class="val">
+                                        <!--<div class="checkdiv" ng-repeat="res in all_restaurant"><input type="checkbox" ng-model="rescheck"  ng-value="{{res.id}}" ng-click="checkclick()"> <span>{{res.name}}</span></div>-->
+                                        <div class="checkdiv"><input type="checkbox" ng-change="chkall()" ng-model="chka"> <span>All Restaurant</span></div>
+                                        <div class="checkdiv" ng-repeat="res in all_restaurant"><input type="checkbox" ng-model="res.selected" value={{res.id}} ng-change="save()"> <span>{{res.name}}</span></div>
+
+                                        <!--<div class="checkdiv"><input type="checkbox"> <span>All Resto</span></div>
+                                        <div class="checkdiv"><input type="checkbox"> <span>All Resto</span></div>
+                                        <div class="checkdiv"><input type="checkbox"> <span>All Resto</span></div>
+                                        <div class="checkdiv"><input type="checkbox"> <span>All Resto</span></div>
+                                        <div class="checkdiv"><input type="checkbox"> <span>All Resto</span></div>-->
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="label">Outlet:</div>
+                                    <div class="val" ng-if="all_outlet">
+                                        <div class="checkdiv"><input type="checkbox" ng-change="chkallout()" ng-model="$parent.chkout"> <span>All Outlet</span></div>
+                                        <div class="checkdiv" ng-repeat="outl in all_outlet"><input type="checkbox" ng-model="outl.selected" value={{outl.id}} ng-change="outsave()"> <span>{{outl.name}}</span></div>
+                                        <!--<div class="checkdiv"><input type="checkbox"> <span>All Resto</span></div>
+                                        <div class="checkdiv"><input type="checkbox"> <span>All Resto</span></div>
+                                        <div class="checkdiv"><input type="checkbox"> <span>All Resto</span></div>
+                                        <div class="checkdiv"><input type="checkbox"> <span>All Resto</span></div>
+                                        <div class="checkdiv"><input type="checkbox"> <span>All Resto</span></div>-->
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="label"></div>
+                                    <div class="val">
+                                        <div class="checkdiv"><input type="radio" name="trans" ng-model="trans" value="unit"> <span>Unit</span></div>
+                                        <div class="checkdiv"><input type="radio" name="trans" ng-model="trans" value="quantity"> <span>Quantity</span></div>
+                                        <div class="checkdiv"><input type="radio" name="trans" ng-model="trans" value="value"> <span>Value</span></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="label"></div>
+                                    <div class="val">
+                                        <div dx-button="{
+                                        text: 'Submit',
+                                        type: 'success',
+                                        onClick: validateAndSubmitTransaction }" id="button" class="dx-widget dx-button-has-text dx-button dx-button-success" tabindex="0" onclick="void(0)" role="button" aria-label="Submit"><div class="dx-template-wrapper ng-scope dx-button-content"><dx-icon></dx-icon><span ng-bind="text" ng-class="{ 'dx-button-text' : !!text }" class="ng-binding dx-button-text">Show Detail</span><!-- ngIf: scopeValue --></div></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div ng-show="transactionTab">
+
+
+                    <div class="transaction-details border-grey">
+
+                        <table>
+                            <tr style="background: #39ac38 none repeat scroll 0 0;">
+                                <td width="22%" class="header-color">Merchandise</td>
+                                <td width="13%" class="header-color">All Offer</td>
+                                <td width="13%" class="header-color">All Redeem</td>
+                                <td width="13%" class="header-color">All Available</td>
+                                <td width="13%" class="header-color">Offer</td>
+                                <td width="13%" class="header-color">Redeem</td>
+                                <td width="13%" class="header-color">Available</td>
+                            </tr>
+
+                            <tr>
+                                <td width="22%">Payment Voucher</td>
+                                <td width="13%">{{transactionInfo.allPaymentOffer | number}}</td>
+                                <td width="13%">{{transactionInfo.allRedeemPaymentOffer | number}}</td>
+                                <td width="13%">{{transactionInfo.allAvailablePaymentOffer | number}}</td>
+                                <td width="13%">{{transactionInfo.offerPaymentOffer | number}}</td>
+                                <td width="13%">{{transactionInfo.redeemPaymentOffer | number}}</td>
+                                <td width="13%">{{transactionInfo.availablePaymentOffer | number}}</td>
+                            </tr>
+                            <tr>
+                                <td width="22%">Menu Voucher</td>
+                                <td width="13%">{{transactionInfo.allMenuOffer | number}}</td>
+                                <td width="13%">{{transactionInfo.allRedeemMenuOffer | number}}</td>
+                                <td width="13%">{{transactionInfo.allAvailableMenuOffer | number}}</td>
+                                <td width="13%">{{transactionInfo.offerMenuOffer | number}}</td>
+                                <td width="13%">{{transactionInfo.redeemMenuOffer | number}}</td>
+                                <td width="13%">{{transactionInfo.availableMenuOffer | number}}</td>
+                            </tr>
+                            <tr>
+                                <td width="22%">Membership</td>
+                                <td width="13%">{{transactionInfo.allMembershipOffer | number}}</td>
+                                <td width="13%">{{transactionInfo.allRedeemMembershipOffer | number}}</td>
+                                <td width="13%">{{transactionInfo.allAvailableMembershipOffer | number}}</td>
+                                <td width="13%">{{transactionInfo.offerMembershipOffer | number}}</td>
+                                <td width="13%">{{transactionInfo.redeemMembershipOffer | number}}</td>
+                                <td width="13%">{{transactionInfo.availableMembershipOffer | number}}</td>
+                            </tr>
+
+                        </table>
+                    </div>
+
+                    <div class="transaction-details border-grey">
+
+                        <table>
+                            <tr>
+                                <td width="22%" class="header-color">Promotion</td>
+                                <td width="13%" class="header-color">Will Active</td>
+                                <td width="13%" class="header-color">New Promo</td>
+                                <td width="13%" class="header-color">Hot Promo</td>
+                                <td width="13%" class="header-color">Lastday</td>
+                                <td width="13%" class="header-color">Special</td>
+                                <td width="13%" class="header-color">View</td>
+                            </tr>
+
+                            <tr>
+                                <td width="22%">Payment Voucher</td>
+                                <td width="13%">{{transactionInfo.willActivePaymentOffer | number}}</td>
+                                <td width="13%">{{transactionInfo.newPaymentOffer | number}}</td>
+                                <td width="13%">{{transactionInfo.hotPaymentOffer | number}}</td>
+                                <td width="13%">{{transactionInfo.lastdayPaymentOffer | number}}</td>
+                                <td width="13%">{{transactionInfo.specialPaymentOffer | number}}</td>
+                                <td width="13%">{{transactionInfo.viewPaymentOffer | number}}</td>
+                            </tr>
+                            <tr>
+                                <td width="22%">Menu Voucher</td>
+                                <td width="13%">{{transactionInfo.willActiveMenuOffer | number}}</td>
+                                <td width="13%">{{transactionInfo.newMenuOffer | number}}</td>
+                                <td width="13%">{{transactionInfo.hotMenuOffer | number}}</td>
+                                <td width="13%">{{transactionInfo.lastdayMenuOffer | number}}</td>
+                                <td width="13%">{{transactionInfo.specialMenuOffer | number}}</td>
+                                <td width="13%">{{transactionInfo.viewMenuOffer | number}}</td>
+                            </tr>
+                            <tr>
+                                <td width="22%">Membership</td>
+                                <td width="13%">{{transactionInfo.willActiveMembershipOffer | number}}</td>
+                                <td width="13%">{{transactionInfo.newMembershipOffer | number}}</td>
+                                <td width="13%">{{transactionInfo.hotMembershipOffer | number}}</td>
+                                <td width="13%">{{transactionInfo.lastdayMembershipOffer | number}}</td>
+                                <td width="13%">{{transactionInfo.specialMembershipOffer | number}}</td>
+                                <td width="13%">{{transactionInfo.viewMembershipOffer | number}}</td>
+                            </tr>
+
+
+                        </table>
+                    </div>
+
+                    <div class="transaction-details border-grey">
+
+                        <table>
+                            <tr>
+                                <td width="22%" class="header-color">Advertising</td>
+                                <td width="13%" class="header-color">Will Active</td>
+                                <td width="13%" class="header-color">Active</td>
+                                <td width="13%" class="header-color">Target Click</td>
+                                <td width="13%" class="header-color">Actual Click</td>
+                                <td width="13%" class="header-color">Remaining</td>
+                                <td width="13%" class="header-color">Exceed Click</td>
+                            </tr>
+
+                            <tr>
+                                <td width="22%">News & Events</td>
+                                <td width="13%">{{transactionInfo.willActiveNews | number}}</td>
+                                <td width="13%">{{transactionInfo.activeNews | number}}</td>
+                                <td width="13%">{{transactionInfo.targetNews | number}}</td>
+                                <td width="13%">{{transactionInfo.actualNews | number}}</td>
+                                <td width="13%">{{transactionInfo.remainingNews | number}}</td>
+                                <td width="13%">{{transactionInfo.exceedNews | number}}</td>
+                            </tr>
+                            <tr>
+                                <td width="22%">Advertising</td>
+                                <td width="13%">{{transactionInfo.willActiveAddv | number}}</td>
+                                <td width="13%">{{transactionInfo.activeAddv | number}}</td>
+                                <td width="13%">{{transactionInfo.targetAddv | number}}</td>
+                                <td width="13%">{{transactionInfo.actualAddv | number}}</td>
+                                <td width="13%">{{transactionInfo.remainingAddv | number}}</td>
+                                <td width="13%">{{transactionInfo.exceedAddv | number}}</td>
+                            </tr>
+                            <tr>
+                                <td width="22%">Banner</td>
+                                <td width="13%">{{transactionInfo.willActiveBanner | number}}</td>
+                                <td width="13%">{{transactionInfo.activeBanner | number}}</td>
+                                <td width="13%">{{transactionInfo.targetBanner | number}}</td>
+                                <td width="13%">{{transactionInfo.actualBanner | number}}</td>
+                                <td width="13%">{{transactionInfo.remainingBanner | number}}</td>
+                                <td width="13%">{{transactionInfo.exceedBanner | number}}</td>
+                            </tr>
+
+
+                        </table>
+                    </div>
+
+                    <div class="transaction-details border-grey">
+
+                        <table>
+                            <tr>
+                                <td width="22%" class="header-color">Marketplace</td>
+                                <td width="13%" class="header-color">Available</td>
+                                <td width="13%" class="header-color">Deal</td>
+                                <td width="13%" class="header-color">Open</td>
+                                <td width="13%" class="header-color">Feedback</td>
+                                <td width="13%" class="header-color">My Event</td>
+                                <td width="13%" class="header-color">My Offers</td>
+                            </tr>
+
+                            <tr>
+                                <td width="22%">Event Offer</td>
+                                <td width="13%">{{transactionInfo.availableEvent | number}}</td>
+                                <td width="13%">{{transactionInfo.dealEvent | number}}</td>
+                                <td width="13%">{{transactionInfo.openEvent | number}}</td>
+                                <td width="13%">{{transactionInfo.feedbackEvent | number}}</td>
+                                <td width="13%">{{transactionInfo.myEvent | number}}</td>
+                                <td width="13%">{{transactionInfo.myOfferEvent | number}}</td>
+                            </tr>
+
+
+                        </table>
+                    </div>
+
+                    <div class="transaction-details border-grey">
+
+                        <table>
+                            <tr>
+                                <td width="22%" class="header-color">Points</td>
+                                <td width="13%" class="header-color">Generated</td>
+                                <td width="13%" class="header-color">Redeem</td>
+                                <td width="13%" class="header-color">Expired</td>
+                                <td width="13%" class="header-color">Balance</td>
+                                <td width="13%" class="header-color">Next Month Exp</td>
+                                <td width="13%" class="header-color">This Year Exp</td>
+                            </tr>
+
+                            <tr>
+                                <td width="22%">Merchant-Point</td>
+                                <td width="13%">{{transactionInfo.generatedPoint | number}}</td>
+                                <td width="13%">{{transactionInfo.redeemPoint | number}}</td>
+                                <td width="13%">{{transactionInfo.expiredPoint | number}}</td>
+                                <td width="13%">{{transactionInfo.balancedPoint | number}}</td>
+                                <td width="13%">{{transactionInfo.nextMonthExpPoint | number}}</td>
+                                <td width="13%">{{transactionInfo.thisYearExpPoint | number}}</td>
+                            </tr>
+
+
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- end ngIf: specialInfo.length != 0 -->
+
+
+        </div>
+
+    </div>
+
+    <div class="m-myaccount-details tablet-hide">
+
+        <div data-ng-include=" 'app/views/partials/leftbar.html' " ></div>
+        <h1>{{allicontext[27].title}}</h1>
+        <div class="m-new-Promo tablet-hide">
+            <h1 ng-click="summeryTabShowHide()">Summary</h1>
+            <div class="m-summery" ng-show="summeryTab">
+                <div class="m-date-pi">
+                    <ul>
+
+                        <li>From: <span class="calendar" dx-date-box="dateBox.from_date" ng-model="userInfo.from_date"></span></li>
+                        <li>To: <span class="calendar" dx-date-box="dateBox.to_date" ng-model="userInfo.to_date"></span></li>
+                        <li><div dx-button="{
+                                text: 'Submit',
+                                type: 'success',
+                                onClick: validateAndSubmit }" id="button" class="dx-widget dx-button-has-text dx-button dx-button-success" tabindex="0" onclick="void(0)" role="button" aria-label="Submit"><div class="dx-template-wrapper ng-scope dx-button-content"><dx-icon></dx-icon><span ng-bind="text" ng-class="{ 'dx-button-text' : !!text }" class="ng-binding dx-button-text">Submit</span><!-- ngIf: scopeValue --></div></div></li>
+                    </ul>
+
+                </div>
+                <ul>
+                    <li>
+                        <div class="item">
+                            <h1>Merchant Summary</h1>
+                            <div class="cont">
+                                <ul>
+                                    <li>
+                                        <div class="title">Restaurants</div>
+                                        <div class="val">{{uptodateInfo.restaurant_count | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Outlets</div>
+                                        <div class="val">{{uptodateInfo.outlet_count | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Active Outlets</div>
+                                        <div class="val">{{uptodateInfo.active_outlet_count | number}}</div>
+                                    </li>
+                                    <lI><h1>Top Redeem</h1></lI>
+                                    <li>
+                                        <div class="title">{{rangeInfo.first_redeem_restaurant}}</div>
+                                        <div class="val">{{rangeInfo.first_redeem_value | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{rangeInfo.second_redeem_restaurant}}</div>
+                                        <div class="val">{{rangeInfo.second_redeem_value  | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{rangeInfo.third_redeem_restaurant}}</div>
+                                        <div class="val">{{rangeInfo.third_redeem_value  | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{rangeInfo.fourth_redeem_restaurant}}</div>
+                                        <div class="val">{{rangeInfo.fourth_redeem_value  | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{rangeInfo.fifth_redeem_restaurant}}</div>
+                                        <div class="val">{{rangeInfo.fifth_redeem_value  | number}}</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item">
+                            <h1>Member Summary</h1>
+                            <div class="cont">
+                                <ul>
+                                    <li>
+                                        <div class="title">Member List</div>
+                                        <div class="val">{{rangeInfo.all_user_count | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Female Member List</div>
+                                        <div class="val">{{rangeInfo.female_user_count | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Male Member List</div>
+                                        <div class="val">{{rangeInfo.male_user_count | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Member Active</div>
+                                        <div class="val">{{rangeInfo.active_member_user_count | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Female Member Active</div>
+                                        <div class="val">{{rangeInfo.active_female_user_count | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Male Member Active</div>
+                                        <div class="val">{{rangeInfo.active_male_user_count | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Non Active Member</div>
+                                        <div class="val">{{rangeInfo.inactive_member_user_count | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">New Member</div>
+                                        <div class="val">{{rangeInfo.all_user_count | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Unactivated</div>
+                                        <div class="val">{{rangeInfo.unactivated_member_count | number}}</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item">
+                            <h1>Up to {{rangeInfo.show_end_date}}</h1>
+                            <div class="cont">
+                                <ul>
+                                    <li>
+                                        <div class="title">All Promotion</div>
+                                        <div class="val">{{uptodateInfo.all_promo | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">All Feature Promo</div>
+                                        <div class="val">{{uptodateInfo.all_featured_promo | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">All Banner</div>
+                                        <div class="val">{{uptodateInfo.all_banner | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">All Advertising</div>
+                                        <div class="val">{{uptodateInfo.all_add | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Active Promotion</div>
+                                        <div class="val">{{uptodateInfo.all_active_promo | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Active Feat Promo</div>
+                                        <div class="val">{{uptodateInfo.all_active_featured_promo | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Active Banner</div>
+                                        <div class="val">{{uptodateInfo.all_active_banner | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Active Advertising</div>
+                                        <div class="val">{{uptodateInfo.all_active_add | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Hot Promotion</div>
+                                        <div class="val">{{uptodateInfo.all_hot_promo | number}}</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item">
+                            <h1>{{rangeInfo.show_start_date}} to {{rangeInfo.show_end_date}}</h1>
+                            <div class="cont">
+                                <ul>
+                                    <li>
+                                        <div class="title">View Promo</div>
+                                        <div class="val">{{rangeInfo.promo_visit_count | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Redeem Promo</div>
+                                        <div class="val">{{rangeInfo.redeem_promo_count | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Unredeem Promo</div>
+                                        <div class="val">{{rangeInfo.unredeem_promo_count | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Target Click Banner</div>
+                                        <div class="val">{{rangeInfo.total_target_banner | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Actual Click Banner</div>
+                                        <div class="val">{{rangeInfo.total_actual_banner | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Target Click Advertise</div>
+                                        <div class="val">{{rangeInfo.total_target_add | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Actual Click Advertise</div>
+                                        <div class="val">{{rangeInfo.total_actual_add | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">View News</div>
+                                        <div class="val">{{rangeInfo.news_visit_count | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Visit Website</div>
+                                        <div class="val"></div>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <!--<ul>
+                    <li>
+                        <div class="item2">
+                            <div class="graph">
+                                <img src="app/assets/Images/bar-chart-movies.gif"  alt=""/> </div>
+
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item2">
+                            <div class="graph">
+                                <img src="app/assets/Images/bar-chart-movies.gif"  alt=""/> </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item2">
+                            <div class="graph">
+                                <img src="app/assets/Images/bar-chart-movies.gif"  alt=""/> </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item2">
+                            <div class="graph">
+                                <img src="app/assets/Images/bar-chart-movies.gif"  alt=""/> </div>
+                        </div>
+                    </li>
+
+                </ul>-->
+                <ul>
+                    <li>
+                        <div class="item2">
+                            <div class="graph" ng-if="reshow">
+                                <!--<img src="app/assets/Images/bar-chart-movies.gif"  alt=""/> </div>-->
+
+
+                                <div id="abc" dx-chart="{
+                            dataSource: dataSource,
+                            series: {
+                                argumentField: 'day',
+                                valueField: 'oranges',
+                                type: 'bar',
+                                name: 'Member',
+                                color: '#ffa500'
+                            }
+                        }"></div>
+                            </div>
+                    </li>
+                    <li>
+                        <div class="item">
+                            <h1>Member</h1>
+                            <div class="cont">
+                                <ul>
+                                    <li>
+                                        <div class="title">All</div>
+                                        <div class="val">{{member_graph.all | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Active(A)</div>
+                                        <div class="val">{{member_graph.active_user | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Non Active(N A)</div>
+                                        <div class="val">{{member_graph.inactive_user | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Female(F)</div>
+                                        <div class="val">{{member_graph.female_user | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Male(M)</div>
+                                        <div class="val">{{member_graph.male_user | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Purchased Member(P M)</div>
+                                        <div class="val">{{member_graph.purchase_member | number}}</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item2">
+                            <div class="graph" ng-if="reshow1">
+                                <!--<img src="app/assets/Images/bar-chart-movies.gif"  alt=""/> </div>-->
+                                <div id="abc" dx-chart="{
+                            dataSource: dataSource1,
+                            series: {
+                                argumentField: 'day',
+                                valueField: 'oranges',
+                                type: 'line',
+                                name: 'New Member',
+                                color: '#ffa500'
+                            }
+                        }"></div>
+                            </div>
+                    </li>
+
+                    <li>
+                        <div class="item">
+                            <h1>New Member</h1>
+                            <div class="cont">
+                                <ul>
+                                    <li>
+                                        <div class="title">{{month_name.first}}</div>
+                                        <div class="val">{{new_member_graph.first | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{month_name.second}}</div>
+                                        <div class="val">{{new_member_graph.second | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{month_name.third}}</div>
+                                        <div class="val">{{new_member_graph.third | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{month_name.fourth}}</div>
+                                        <div class="val">{{new_member_graph.fourth | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{month_name.fifth}}</div>
+                                        <div class="val">{{new_member_graph.fifth | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{month_name.sixth}}</div>
+                                        <div class="val">{{new_member_graph.sixth | number}}</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item2">
+                            <div class="graph" ng-if="reshow3">
+                                <!--<img src="app/assets/Images/bar-chart-movies.gif"  alt=""/>-->
+                                <div id="abc" dx-chart="{
+                            dataSource: dataSource3,
+                            series: {
+                                argumentField: 'day',
+                                valueField: 'oranges',
+                                type: 'line',
+                                name: 'Spending',
+                                color: '#ffa500'
+                            }
+                        }"></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item">
+                            <h1>Member Spending in IDR 1,000</h1>
+                            <div class="cont">
+                                <ul>
+                                    <li>
+                                        <div class="title">{{month_name.first}}</div>
+                                        <div class="val">{{order_graph.first | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{month_name.second}}</div>
+                                        <div class="val">{{order_graph.second | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{month_name.third}}</div>
+                                        <div class="val">{{order_graph.third | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{month_name.fourth}}</div>
+                                        <div class="val">{{order_graph.fourth | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{month_name.fifth}}</div>
+                                        <div class="val">{{order_graph.fifth | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{month_name.sixth}}</div>
+                                        <div class="val">{{order_graph.sixth | number}}</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item2">
+                            <div class="graph" ng-if="reshow2">
+                                <!--<img src="app/assets/Images/bar-chart-movies.gif"  alt=""/> </div>-->
+                                <div id="abc" dx-chart="{
+                            dataSource: dataSource2,
+                            series: {
+                                argumentField: 'day',
+                                valueField: 'oranges',
+                                type: 'line',
+                                name: 'Promo Visit',
+                                color: '#ffa500'
+                            }
+                        }"></div>
+                            </div>
+                    </li>
+
+
+                    <li>
+                        <div class="item">
+                            <h1>Page and Promo Visit</h1>
+                            <div class="cont">
+                                <ul>
+                                    <li>
+                                        <div class="title">{{month_name.first}}</div>
+                                        <div class="val">{{promo_graph.first | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{month_name.second}}</div>
+                                        <div class="val">{{promo_graph.second | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{month_name.third}}</div>
+                                        <div class="val">{{promo_graph.third | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{month_name.fourth}}</div>
+                                        <div class="val">{{promo_graph.fourth | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{month_name.fifth}}</div>
+                                        <div class="val">{{promo_graph.fifth | number}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">{{month_name.sixth}}</div>
+                                        <div class="val">{{promo_graph.sixth | number}}</div>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+
+
+                </ul>
+                <!--<ul>
+
+
+                </ul>-->
+            </div>
+
+
+        </div>
+
+
+
+
+        <div class="m-new-Promo tablet-hide">
+            <h1 ng-click="transactionTabShowHide()">Transaction</h1>
+            <div class="m-transaction" ng-show="transactionTab">
+                <div class="t-form">
+                    <ul>
+                        <li>
+                            <div class="datediv">
+                                <ul>
+
+                                    <li>From: <span class="calendar" dx-date-box="dateBox.start_date" ng-model="userInfo.start_date"></span></li>
+                                    <li>To: <span class="calendar" dx-date-box="dateBox.end_date" ng-model="userInfo.end_date"></span></li>
+                                    <!--<li><div dx-button="{
+                                        text: 'Submit',
+                                        type: 'success',
+                                        onClick: validateAndSubmit }" id="button" class="dx-widget dx-button-has-text dx-button dx-button-success" tabindex="0" onclick="void(0)" role="button" aria-label="Submit"><div class="dx-template-wrapper ng-scope dx-button-content"><dx-icon></dx-icon><span ng-bind="text" ng-class="{ 'dx-button-text' : !!text }" class="ng-binding dx-button-text">Submit</span></div></div></li>-->
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="label">Restaurant:</div>
+                            <div class="val">
+                                <!--<div class="checkdiv" ng-repeat="res in all_restaurant"><input type="checkbox" ng-model="rescheck"  ng-value="{{res.id}}" ng-click="checkclick()"> <span>{{res.name}}</span></div>-->
+                                <div class="checkdiv"><input type="checkbox" ng-change="chkall()" ng-model="chka"> <span>All Restaurant</span></div>
+                                <div class="checkdiv" ng-repeat="res in all_restaurant"><input type="checkbox" ng-model="res.selected" value={{res.id}} ng-change="save()"> <span>{{res.name}}</span></div>
+
+                                <!--<div class="checkdiv"><input type="checkbox"> <span>All Resto</span></div>
+                                <div class="checkdiv"><input type="checkbox"> <span>All Resto</span></div>
+                                <div class="checkdiv"><input type="checkbox"> <span>All Resto</span></div>
+                                <div class="checkdiv"><input type="checkbox"> <span>All Resto</span></div>
+                                <div class="checkdiv"><input type="checkbox"> <span>All Resto</span></div>-->
+                            </div>
+                        </li>
+                        <li>
+                            <div class="label">Outlet:</div>
+                            <div class="val" ng-if="all_outlet">
+                                <div class="checkdiv"><input type="checkbox" ng-change="chkallout()" ng-model="$parent.chkout"> <span>All Outlet</span></div>
+                                <div class="checkdiv" ng-repeat="outl in all_outlet"><input type="checkbox" ng-model="outl.selected" value={{outl.id}} ng-change="outsave()"> <span>{{outl.name}}</span></div>
+                                <!--<div class="checkdiv"><input type="checkbox"> <span>All Resto</span></div>
+                                <div class="checkdiv"><input type="checkbox"> <span>All Resto</span></div>
+                                <div class="checkdiv"><input type="checkbox"> <span>All Resto</span></div>
+                                <div class="checkdiv"><input type="checkbox"> <span>All Resto</span></div>
+                                <div class="checkdiv"><input type="checkbox"> <span>All Resto</span></div>-->
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="label"></div>
+                            <div class="val">
+                                <div class="checkdiv"><input type="radio" name="trans1" ng-model="trans" value="unit"> <span>Unit</span></div>
+                                <div class="checkdiv"><input type="radio" name="trans1" ng-model="trans" value="quantity"> <span>Quantity</span></div>
+                                <div class="checkdiv"><input type="radio" name="trans1" ng-model="trans" value="value"> <span>Value</span></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="label"></div>
+                            <div class="val">
+                                <div dx-button="{
+                                        text: 'Submit',
+                                        type: 'success',
+                                        onClick: validateAndSubmitTransaction }" id="button" class="dx-widget dx-button-has-text dx-button dx-button-success" tabindex="0" onclick="void(0)" role="button" aria-label="Submit"><div class="dx-template-wrapper ng-scope dx-button-content"><dx-icon></dx-icon><span ng-bind="text" ng-class="{ 'dx-button-text' : !!text }" class="ng-binding dx-button-text">Show Detail</span><!-- ngIf: scopeValue --></div></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="m-transaction-details tablet-hide border-grey" ng-show="transactionTab">
+            <table>
+                <tr>
+                    <td class="h-bg-color headings" width="50%" class="m-header-color ">Merchandise</td>
+                    <td class="h-bg-color headings">Payment Voucher</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">All Offer</td>
+                    <td>{{transactionInfo.allPaymentOffer | number}}</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">All Redeem</td>
+                    <td>{{transactionInfo.allRedeemPaymentOffer | number}}</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">All Available</td>
+                    <td>{{transactionInfo.allAvailablePaymentOffer | number}}</td>
+                </tr>
+                <tr>
+                    <td width="12%" class="m-header-color">Offer</td>
+                    <td>{{transactionInfo.offerPaymentOffer | number}}</td>
+                </tr>
+                <tr>
+                    <td width="13%" class="m-header-color">Redeem</td>
+                    <td>{{transactionInfo.redeemPaymentOffer | number}}</td>
+                </tr>
+                <tr>
+                    <td width="13%" class="m-header-color">Available</td>
+                    <td>{{transactionInfo.availablePaymentOffer | number}}</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <div class="m-transaction-details tablet-hide border-grey" ng-show="transactionTab">
+            <table>
+                <tr>
+                    <td class="h-bg-color headings" width="50%" class="m-header-color headings">Merchandise</td>
+                    <td class="h-bg-color headings">Menu Voucher</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">All Offer</td>
+                    <td>{{transactionInfo.allMenuOffer | number}}</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">All Redeem</td>
+                    <td>{{transactionInfo.allRedeemMenuOffer | number}}</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">All Available</td>
+                    <td>{{transactionInfo.allAvailableMenuOffer | number}}</td>
+                </tr>
+                <tr>
+                    <td width="12%" class="m-header-color">Offer</td>
+                    <td>{{transactionInfo.offerMenuOffer | number}}</td>
+                </tr>
+                <tr>
+                    <td width="13%" class="m-header-color">Redeem</td>
+                    <td>{{transactionInfo.redeemMenuOffer | number}}</td>
+                </tr>
+                <tr>
+                    <td width="13%" class="m-header-color">Available</td>
+                    <td>{{transactionInfo.availableMenuOffer | number}}</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <div class="m-transaction-details tablet-hide border-grey" ng-show="transactionTab">
+            <table>
+                <tr>
+                    <td class="h-bg-color headings" width="50%" class="m-header-color">Merchandise</td>
+                    <td class="h-bg-color headings">Membership</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">All Offer</td>
+                    <td>{{transactionInfo.allMembershipOffer | number}}</td>
+
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">All Redeem</td>
+                    <td>{{transactionInfo.allRedeemMembershipOffer | number}}</td>
+
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">All Available</td>
+                    <td>{{transactionInfo.allAvailableMembershipOffer | number}}</td>
+
+                </tr>
+                <tr>
+                    <td width="12%" class="m-header-color">Offer</td>
+                    <td>{{transactionInfo.offerMembershipOffer | number}}</td>
+
+                </tr>
+                <tr>
+                    <td width="13%" class="m-header-color">Redeem</td>
+                    <td>{{transactionInfo.redeemMembershipOffer | number}}</td>
+
+                </tr>
+                <tr>
+                    <td width="13%" class="m-header-color">Available</td>
+                    <td>{{transactionInfo.availableMembershipOffer | number}}</td>
+                </tr>
+
+            </table>
+
+        </div>
+        <div class="m-transaction-details tablet-hide border-grey" ng-show="transactionTab">
+            <table>
+                <tr>
+                    <td class="h-bg-color headings" width="50%" class="m-header-color">Promotion</td>
+                    <td class="h-bg-color headings">Payment Voucher</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Will Active</td>
+                    <td>{{transactionInfo.willActivePaymentOffer | number}}</td>
+
+
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">New Promo</td>
+                    <td>{{transactionInfo.newPaymentOffer | number}}</td>
+
+
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Hot Promo</td>
+                    <td>{{transactionInfo.hotPaymentOffer | number}}</td>
+
+
+                </tr>
+                <tr>
+                    <td width="12%" class="m-header-color">Lastday</td>
+                    <td>{{transactionInfo.lastdayPaymentOffer | number}}</td>
+
+
+                </tr>
+                <tr>
+                    <td width="13%" class="m-header-color">Special</td>
+                    <td>{{transactionInfo.specialPaymentOffer | number}}</td>
+
+
+                </tr>
+                <tr>
+                    <td width="13%" class="m-header-color">View</td>
+                    <td>{{transactionInfo.viewPaymentOffer | number}}</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <div class="m-transaction-details tablet-hide border-grey" ng-show="transactionTab">
+            <table>
+                <tr>
+                    <td class="h-bg-color headings" width="50%" class="m-header-color">Promotion</td>
+                    <td class="h-bg-color headings">Menu Voucher</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Will Active</td>
+                    <td>{{transactionInfo.willActiveMenuOffer | number}}</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">New Promo</td>
+                    <td>{{transactionInfo.newMenuOffer | number}}</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Hot Promo</td>
+                    <td>{{transactionInfo.hotMenuOffer | number}}</td>
+                </tr>
+                <tr>
+                    <td width="12%" class="m-header-color">Lastday</td>
+                    <td>{{transactionInfo.lastdayMenuOffer | number}}</td>
+                </tr>
+                <tr>
+                    <td width="13%" class="m-header-color">Special</td>
+                    <td>{{transactionInfo.specialMenuOffer | number}}</td>
+                </tr>
+                <tr>
+                    <td width="13%" class="m-header-color">View</td>
+                    <td>{{transactionInfo.viewMenuOffer | number}}</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <div class="m-transaction-details tablet-hide border-grey" ng-show="transactionTab">
+            <table>
+                <tr>
+                    <td class="h-bg-color headingsr" width="50%" class="m-header-color">Promotion</td>
+                    <td class="h-bg-color headings">Membership</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Will Active</td>
+                    <td>{{transactionInfo.willActiveMembershipOffer | number}}</td>
+
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">New Promo</td>
+                    <td>{{transactionInfo.newMembershipOffer | number}}</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Hot Promo</td>
+                    <td>{{transactionInfo.hotMembershipOffer | number}}</td>
+                </tr>
+                <tr>
+                    <td width="12%" class="m-header-color">Lastday</td>
+                    <td>{{transactionInfo.lastdayMembershipOffer | number}}</td>
+                </tr>
+                <tr>
+                    <td width="13%" class="m-header-color">Special</td>
+                    <td>{{transactionInfo.specialMembershipOffer | number}}</td>
+                </tr>
+                <tr>
+                    <td width="13%" class="m-header-color">View</td>
+                    <td>{{transactionInfo.viewMembershipOffer | number}}</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <div class="m-transaction-details tablet-hide border-grey" ng-show="transactionTab">
+            <table>
+                <tr>
+                    <td class="h-bg-color headings" width="50%" class="m-header-color">Advertising</td>
+                    <td class="h-bg-color headings">News & Events</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Will Active</td>
+                    <td>{{transactionInfo.willActiveNews | number}}</td>
+
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Active</td>
+                    <td>{{transactionInfo.activeNews | number}}</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Target Click</td>
+                    <td>{{transactionInfo.targetNews | number}}</td>
+                </tr>
+                <tr>
+                    <td width="12%" class="m-header-color">Actual Click</td>
+                    <td>{{transactionInfo.actualNews | number}}</td>
+
+                </tr>
+                <tr>
+                    <td width="13%" class="m-header-color">Remaining</td>
+                    <td>{{transactionInfo.remainingNews | number}}</td>
+
+                </tr>
+                <tr>
+                    <td width="13%" class="m-header-color">Exceed Click</td>
+                    <td>{{transactionInfo.exceedNews | number}}</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <div class="m-transaction-details tablet-hide border-grey" ng-show="transactionTab">
+            <table>
+                <tr>
+                    <td class="h-bg-color headings" width="50%" class="m-header-color">Advertising</td>
+                    <td class="h-bg-color headings">Advertising</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Will Active</td>
+                    <td>{{transactionInfo.willActiveAddv | number}}</td>
+
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Active</td>
+                    <td>{{transactionInfo.activeAddv | number}}</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Target Click</td>
+                    <td>{{transactionInfo.targetAddv | number}}</td>
+                </tr>
+                <tr>
+                    <td width="12%" class="m-header-color">Actual Click</td>
+                    <td>{{transactionInfo.actualAddv | number}}</td>
+
+                </tr>
+                <tr>
+                    <td width="13%" class="m-header-color">Remaining</td>
+                    <td>{{transactionInfo.remainingAddv | number}}</td>
+
+                </tr>
+                <tr>
+                    <td width="13%" class="m-header-color">Exceed Click</td>
+                    <td>{{transactionInfo.exceedAddv | number}}</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <div class="m-transaction-details tablet-hide border-grey" ng-show="transactionTab">
+            <table>
+                <tr>
+                    <td class="h-bg-color headings" width="50%" class="m-header-color">Advertising</td>
+                    <td class="h-bg-color headings">Banner</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Will Active</td>
+                    <td>{{transactionInfo.willActiveBanner | number}}</td>
+
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Active</td>
+                    <td>{{transactionInfo.activeBanner | number}}</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Target Click</td>
+                    <td>{{transactionInfo.targetBanner | number}}</td>
+                </tr>
+                <tr>
+                    <td width="12%" class="m-header-color">Actual Click</td>
+                    <td>{{transactionInfo.actualBanner | number}}</td>
+
+                </tr>
+                <tr>
+                    <td width="13%" class="m-header-color">Remaining</td>
+                    <td>{{transactionInfo.remainingBanner | number}}</td>
+
+                </tr>
+                <tr>
+                    <td width="13%" class="m-header-color">Exceed Click</td>
+                    <td>{{transactionInfo.exceedBanner | number}}</td>
+                </tr>
+
+            </table>
+
+        </div>
+        <div class="m-transaction-details tablet-hide border-grey" ng-show="transactionTab">
+            <table>
+                <tr>
+                    <td class="h-bg-color headings" width="50%" class="m-header-color">Marketplace</td>
+                    <td class="h-bg-color headings">Event Offer</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Available</td>
+                    <td>{{transactionInfo.availableEvent | number}}</td>
+
+
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Deal</td>
+                    <td>{{transactionInfo.dealEvent | number}}</td>
+
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Open</td>
+                    <td>{{transactionInfo.openEvent | number}}</td>
+
+                </tr>
+                <tr>
+                    <td width="12%" class="m-header-color">Feedback</td>
+                    <td>{{transactionInfo.feedbackEvent | number}}</td>
+
+
+                </tr>
+                <tr>
+                    <td width="13%" class="m-header-color">My Event</td>
+                    <td>{{transactionInfo.myEvent | number}}</td>
+
+
+                </tr>
+                <tr>
+                    <td width="13%" class="m-header-color">My Offers</td>
+                    <td>{{transactionInfo.myOfferEvent | number}}</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <div class="m-transaction-details tablet-hide border-grey" ng-show="transactionTab">
+            <table>
+                <tr>
+                    <td class="h-bg-color headings" width="50%" class="m-header-color ">Points</td>
+                    <td class="h-bg-color headings">Merchant-Point</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Generated</td>
+                    <td>{{transactionInfo.generatedPoint | number}}</td>
+
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Redeem</td>
+                    <td>{{transactionInfo.redeemPoint | number}}</td>
+                </tr>
+                <tr>
+                    <td width="30%" class="m-header-color">Expired</td>
+                    <td>{{transactionInfo.expiredPoint | number}}</td>
+                </tr>
+                <tr>
+                    <td width="12%" class="m-header-color">Balance</td>
+                    <td>{{transactionInfo.balancedPoint | number}}</td>
+
+                </tr>
+                <tr>
+                    <td width="13%" class="m-header-color">Next Month Exp</td>
+                    <td>{{transactionInfo.nextMonthExpPoint | number}}</td>
+
+                </tr>
+                <tr>
+                    <td width="13%" class="m-header-color">This Year Exp</td>
+                    <td>{{transactionInfo.thisYearExpPoint | number}}</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+
+
+    </div>
+
+
+</div>
+<style>
+    #abc {
+        height: 320px;
+        width: 100%;
+    }
+</style>
+
