@@ -57,8 +57,8 @@ app.run(['$rootScope', '$state', '$stateParams',
         // set below basic information
         //$rootScope.serviceurl = "http://localhost/prohelp/";
         //$rootScope.serviceurl = "http://livehelpout.com/beta.admin";
-        $rootScope.serviceurl = "http://107.170.152.166/mFoodGateAPI/";
-         $rootScope.siteurl = "http://107.170.152.166/mFood/#/";
+        $rootScope.serviceurl = "http://api.mfoodgate.com/index.php/";
+        $rootScope.siteurl = "http://www.mfoodgate.com/#/";
         $rootScope.app = {
             name: 'mFoodGate', // name of your project
             author: 'NITS', // author's name or company name
