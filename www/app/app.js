@@ -59,9 +59,12 @@ app.run(['$rootScope', '$state', '$stateParams',
         //$rootScope.serviceurl = "http://livehelpout.com/beta.admin";
         $rootScope.serviceurl = "http://api.mfoodgate.com/index.php/";
         $rootScope.siteurl = "http://www.mfoodgate.com/#/";
+<<<<<<< HEAD
         //$rootScope.metadesc = "http://107.170.152.166/mFoodGateAPI/";
 
         $rootScope.googleClientID = "612181755298-lpkrunqgt3860479r850dif58p9p2o12.apps.googleusercontent.com";
+=======
+>>>>>>> 0228e3b62e357876fe9ba1534539bfffab04a452
         $rootScope.app = {
             name: 'mFoodGate', // name of your project
             author: 'NITS', // author's name or company name
