@@ -139,32 +139,26 @@
                     </div>
 
                     <div class="share">
-                        <p>Share this deal
-                            <!--<a href="#"-->
-                            <!--socialshare-->
-                            <!--socialshare-provider="twitter"-->
-                            <!--socialshare-text="720kb AngularJS Socialshare"-->
-                            <!--socialshare-hashtags="angularjs, angular-socialshare"-->
-                            <!--socialshare-url="http://720kb.net">-->
-                            <!--Share me-->
-                            <!--</a>-->
-                            <!--<a href="#"-->
-                            <!--socialshare-->
-                            <!--socialshare-provider="facebook"-->
-                            <!--socialshare-text="promodetails.title"-->
-                            <!--socialshare-description = "promodetails.description">-->
-                            <!--Share me-->
-                            <!--</a>-->
-                            <!--<span><img src="app/assets/Images/icon-mail.png" width="20" height="20"  alt=""/></span><span><img src="app/assets/Images/icon-f.png" width="20" height="20"  alt=""/></span><span><img src="app/assets/Images/icon-t.png" width="20" height="20"  alt=""/></span></p>-->
-                            <!--<span class='st_sharethis_large' displayText='ShareThis'></span>-->
-                            <!--<span class='st_facebook_large' displayText='Facebook'></span>-->
-                            <!--<span class='st_twitter_large' displayText='Tweet'></span>-->
-                            <!--<span class='st_linkedin_large' displayText='LinkedIn'></span>-->
-                            <!--<span class='st_pinterest_large' displayText='Pinterest'></span>-->
-                            <!--<span class='st_email_large' displayText='Email'></span>-->
-                        </p>
+                        <p></p>
                         <!-- Go to www.addthis.com/dashboard to customize your tools -->
-                        <div class="addthis_sharing_toolbox"></div>
+                        <!--<div class="addthis_sharing_toolbox"></div>-->
+                        <li>
+                            <!--<a  href="javascript:void(0);" onclick="fbsharedialog('{{allnews.id}}','<?php echo $img;?>','{{allnews.title}}','Posted on:{{allnews.date}} | By: Admin | View {{allnews.views}}')" class="fa fa-facebook">TEST</a>-->
+                            <a  href="javascript:void(0);" ng-click="fbsharedialog()" class="fa fa-facebook">
+                                <img src="app/assets/Images/s-icon-1.png" width="25" height="25" >
+                            </a>
+
+                            <a  href="http://twitter.com/intent/tweet?text={{newspagetitle}}&amp;url={{pageLink}}&amp;related=" target="_blank" class="fa fa-facebook">
+                                <img src="app/assets/Images/s-icon-2.png" width="25" height="25" >
+                            </a>
+
+                            <a  href="http://www.linkedin.com/shareArticle?mini=true&amp;url={{pageLink}}&amp;title={{newspagetitle}}&amp;summary={{newspagedescription}}" target="_new" class="fa fa-facebook">
+                                <img src="app/assets/Images/linkedin.png" width="25" height="25" >
+                            </a>
+
+                            <a href="https://plus.google.com/share?url={{pageLink}}" onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img src="app/assets/Images/g-plus.png" width="25" height="25" ></a>
+                        </li>
                     </div>
                     <div class="highlights" ng-bind-html="promodetails.description">
 
@@ -278,9 +272,28 @@
                 </div>
 
                 <div class="share">
-                    <p>Share this deal</p>
-                    <div class="addthis_sharing_toolbox"></div>
+                    <p></p>
+                    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                    <!--<div class="addthis_sharing_toolbox"></div>-->
+                    <li>
+                        <!--<a  href="javascript:void(0);" onclick="fbsharedialog('{{allnews.id}}','<?php echo $img;?>','{{allnews.title}}','Posted on:{{allnews.date}} | By: Admin | View {{allnews.views}}')" class="fa fa-facebook">TEST</a>-->
+                        <a  href="javascript:void(0);" ng-click="fbsharedialog()" class="fa fa-facebook">
+                            <img src="app/assets/Images/s-icon-1.png" width="25" height="25" >
+                        </a>
+
+                        <a  href="http://twitter.com/intent/tweet?text={{newspagetitle}}&amp;url={{pageLink}}&amp;related=" target="_blank" class="fa fa-facebook">
+                            <img src="app/assets/Images/s-icon-2.png" width="25" height="25" >
+                        </a>
+
+                        <a  href="http://www.linkedin.com/shareArticle?mini=true&amp;url={{pageLink}}&amp;title={{newspagetitle}}&amp;summary={{newspagedescription}}" target="_new" class="fa fa-facebook">
+                            <img src="app/assets/Images/linkedin.png" width="25" height="25" >
+                        </a>
+
+                        <a href="https://plus.google.com/share?url={{pageLink}}" onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img src="app/assets/Images/g-plus.png" width="25" height="25" ></a>
+                    </li>
                 </div>
+
                 <div class="highlights" ng-bind-html="promodetails.description">
 
                 </div>

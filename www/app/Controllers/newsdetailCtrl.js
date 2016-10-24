@@ -43,6 +43,8 @@ app.controller('newsdetailCtrl', function ($rootScope, $scope, $http, $location,
         }).success(function(data) {
             if(data.news) {
                 $scope.allnews = data.news;
+                $scope.newspagetitle = encodeURIComponent($scope.allnews.title);
+                $scope.newspagedescription = encodeURIComponent('Posted on:  '+$scope.allnews.date);
             }
         })
     }
@@ -94,7 +96,7 @@ app.controller('newsdetailCtrl', function ($rootScope, $scope, $http, $location,
     $scope.fbsharedialog = function(){
         var attachment = {
 				     'name':$scope.allnews.title,
-				     'description':$scope.allnews.description,
+				     'description':$scope.allnews.sharedescription,
 				     'caption': 'MFoodGate',
 				     'href':$scope.allnews.image,
 				     'media':[{'type':'image',
@@ -109,8 +111,8 @@ app.controller('newsdetailCtrl', function ($rootScope, $scope, $http, $location,
 			link: $rootScope.siteurl+'newsdetail/'+$stateParams.newsId,
 			picture: $scope.allnews.image,
 			caption: 'MFoodGate',
-			description: $scope.allnews.description,
-			message: $scope.allnews.description,
+			description: $scope.allnews.sharedescription,
+			message: $scope.allnews.sharedescription,
 			display: 'iframe',
 			width: 300,
 			height: 150

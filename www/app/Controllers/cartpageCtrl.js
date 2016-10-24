@@ -1,4 +1,4 @@
-app.controller('cartpageCtrl', function ($rootScope, $scope, $http, $location, $stateParams, myAuth, NgMap,mFoodCart,$window,$cookieStore) {
+app.controller('cartpageCtrl', function ($rootScope, $scope, $http, $location, $stateParams, myAuth, NgMap,mFoodCart,$window,$cookieStore,$timeout) {
     $scope.promoId = $stateParams.promoId;
     $scope.loggedindetails = myAuth.getUserNavlinks();
 
@@ -6,6 +6,7 @@ app.controller('cartpageCtrl', function ($rootScope, $scope, $http, $location, $
     $scope.cartIds = [];
     $scope.cartisresell = [];
     $scope.cartDetails = mFoodCart.get_cart();
+	$scope.isDisabled = false;
 
     $scope.getCartTotals = function(){
         $scope.cart_total = 0;
@@ -344,16 +345,7 @@ app.controller('cartpageCtrl', function ($rootScope, $scope, $http, $location, $
     $scope.cart_total = 0;
     $scope.cart_total_points = 0;
 
-    /*$scope.getCartTotals = function(){
-        $scope.cart_total = 0;
-        $scope.cart_total_points = 0;
-        $scope.cartDetails = mFoodCart.get_cart();
-        angular.forEach($scope.cartDetails,function(value){
-            $scope.cart_total = $scope.cart_total + (value.quantity * value.offer_price);
-            $scope.cart_total_points += (value.quantity * value.mpoints);
-        })
-    }*/
-
+    
     $scope.pay_now = function() {
        // alert($scope.mpoints);
        // alert($scope.cart_total_points);
@@ -361,6 +353,163 @@ app.controller('cartpageCtrl', function ($rootScope, $scope, $http, $location, $
         //return false;
 
         $scope.cartDetails = mFoodCart.get_cart();
+        //console.log($scope.cartDetails);
+
+        if (!$scope.loggedindetails) {
+            var ret = $location.path();
+            $location.path("/login").search('returnUrl', ret);
+        }
+        else {
+            if(!$scope.loggedindetails.first_name) {
+                $location.path("/profile");
+            }else {
+                $scope.getCartTotals();
+                $http({
+                    method: "POST",
+                    url: $rootScope.serviceurl + "checkOffersPoint",
+                    headers: {'Content-Type': 'application/json'},
+                    data: {
+                        cart: $scope.cartDetails,
+                        user_id: $scope.loggedindetails.id
+                    }
+                    }).success(function (data) {
+                        console.log(data);
+                        //return false;
+                        if(data.type=='success'){
+                            $scope.isPointRedeem = 0;
+                            $scope.isPrice = 0;
+                            $scope.isOnlyPrice = 1;
+                            localStorage.setItem('onlyPrice', $scope.isOnlyPrice);
+                            angular.forEach($scope.cartDetails, function (v) {
+
+                                if (v.payments == true)
+                                    $scope.isPointRedeem = 1;
+
+                                if (v.paymentscash == true)
+                                    $scope.isPrice = 1;
+                            });
+                            //alert($scope.isPointRedeem);
+                            //alert($scope.isPrice );
+                            if($scope.isPointRedeem == 1){
+                                $http({
+                                    method: "POST",
+                                    url: $rootScope.serviceurl + "redeemUserPoints",
+                                    headers: {'Content-Type': 'application/json'},
+                                    data: {
+                                        cart: $scope.cartDetails,
+                                        points: $scope.cart_total_points,
+                                        user_id: $scope.loggedindetails.id
+                                    }
+                                }).success(function (data) {
+
+                                        //console.log(data);
+                                        //return false;
+
+                                    if (data.status == 'success') {
+                                        //console.log(data);
+                                        $scope.isOnlyPrice = 0;
+                                        localStorage.setItem('onlyPrice', $scope.isOnlyPrice);
+                                        if($scope.isPrice == 0) {
+                                            angular.forEach($scope.cartDetails, function (v) {
+                                                $scope.remove_offer_payment(v.offer_id);
+                                            });
+                                            localStorage.removeItem('cart');
+                                            var message = "Redeem Point success and your points have been deducted.";
+                                            DevExpress.ui.notify({
+                                                message: message,
+                                                position: {
+                                                    my: "center top",
+                                                    at: "center top"
+                                                }
+                                            }, "success", 3000);
+                                            $location.path('/');
+                                        }
+                                        
+                                    }else{
+                                        var message = "Redeem error.";
+                                        DevExpress.ui.notify({
+                                            message: message,
+                                            position: {
+                                                my: "center top",
+                                                at: "center top"
+                                            }
+                                        }, "success", 3000);
+                                        return false;
+                                    }
+
+                                })
+                            }
+                            if($scope.isPrice == 1){
+                                $scope.allcartDetails = $scope.cartDetails
+                                angular.forEach($scope.allcartDetails, function (v) {
+                                    if(v.condtn == 0){
+                                        if(v.payments == true){
+                                            $scope.remove_offer_payment(v.offer_id);
+                                        }
+                                    }
+                                });
+                                $scope.allcartDetails = mFoodCart.get_cart();
+                                //console.log($scope.allcartDetails);
+                                if($scope.allcartDetails.length != 0){
+                                    $http({
+                                        method: "POST",
+                                        url: $rootScope.serviceurl + "cart_checkout",
+                                        headers: {'Content-Type': 'application/json'},
+                                        data: {cart: $scope.allcartDetails, total: $scope.cart_total, user_id: $scope.loggedindetails.id}
+                                    }).success(function (data) {
+
+                                        if (data.type == 'success') {
+                                            //console.log(data.getRelatedPromo);
+                                            //$scope.related_products = data.getRelatedPromo;
+                                            console.log(data);
+                                          //cordova.InAppBrowser.open(data.url, '_blank', 'location=yes');
+                                            $window.location.href = data.url;
+
+                                        }
+                                        else {
+                                            var message = "Internal error. Please try again later";
+                                            DevExpress.ui.notify({
+                                                message: message,
+                                                position: {
+                                                    my: "center top",
+                                                    at: "center top"
+                                                }
+                                            }, "error", 3000);
+                                        }
+                                    })
+                                }
+                            }
+
+
+                        }else{                            
+                            DevExpress.ui.notify({
+                                message: data.message,
+                                position: {
+                                    my: "center top",
+                                    at: "center top"
+                                }
+                            }, "error", 3000);
+                        }
+                    });
+                    return false;                
+        }
+    }
+        
+    }
+	 if(PayPalMobile)
+	  {
+		PayPalMobile.init( $rootScope.paypalClientIDs, $rootScope.onPayPalMobileInit());
+	    }
+
+
+	
+
+	$scope.pay_now_app = function() {
+       $scope.isDisabled = true;
+
+        $scope.cartDetails = mFoodCart.get_cart();
+	
+	
         //console.log($scope.cartDetails);
 
         if (!$scope.loggedindetails) {
@@ -473,31 +622,8 @@ app.controller('cartpageCtrl', function ($rootScope, $scope, $http, $location, $
                                 $scope.allcartDetails = mFoodCart.get_cart();
                                 //console.log($scope.allcartDetails);
                                 if($scope.allcartDetails.length != 0){
-                                    $http({
-                                        method: "POST",
-                                        url: $rootScope.serviceurl + "cart_checkout",
-                                        headers: {'Content-Type': 'application/json'},
-                                        data: {cart: $scope.allcartDetails, total: $scope.cart_total, user_id: $scope.loggedindetails.id}
-                                    }).success(function (data) {
-
-                                        if (data.type == 'success') {
-                                            //console.log(data.getRelatedPromo);
-                                            //$scope.related_products = data.getRelatedPromo;
-                                            console.log(data);
-                                            $window.location.href = data.url;
-
-                                        }
-                                        else {
-                                            var message = "Internal error. Please try again later";
-                                            DevExpress.ui.notify({
-                                                message: message,
-                                                position: {
-                                                    my: "center top",
-                                                    at: "center top"
-                                                }
-                                            }, "error", 3000);
-                                        }
-                                    })
+                                    PayPalMobile.renderSinglePaymentUI($scope.createPayment(), $scope.onSuccesfulPayment,
+        	$scope.onUserCanceled);
                                 }
                             }
 
@@ -514,151 +640,112 @@ app.controller('cartpageCtrl', function ($rootScope, $scope, $http, $location, $
                         }
                     });
                     return false;
-                /*if($scope.condition == 1) {
-                    if ($scope.mpoints >= $scope.cart_total_points) {
-                        $http({
-                            method: "POST",
-                            url: $rootScope.serviceurl + "redeemUserPoints",
-                            headers: {'Content-Type': 'application/json'},
-                            data: {
-                                cart: $scope.cartDetails,
-                                points: $scope.cart_total_points,
-                                user_id: $scope.loggedindetails.id
-                            }
-                        }).success(function (data) {
-
-                            if (data.status == 'success') {
-
-
-                            }
-
-                        })
-                    }else {
-                        var message = "You don't have sufficient points to redeem.";
-                        DevExpress.ui.notify({
-                            message: message,
-                            position: {
-                                my: "center top",
-                                at: "center top"
-                            }
-                        }, "error", 3000);
-                        return false;
-                    }
-
-                    $http({
-                        method: "POST",
-                        url: $rootScope.serviceurl + "cart_checkout",
-                        headers: {'Content-Type': 'application/json'},
-                        data: {cart: $scope.cartDetails, total: $scope.cart_total, user_id: $scope.loggedindetails.id}
-                    }).success(function (data) {
-
-                        if (data.type == 'success') {
-                            //console.log(data.getRelatedPromo);
-                            //$scope.related_products = data.getRelatedPromo;
-                            //console.log($scope.related_products);
-                            $window.location.href = data.url;
-
-                        }
-                        else {
-                            var message = "Internal error. Please try again later";
-                            DevExpress.ui.notify({
-                                message: message,
-                                position: {
-                                    my: "center top",
-                                    at: "center top"
-                                }
-                            }, "error", 3000);
-                        }
-                    })
-                }else{
-                if ($scope.payments == 'C') {
-                    $http({
-                        method: "POST",
-                        url: $rootScope.serviceurl + "cart_checkout",
-                        headers: {'Content-Type': 'application/json'},
-                        data: {cart: $scope.cartDetails, total: $scope.cart_total, user_id: $scope.loggedindetails.id}
-                    }).success(function (data) {
-
-                        if (data.type == 'success') {
-                            //console.log(data.getRelatedPromo);
-                            //$scope.related_products = data.getRelatedPromo;
-                            //console.log($scope.related_products);
-                            $window.location.href = data.url;
-
-                        }
-                        else {
-                            var message = "Internal error. Please try again later";
-                            DevExpress.ui.notify({
-                                message: message,
-                                position: {
-                                    my: "center top",
-                                    at: "center top"
-                                }
-                            }, "error", 3000);
-                        }
-                    })
-                }
-                else {
-                    if ($scope.mpoints >= $scope.cart_total_points) {
-                        $http({
-                            method: "POST",
-                            url: $rootScope.serviceurl + "redeemUserPoints",
-                            headers: {'Content-Type': 'application/json'},
-                            data: {
-                                cart: $scope.cartDetails,
-                                points: $scope.cart_total_points,
-                                user_id: $scope.loggedindetails.id
-                            }
-                        }).success(function (data) {
-                            //console.log(data);
-                            //return false;
-                            if (data.status == 'success') {
-                                //$cookieStore.remove('cart');
-                                localStorage.removeItem('cart');
-                                //console.log(data.getRelatedPromo);
-                                //$scope.related_products = data.getRelatedPromo;
-                                //$scope.related_products = data.getRelatedPromo;
-                                //console.log($scope.related_products);
-                                //$window.location.href = data.url;
-                                var message = "Redeem successfull.";
-                                DevExpress.ui.notify({
-                                    message: message,
-                                    position: {
-                                        my: "center top",
-                                        at: "center top"
-                                    }
-                                }, "success", 3000);
-                                $location.path('/');
-                            }
-                            else {
-                                var message = "Internal error. Please try again later";
-                                DevExpress.ui.notify({
-                                    message: message,
-                                    position: {
-                                        my: "center top",
-                                        at: "center top"
-                                    }
-                                }, "error", 3000);
-                            }
-                        })
-                    }
-                    else {
-                        var message = "You don't have sufficient points to redeem.";
-                        DevExpress.ui.notify({
-                            message: message,
-                            position: {
-                                my: "center top",
-                                at: "center top"
-                            }
-                        }, "error", 3000);
-                    }
-
-                }
-            }*/
+                
         }
     }
         /**/
     }
+	$scope.createPayment = function() {
+		// for simplicity use predefined amount
+		
+		//alert($scope.details.total_price);
+		
+		$scope.allofertitle = '';
+		angular.forEach($scope.allcartDetails,function(v){		
+			if(!$scope.allofertitle){
+				$scope.allofertitle = v.offer_title;
+			}else{
+				$scope.allofertitle = $scope.allofertitle+', '+v.offer_title;
+			}
+		});
+		//console.log($scope.allofertitle);
+		//return false;
+		var paymentDetails = new PayPalPaymentDetails($scope.cart_total, "0.00", "0.00");
+		console.log(paymentDetails);
+		var payment = new PayPalPayment($scope.cart_total, "USD", $scope.allofertitle, "Sale",
+		  paymentDetails);
+                  //console.log(payment);
+                  //return false;
+		//alert('create');
+		
+		return payment;
+    	}
+    
+    $scope.onUserCanceled = function(result) {
+        console.log("Canceled",result);
+//alert('cancelled');
+	$scope.isDisabled = false;
+	alert('Payment cancelled, please try again');
+	
+      }
+      
+    $scope.onSuccesfulPayment = function(payment) {
+	//alert('Success');
+	//alert(payment.response.id);
+        
+        $http({
+                method: "POST",
+                url: $rootScope.serviceurl + "cart_checkout_app",
+                headers: {'Content-Type': 'application/json'},
+                data: {cart: $scope.allcartDetails, total: $scope.cart_total, payment_id:payment.response.id, user_id: $scope.loggedindetails.id}
+            }).success(function (data) {
+
+                
+            });
+
+	$http({
+            method: "POST",
+            url: $rootScope.serviceurl + "success_payment",
+            data: 'payment_id=' + payment.response.id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).success(function(data){
+            //$cookieStore.remove('cart');
+            localStorage.setItem('cart', null);
+            $http({
+                method: "DELETE",
+                url: $rootScope.serviceurl+"deleteCartByUser/"+$scope.loggedindetails.id,
+                headers: {'Content-Type': 'application/json'}
+            }).success(function(data) {
+
+            })
+            $timeout(function(){
+                $scope.onlyPrice = localStorage.getItem('onlyPrice');
+                //alert($scope.onlyPrice);
+                localStorage.setItem('onlyPrice', null);
+                //localStorage.setItem('onlyPrice', $scope.isOnlyPrice);
+                //alert($scope.onlyPrice);
+                if($scope.onlyPrice == 1){
+                    var message = "Payment successfull.";
+
+                    DevExpress.ui.notify({
+                        message: message,
+                        position: {
+                            my: "center top",
+                            at: "center top"
+                        }
+                    }, "success", 3000);
+                }else{
+                    var message = "Purchase and Redeem Points success and your points have been deducted.";
+                    DevExpress.ui.notify({
+                        message: message,
+                        position: {
+                            my: "center top",
+                            at: "center top"
+                        }
+                    }, "success", 3000);
+                }
+
+            $location.path('/');
+            $location.search('success', null);
+            $location.search('token', null);
+            $location.search('paymentId', null);
+            $location.search('PayerID',null);
+            },3000);
+        });
+        
+        
+        
+      }
 
     $scope.delete_from_cart = function (id,event_promo)
     {

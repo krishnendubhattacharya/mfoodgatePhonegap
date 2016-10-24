@@ -23,6 +23,11 @@ app.controller('loginCtrl', function ($rootScope, $scope, $http, $location,$face
             mode: "email",
 
         },
+        forgotemail: {
+            placeholder: "Enter Email",
+            mode: "email",
+
+        },
         username: {
             placeholder: "Enter Username",
             mode: "text",
@@ -477,7 +482,33 @@ app.controller('loginCtrl', function ($rootScope, $scope, $http, $location,$face
                     }
 
                 });      
-    } 
+    }
+
+    $scope.forgotpassword = function(params) {
+
+
+        var result = params.validationGroup.validate();
+        if(result.isValid) {
+            console.log($scope.forgotemail);
+           /* $http({
+                method: "POST",
+                url: $rootScope.serviceurl+"users/login",
+                data: {"email":$scope.email,"password":$scope.password},
+                headers: {'Content-Type': 'application/json'},
+            }).success(function(data) {
+                console.log(data);
+                if(data.type == 'success'){
+                    $scope.message = data.message;
+
+
+                }else{
+
+                }
+
+            })*/
+
+        }
+    };
 
 });
 

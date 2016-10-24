@@ -65,6 +65,8 @@ app.controller('resellvoucherdetailCtrl', function ($rootScope, $scope, $http, $
         }).success(function(data) {
             if(data.type == 'success') {
                 $scope.promodetails = data.offer;
+                $scope.newspagetitle = encodeURIComponent($scope.promodetails.title);
+                $scope.newspagedescription = encodeURIComponent('Posted on:  '+$scope.promodetails.created_on);
                 $scope.pointdetails = data.point_details;
                 $scope.resell_user_details = data.resell_user_details[0];
                 $scope.restaurant = data.restaurants;
@@ -724,6 +726,50 @@ app.controller('resellvoucherdetailCtrl', function ($rootScope, $scope, $http, $
         $scope.mapaddress = outletInfo.address;
         $scope.maptitle = outletInfo.title;
     }
+
+    $scope.pageLink = encodeURIComponent($rootScope.siteurl+'resellvoucherdetail/'+$stateParams.resellId+'/'+$stateParams.promoId);
+
+    $scope.fbsharedialog = function(){
+        var attachment = {
+            'name':$scope.promodetails.title,
+            'description':$scope.promodetails.sharedescription,
+            'caption': 'MFoodGate',
+            'href':$scope.promodetails.image,
+            'media':[{'type':'image',
+                'src':$scope.promodetails.image,
+                'href':$rootScope.siteurl
+            }]
+        };
+        console.log(attachment);
+        FB.ui({
+            method: 'feed',
+            name:$scope.promodetails.title,
+            link: $rootScope.siteurl+'resellvoucherdetail/'+$stateParams.resellId+'/'+$stateParams.promoId,
+            picture: $scope.promodetails.image,
+            caption: 'MFoodGate',
+            description: $scope.promodetails.sharedescription,
+            message: $scope.promodetails.sharedescription,
+            display: 'iframe',
+            width: 300,
+            height: 150
+        })
+    }
+
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId: '646829092146685',
+            status: true,
+            cookie: true,
+            xfbml: true
+        });
+    };
+    (function(d){
+        var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement('script'); js.id = id; js.async = true;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        ref.parentNode.insertBefore(js, ref);
+    }(document));
 
     //$scope.payments = true;
     //$scope.paymentscash = true;

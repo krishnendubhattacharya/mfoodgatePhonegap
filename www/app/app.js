@@ -57,8 +57,11 @@ app.run(['$rootScope', '$state', '$stateParams',
         // set below basic information
         //$rootScope.serviceurl = "http://localhost/prohelp/";
         //$rootScope.serviceurl = "http://livehelpout.com/beta.admin";
-        $rootScope.serviceurl = "http://107.170.152.166/mFoodGateAPI/";
-         $rootScope.siteurl = "http://107.170.152.166/mFood/#/";
+        $rootScope.serviceurl = "http://api.mfoodgate.com/index.php/";
+        $rootScope.siteurl = "http://www.mfoodgate.com/#/";
+        //$rootScope.metadesc = "http://107.170.152.166/mFoodGateAPI/";
+
+        $rootScope.googleClientID = "612181755298-lpkrunqgt3860479r850dif58p9p2o12.apps.googleusercontent.com";
         $rootScope.app = {
             name: 'mFoodGate', // name of your project
             author: 'NITS', // author's name or company name
@@ -178,6 +181,12 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 resolve: loadSequence('login'),
                 templateUrl: 'app/views/login.html',
                 title: 'Login'
+            })
+            .state('frontend.forgotpassword', {
+                url: '/forgotpassword',
+                resolve: loadSequence('login'),
+                templateUrl: 'app/views/forgotpassword.html',
+                title: 'Forgot Password'
             })
             .state('frontend.register', {
                 url: '/register/:email',
