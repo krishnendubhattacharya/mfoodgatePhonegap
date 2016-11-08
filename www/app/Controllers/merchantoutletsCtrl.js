@@ -75,7 +75,8 @@ app.controller('merchantoutletsCtrl', function ($rootScope, $scope, $http, $loca
             address:'',
             business_hours:'',
             //location_id:'',
-            is_active:false
+            is_active:false,
+            link_pos:''
         }
         $scope.selectedLocation=[];
         //$scope.selectedTypes =[];
@@ -130,7 +131,7 @@ app.controller('merchantoutletsCtrl', function ($rootScope, $scope, $http, $loca
         },{caption:"Active",cellTemplate: function (container, options) {
             var text = options.data.is_active==1?'Yes':'No';
             $(container).html(text);
-        }},
+        }},"link_pos",
             {
                 caption:'Edit',
                 width: 100,
@@ -311,7 +312,7 @@ app.controller('merchantoutletsCtrl', function ($rootScope, $scope, $http, $loca
         else
         {
             console.log($scope.menuInfo);
-            $scope.menuInfo.user_id = $scope.loggedindetails.id;
+            /*$scope.menuInfo.user_id = $scope.loggedindetails.id;
             //$scope.areadata = $scope.areaList;
             $scope.menuInfo.location_id = $scope.areaList;
             $http({
@@ -346,10 +347,17 @@ app.controller('merchantoutletsCtrl', function ($rootScope, $scope, $http, $loca
                         }
                     }, "error", 3000);
                 }
-            })
+            })*/
         }
     }
-
+    var priorities = ["Yes","No "];
+    $scope.radioGroup = {
+        changeLayout: {
+            items: priorities,
+            value: priorities[0],
+            layout: "horizontal"
+        }
+    }
     $scope.edit_menu = function(menu)
     {
         console.log(menu);
@@ -365,7 +373,9 @@ app.controller('merchantoutletsCtrl', function ($rootScope, $scope, $http, $loca
             business_hours:menu.business_hours,
             //location_id:menu.location_id,
             outlet_id:menu.outlet_id,
-            is_active:menu.is_active
+            is_active:menu.is_active,
+            link_pos:menu.link_pos,
+
         }
         $scope.event_info=menu;
         //$scope.setSelectedTypes();

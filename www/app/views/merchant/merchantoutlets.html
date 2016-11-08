@@ -123,6 +123,14 @@
                                 }" style="float: left" ng-model="menuInfo.is_active"></div>
                             </div>
                         </div>
+                        
+					<div class="dx-field">
+						<div class="dx-field-label">Link POS</div>
+						<div class="dx-field-value">
+				              <div dx-radio-group="radioGroup.changeLayout" ng-model="menuInfo.link_pos"></div>
+				          </div>
+					</div>
+                        
 
                     </div>
                     <!--<div id="summary" dx-validation-summary="{ }"></div>-->
@@ -183,6 +191,10 @@
                     <tr>
                         <td width="30%" class="m-header-color">Active</td>
                         <td>{{voucherDetail.is_active==1?'Yes':'No'}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="m-header-color">Link Pos</td>
+                        <td>{{voucherDetail.link_pos}}</td>
                     </tr>
                     <tr>
                         <td colspan="2">
@@ -304,6 +316,13 @@
                                     value: '1'
                                 }" style="float: left" ng-model="menuInfo.is_active"></div>
                         </div>
+                    </div>
+                    
+                    <div class="dx-field">
+                        <div class="dx-field-label">Link POS</div>
+                        <div class="dx-field-value">
+			              <div dx-radio-group="radioGroup.changeLayout" ng-model="menuInfo.link_pos"></div>
+			         </div>
                     </div>
 
                 </div>

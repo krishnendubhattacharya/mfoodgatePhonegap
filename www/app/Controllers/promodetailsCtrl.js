@@ -9,6 +9,30 @@ app.controller('promodetailsCtrl', function ($rootScope, $scope, $http, $locatio
         $scope.map = map;
     });
     //alert($rootScope.swipeValue);
+    $scope.operator_list = [];
+    $scope.operator_list.push({name:'Card',value:'Card'});
+    $scope.operator_list.push({name:'App',value:'App'});
+    $scope.operator_list.push({name:'Both',value:'Both'});
+    
+    $scope.typemem = 'Card';
+    $scope.selectBoxData = [
+    { "name": "Card", "capital": "Card" },
+    { "name": "App", "capital": "App" },
+    { "name": "Both", "capital": "Both" }]
+    
+    $scope.textBox = {
+        typemem:{
+            dataSource: $scope.operator_list,
+            displayExpr: "name",
+            valueExpr: "value",
+            onInitialized:function(e){
+                //$scope.res_select = e.component;
+            },
+            onValueChanged: function(data) {
+             $scope.typemem = data.value;
+            }
+        }
+    };
 
     $scope.save_to_db = function() {
         console.log("saving -1",$scope.loggedindetails);
@@ -215,7 +239,9 @@ app.controller('promodetailsCtrl', function ($rootScope, $scope, $http, $locatio
     $scope.getRelatedProducts();
 
     $scope.add_to_cart = function(){
-
+//console.log($scope.operator);
+        /*if()
+        {*/
         $http({
             method: "GET",
             url: $rootScope.serviceurl+"checkOfferId/"+$stateParams.promoId,
@@ -223,6 +249,7 @@ app.controller('promodetailsCtrl', function ($rootScope, $scope, $http, $locatio
             //data:{item:data,user_id:$scope.loggedindetails.id}
         }).success(function(res) {
 
+            console.log(res);
             if(res.type =='success'){
                 if($scope.promodetails.conditions == 1){
                     $scope.pay = true;
@@ -254,24 +281,22 @@ app.controller('promodetailsCtrl', function ($rootScope, $scope, $http, $locatio
                     event               :   0,
                     event_id            :   0,
                     event_price         :   0,
-                    event_bid_id        :   0
+                    event_bid_id        :   0,
+                    typemem             :   $scope.typemem
                 }
                 mFoodCart.add_to_cart(cart_obj);
                 $scope.cartDetails = mFoodCart.get_cart();
-                /*if($scope.cartDetails) {
-                    angular.forEach($scope.cartDetails, function (v) {
-
-                        if(v.condtn == 1){
-                            v.payments =true;
-                            v.paymentscash=true;
-                        }else{
-                            v.payments =false;
-                            v.paymentscash=false;
-                        }
-
-
-                    })
-                */
+//                if($scope.cartDetails) {
+//                    angular.forEach($scope.cartDetails, function (v) {
+//                        if(v.condtn == 1){
+//                            v.payments =true;
+//                            v.paymentscash=true;
+//                        }else{
+//                            v.payments =false;
+//                            v.paymentscash=false;
+//                        }
+//                  })
+                
                 //console.log($scope.cartDetails);
                 $scope.getCartTotals();
                 $scope.save_to_db();
@@ -286,6 +311,17 @@ app.controller('promodetailsCtrl', function ($rootScope, $scope, $http, $locatio
                 }, "error", 3000);
             }
         });
+        
+        /*}else{
+        	 var message = "You cannot add the voucher as the price is 0";
+           DevExpress.ui.notify({
+               message: message,
+               position: {
+                   my: "center top",
+                   at: "center top"
+               }
+           }, "error", 3000);
+        }*/
 
     }
 
@@ -650,37 +686,42 @@ app.controller('promodetailsCtrl', function ($rootScope, $scope, $http, $locatio
         /**/
     }
 
-    $scope.delete_from_cart = function (id,event_promo)
+    $scope.delete_from_cart = function (id,event_promo,quantity,promo_qty)
     {
         if($scope.loggedindetails) {
             $http({
                 method: "POST",
                 url: $rootScope.serviceurl + "deleteFromCart",
                 headers: {'Content-Type': 'application/json'},
-                data: {user_id: $scope.loggedindetails.id, offer_id: id,event_promo:event_promo}
+                data: {user_id: $scope.loggedindetails.id, offer_id: id,event_promo:event_promo,quantity:quantity,promo_qty:promo_qty}
             }).success(function (data) {
             })
         }
     }
 
-    $scope.remove_offer = function(offer_id){
+    $scope.remove_offer = function(offer_id,quantity){
         mFoodCart.remove(offer_id);
         $scope.getCartTotals();
         $scope.event_promo = 'p';
-        $scope.delete_from_cart(offer_id,$scope.event_promo);
+        $scope.promo_qty = 'yes';
+        $scope.delete_from_cart(offer_id,$scope.event_promo,quantity,$scope.promo_qty);
     }
 
     $scope.remove_offer_payment = function(offer_id){
         mFoodCart.remove(offer_id);
         $scope.getCartTotals();
         $scope.event_promo = 'p';
-        $scope.delete_from_cart(offer_id,$scope.event_promo);
+        $scope.promo_qty = 'no';
+        $scope.qqty = 0;
+        $scope.delete_from_cart(offer_id,$scope.event_promo,$scope.qqty,$scope.promo_qty);
     }
     $scope.remove_event = function(offer_id){
         mFoodCart.remove(offer_id);
         $scope.getCartTotals();
         $scope.event_promo = 'e';
-        $scope.delete_from_cart(offer_id,$scope.event_promo);
+        $scope.promo_qty = 'no';
+        $scope.qqty = 0;
+        $scope.delete_from_cart(offer_id,$scope.event_promo,$scope.qqty,$scope.promo_qty);
     }
 
     $scope.getAds = function () {
@@ -772,7 +813,10 @@ app.controller('promodetailsCtrl', function ($rootScope, $scope, $http, $locatio
         js.src = "//connect.facebook.net/en_US/all.js";
         ref.parentNode.insertBefore(js, ref);
     }(document));
-
+    
+    
+    
+    
     //$scope.payments = true;
     //$scope.paymentscash = true;
 });

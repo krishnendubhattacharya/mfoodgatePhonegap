@@ -275,6 +275,7 @@
                     <p></p>
                     <!-- Go to www.addthis.com/dashboard to customize your tools -->
                     <!--<div class="addthis_sharing_toolbox"></div>-->
+                    <ul>
                     <li style="list-style-type: none;">
                         <!--<a  href="javascript:void(0);" onclick="fbsharedialog('{{allnews.id}}','<?php echo $img;?>','{{allnews.title}}','Posted on:{{allnews.date}} | By: Admin | View {{allnews.views}}')" class="fa fa-facebook">TEST</a>-->
                         <a  href="javascript:void(0);" ng-click="fbsharedialog()" class="fa fa-facebook">
@@ -292,6 +293,8 @@
                         <a href="https://plus.google.com/share?url={{pageLink}}" onclick="javascript:window.open(this.href,
   '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img src="app/assets/Images/g-plus.png" width="25" height="25" ></a>
                     </li>
+                    </ul>
+                <style>.share a{ text-decoration:none !important}</style>
                 </div>
 
                 <div class="highlights" ng-bind-html="promodetails.description">

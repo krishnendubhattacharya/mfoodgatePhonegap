@@ -180,6 +180,14 @@
                     <div class="totals"><span>Total:</span> $1400</div>
                 </div>
             </div>-->
+            <!--<div style="text-align:center;" ng-show="isDisabled" id="large-indicator" dx-load-indicator="{
+        	    height: 60,
+        	    width: 60
+        	}"></div>-->
+            <div ng-show="isDisabled" class="item-details" style="text-align:center">
+                <p><span><img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Loading_bar.gif"></span></p>
+            </div>
+            
             <p ng-if="cartDetails"><input type="button" value="BUY NOW" ng-click="pay_now_app()" ng-disabled="isDisabled"></p>
         </div>
         </div>

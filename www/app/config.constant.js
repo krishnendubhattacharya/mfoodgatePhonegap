@@ -137,6 +137,7 @@ app.constant('JS_REQUIRES', {
         'merchantdashboard':['app/Controllers/merchant/merchantdashboardCtrl.js','app/Controllers/leftbarCtrl.js'],
         'eventbiddetail':['app/Controllers/eventbiddetailsCtrl.js','app/directives/countdownDirective.js'],
         'merchantredeem':['app/Controllers/merchant/merchantredeemCtrl.js','app/Controllers/leftbarCtrl.js'],
+	   'merchantreport':['app/Controllers/merchant/merchantreportCtrl.js','app/Controllers/leftbarCtrl.js'],
 
     },
 

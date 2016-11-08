@@ -123,7 +123,7 @@
                         <!--<p countdown='' date='{{promodetails.expire_date}}'>&nbsp;</p>-->
                     </div>
                     <div style="padding-top: 25px;" class="dx-clearfix"></div>
-                    <div ng-if="loggedinid == promodetails.resell_bidder" id="button" dx-button="{
+                    <div id="button" dx-button="{
                                 text: 'Add to Cart',
                                 type: 'success',
                                 height:'40px',
@@ -212,7 +212,7 @@
                 </div>
                 <div style="clear: both"></div>
             </div>
-            <div style="text-align:right">
+            <!--<div style="text-align:right">
             	<div ng-if="loggedinid == promodetails.resell_bidder" id="button" dx-button="{
                                 text: 'Add to Cart',
                                 type: 'success',
@@ -223,7 +223,7 @@
                     </div>
                 
                 <div style="clear: both;margin-bottom: 10px;"></div>
-            </div>
+            </div>-->
         </div>
     </div>
     </div>
@@ -356,7 +356,7 @@
                         <!--<p countdown='' date='{{promodetails.expire_date}}'>&nbsp;</p>-->
                     </div>
                     <div style="padding-top: 25px;" class="dx-clearfix"></div>
-                    <div ng-if="loggedinid == promodetails.resell_bidder" id="button" dx-button="{
+                    <div  id="button" dx-button="{
                                 text: 'Add to Cart',
                                 type: 'success',
                                 height:'40px',
@@ -380,6 +380,7 @@
                 <p></p>
                 <!-- Go to www.addthis.com/dashboard to customize your tools -->
                 <!--<div class="addthis_sharing_toolbox"></div>-->
+                <ul>
                 <li style="list-style-type: none;">
                     <!--<a  href="javascript:void(0);" onclick="fbsharedialog('{{allnews.id}}','<?php echo $img;?>','{{allnews.title}}','Posted on:{{allnews.date}} | By: Admin | View {{allnews.views}}')" class="fa fa-facebook">TEST</a>-->
                     <a  href="javascript:void(0);" ng-click="fbsharedialog()" class="fa fa-facebook">
@@ -397,6 +398,8 @@
                     <a href="https://plus.google.com/share?url={{pageLink}}" onclick="javascript:window.open(this.href,
   '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img src="app/assets/Images/g-plus.png" width="25" height="25" ></a>
                 </li>
+                </ul>
+                <style>.share a{ text-decoration:none !important}</style>
             </div>
             <div class="highlights" ng-bind-html="promodetails.description">
 
@@ -431,7 +434,7 @@
                 </div>
                 <div style="clear: both"></div>
             </div>
-            <div style="text-align:right">
+            <!--<div style="text-align:right">
             	<div ng-if="loggedinid == promodetails.resell_bidder" id="button" dx-button="{
                                 text: 'Add to Cart',
                                 type: 'success',
@@ -442,7 +445,7 @@
                     </div>
                 
                 <div style="clear: both;margin-bottom: 10px;"></div>
-            </div>
+            </div>-->
         </div>
     </div>
 
@@ -526,7 +529,7 @@
                             <h2>Paket Hemat Sowe</h2>
                             <p>11D:21H:50M:20S</p>
                         </div>
-
+ 
                     </div>
                 </div>
             </li>

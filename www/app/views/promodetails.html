@@ -26,7 +26,7 @@
 
                 <div class="qty-totals">
                     <div class="qty" style="width:60%">
-                        <div ng-if="cart.event == 0" class="nwe-btn" ng-click="remove_offer({{cart.offer_id}})" ><span class="dx-button" ng-click="remove_offer({{cart.offer_id}})" style="color:red;">Remove from Cart</span></div>
+                        <div ng-if="cart.event == 0" class="nwe-btn" ng-click="remove_offer({{cart.offer_id}},{{cart.quantity}})" ><span class="dx-button" ng-click="remove_offer({{cart.offer_id}},{{cart.quantity}})" style="color:red;">Remove from Cart</span></div>
                         <div ng-if="cart.event == 1" class="nwe-btn" ng-click="remove_event({{cart.event_id}})" ><span class="dx-button" ng-click="remove_event({{cart.event_id}})" style="color:red;">Remove from Cart</span></div>
                     </div>
                     <div ng-if="cart.event == 0" class="totals" style="width:40%" ><span>M-points:</span>{{cart.quantity*cart.mpoints}}</div>
@@ -115,6 +115,9 @@
                         <p><b>Time Left : </b><p style="color:green" countdown='' date="{{promodetails.expire_date}}" ng-if="promodetails.expire_date">&nbsp;</p></p>
                         <p><b>About Merchant : </b>{{about_me}}</p>
                         <!--<p countdown='' date='{{promodetails.expire_date}}'>&nbsp;</p>-->
+                    </div>
+                    <div ng-if="promodetails.offer_type_id == 3" style="width:25%">
+                    	<div dx-select-box="textBox.typemem" ng-model="typemem"></div>
                     </div>
                     <div style="padding-top: 25px;" class="dx-clearfix"></div>
                     <div id="button" ng-if="((promodetails.quantity - promodetails.buy_count)>0) " dx-button="{
@@ -206,7 +209,7 @@
                 </div>
                 <div style="clear: both"></div>
             </div>
-            <div style="text-align:right">
+            <!--<div style="text-align:right">
                 <div id="button" ng-if="((promodetails.quantity - promodetails.buy_count)>0) " dx-button="{
                                 text: 'Add to Cart',
                                 type: 'success',
@@ -214,7 +217,7 @@
                                 width:'130px',
                                 onClick: add_to_cart }" ></div>
                 <div style="clear: both;margin-bottom: 10px;"></div>
-            </div>
+            </div>-->
         </div>
     </div>
     </div>
@@ -251,7 +254,7 @@
 
                 <div class="qty-totals">
                     <div class="qty" style="width:60%">
-                        <div ng-if="cart.event == 0" class="nwe-btn" ng-click="remove_offer({{cart.offer_id}})" ><span class="dx-button" ng-click="remove_offer({{cart.offer_id}})" style="color:red;">Remove from Cart</span></div>
+                        <div ng-if="cart.event == 0" class="nwe-btn" ng-click="remove_offer({{cart.offer_id}},{{cart.quantity}})" ><span class="dx-button" ng-click="remove_offer({{cart.offer_id}},{{cart.quantity}})" style="color:red;">Remove from Cart</span></div>
                         <div ng-if="cart.event == 1" class="nwe-btn" ng-click="remove_event({{cart.event_id}})" ><span class="dx-button" ng-click="remove_event({{cart.event_id}})" style="color:red;">Remove from Cart</span></div>
                     </div>
                     <div ng-if="cart.event == 0" class="totals" style="width:40%" ><span>M-points:</span>{{cart.quantity*cart.mpoints}}</div>
@@ -364,6 +367,7 @@
                 <p></p>
                 <!-- Go to www.addthis.com/dashboard to customize your tools -->
                 <!--<div class="addthis_sharing_toolbox"></div>-->
+                <ul>
                 <li style="list-style-type: none;">
                     <!--<a  href="javascript:void(0);" onclick="fbsharedialog('{{allnews.id}}','<?php echo $img;?>','{{allnews.title}}','Posted on:{{allnews.date}} | By: Admin | View {{allnews.views}}')" class="fa fa-facebook">TEST</a>-->
                     <a  href="javascript:void(0);" ng-click="fbsharedialog()" class="fa fa-facebook">
@@ -381,6 +385,8 @@
                     <a href="https://plus.google.com/share?url={{pageLink}}" onclick="javascript:window.open(this.href,
   '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img src="app/assets/Images/g-plus.png" width="25" height="25" ></a>
                 </li>
+                </ul>
+                <style>.share a{ text-decoration:none !important}</style>
             </div>
             <div class="highlights" ng-bind-html="promodetails.description">
 
@@ -415,7 +421,7 @@
                 </div>
                 <div style="clear: both"></div>
             </div>
-            <div style="text-align:right">
+            <!--<div style="text-align:right">
                 <div ng-if="((promodetails.quantity - promodetails.buy_count)>0) " id="button" dx-button="{
                                 text: 'Add to Cart',
                                 type: 'success',
@@ -423,7 +429,7 @@
                                 width:'130px',
                                 onClick: add_to_cart }" ></div>
                 <div style="clear: both;margin-bottom: 10px;"></div>
-            </div>
+            </div>-->
         </div>
     </div>
 

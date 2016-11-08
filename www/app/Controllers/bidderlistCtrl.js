@@ -53,7 +53,7 @@ app.controller('bidderlistCtrl', function ($rootScope, $scope, $http, $location,
             if(data.type == 'success'){
                 //var message = data.message;
                 //params.validationGroup.reset();
-                $location.path('/dashboard');
+                $location.path('/bidvoucher');
 
                 DevExpress.ui.notify({
                     message: data.message,

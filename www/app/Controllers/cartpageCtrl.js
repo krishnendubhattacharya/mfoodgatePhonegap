@@ -680,6 +680,9 @@ app.controller('cartpageCtrl', function ($rootScope, $scope, $http, $location, $
       }
       
     $scope.onSuccesfulPayment = function(payment) {
+        //console.log(payment);
+        //return false;
+        $scope.payid = Math.floor(Math.random() * 1000000000);
 	//alert('Success');
 	//alert(payment.response.id);
         
@@ -687,7 +690,7 @@ app.controller('cartpageCtrl', function ($rootScope, $scope, $http, $location, $
                 method: "POST",
                 url: $rootScope.serviceurl + "cart_checkout_app",
                 headers: {'Content-Type': 'application/json'},
-                data: {cart: $scope.allcartDetails, total: $scope.cart_total, payment_id:payment.response.id, user_id: $scope.loggedindetails.id}
+                data: {cart: $scope.allcartDetails, total: $scope.cart_total, payment_id:$scope.payid, user_id: $scope.loggedindetails.id}
             }).success(function (data) {
 
                 
@@ -696,7 +699,7 @@ app.controller('cartpageCtrl', function ($rootScope, $scope, $http, $location, $
 	$http({
             method: "POST",
             url: $rootScope.serviceurl + "success_payment",
-            data: 'payment_id=' + payment.response.id,
+            data: 'payment_id=' + $scope.payid,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).success(function(data){
             //$cookieStore.remove('cart');
