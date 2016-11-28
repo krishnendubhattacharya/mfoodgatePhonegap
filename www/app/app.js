@@ -42,23 +42,6 @@ app.config(['$facebookProvider', function($facebookProvider) {
             firstScriptElement.parentNode.insertBefore(facebookJS, firstScriptElement);
         }());
     });
-    
-    app.run(function(){
-    
-    window.onload = function() {
-             if (window.Connection) {
-                if (navigator.connection.type == Connection.NONE) {
-                    var r = confirm("The internet is disconnected on your device.");
-                    if (r == true) {
-                        navigator.app.exitApp();
-                    } else {
-                        navigator.app.exitApp();
-                    }
-                }
-              }
-        };
-    
-});
 
 
 app.run(['$rootScope', '$state', '$stateParams',
@@ -74,9 +57,7 @@ app.run(['$rootScope', '$state', '$stateParams',
         // set below basic information
         //$rootScope.serviceurl = "http://localhost/prohelp/";
         //$rootScope.serviceurl = "http://livehelpout.com/beta.admin";
-        //$rootScope.serviceurl = "http://107.170.152.166/mFoodGateAPI/";
-         //$rootScope.siteurl = "http://107.170.152.166/mFood/#/";
-         $rootScope.serviceurl = "http://api.mfoodgate.com/index.php/";
+        $rootScope.serviceurl = "http://api.mfoodgate.com/index.php/";
         $rootScope.siteurl = "http://www.mfoodgate.com/#/";
         //$rootScope.metadesc = "http://107.170.152.166/mFoodGateAPI/";
         

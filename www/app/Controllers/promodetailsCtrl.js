@@ -249,7 +249,6 @@ app.controller('promodetailsCtrl', function ($rootScope, $scope, $http, $locatio
             //data:{item:data,user_id:$scope.loggedindetails.id}
         }).success(function(res) {
 
-            console.log(res);
             if(res.type =='success'){
                 if($scope.promodetails.conditions == 1){
                     $scope.pay = true;
@@ -346,6 +345,7 @@ app.controller('promodetailsCtrl', function ($rootScope, $scope, $http, $locatio
         })
     }*/
     //console.log('cart',$scope.cartDetails);
+
 
     $scope.updateCheck = function(data,offerId,paytype){
         //console.log(data);
